@@ -43,7 +43,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("profile_info") as! ProfileInfoTableViewCell
+        cell.fullNameLabel.text = User.currentUser?.last_name
+        cell.profileImageView.image = UIImage(named: "user_profile")?.createRadius(cell.profileImageView.bounds.size, radius: cell.profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
         return cell
     }
 }

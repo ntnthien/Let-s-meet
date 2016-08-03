@@ -8,6 +8,8 @@ target 'Lets meet' do
   pod 'FacebookCore'
   pod 'FacebookShare'
   pod 'FacebookLogin'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
   # Pods for Let's meet
 

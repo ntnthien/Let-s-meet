@@ -75,7 +75,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
     }
     func fetchProfile() {
         
-        let parameters = ["fields": "email, first_name, last_name, picture.type(large)"]
+        let parameters = ["fields": "email, gender, first_name, last_name, picture.type(large)"]
         
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).startWithCompletionHandler { (connection, result, error) in
             if error != nil {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		51F34B2C3B28D2B41B14EA24 /* Pods_Lets_meetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957D949BEEC61C628D46F2B1 /* Pods_Lets_meetUITests.framework */; };
 		6B671CCE1D5242A700357BE5 /* ProfileInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B671CCD1D5242A700357BE5 /* ProfileInfoTableViewCell.swift */; };
+		6B671CD11D524AC000357BE5 /* UIImage_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B671CD01D524AC000357BE5 /* UIImage_Extension.swift */; };
 		6B8E2C9A1D51BDB8002C2193 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E2C991D51BDB8002C2193 /* User.swift */; };
 		6BC8C5D31D51EBCE0074C27F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */; };
 		6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */; };
@@ -55,6 +56,7 @@
 		3EF0E717C3ADCC985ABBAC8D /* Pods-Let's meetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests.release.xcconfig"; sourceTree = "<group>"; };
 		45DB528E3EA84C8FC3A06911 /* Pods_Let_s_meet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Let_s_meet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B671CCD1D5242A700357BE5 /* ProfileInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoTableViewCell.swift; sourceTree = "<group>"; };
+		6B671CD01D524AC000357BE5 /* UIImage_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_Extension.swift; sourceTree = "<group>"; };
 		6B8E2C991D51BDB8002C2193 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6B671CCF1D524A5500357BE5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6B671CD01D524AC000357BE5 /* UIImage_Extension.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		74248B76A500F1C6298C0F4E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +183,7 @@
 		C2F529401D51067100AB6337 /* Lets meet */ = {
 			isa = PBXGroup;
 			children = (
+				6B671CCF1D524A5500357BE5 /* Helpers */,
 				C2F529761D51071200AB6337 /* Models */,
 				C2F529751D51070700AB6337 /* Views */,
 				C2F529741D5106EF00AB6337 /* Controllers */,
@@ -514,6 +525,7 @@
 				6BC8C5D31D51EBCE0074C27F /* ProfileViewController.swift in Sources */,
 				C2F529711D5106C700AB6337 /* BaseViewController.swift in Sources */,
 				C2F529721D5106C700AB6337 /* Constants.swift in Sources */,
+				6B671CD11D524AC000357BE5 /* UIImage_Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
