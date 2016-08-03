@@ -16,10 +16,11 @@ let NAV_BAR_FONT = "Avenir-Light"
 let MAIN_FONT = "Avenir-Next"
 
 // MARK: - Colors
-let MAIN_COLOR = UIColor(red: 80/255.0, green: 199/255.0, blue: 229/255.0, alpha: 1.0)
+let MAIN_COLOR = UIColor(red: 78/255.0, green: 205/255.0, blue: 217/255.0, alpha: 1.0)
 let SECONDARY_COLOR = UIColor(red: 39/255.0, green: 179/255.0, blue: 236/255.0, alpha: 1.0)
 let BORDER_COLOR = UIColor.darkGrayColor()
 
-let NAV_COLOR = UIColor(red: 80/255.0, green: 199/255.0, blue: 229/255.0, alpha: 1.0)
+let NAV_COLOR = UIColor(red: 78/255.0, green: 205/255.0, blue: 217/255.0, alpha: 1.0)
+
 
 // MARK: - API

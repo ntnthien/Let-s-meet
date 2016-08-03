@@ -7,13 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		849C814A11BD2ED6F4D7B1D8 /* Pods_Let_s_meet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DB528E3EA84C8FC3A06911 /* Pods_Let_s_meet.framework */; };
+		A0B322E22327BA6BF927D635 /* Pods_Let_s_meetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */; };
 		C2F529421D51067100AB6337 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529411D51067100AB6337 /* AppDelegate.swift */; };
-		C2F529441D51067100AB6337 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529431D51067100AB6337 /* ViewController.swift */; };
 		C2F529471D51067100AB6337 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2F529451D51067100AB6337 /* Main.storyboard */; };
 		C2F529491D51067100AB6337 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2F529481D51067100AB6337 /* Assets.xcassets */; };
 		C2F5294C1D51067100AB6337 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2F5294A1D51067100AB6337 /* LaunchScreen.storyboard */; };
 		C2F529571D51067100AB6337 /* Let_s_meetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529561D51067100AB6337 /* Let_s_meetTests.swift */; };
 		C2F529621D51067100AB6337 /* Let_s_meetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529611D51067100AB6337 /* Let_s_meetUITests.swift */; };
+		C2F529711D5106C700AB6337 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F5296F1D5106C700AB6337 /* BaseViewController.swift */; };
+		C2F529721D5106C700AB6337 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529701D5106C700AB6337 /* Constants.swift */; };
+		C2F529781D51087900AB6337 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2F529771D51087900AB6337 /* GoogleService-Info.plist */; };
+		C2F529791D51087900AB6337 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2F529771D51087900AB6337 /* GoogleService-Info.plist */; };
+		C2F5297A1D51087900AB6337 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C2F529771D51087900AB6337 /* GoogleService-Info.plist */; };
+		F411947B00DD79E9BB9731B9 /* Pods_Let_s_meetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA824056D475E29A3E045A7F /* Pods_Let_s_meetTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +41,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		072B891C5528107B698350A1 /* Pods-Let's meetTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Let_s_meetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		379013C6010181A40CC5A81F /* Pods-Let's meetUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3EF0E717C3ADCC985ABBAC8D /* Pods-Let's meetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests.release.xcconfig"; sourceTree = "<group>"; };
+		45DB528E3EA84C8FC3A06911 /* Pods_Let_s_meet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Let_s_meet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		898152F44DBA90BC33E92291 /* Pods-Let's meet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet.release.xcconfig"; sourceTree = "<group>"; };
+		B07E38175CA9BF2A2D9CD0DC /* Pods-Let's meetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests.release.xcconfig"; sourceTree = "<group>"; };
+		C1A1B6B7B2DE083E853BC3ED /* Pods-Let's meet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet.debug.xcconfig"; sourceTree = "<group>"; };
 		C2F5293E1D51067000AB6337 /* Let's meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Let's meet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F529411D51067100AB6337 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C2F529431D51067100AB6337 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C2F529461D51067100AB6337 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C2F529481D51067100AB6337 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C2F5294B1D51067100AB6337 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +61,10 @@
 		C2F5295D1D51067100AB6337 /* Let's meetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Let's meetUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F529611D51067100AB6337 /* Let_s_meetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Let_s_meetUITests.swift; sourceTree = "<group>"; };
 		C2F529631D51067100AB6337 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2F5296F1D5106C700AB6337 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		C2F529701D5106C700AB6337 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C2F529771D51087900AB6337 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA824056D475E29A3E045A7F /* Pods_Let_s_meetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Let_s_meetTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849C814A11BD2ED6F4D7B1D8 /* Pods_Let_s_meet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F411947B00DD79E9BB9731B9 /* Pods_Let_s_meetTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +88,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0B322E22327BA6BF927D635 /* Pods_Let_s_meetUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29CC89C1D93F6F43BF2B03C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				45DB528E3EA84C8FC3A06911 /* Pods_Let_s_meet.framework */,
+				DA824056D475E29A3E045A7F /* Pods_Let_s_meetTests.framework */,
+				2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		74248B76A500F1C6298C0F4E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1A1B6B7B2DE083E853BC3ED /* Pods-Let's meet.debug.xcconfig */,
+				898152F44DBA90BC33E92291 /* Pods-Let's meet.release.xcconfig */,
+				072B891C5528107B698350A1 /* Pods-Let's meetTests.debug.xcconfig */,
+				B07E38175CA9BF2A2D9CD0DC /* Pods-Let's meetTests.release.xcconfig */,
+				379013C6010181A40CC5A81F /* Pods-Let's meetUITests.debug.xcconfig */,
+				3EF0E717C3ADCC985ABBAC8D /* Pods-Let's meetUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C2F529351D51067000AB6337 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +125,8 @@
 				C2F529551D51067100AB6337 /* Let's meetTests */,
 				C2F529601D51067100AB6337 /* Let's meetUITests */,
 				C2F5293F1D51067000AB6337 /* Products */,
+				74248B76A500F1C6298C0F4E /* Pods */,
+				29CC89C1D93F6F43BF2B03C7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +143,13 @@
 		C2F529401D51067100AB6337 /* Let's meet */ = {
 			isa = PBXGroup;
 			children = (
-				C2F529411D51067100AB6337 /* AppDelegate.swift */,
-				C2F529431D51067100AB6337 /* ViewController.swift */,
+				C2F529761D51071200AB6337 /* Models */,
+				C2F529751D51070700AB6337 /* Views */,
+				C2F529741D5106EF00AB6337 /* Controllers */,
+				C2F529731D5106E100AB6337 /* Supporting Files */,
 				C2F529451D51067100AB6337 /* Main.storyboard */,
-				C2F529481D51067100AB6337 /* Assets.xcassets */,
 				C2F5294A1D51067100AB6337 /* LaunchScreen.storyboard */,
-				C2F5294D1D51067100AB6337 /* Info.plist */,
+				C2F529481D51067100AB6337 /* Assets.xcassets */,
 			);
 			path = "Let's meet";
 			sourceTree = "<group>";
@@ -125,6 +172,39 @@
 			path = "Let's meetUITests";
 			sourceTree = "<group>";
 		};
+		C2F529731D5106E100AB6337 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C2F529411D51067100AB6337 /* AppDelegate.swift */,
+				C2F5294D1D51067100AB6337 /* Info.plist */,
+				C2F529771D51087900AB6337 /* GoogleService-Info.plist */,
+				C2F529701D5106C700AB6337 /* Constants.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C2F529741D5106EF00AB6337 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C2F5296F1D5106C700AB6337 /* BaseViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C2F529751D51070700AB6337 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		C2F529761D51071200AB6337 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +212,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2F529661D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meet" */;
 			buildPhases = (
+				5401FC454BC89D2A5992B59C /* [CP] Check Pods Manifest.lock */,
 				C2F5293A1D51067000AB6337 /* Sources */,
 				C2F5293B1D51067000AB6337 /* Frameworks */,
 				C2F5293C1D51067000AB6337 /* Resources */,
+				68B7C76B1E1DC5B16E22FC8F /* [CP] Embed Pods Frameworks */,
+				7EAA13DD82E0AC3F9D7F27EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +232,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2F529691D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meetTests" */;
 			buildPhases = (
+				E67BF64FD438CDBCDFAA58AB /* [CP] Check Pods Manifest.lock */,
 				C2F5294E1D51067100AB6337 /* Sources */,
 				C2F5294F1D51067100AB6337 /* Frameworks */,
 				C2F529501D51067100AB6337 /* Resources */,
+				6FFA5C8ED6A223B82DB76899 /* [CP] Embed Pods Frameworks */,
+				CFA2D46343C168BF08E88A33 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +253,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2F5296C1D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meetUITests" */;
 			buildPhases = (
+				7516E93B4801F2A3CAECB590 /* [CP] Check Pods Manifest.lock */,
 				C2F529591D51067100AB6337 /* Sources */,
 				C2F5295A1D51067100AB6337 /* Frameworks */,
 				C2F5295B1D51067100AB6337 /* Resources */,
+				5E3CD680FA23B465F66991BF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -230,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2F5294C1D51067100AB6337 /* LaunchScreen.storyboard in Resources */,
+				C2F529781D51087900AB6337 /* GoogleService-Info.plist in Resources */,
 				C2F529491D51067100AB6337 /* Assets.xcassets in Resources */,
 				C2F529471D51067100AB6337 /* Main.storyboard in Resources */,
 			);
@@ -239,6 +328,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F529791D51087900AB6337 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,18 +336,143 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F5297A1D51087900AB6337 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5401FC454BC89D2A5992B59C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5E3CD680FA23B465F66991BF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		68B7C76B1E1DC5B16E22FC8F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FFA5C8ED6A223B82DB76899 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7516E93B4801F2A3CAECB590 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7EAA13DD82E0AC3F9D7F27EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFA2D46343C168BF08E88A33 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E67BF64FD438CDBCDFAA58AB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C2F5293A1D51067000AB6337 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2F529441D51067100AB6337 /* ViewController.swift in Sources */,
 				C2F529421D51067100AB6337 /* AppDelegate.swift in Sources */,
+				C2F529711D5106C700AB6337 /* BaseViewController.swift in Sources */,
+				C2F529721D5106C700AB6337 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,28 +614,31 @@
 		};
 		C2F529671D51067100AB6337 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1A1B6B7B2DE083E853BC3ED /* Pods-Let's meet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Let's meet/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Let-s-meet";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Lets-meet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		C2F529681D51067100AB6337 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 898152F44DBA90BC33E92291 /* Pods-Let's meet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Let's meet/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Let-s-meet";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Lets-meet";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 		C2F5296A1D51067100AB6337 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 072B891C5528107B698350A1 /* Pods-Let's meetTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Let's meetTests/Info.plist";
@@ -433,6 +651,7 @@
 		};
 		C2F5296B1D51067100AB6337 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B07E38175CA9BF2A2D9CD0DC /* Pods-Let's meetTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Let's meetTests/Info.plist";
@@ -445,6 +664,7 @@
 		};
 		C2F5296D1D51067100AB6337 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 379013C6010181A40CC5A81F /* Pods-Let's meetUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Let's meetUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -456,6 +676,7 @@
 		};
 		C2F5296E1D51067100AB6337 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EF0E717C3ADCC985ABBAC8D /* Pods-Let's meetUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Let's meetUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -484,6 +705,7 @@
 				C2F529681D51067100AB6337 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C2F529691D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meetTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +714,7 @@
 				C2F5296B1D51067100AB6337 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C2F5296C1D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meetUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +723,7 @@
 				C2F5296E1D51067100AB6337 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

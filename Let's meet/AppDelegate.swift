@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
+        // Customize Navigation Bar
+        UINavigationBar.appearance().barTintColor = NAV_COLOR
+        UINavigationBar.appearance().setBackgroundImage(UIImage(),forBarPosition: .Any, barMetrics: .Default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().translucent = false
+        
+        
+        if let barFont = UIFont(name: NAV_BAR_FONT, size: 24.0) {
+            UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: barFont]
+        }
+        FIRApp.configure()
         return true
     }
 
