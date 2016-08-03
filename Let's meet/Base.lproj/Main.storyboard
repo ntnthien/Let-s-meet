@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--User Profile-->
@@ -48,7 +49,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3G-0C-dK5">
                                         <rect key="frame" x="0.0" y="38" width="82" height="30"/>
-                                        <state key="normal" title="Register"/>
+                                        <state key="normal" title="Profile"/>
                                         <connections>
                                             <segue destination="u3y-Lv-WRt" kind="show" id="QWT-Um-fdf"/>
                                         </connections>
@@ -94,7 +95,7 @@
         <!--Login-->
         <scene sceneID="RTS-Rj-4vV">
             <objects>
-                <viewController id="o5R-Vo-nIf" sceneMemberID="viewController">
+                <viewController id="o5R-Vo-nIf" customClass="LoginViewController" customModule="Let_s_meet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5uU-kZ-wFK"/>
                         <viewControllerLayoutGuide type="bottom" id="SEe-k1-arZ"/>
@@ -112,10 +113,10 @@
             </objects>
             <point key="canvasLocation" x="-54" y="1106"/>
         </scene>
-        <!--Register-->
+        <!--Profile-->
         <scene sceneID="t0p-Gt-82u">
             <objects>
-                <viewController id="u3y-Lv-WRt" sceneMemberID="viewController">
+                <viewController id="u3y-Lv-WRt" customClass="ProfileViewController" customModule="Let_s_meet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jjk-Ws-umF"/>
                         <viewControllerLayoutGuide type="bottom" id="8w3-TB-4Bx"/>
@@ -123,9 +124,60 @@
                     <view key="view" contentMode="scaleToFill" id="sFS-wu-XP6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="263" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SaL-Y8-GMK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="263" id="sSl-LD-4Cw">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="263"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sSl-LD-4Cw" id="EWd-vA-pG8">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="262.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_profile" translatesAutoresizingMaskIntoConstraints="NO" id="Bre-mJ-hvy">
+                                                    <rect key="frame" x="240" y="28" width="120" height="120"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="120" id="gmu-Hw-OG5"/>
+                                                        <constraint firstAttribute="width" constant="120" id="grl-42-0Zq"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nhung" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGh-a1-v2b">
+                                                    <rect key="frame" x="264" y="168" width="72" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanh Pho Ho Chi Minh, Viet Nam" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Niw-O5-gw0">
+                                                    <rect key="frame" x="170.5" y="207" width="259.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Bre-mJ-hvy" firstAttribute="centerX" secondItem="EWd-vA-pG8" secondAttribute="centerX" id="9eT-ac-VDi"/>
+                                                <constraint firstItem="Niw-O5-gw0" firstAttribute="top" secondItem="dGh-a1-v2b" secondAttribute="bottom" constant="10" id="WEz-iW-tpY"/>
+                                                <constraint firstItem="dGh-a1-v2b" firstAttribute="centerX" secondItem="EWd-vA-pG8" secondAttribute="centerX" id="dmN-La-wq0"/>
+                                                <constraint firstItem="dGh-a1-v2b" firstAttribute="top" secondItem="Bre-mJ-hvy" secondAttribute="bottom" constant="20" id="qhH-cd-GYq"/>
+                                                <constraint firstItem="Bre-mJ-hvy" firstAttribute="top" secondItem="EWd-vA-pG8" secondAttribute="topMargin" constant="20" id="v9T-I7-XhD"/>
+                                                <constraint firstItem="Niw-O5-gw0" firstAttribute="centerX" secondItem="EWd-vA-pG8" secondAttribute="centerX" id="vpD-un-VxI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SaL-Y8-GMK" secondAttribute="trailing" id="9al-Np-3bF"/>
+                            <constraint firstItem="SaL-Y8-GMK" firstAttribute="leading" secondItem="sFS-wu-XP6" secondAttribute="leading" id="cAf-UP-f3R"/>
+                            <constraint firstItem="SaL-Y8-GMK" firstAttribute="top" secondItem="sFS-wu-XP6" secondAttribute="top" id="eaw-Sn-BjT"/>
+                            <constraint firstAttribute="bottom" secondItem="SaL-Y8-GMK" secondAttribute="bottom" id="gKY-Sf-Oz5"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Register" id="SdA-hm-Hvv">
+                    <navigationItem key="navigationItem" title="Profile" id="SdA-hm-Hvv">
                         <barButtonItem key="backBarButtonItem" title=" " id="sYB-zz-DwU"/>
                     </navigationItem>
                 </viewController>
@@ -190,4 +242,7 @@
             <point key="canvasLocation" x="-54" y="345"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="user_profile" width="225" height="224"/>
+    </resources>
 </document>
