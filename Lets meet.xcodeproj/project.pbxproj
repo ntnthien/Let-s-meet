@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51F34B2C3B28D2B41B14EA24 /* Pods_Lets_meetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957D949BEEC61C628D46F2B1 /* Pods_Lets_meetUITests.framework */; };
 		6B8E2C9A1D51BDB8002C2193 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E2C991D51BDB8002C2193 /* User.swift */; };
 		6BC8C5D31D51EBCE0074C27F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */; };
 		6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */; };
-		849C814A11BD2ED6F4D7B1D8 /* Pods_Let_s_meet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DB528E3EA84C8FC3A06911 /* Pods_Let_s_meet.framework */; };
+		6CF6CCF1C287AEC6D05DD7DF /* Pods_Lets_meetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AEA2A2A8682B15B1D6A1FC /* Pods_Lets_meetTests.framework */; };
 		A0B322E22327BA6BF927D635 /* Pods_Let_s_meetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */; };
+		BF50F3722877FB4C2F7A3CB1 /* Pods_Lets_meet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2C45AB3DCC9D72B7EBDB998 /* Pods_Lets_meet.framework */; };
 		C2F529421D51067100AB6337 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529411D51067100AB6337 /* AppDelegate.swift */; };
 		C2F529471D51067100AB6337 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2F529451D51067100AB6337 /* Main.storyboard */; };
 		C2F529491D51067100AB6337 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2F529481D51067100AB6337 /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 /* Begin PBXFileReference section */
 		072B891C5528107B698350A1 /* Pods-Let's meetTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Let_s_meetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23EA1A3E831F5C7E70B51CBA /* Pods-Lets meet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meet/Pods-Lets meet.release.xcconfig"; sourceTree = "<group>"; };
+		28AEA2A2A8682B15B1D6A1FC /* Pods_Lets_meetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lets_meetTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		379013C6010181A40CC5A81F /* Pods-Let's meetUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3EF0E717C3ADCC985ABBAC8D /* Pods-Let's meetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests.release.xcconfig"; sourceTree = "<group>"; };
 		45DB528E3EA84C8FC3A06911 /* Pods_Let_s_meet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Let_s_meet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,24 +57,31 @@
 		6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		898152F44DBA90BC33E92291 /* Pods-Let's meet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet.release.xcconfig"; sourceTree = "<group>"; };
+		957D949BEEC61C628D46F2B1 /* Pods_Lets_meetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lets_meetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F5708975E01FC1F96C4EF42 /* Pods-Lets meetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meetUITests/Pods-Lets meetUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A2C45AB3DCC9D72B7EBDB998 /* Pods_Lets_meet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lets_meet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAF5919EB86C07FDCE4FC8E7 /* Pods-Lets meetTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meetTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meetTests/Pods-Lets meetTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B07E38175CA9BF2A2D9CD0DC /* Pods-Let's meetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests.release.xcconfig"; sourceTree = "<group>"; };
 		C1A1B6B7B2DE083E853BC3ED /* Pods-Let's meet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet.debug.xcconfig"; sourceTree = "<group>"; };
-		C2F5293E1D51067000AB6337 /* Let's meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Let's meet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2F5293E1D51067000AB6337 /* Lets meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lets meet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F529411D51067100AB6337 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2F529461D51067100AB6337 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C2F529481D51067100AB6337 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C2F5294B1D51067100AB6337 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C2F5294D1D51067100AB6337 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C2F529521D51067100AB6337 /* Let's meetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Let's meetTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2F529521D51067100AB6337 /* Lets meet.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lets meet.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F529561D51067100AB6337 /* Let_s_meetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Let_s_meetTests.swift; sourceTree = "<group>"; };
 		C2F529581D51067100AB6337 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C2F5295D1D51067100AB6337 /* Let's meetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Let's meetUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2F5295D1D51067100AB6337 /* Lets meet.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lets meet.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F529611D51067100AB6337 /* Let_s_meetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Let_s_meetUITests.swift; sourceTree = "<group>"; };
 		C2F529631D51067100AB6337 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2F5296F1D5106C700AB6337 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C2F529701D5106C700AB6337 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C2F529771D51087900AB6337 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA10D9FB077408DD623FBE4E /* Pods-Lets meet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meet/Pods-Lets meet.debug.xcconfig"; sourceTree = "<group>"; };
 		DA824056D475E29A3E045A7F /* Pods_Let_s_meetTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Let_s_meetTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2F1E09B45E708BE4B0AE3C7 /* Pods-Lets meetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meetTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meetTests/Pods-Lets meetTests.release.xcconfig"; sourceTree = "<group>"; };
+		FBABECE0C96460DC063A43EC /* Pods-Lets meetUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meetUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meetUITests/Pods-Lets meetUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				849C814A11BD2ED6F4D7B1D8 /* Pods_Let_s_meet.framework in Frameworks */,
+				BF50F3722877FB4C2F7A3CB1 /* Pods_Lets_meet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F411947B00DD79E9BB9731B9 /* Pods_Let_s_meetTests.framework in Frameworks */,
+				6CF6CCF1C287AEC6D05DD7DF /* Pods_Lets_meetTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0B322E22327BA6BF927D635 /* Pods_Let_s_meetUITests.framework in Frameworks */,
+				51F34B2C3B28D2B41B14EA24 /* Pods_Lets_meetUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +120,9 @@
 				45DB528E3EA84C8FC3A06911 /* Pods_Let_s_meet.framework */,
 				DA824056D475E29A3E045A7F /* Pods_Let_s_meetTests.framework */,
 				2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */,
+				A2C45AB3DCC9D72B7EBDB998 /* Pods_Lets_meet.framework */,
+				28AEA2A2A8682B15B1D6A1FC /* Pods_Lets_meetTests.framework */,
+				957D949BEEC61C628D46F2B1 /* Pods_Lets_meetUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -120,6 +136,12 @@
 				B07E38175CA9BF2A2D9CD0DC /* Pods-Let's meetTests.release.xcconfig */,
 				379013C6010181A40CC5A81F /* Pods-Let's meetUITests.debug.xcconfig */,
 				3EF0E717C3ADCC985ABBAC8D /* Pods-Let's meetUITests.release.xcconfig */,
+				DA10D9FB077408DD623FBE4E /* Pods-Lets meet.debug.xcconfig */,
+				23EA1A3E831F5C7E70B51CBA /* Pods-Lets meet.release.xcconfig */,
+				AAF5919EB86C07FDCE4FC8E7 /* Pods-Lets meetTests.debug.xcconfig */,
+				E2F1E09B45E708BE4B0AE3C7 /* Pods-Lets meetTests.release.xcconfig */,
+				FBABECE0C96460DC063A43EC /* Pods-Lets meetUITests.debug.xcconfig */,
+				9F5708975E01FC1F96C4EF42 /* Pods-Lets meetUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -127,9 +149,9 @@
 		C2F529351D51067000AB6337 = {
 			isa = PBXGroup;
 			children = (
-				C2F529401D51067100AB6337 /* Let's meet */,
-				C2F529551D51067100AB6337 /* Let's meetTests */,
-				C2F529601D51067100AB6337 /* Let's meetUITests */,
+				C2F529401D51067100AB6337 /* Lets meet */,
+				C2F529551D51067100AB6337 /* Lets meetTests */,
+				C2F529601D51067100AB6337 /* Lets meetUITests */,
 				C2F5293F1D51067000AB6337 /* Products */,
 				74248B76A500F1C6298C0F4E /* Pods */,
 				29CC89C1D93F6F43BF2B03C7 /* Frameworks */,
@@ -139,14 +161,14 @@
 		C2F5293F1D51067000AB6337 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C2F5293E1D51067000AB6337 /* Let's meet.app */,
-				C2F529521D51067100AB6337 /* Let's meetTests.xctest */,
-				C2F5295D1D51067100AB6337 /* Let's meetUITests.xctest */,
+				C2F5293E1D51067000AB6337 /* Lets meet.app */,
+				C2F529521D51067100AB6337 /* Lets meet.xctest */,
+				C2F5295D1D51067100AB6337 /* Lets meet.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C2F529401D51067100AB6337 /* Let's meet */ = {
+		C2F529401D51067100AB6337 /* Lets meet */ = {
 			isa = PBXGroup;
 			children = (
 				C2F529761D51071200AB6337 /* Models */,
@@ -157,24 +179,27 @@
 				C2F5294A1D51067100AB6337 /* LaunchScreen.storyboard */,
 				C2F529481D51067100AB6337 /* Assets.xcassets */,
 			);
+			name = "Lets meet";
 			path = "Let's meet";
 			sourceTree = "<group>";
 		};
-		C2F529551D51067100AB6337 /* Let's meetTests */ = {
+		C2F529551D51067100AB6337 /* Lets meetTests */ = {
 			isa = PBXGroup;
 			children = (
 				C2F529561D51067100AB6337 /* Let_s_meetTests.swift */,
 				C2F529581D51067100AB6337 /* Info.plist */,
 			);
+			name = "Lets meetTests";
 			path = "Let's meetTests";
 			sourceTree = "<group>";
 		};
-		C2F529601D51067100AB6337 /* Let's meetUITests */ = {
+		C2F529601D51067100AB6337 /* Lets meetUITests */ = {
 			isa = PBXGroup;
 			children = (
 				C2F529611D51067100AB6337 /* Let_s_meetUITests.swift */,
 				C2F529631D51067100AB6337 /* Info.plist */,
 			);
+			name = "Lets meetUITests";
 			path = "Let's meetUITests";
 			sourceTree = "<group>";
 		};
@@ -217,9 +242,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C2F5293D1D51067000AB6337 /* Let's meet */ = {
+		C2F5293D1D51067000AB6337 /* Lets meet */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C2F529661D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meet" */;
+			buildConfigurationList = C2F529661D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meet" */;
 			buildPhases = (
 				5401FC454BC89D2A5992B59C /* [CP] Check Pods Manifest.lock */,
 				C2F5293A1D51067000AB6337 /* Sources */,
@@ -232,14 +257,14 @@
 			);
 			dependencies = (
 			);
-			name = "Let's meet";
+			name = "Lets meet";
 			productName = "Let's meet";
-			productReference = C2F5293E1D51067000AB6337 /* Let's meet.app */;
+			productReference = C2F5293E1D51067000AB6337 /* Lets meet.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C2F529511D51067100AB6337 /* Let's meetTests */ = {
+		C2F529511D51067100AB6337 /* Lets meetTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C2F529691D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meetTests" */;
+			buildConfigurationList = C2F529691D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meetTests" */;
 			buildPhases = (
 				E67BF64FD438CDBCDFAA58AB /* [CP] Check Pods Manifest.lock */,
 				C2F5294E1D51067100AB6337 /* Sources */,
@@ -253,14 +278,14 @@
 			dependencies = (
 				C2F529541D51067100AB6337 /* PBXTargetDependency */,
 			);
-			name = "Let's meetTests";
+			name = "Lets meetTests";
 			productName = "Let's meetTests";
-			productReference = C2F529521D51067100AB6337 /* Let's meetTests.xctest */;
+			productReference = C2F529521D51067100AB6337 /* Lets meet.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C2F5295C1D51067100AB6337 /* Let's meetUITests */ = {
+		C2F5295C1D51067100AB6337 /* Lets meetUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C2F5296C1D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meetUITests" */;
+			buildConfigurationList = C2F5296C1D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meetUITests" */;
 			buildPhases = (
 				7516E93B4801F2A3CAECB590 /* [CP] Check Pods Manifest.lock */,
 				C2F529591D51067100AB6337 /* Sources */,
@@ -273,9 +298,9 @@
 			dependencies = (
 				C2F5295F1D51067100AB6337 /* PBXTargetDependency */,
 			);
-			name = "Let's meetUITests";
+			name = "Lets meetUITests";
 			productName = "Let's meetUITests";
-			productReference = C2F5295D1D51067100AB6337 /* Let's meetUITests.xctest */;
+			productReference = C2F5295D1D51067100AB6337 /* Lets meet.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -301,7 +326,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C2F529391D51067000AB6337 /* Build configuration list for PBXProject "Let's meet" */;
+			buildConfigurationList = C2F529391D51067000AB6337 /* Build configuration list for PBXProject "Lets meet" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -314,9 +339,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C2F5293D1D51067000AB6337 /* Let's meet */,
-				C2F529511D51067100AB6337 /* Let's meetTests */,
-				C2F5295C1D51067100AB6337 /* Let's meetUITests */,
+				C2F5293D1D51067000AB6337 /* Lets meet */,
+				C2F529511D51067100AB6337 /* Lets meetTests */,
+				C2F5295C1D51067100AB6337 /* Lets meetUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -379,7 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meetUITests/Pods-Lets meetUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		68B7C76B1E1DC5B16E22FC8F /* [CP] Embed Pods Frameworks */ = {
@@ -394,7 +419,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meet/Pods-Lets meet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6FFA5C8ED6A223B82DB76899 /* [CP] Embed Pods Frameworks */ = {
@@ -409,7 +434,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meetTests/Pods-Lets meetTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7516E93B4801F2A3CAECB590 /* [CP] Check Pods Manifest.lock */ = {
@@ -439,7 +464,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meet/Pods-Lets meet-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CFA2D46343C168BF08E88A33 /* [CP] Copy Pods Resources */ = {
@@ -454,7 +479,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meetTests/Pods-Lets meetTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E67BF64FD438CDBCDFAA58AB /* [CP] Check Pods Manifest.lock */ = {
@@ -509,12 +534,12 @@
 /* Begin PBXTargetDependency section */
 		C2F529541D51067100AB6337 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C2F5293D1D51067000AB6337 /* Let's meet */;
+			target = C2F5293D1D51067000AB6337 /* Lets meet */;
 			targetProxy = C2F529531D51067100AB6337 /* PBXContainerItemProxy */;
 		};
 		C2F5295F1D51067100AB6337 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C2F5293D1D51067000AB6337 /* Let's meet */;
+			target = C2F5293D1D51067000AB6337 /* Lets meet */;
 			targetProxy = C2F5295E1D51067100AB6337 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -626,74 +651,74 @@
 		};
 		C2F529671D51067100AB6337 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1A1B6B7B2DE083E853BC3ED /* Pods-Let's meet.debug.xcconfig */;
+			baseConfigurationReference = DA10D9FB077408DD623FBE4E /* Pods-Lets meet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Let's meet/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Lets-meet";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Lets meet";
 			};
 			name = Debug;
 		};
 		C2F529681D51067100AB6337 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 898152F44DBA90BC33E92291 /* Pods-Let's meet.release.xcconfig */;
+			baseConfigurationReference = 23EA1A3E831F5C7E70B51CBA /* Pods-Lets meet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Let's meet/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Lets-meet";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Lets meet";
 			};
 			name = Release;
 		};
 		C2F5296A1D51067100AB6337 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 072B891C5528107B698350A1 /* Pods-Let's meetTests.debug.xcconfig */;
+			baseConfigurationReference = AAF5919EB86C07FDCE4FC8E7 /* Pods-Lets meetTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Let's meetTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Let-s-meetTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Let's meet.app/Let's meet";
+				PRODUCT_NAME = "Lets meet";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lets meet.app/Lets meet";
 			};
 			name = Debug;
 		};
 		C2F5296B1D51067100AB6337 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B07E38175CA9BF2A2D9CD0DC /* Pods-Let's meetTests.release.xcconfig */;
+			baseConfigurationReference = E2F1E09B45E708BE4B0AE3C7 /* Pods-Lets meetTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "Let's meetTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Let-s-meetTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Let's meet.app/Let's meet";
+				PRODUCT_NAME = "Lets meet";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lets meet.app/Lets meet";
 			};
 			name = Release;
 		};
 		C2F5296D1D51067100AB6337 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 379013C6010181A40CC5A81F /* Pods-Let's meetUITests.debug.xcconfig */;
+			baseConfigurationReference = FBABECE0C96460DC063A43EC /* Pods-Lets meetUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Let's meetUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Let-s-meetUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Lets meet";
 				TEST_TARGET_NAME = "Let's meet";
 			};
 			name = Debug;
 		};
 		C2F5296E1D51067100AB6337 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3EF0E717C3ADCC985ABBAC8D /* Pods-Let's meetUITests.release.xcconfig */;
+			baseConfigurationReference = 9F5708975E01FC1F96C4EF42 /* Pods-Lets meetUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = "Let's meetUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Let-s-meetUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Lets meet";
 				TEST_TARGET_NAME = "Let's meet";
 			};
 			name = Release;
@@ -701,7 +726,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C2F529391D51067000AB6337 /* Build configuration list for PBXProject "Let's meet" */ = {
+		C2F529391D51067000AB6337 /* Build configuration list for PBXProject "Lets meet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C2F529641D51067100AB6337 /* Debug */,
@@ -710,7 +735,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C2F529661D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meet" */ = {
+		C2F529661D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C2F529671D51067100AB6337 /* Debug */,
@@ -719,7 +744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C2F529691D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meetTests" */ = {
+		C2F529691D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meetTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C2F5296A1D51067100AB6337 /* Debug */,
@@ -728,7 +753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C2F5296C1D51067100AB6337 /* Build configuration list for PBXNativeTarget "Let's meetUITests" */ = {
+		C2F5296C1D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meetUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C2F5296D1D51067100AB6337 /* Debug */,
