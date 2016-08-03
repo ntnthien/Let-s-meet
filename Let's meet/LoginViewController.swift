@@ -7,29 +7,85 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
-
+    
+    let fbButton = FBSDKLoginButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // Facebook login
+        fbButton.delegate = self
+        fbButton.loginBehavior = FBSDKLoginBehavior.Browser
+        fbButton.readPermissions = ["public_profile","user_about_me","email", "user_videos"]
+        fbButton.publishPermissions = ["publish_actions"]
+        fbButton.center = self.view.center
+        self.view.addSubview(fbButton)
+        
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            fetchProfile()
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
+
+// MARK: FBLogin
+extension LoginViewController: FBSDKLoginButtonDelegate {
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        
+        guard error == nil else {
+            //            showError("Unattended error!")
+            return
+        }
+        
+        guard !result.isCancelled else {
+            fetchProfile()
+            return
+        }
+        
+        // AccessToken class will have session details
+        if let aToken = FBSDKAccessToken.currentAccessToken(){
+            fetchProfile()
+        }
+        //        ApiClient.getToken()
+        //        self.presentViewController(StoryboardHelper.getNavigationController(), animated: true, completion: nil)
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        
+        //        ApiClient.token = nil
+    }
+    func fetchProfile() {
+        
+        let parameters = ["fields": "email, first_name, last_name, picture.type(large)"]
+        
+        FBSDKGraphRequest(graphPath: "me", parameters: parameters).startWithCompletionHandler { (connection, result, error) in
+            if error != nil {
+                print(error)
+            } else {
+                User(dictionary: result as! NSDictionary)
+                print(User.currentUser)
+            }
+        }
+    }
+}
+
+

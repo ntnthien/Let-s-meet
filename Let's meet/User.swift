@@ -12,7 +12,9 @@ class User {
     
     static var _currentUser: User?
     
-    var username: String?
+    var last_name: String?
+    var first_name: String?
+
     var password: String?
     var profileUrl: NSURL?
     
@@ -20,13 +22,14 @@ class User {
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        username = dictionary["username"] as? String
+        last_name = dictionary["last_name"] as? String
+        first_name = dictionary["first_name"] as? String
         password = dictionary["password"] as? String
         
-//        let profileUrlString = dictionary["profile_image_url_https"] as? String
-//        if let profileUrlString = profileUrlString {
-//            profileUrl = NSURL(string: profileUrlString)
-//        }
+        if let picture = dictionary["picture"] as? NSDictionary, data = picture["data"] as? NSDictionary,
+            url = data["url"] as? String{
+            profileUrl = NSURL(string: url)
+        }
     }
     class var currentUser: User? {
         get {
