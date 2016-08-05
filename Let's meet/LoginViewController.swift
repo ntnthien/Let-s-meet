@@ -62,7 +62,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
         }
         
         // AccessToken class will have session details
-        if let aToken = FBSDKAccessToken.currentAccessToken(){
+        if FBSDKAccessToken.currentAccessToken() != nil{
             fetchProfile()
         }
         //        ApiClient.getToken()
