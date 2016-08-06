@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FacebookLogin
 
 class ProfileViewController: UIViewController {
 
@@ -14,8 +15,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        initTableView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,18 +35,40 @@ class ProfileViewController: UIViewController {
     }
     */
 
+    @IBAction func logoutButtonTouched(sender: AnyObject) {
+        let loginManager = LoginManager()
+        loginManager.logOut()
+        User.currentUser = nil
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func initTableView() {
+        // Initialize a UIRefreshControl
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+//        
+//        tableView.estimatedRowHeight = 500
+//        tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        refreshControl.endRefreshing()
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("profile_info") as! ProfileInfoTableViewCell
-        cell.fullNameLabel.text = User.currentUser?.last_name
-        cell.profileImageView.image = UIImage(named: "user_profile")?.createRadius(cell.profileImageView.bounds.size, radius: cell.profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
+        cell.user = User.currentUser
         return cell
     }
 }

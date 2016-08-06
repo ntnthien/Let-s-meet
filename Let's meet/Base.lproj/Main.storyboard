@@ -117,7 +117,7 @@
         <!--Profile-->
         <scene sceneID="t0p-Gt-82u">
             <objects>
-                <viewController id="u3y-Lv-WRt" customClass="ProfileViewController" customModule="Lets_meet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="profileVC" id="u3y-Lv-WRt" customClass="ProfileViewController" customModule="Lets_meet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jjk-Ws-umF"/>
                         <viewControllerLayoutGuide type="bottom" id="8w3-TB-4Bx"/>
@@ -189,6 +189,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="SdA-hm-Hvv">
                         <barButtonItem key="backBarButtonItem" title=" " id="sYB-zz-DwU"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="78h-jk-Qae">
+                            <connections>
+                                <action selector="logoutButtonTouched:" destination="u3y-Lv-WRt" id="rwP-TI-ojv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="SaL-Y8-GMK" id="qwa-wZ-qwe"/>

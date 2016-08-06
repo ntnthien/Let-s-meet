@@ -135,12 +135,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6B671CCF1D524A5500357BE5 /* Helpers */ = {
+		6B671CCF1D524A5500357BE5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				6B671CD01D524AC000357BE5 /* UIImage_Extension.swift */,
 			);
-			name = Helpers;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		74248B76A500F1C6298C0F4E /* Pods */ = {
@@ -187,7 +187,7 @@
 		C2F529401D51067100AB6337 /* Lets meet */ = {
 			isa = PBXGroup;
 			children = (
-				6B671CCF1D524A5500357BE5 /* Helpers */,
+				6B671CCF1D524A5500357BE5 /* Extensions */,
 				C2F529761D51071200AB6337 /* Models */,
 				C2F529751D51070700AB6337 /* Views */,
 				C2F529741D5106EF00AB6337 /* Controllers */,

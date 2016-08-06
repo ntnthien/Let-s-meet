@@ -14,7 +14,6 @@ class User {
     
     var last_name: String?
     var first_name: String?
-
     var password: String?
     var profileUrl: NSURL?
     
@@ -33,6 +32,7 @@ class User {
     }
     class var currentUser: User? {
         get {
+            print("Get currentUser")
             if _currentUser == nil {
                 let defaults = NSUserDefaults.standardUserDefaults()
                 let userData = defaults.objectForKey("currentUserData") as? NSData
@@ -45,6 +45,8 @@ class User {
             return _currentUser
         }
         set(user) {
+            print("Set currentUser")
+
             _currentUser = user
             
             let defaults = NSUserDefaults.standardUserDefaults()
