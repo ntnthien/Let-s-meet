@@ -24,3 +24,4 @@ let NAV_COLOR = UIColor(red: 78/255.0, green: 205/255.0, blue: 217/255.0, alpha:
 
 
 // MARK: - API
+let GOOGLE_API_KEY = "AIzaSyCPwzstfvsS26o0e3ex3U1SdRs4hCxD6Uk"
