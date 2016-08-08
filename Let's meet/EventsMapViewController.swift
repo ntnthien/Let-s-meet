@@ -11,6 +11,8 @@ import GoogleMaps
 
 class EventsMapViewController: UIViewController {
     
+    
+    
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var tableView: UITableView!
     

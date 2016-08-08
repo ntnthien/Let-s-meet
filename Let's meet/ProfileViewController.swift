@@ -63,12 +63,21 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("profile_info") as! ProfileInfoTableViewCell
-        cell.user = User.currentUser
+        switch indexPath.row {
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier("profile_info") as! ProfileInfoTableViewCell
+            cell.user = User.currentUser
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier("logout")
+            return cell!
+        default:
+        let cell = UITableViewCell()
         return cell
+        }
     }
 }

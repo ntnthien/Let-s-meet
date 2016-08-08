@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         // Custom navigation bar
         customNavigationBar()
+        UITabBar.appearance().selectedImageTintColor = NAV_COLOR
         // Facebook delegate
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         // Firebase configure
