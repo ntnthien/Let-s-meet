@@ -137,10 +137,10 @@
             </objects>
             <point key="canvasLocation" x="1521" y="880"/>
         </scene>
-        <!--Lets meet-->
+        <!--More-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MoreViewController" customModule="Lets_meet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoreViewController" id="BYZ-38-t0r" customClass="MoreViewController" customModule="Lets_meet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -156,7 +156,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="82" height="30"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
-                                            <segue destination="o5R-Vo-nIf" kind="show" id="ttr-4a-Qtp"/>
+                                            <segue destination="o5R-Vo-nIf" kind="show" id="smq-Wj-4Cp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q3G-0C-dK5">
@@ -191,9 +191,6 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="91A-qw-6tQ">
                                         <rect key="frame" x="0.0" y="228" width="82" height="30"/>
                                         <state key="normal" title="Logout"/>
-                                        <connections>
-                                            <action selector="logoutButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wqQ-wb-3bm"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -204,7 +201,7 @@
                             <constraint firstItem="1zG-tA-JzR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="u1f-d8-WFH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Lets meet" id="V17-DC-q0A">
+                    <navigationItem key="navigationItem" title="More" id="V17-DC-q0A">
                         <barButtonItem key="backBarButtonItem" title=" " id="Hsc-US-DP5"/>
                     </navigationItem>
                 </viewController>

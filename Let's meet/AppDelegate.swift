@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import Firebase
+import FirebaseAuthUI
 import FBSDKCoreKit
 import GoogleMaps
 import GooglePlaces
@@ -16,13 +18,17 @@ import GooglePlaces
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    static var mainStoryboard: UIStoryboard {
+        return UIStoryboard(name: "Main", bundle: nil)
+    }
+
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().statusBarStyle = .LightContent
         // Custom navigation bar
         customNavigationBar()
-        UITabBar.appearance().selectedImageTintColor = NAV_COLOR
+        UITabBar.appearance().tintColor = NAV_COLOR
         // Facebook delegate
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         // Firebase configure
@@ -33,9 +39,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+//    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+//        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+//    }
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        let sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?
+        if FIRAuthUI.authUI()?.handleOpenURL(url, sourceApplication: sourceApplication ?? "") ?? false {
+            return true
+        }
+        // other URL handling goes here.
+        return false
     }
+
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

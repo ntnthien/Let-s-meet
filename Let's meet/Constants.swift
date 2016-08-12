@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 // MARK: - Screen constants
 let SCREEN_SIZE = UIScreen.mainScreen().bounds.size
@@ -25,3 +26,10 @@ let NAV_COLOR = UIColor(red: 78/255.0, green: 205/255.0, blue: 217/255.0, alpha:
 
 // MARK: - API
 let GOOGLE_API_KEY = "AIzaSyCPwzstfvsS26o0e3ex3U1SdRs4hCxD6Uk"
+let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
+let kFacebookAppID     = "290508221310489"
+let kFirebaseTermsOfService = NSURL(string: "https://firebase.google.com/terms/")!
+
+
+// MARK: - Storyboard IDs
+let MORE_VC_ID = "MoreViewController"
