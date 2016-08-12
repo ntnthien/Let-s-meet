@@ -8,17 +8,13 @@
 
 import UIKit
 import Firebase
-import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
-import FBSDKLoginKit
 
 class MoreViewController: BaseViewController {
     private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
     
     private(set) var auth: FIRAuth? = FIRAuth.auth()
-    private(set) var authUI: FIRAuthUI? = FIRAuthUI.authUI()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +26,6 @@ class MoreViewController: BaseViewController {
         super.viewWillAppear(animated)
         // If you haven't set up your authentications correctly these buttons
         // will still appear in the UI, but they'll crash the app when tapped.
-        let providers: [FIRAuthProviderUI] = [
-            //      FIRGoogleAuthUI(clientID: kGoogleAppClientID)!,
-            FIRFacebookAuthUI(appID: kFacebookAppID)!,
-            ]
-        self.authUI?.signInProviders = providers
-        
-        // This is listed as `TOSURL` in the objc source,
-        // but it's `termsOfServiceURL` in the current pod version.
-        self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
         
         self.authStateDidChangeHandle =
             self.auth?.addAuthStateDidChangeListener(self.updateUI(auth:user:))
@@ -56,11 +43,11 @@ class MoreViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func loginButtonTouched(sender: AnyObject) {
-        let controller = self.authUI!.authViewController()
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
+//    
+//    @IBAction func loginButtonTouched(sender: AnyObject) {
+//        let controller = self.authUI!.authViewController()
+//        self.presentViewController(controller, animated: true, completion: nil)
+//    }
     
     @IBAction func logoutButtonTouched(sender: AnyObject) {
       //  LoginManager().logOut()
@@ -96,7 +83,7 @@ class MoreViewController: BaseViewController {
 //            self.nameLabel.text = "Name"
 //            self.emailLabel.text = "Email"
 //            self.uidLabel.text = "UID"
-            print("signed in")
+            print("signed out")
 
         }
     }

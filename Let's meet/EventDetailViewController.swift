@@ -61,9 +61,9 @@ extension EventDetailViewController: UITableViewDataSource {
         case 0:
             cell = (tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! UITableViewCell)
         case 1:
-            cell = (tableView.dequeueReusableCellWithIdentifier("subHeaderCell", forIndexPath: indexPath) as! UITableViewCell)
+            cell = (tableView.dequeueReusableCellWithIdentifier("actionCell", forIndexPath: indexPath) as! UITableViewCell)
         case 2:
-            cell = (tableView.dequeueReusableCellWithIdentifier("bodyCell", forIndexPath: indexPath) as! UITableViewCell)
+            cell = (tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! UITableViewCell)
             
         default:
             cell = UITableViewCell()
