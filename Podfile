@@ -10,6 +10,7 @@ target 'Lets meet' do
   pod 'FacebookLogin'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'JSQMessagesViewController'
 
   # Pods for Let's meet
 

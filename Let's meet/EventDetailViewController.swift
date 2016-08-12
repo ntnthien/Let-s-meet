@@ -23,6 +23,7 @@ class EventDetailViewController: BaseViewController {
         // Customized the tableView
         tableView.separatorColor = UIColor.clearColor()
         
+        
         // Do any additional setup after loading the view.
     }
 
@@ -68,6 +69,7 @@ extension EventDetailViewController: UITableViewDataSource {
         default:
             cell = UITableViewCell()
         }
+        cell.selectionStyle = .None
 //        cell.configureCell(cell, forRowAtIndexPath: indexPath)
         return cell
     }

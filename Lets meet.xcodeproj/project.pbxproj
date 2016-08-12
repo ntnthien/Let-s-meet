@@ -28,6 +28,7 @@
 		C20FB7811D5C80FB0069F567 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20FB7801D5C80FB0069F567 /* Event.swift */; };
 		C216DF021D5B175B0040BF6C /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C216DF011D5B175B0040BF6C /* MoreViewController.swift */; };
 		C2551C2B1D5C2C9F0053676E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2551C2A1D5C2C9F0053676E /* EventDetailViewController.swift */; };
+		C264464B1D5DCAA900610C4B /* EventHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */; };
 		C2F529421D51067100AB6337 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529411D51067100AB6337 /* AppDelegate.swift */; };
 		C2F529471D51067100AB6337 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2F529451D51067100AB6337 /* Main.storyboard */; };
 		C2F529491D51067100AB6337 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2F529481D51067100AB6337 /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		C20FB7801D5C80FB0069F567 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		C216DF011D5B175B0040BF6C /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		C2551C2A1D5C2C9F0053676E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C2F5293E1D51067000AB6337 /* Lets meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lets meet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F529411D51067100AB6337 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2F529461D51067100AB6337 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */,
 				6B82EF301D5C610F00C76357 /* CreateEventTableViewCell.swift */,
 				6B82EF381D5C8CCB00C76357 /* DatePickerPopupViewController.xib */,
+				C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				6B671CCE1D5242A700357BE5 /* ProfileInfoTableViewCell.swift in Sources */,
 				6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */,
 				6B5848B31D55D56900CA26FD /* EventsMapViewController.swift in Sources */,
+				C264464B1D5DCAA900610C4B /* EventHeaderTableViewCell.swift in Sources */,
 				C2551C2B1D5C2C9F0053676E /* EventDetailViewController.swift in Sources */,
 				6B8E2C9A1D51BDB8002C2193 /* User.swift in Sources */,
 				C2F529421D51067100AB6337 /* AppDelegate.swift in Sources */,
