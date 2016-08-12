@@ -14,6 +14,9 @@
 		6B82EF291D5C307C00C76357 /* photo-1440558899941-2b58b4b0e6ad.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6B82EF281D5C307C00C76357 /* photo-1440558899941-2b58b4b0e6ad.jpeg */; };
 		6B82EF2B1D5C30E100C76357 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B82EF2A1D5C30E100C76357 /* CreateEventViewController.swift */; };
 		6B82EF311D5C610F00C76357 /* CreateEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B82EF301D5C610F00C76357 /* CreateEventTableViewCell.swift */; };
+		6B82EF341D5C813C00C76357 /* LocalNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B82EF331D5C813C00C76357 /* LocalNotificationHelper.swift */; };
+		6B82EF391D5C8CCB00C76357 /* DatePickerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B82EF371D5C8CCB00C76357 /* DatePickerPopupViewController.swift */; };
+		6B82EF3A1D5C8CCB00C76357 /* DatePickerPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B82EF381D5C8CCB00C76357 /* DatePickerPopupViewController.xib */; };
 		6B8E2C9A1D51BDB8002C2193 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E2C991D51BDB8002C2193 /* User.swift */; };
 		6BC8C5D31D51EBCE0074C27F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */; };
 		6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */; };
@@ -70,6 +73,9 @@
 		6B82EF281D5C307C00C76357 /* photo-1440558899941-2b58b4b0e6ad.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "photo-1440558899941-2b58b4b0e6ad.jpeg"; sourceTree = "<group>"; };
 		6B82EF2A1D5C30E100C76357 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		6B82EF301D5C610F00C76357 /* CreateEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventTableViewCell.swift; sourceTree = "<group>"; };
+		6B82EF331D5C813C00C76357 /* LocalNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationHelper.swift; sourceTree = "<group>"; };
+		6B82EF371D5C8CCB00C76357 /* DatePickerPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerPopupViewController.swift; sourceTree = "<group>"; };
+		6B82EF381D5C8CCB00C76357 /* DatePickerPopupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerPopupViewController.xib; sourceTree = "<group>"; };
 		6B8E2C991D51BDB8002C2193 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +171,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		6B82EF321D5C811E00C76357 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6B82EF331D5C813C00C76357 /* LocalNotificationHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		74248B76A500F1C6298C0F4E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				6B82EF271D5C304F00C76357 /* Resources */,
+				6B82EF321D5C811E00C76357 /* Helpers */,
 				6B671CCF1D524A5500357BE5 /* Extensions */,
 				C2F529761D51071200AB6337 /* Models */,
 				C2F529751D51070700AB6337 /* Views */,
@@ -257,6 +272,7 @@
 		C2F529741D5106EF00AB6337 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6B82EF371D5C8CCB00C76357 /* DatePickerPopupViewController.swift */,
 				C2F5296F1D5106C700AB6337 /* BaseViewController.swift */,
 				6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */,
 				6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */,
@@ -275,6 +291,7 @@
 				6B671CCD1D5242A700357BE5 /* ProfileInfoTableViewCell.swift */,
 				846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */,
 				6B82EF301D5C610F00C76357 /* CreateEventTableViewCell.swift */,
+				6B82EF381D5C8CCB00C76357 /* DatePickerPopupViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -364,6 +381,7 @@
 				TargetAttributes = {
 					C2F5293D1D51067000AB6337 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 42GHUCGJCJ;
 					};
 					C2F529511D51067100AB6337 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -405,6 +423,7 @@
 				C2F529491D51067100AB6337 /* Assets.xcassets in Resources */,
 				C2F529471D51067100AB6337 /* Main.storyboard in Resources */,
 				6B82EF291D5C307C00C76357 /* photo-1440558899941-2b58b4b0e6ad.jpeg in Resources */,
+				6B82EF3A1D5C8CCB00C76357 /* DatePickerPopupViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,10 +580,12 @@
 				6B8E2C9A1D51BDB8002C2193 /* User.swift in Sources */,
 				C2F529421D51067100AB6337 /* AppDelegate.swift in Sources */,
 				6BC8C5D31D51EBCE0074C27F /* ProfileViewController.swift in Sources */,
+				6B82EF391D5C8CCB00C76357 /* DatePickerPopupViewController.swift in Sources */,
 				846F6A191D54A9E400F34EAF /* EventListViewController.swift in Sources */,
 				C20FB7811D5C80FB0069F567 /* Event.swift in Sources */,
 				846F6A171D549CF500F34EAF /* EventListTableViewCell.swift in Sources */,
 				C2F529711D5106C700AB6337 /* BaseViewController.swift in Sources */,
+				6B82EF341D5C813C00C76357 /* LocalNotificationHelper.swift in Sources */,
 				C216DF021D5B175B0040BF6C /* MoreViewController.swift in Sources */,
 				6B82EF311D5C610F00C76357 /* CreateEventTableViewCell.swift in Sources */,
 				C2F529721D5106C700AB6337 /* Constants.swift in Sources */,
@@ -714,10 +735,13 @@
 			baseConfigurationReference = DA10D9FB077408DD623FBE4E /* Pods-Lets meet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Let's meet/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Lets-meet";
 				PRODUCT_NAME = "Lets meet";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -726,10 +750,13 @@
 			baseConfigurationReference = 23EA1A3E831F5C7E70B51CBA /* Pods-Lets meet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Let's meet/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Lets-meet";
 				PRODUCT_NAME = "Lets meet";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
