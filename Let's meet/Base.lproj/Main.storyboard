@@ -836,12 +836,17 @@
                                                         <action selector="onDatePickerButton:" destination="8Db-7U-oM9" eventType="touchUpInside" id="nUU-6q-r4w"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYv-ai-GXe">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYv-ai-GXe">
                                                     <rect key="frame" x="10" y="260" width="526" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tags" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zHn-26-CDT">
+                                                    <rect key="frame" x="10" y="420" width="580" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Zf1-aP-Zur" firstAttribute="top" secondItem="6Rj-W6-Ca0" secondAttribute="bottom" constant="10" id="2uj-1Q-fRK"/>
@@ -855,6 +860,7 @@
                                                 <constraint firstItem="Qdg-ku-chQ" firstAttribute="top" secondItem="yYv-ai-GXe" secondAttribute="bottom" constant="19" id="E6N-yO-P5x"/>
                                                 <constraint firstAttribute="trailing" secondItem="dZq-oL-9W3" secondAttribute="trailing" constant="10" id="Gtp-Xp-xMA"/>
                                                 <constraint firstItem="L3L-nz-9DM" firstAttribute="leading" secondItem="b1f-er-0Zh" secondAttribute="leading" constant="10" id="IlD-pY-0NY"/>
+                                                <constraint firstItem="zHn-26-CDT" firstAttribute="top" secondItem="L3L-nz-9DM" secondAttribute="bottom" constant="10" id="OAt-Bb-xbQ"/>
                                                 <constraint firstItem="6Rj-W6-Ca0" firstAttribute="leading" secondItem="b1f-er-0Zh" secondAttribute="leading" constant="10" id="PFi-vT-Gol"/>
                                                 <constraint firstItem="6Rj-W6-Ca0" firstAttribute="top" secondItem="b1f-er-0Zh" secondAttribute="top" constant="10" id="bV3-GA-6LK"/>
                                                 <constraint firstItem="hhr-Vz-hU6" firstAttribute="leading" relation="lessThanOrEqual" secondItem="yYv-ai-GXe" secondAttribute="trailing" constant="24" id="dg7-eM-MFJ"/>
@@ -864,6 +870,8 @@
                                                 <constraint firstItem="yYv-ai-GXe" firstAttribute="top" secondItem="Zf1-aP-Zur" secondAttribute="bottom" constant="10" id="ihx-kq-rye"/>
                                                 <constraint firstAttribute="trailing" secondItem="wMa-u5-kbA" secondAttribute="trailing" constant="15" id="kkY-as-xuC"/>
                                                 <constraint firstItem="L3L-nz-9DM" firstAttribute="top" secondItem="dZq-oL-9W3" secondAttribute="bottom" constant="10" id="nQh-pv-4cX"/>
+                                                <constraint firstAttribute="trailing" secondItem="zHn-26-CDT" secondAttribute="trailing" constant="10" id="nkl-m8-buc"/>
+                                                <constraint firstItem="zHn-26-CDT" firstAttribute="leading" secondItem="b1f-er-0Zh" secondAttribute="leading" constant="10" id="o1d-H8-PkC"/>
                                                 <constraint firstItem="Zf1-aP-Zur" firstAttribute="leading" secondItem="b1f-er-0Zh" secondAttribute="leading" constant="10" id="q6R-1Z-dcG"/>
                                                 <constraint firstItem="yYv-ai-GXe" firstAttribute="leading" secondItem="b1f-er-0Zh" secondAttribute="leading" constant="10" id="wGx-B2-g7t"/>
                                             </constraints>
@@ -874,6 +882,7 @@
                                             <outlet property="locationTextfield" destination="dZq-oL-9W3" id="9cO-F0-gUb"/>
                                             <outlet property="panelImage" destination="6Rj-W6-Ca0" id="fc4-o9-iR2"/>
                                             <outlet property="priceTextfield" destination="b1f-er-0Zh" id="z8g-VD-4Bh"/>
+                                            <outlet property="tagTextfield" destination="zHn-26-CDT" id="IPb-yu-ec7"/>
                                             <outlet property="timeLabel" destination="yYv-ai-GXe" id="dSU-qn-vTB"/>
                                             <outlet property="titleTextfield" destination="Zf1-aP-Zur" id="j4A-Cj-cGW"/>
                                         </connections>
@@ -1016,7 +1025,7 @@
         <image name="wish" width="70" height="70"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Wj5-39-qEQ"/>
         <segue reference="xEW-o4-58I"/>
-        <segue reference="QWT-Um-fdf"/>
     </inferredMetricsTieBreakers>
 </document>

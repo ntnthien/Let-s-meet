@@ -26,6 +26,8 @@ class CreateEventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var priceTextfield: UIView!
     
+    @IBOutlet weak var tagTextfield: UITextField!
+    
     @IBOutlet weak var editButton: UIButton!
     
     var delegate: CreateEventTableViewCellDelegate!
