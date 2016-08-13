@@ -22,17 +22,17 @@ struct Event {
     var thumbnailURL: String?
     
     init (id: String, name: String, description: String, location: String, time: NSDate, hostID: String, onlineStream: String?, joinAmount: Int, tag: [String], discussionID: String, thumbnailURL: String?) {
-        self.id = eventID
+        self.id = id
         self.name = name
         self.description = description
         self.location = location
-        self.time = NSDate(timeIntervalSince1970: time)
+        self.time = time
         self.hostID = hostID
         self.onlineStream = onlineStream
         self.joinAmount = joinAmount
         self.thumbnailURL = thumbnailURL
         self.discussionID = discussionID
-        self.tag = tag.componentsSeparatedByString(",")
+        self.tag = tag
     }
     
     init? (eventID: String, eventInfo: [String: AnyObject]) {
