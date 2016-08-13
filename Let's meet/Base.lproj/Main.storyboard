@@ -356,6 +356,24 @@
             </objects>
             <point key="canvasLocation" x="1537" y="1551"/>
         </scene>
+        <!--Filter View Controller-->
+        <scene sceneID="gmu-FC-YXq">
+            <objects>
+                <viewController id="RGc-rG-Q0l" customClass="FilterViewController" customModule="Lets_meet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZnY-5n-PHs"/>
+                        <viewControllerLayoutGuide type="bottom" id="eBl-oC-847"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zTr-Pc-B1U">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GxI-TW-IF7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1409" y="-1180"/>
+        </scene>
         <!--Event List View Controller-->
         <scene sceneID="5Jx-YB-R4i">
             <objects>
@@ -479,6 +497,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="kHq-uj-Wum">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" image="filterIcon" id="66Z-jo-b9t">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="RGc-rG-Q0l" kind="show" id="NZy-vE-i8p"/>
+                            </connections>
+                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="oQb-3p-ANu">
                             <rect key="frame" x="180" y="7" width="240" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1039,6 +1063,7 @@
         <image name="chat" width="70" height="70"/>
         <image name="edit" width="21" height="21"/>
         <image name="email" width="70" height="70"/>
+        <image name="filterIcon" width="32" height="32"/>
         <image name="home" width="21" height="21"/>
         <image name="main_event" width="1170" height="500"/>
         <image name="map" width="21" height="21"/>
