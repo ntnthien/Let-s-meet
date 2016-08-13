@@ -743,7 +743,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Let's meet/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Lets-meet";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zincer.Letsmeet;
 				PRODUCT_NAME = "Lets meet";
 				PROVISIONING_PROFILE = "";
 			};
@@ -758,7 +758,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Let's meet/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.zincer.Lets-meet";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zincer.Letsmeet;
 				PRODUCT_NAME = "Lets meet";
 				PROVISIONING_PROFILE = "";
 			};
