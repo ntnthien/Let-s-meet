@@ -7,23 +7,44 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
+import MobileCoreServices
 
-class CreateEventViewController: UIViewController {
+class CreateEventViewController: BaseViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
     
     var popViewController : DatePickerPopupViewController!
+    var event: Event!
+    
+    var eventsRef = FIRDatabase.database().reference().child("events")
+    var discussionsRef = FIRDatabase.database().reference().child("discussions")
+    var tagsRef = FIRDatabase.database().reference().child("tags")
+
+    let currentUser = FIRAuth.auth()?.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initTable()
-        //        self.setRoundedBorder(5, withBorderWidth: 1, withColor: UIColor(red: 0.0, green: 122.0/2550, blue: 1.0, alpha: 1.0), forButton: showPopupBtn)
-        
     }
     
     @IBAction func onSaveButton(sender: UIBarButtonItem) {
         print("On save event")
+        
+        let newEvent = eventsRef.childByAutoId()
+        let newDiscussion = discussionsRef.childByAutoId()
+        let tags = "docker, firebase"
+        for tag in separateTags(tags) {
+            tagsRef.child(tag).setValue(["event_id": newEvent.key])
+        }
+        let newEventData = ["event_id": newEvent.key, "location": "12 Nguyen Trai", "description": "No description", "name": "WWDC 2016", "host_id": currentUser!.uid, "time_since_1970": "123456", "join_amount": 0, "discussion_id": newDiscussion.key, "tags": tags, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
+        let newDiscussionData = ["discussion_id": newDiscussion.key]
+        
+        newEvent.setValue(newEventData)
+        newDiscussion.setValue(newDiscussionData)
+        
     }
     
     
@@ -79,10 +100,42 @@ extension CreateEventViewController: UITableViewDataSource, UITableViewDelegate 
 extension CreateEventViewController: CreateEventTableViewCellDelegate {
     func clickEditImage(createEventTVC: CreateEventTableViewCell, isCliked: Bool) {
         print("clickEditImage \(isCliked)")
+        didPressImagePickerButton()
     }
     
     func clickDatePicker(createEventTVC: CreateEventTableViewCell, isCliked: Bool) {
         print("clickDatePicker \(isCliked)")
         showPopUp()
+    }
+    
+//    func getMediaFrom(type: CFString){
+//        let mediaPicker = UIImagePickerController()
+//        mediaPicker.delegate = self
+//        mediaPicker.mediaTypes = [type as String]
+//        self.presentViewController(mediaPicker, animated: true, completion: nil)
+//    }
+    
+    func didPressImagePickerButton() {
+        print("didPressImagePickerButton")
+        let sheet = UIAlertController(title: "Media Messages", message: "Please select a media", preferredStyle: .ActionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (alertAction) in
+            
+        }
+        let photoLibrary = UIAlertAction(title: "Photo Library", style: .Default) { (alert) in
+//            self.getMediaFrom(kUTTypeImage)
+            
+        }
+        
+        let videoLibrary = UIAlertAction(title: "Video Library", style: .Default) { (alert) in
+//            self.getMediaFrom(kUTTypeMovie)
+        }
+        sheet.addAction(photoLibrary)
+        sheet.addAction(videoLibrary)
+        sheet.addAction(cancel)
+        self.presentViewController(sheet, animated: true, completion: nil)
+        
+        //        let imagePicker = UIImagePickerController()
+        //        imagePicker.delegate = self
+        //        self.presentViewController(imagePicker, animated: true, completion: nil)
     }
 }

@@ -47,6 +47,11 @@ class BaseViewController: UIViewController {
         
     }
     
+    func separateTags(tags: String) -> [String] {
+        let tags = tags.componentsSeparatedByString(",")
+        return tags
+    }
+    
     /*
      // MARK: - Navigation
      

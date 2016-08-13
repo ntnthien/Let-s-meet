@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 struct Event {
     var id: String
@@ -17,11 +18,11 @@ struct Event {
     var hostID: String
     var onlineStream: String?
     var joinAmount: Int
-    var tag: [String]
+    var tags: [String]
     var discussionID: String
     var thumbnailURL: String?
     
-    init (id: String, name: String, description: String, location: String, time: NSDate, hostID: String, onlineStream: String?, joinAmount: Int, tag: [String], discussionID: String, thumbnailURL: String?) {
+    init (id: String, name: String, description: String, location: String, time: NSDate, hostID: String, onlineStream: String?, joinAmount: Int, tags: [String], discussionID: String, thumbnailURL: String?) {
         self.id = id
         self.name = name
         self.description = description
@@ -32,19 +33,19 @@ struct Event {
         self.joinAmount = joinAmount
         self.thumbnailURL = thumbnailURL
         self.discussionID = discussionID
-        self.tag = tag
+        self.tags = tags
     }
     
     init? (eventID: String, eventInfo: [String: AnyObject]) {
         guard let location = eventInfo["location"] as? String,
-             description = eventInfo["description"] as? String,
-             name = eventInfo["name"] as? String,
-             time = eventInfo["time_since_1970"] as? Double,
-             hostID = eventInfo["hostID"] as? String,
-             joinAmount = eventInfo["join_amount"] as? Int,
-             discussionID = eventInfo["discussionID"] as? String,
-             tag = eventInfo["tag"] as? String
-        else { return nil }
+            description = eventInfo["description"] as? String,
+            name = eventInfo["name"] as? String,
+            time = eventInfo["time_since_1970"] as? Double,
+            hostID = eventInfo["host_id"] as? String,
+            joinAmount = eventInfo["join_amount"] as? Int,
+            discussionID = eventInfo["discussion_id"] as? String,
+            tags = eventInfo["tags"] as? String
+            else { return nil }
         
         self.id = eventID
         self.name = name
@@ -52,7 +53,7 @@ struct Event {
         self.location = location
         self.time = NSDate(timeIntervalSince1970: time)
         self.hostID = hostID
-        if let onlineStream = eventInfo["onlineStream"] as? String {
+        if let onlineStream = eventInfo["online_stream"] as? String {
             self.onlineStream = onlineStream
         }
         self.joinAmount = joinAmount
@@ -60,6 +61,10 @@ struct Event {
             self.thumbnailURL = thumbnailURL
         }
         self.discussionID = discussionID
-        self.tag = tag.componentsSeparatedByString(",")
+        self.tags = tags.componentsSeparatedByString(",")
+    }
+    
+    func toJSON() -> [String: AnyObject] {
+        return ["event_id": self.id, "location": self.location, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": "123456", "join_amount": 0, "discussion_id": self.discussionID, "tags": self.tags.joinWithSeparator(","),"thumbnail_url": (self.thumbnailURL ?? ""), "online_stream": (self.onlineStream ?? "")]
     }
 }
