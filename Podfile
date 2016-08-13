@@ -11,6 +11,7 @@ target 'Lets meet' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'JSQMessagesViewController'
+  pod 'ObjectMapper', '~> 1.3'
 
   # Pods for Let's meet
 

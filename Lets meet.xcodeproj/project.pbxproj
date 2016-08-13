@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		51F34B2C3B28D2B41B14EA24 /* Pods_Lets_meetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957D949BEEC61C628D46F2B1 /* Pods_Lets_meetUITests.framework */; };
+		6B13C5811D5F1A9D00CC445C /* FirebaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B13C5801D5F1A9D00CC445C /* FirebaseAPI.swift */; };
 		6B5848B31D55D56900CA26FD /* EventsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5848B21D55D56900CA26FD /* EventsMapViewController.swift */; };
 		6B671CCE1D5242A700357BE5 /* ProfileInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B671CCD1D5242A700357BE5 /* ProfileInfoTableViewCell.swift */; };
 		6B671CD11D524AC000357BE5 /* UIImage_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B671CD01D524AC000357BE5 /* UIImage_Extension.swift */; };
@@ -69,6 +70,7 @@
 		379013C6010181A40CC5A81F /* Pods-Let's meetUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3EF0E717C3ADCC985ABBAC8D /* Pods-Let's meetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetUITests/Pods-Let's meetUITests.release.xcconfig"; sourceTree = "<group>"; };
 		45DB528E3EA84C8FC3A06911 /* Pods_Let_s_meet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Let_s_meet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B13C5801D5F1A9D00CC445C /* FirebaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPI.swift; sourceTree = "<group>"; };
 		6B5848B21D55D56900CA26FD /* EventsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsMapViewController.swift; sourceTree = "<group>"; };
 		6B671CCD1D5242A700357BE5 /* ProfileInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoTableViewCell.swift; sourceTree = "<group>"; };
 		6B671CD01D524AC000357BE5 /* UIImage_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage_Extension.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				6B82EF331D5C813C00C76357 /* LocalNotificationHelper.swift */,
+				6B13C5801D5F1A9D00CC445C /* FirebaseAPI.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -318,12 +321,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2F529661D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meet" */;
 			buildPhases = (
+				1185464F7C55FDE193E60A1B /* 📦 Check Pods Manifest.lock */,
 				5401FC454BC89D2A5992B59C /* [CP] Check Pods Manifest.lock */,
 				C2F5293A1D51067000AB6337 /* Sources */,
 				C2F5293B1D51067000AB6337 /* Frameworks */,
 				C2F5293C1D51067000AB6337 /* Resources */,
 				68B7C76B1E1DC5B16E22FC8F /* [CP] Embed Pods Frameworks */,
 				7EAA13DD82E0AC3F9D7F27EB /* [CP] Copy Pods Resources */,
+				51CF33C20577991E589A59EC /* 📦 Embed Pods Frameworks */,
+				3AB79946902F962C1AB3E5A4 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -338,12 +344,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2F529691D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meetTests" */;
 			buildPhases = (
+				5888E5E38914556F803507DD /* 📦 Check Pods Manifest.lock */,
 				E67BF64FD438CDBCDFAA58AB /* [CP] Check Pods Manifest.lock */,
 				C2F5294E1D51067100AB6337 /* Sources */,
 				C2F5294F1D51067100AB6337 /* Frameworks */,
 				C2F529501D51067100AB6337 /* Resources */,
 				6FFA5C8ED6A223B82DB76899 /* [CP] Embed Pods Frameworks */,
 				CFA2D46343C168BF08E88A33 /* [CP] Copy Pods Resources */,
+				3A0C96ED3ABFA8B7FF5BA865 /* 📦 Embed Pods Frameworks */,
+				4083F7B341178F9ED585BD4E /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -359,11 +368,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C2F5296C1D51067100AB6337 /* Build configuration list for PBXNativeTarget "Lets meetUITests" */;
 			buildPhases = (
+				DE88489EF458B2BCBAB21105 /* 📦 Check Pods Manifest.lock */,
 				7516E93B4801F2A3CAECB590 /* [CP] Check Pods Manifest.lock */,
 				C2F529591D51067100AB6337 /* Sources */,
 				C2F5295A1D51067100AB6337 /* Frameworks */,
 				C2F5295B1D51067100AB6337 /* Resources */,
 				5E3CD680FA23B465F66991BF /* [CP] Copy Pods Resources */,
+				6D655B314246369B9378A9D1 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -452,6 +463,81 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1185464F7C55FDE193E60A1B /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3A0C96ED3ABFA8B7FF5BA865 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meetTests/Pods-Lets meetTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3AB79946902F962C1AB3E5A4 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meet/Pods-Lets meet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4083F7B341178F9ED585BD4E /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meetTests/Pods-Lets meetTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		51CF33C20577991E589A59EC /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meet/Pods-Lets meet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5401FC454BC89D2A5992B59C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -460,6 +546,21 @@
 			inputPaths = (
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5888E5E38914556F803507DD /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,6 +596,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meet/Pods-Lets meet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D655B314246369B9378A9D1 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meetUITests/Pods-Lets meetUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6FFA5C8ED6A223B82DB76899 /* [CP] Embed Pods Frameworks */ = {
@@ -557,6 +673,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lets meetTests/Pods-Lets meetTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DE88489EF458B2BCBAB21105 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		E67BF64FD438CDBCDFAA58AB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -582,6 +713,7 @@
 				6B671CCE1D5242A700357BE5 /* ProfileInfoTableViewCell.swift in Sources */,
 				6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */,
 				6B5848B31D55D56900CA26FD /* EventsMapViewController.swift in Sources */,
+				6B13C5811D5F1A9D00CC445C /* FirebaseAPI.swift in Sources */,
 				C264464B1D5DCAA900610C4B /* EventHeaderTableViewCell.swift in Sources */,
 				C2551C2B1D5C2C9F0053676E /* EventDetailViewController.swift in Sources */,
 				6B8E2C9A1D51BDB8002C2193 /* User.swift in Sources */,
