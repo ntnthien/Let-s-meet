@@ -10,7 +10,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseDatabase
 
-class FirebaseAPI {
+ class FirebaseAPI {
  
     static var sharedInstance = FirebaseAPI()
     var eventsRef = FIRDatabase.database().reference().child("events")

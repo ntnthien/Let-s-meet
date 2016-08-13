@@ -32,19 +32,21 @@ class CreateEventViewController: BaseViewController {
     
     @IBAction func onSaveButton(sender: UIBarButtonItem) {
         print("On save event")
-        
-        let newEvent = eventsRef.childByAutoId()
-        let newDiscussion = discussionsRef.childByAutoId()
+//        
+//        let newEvent = eventsRef.childByAutoId()
+//        let newDiscussion = discussionsRef.childByAutoId()
         let tags = "docker, firebase"
-        for tag in separateTags(tags) {
-            tagsRef.child(tag).setValue(["event_id": newEvent.key])
-        }
-        let newEventData = ["event_id": newEvent.key, "location": "12 Nguyen Trai", "description": "No description", "name": "WWDC 2016", "host_id": currentUser!.uid, "time_since_1970": "123456", "join_amount": 0, "discussion_id": newDiscussion.key, "tags": tags, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
-        let newDiscussionData = ["discussion_id": newDiscussion.key]
-        
-        newEvent.setValue(newEventData)
-        newDiscussion.setValue(newDiscussionData)
-        
+//        for tag in separateTags(tags) {
+//            tagsRef.child(tag).setValue(["event_id": newEvent.key])
+//        }
+//        let newEventData = ["event_id": newEvent.key, "location": "12 Nguyen Trai", "description": "No description", "name": "WWDC 2016", "host_id": currentUser!.uid, "time_since_1970": "123456", "join_amount": 0, "discussion_id": newDiscussion.key, "tags": tags, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
+//        let newDiscussionData = ["discussion_id": newDiscussion.key]
+//        
+//        newEvent.setValue(newEventData)
+//        newDiscussion.setValue(newDiscussionData)
+        let newEventData = ["event_id": "", "location": "12 Nguyen Trai", "description": "No description", "name": "WWDC 2016", "host_id": currentUser!.uid, "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": tags, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
+        let eventObject = Event(eventID: "", eventInfo: newEventData as! [String : AnyObject])
+        FirebaseAPI.sharedInstance.createEvent(eventObject!)
     }
     
     
