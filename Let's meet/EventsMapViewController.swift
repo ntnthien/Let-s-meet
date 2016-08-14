@@ -32,18 +32,26 @@ class EventsMapViewController: UIViewController {
         
         // Create a GMSCameraPosition that tells the map to display the
         // coordinate -33.86,151.20 at zoom level 6.
-        let camera = GMSCameraPosition.cameraWithLatitude(-33.86, longitude: 151.20, zoom: 12.0)
+        
+        let camera = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 17.0)
         let mapView = GMSMapView.mapWithFrame(self.mapView.bounds, camera: camera)
         mapView.myLocationEnabled = true
         mapView.mapType = kGMSTypeNormal
         mapView.indoorEnabled = false
+
+        if let mylocation = mapView.myLocation {
+            print("User's location: \(mylocation)")
+        } else {
+            print("User's location is unknown")
+        }
         
         
         // Creates a marker in the center of the map.
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
+        marker.position = CLLocationCoordinate2D(latitude: 10.7803616, longitude: 106.6860085)
+        marker.title = "Docker Meetup"
+        marker.snippet = "Work Sai Gon"
+        
         marker.map = mapView
         
         self.mapView.addSubview(mapView)
