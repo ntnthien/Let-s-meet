@@ -68,7 +68,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("profile_info") as! ProfileInfoTableViewCell
-            cell.user = User.currentUser
+            cell.user = User(userInfo: FirebaseAPI.sharedInstance.getUserInfo()!)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("logout")

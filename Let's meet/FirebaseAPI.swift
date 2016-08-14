@@ -24,7 +24,7 @@ class FirebaseAPI {
     let eventsRef = FIRDatabase.database().reference().child("events")
     let discussionsRef =  FIRDatabase.database().reference().child("discussions")
     let tagsRef = FIRDatabase.database().reference().child("tags")
-//    let userRef = FIRDatabase.database().reference().userRef
+    let userRef = FIRDatabase.database().reference().child("users")
     
     let currentUser = FIRAuth.auth()?.currentUser
     
@@ -37,7 +37,11 @@ class FirebaseAPI {
     init() {
         let providers: [FIRAuthProviderUI] = [FIRFacebookAuthUI(appID: FACEBOOK_APP_ID)!]
         self.authUI?.signInProviders = providers
+        self.authUI?.signInWithEmailHidden = true
         self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
+        self.authStateDidChangeHandle =
+            self.auth?.addAuthStateDidChangeListener(self.authStateHandler(auth:user:))
+
     }
     
     
@@ -70,8 +74,19 @@ class FirebaseAPI {
     
     
     // MARK: - User
-    func getUserInfo(id: String) {
-        
+    func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
+        userRef.observeSingleEventOfType(.Value, withBlock: block)
+    }
+    
+    func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {
+        if let user = user, userInfo = User(userInfo: user.providerData.first!) {
+            userRef.child(user.uid).setValue(userInfo.toJSON())
+            
+            print("signed in")
+        } else {
+            print("signed out")
+            
+        }
     }
     
     func getUserInfo() -> FIRUserInfo? {
@@ -89,7 +104,6 @@ class FirebaseAPI {
     func logout() {
         do {
             try self.auth?.signOut()
-            print("logout")
         } catch let error {
             
             fatalError("Could not sign out: \(error)")

@@ -18,14 +18,12 @@ class ProfileInfoTableViewCell: UITableViewCell {
     
     var user: User? {
         didSet {
-            if let first_name = user?.first_name, last_name = user?.last_name {
-                fullNameLabel.text = "\(first_name) \(last_name)"
+            if let name = user?.displayName {
+                fullNameLabel.text = "\(name)"
             }
-            if user?.profileUrl != nil {
-                let url = user?.profileUrl
-                
+            if let url = NSURL(string: (user?.photoURL)!) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                    let data = NSData(contentsOfURL: url!)
+                    let data = NSData(contentsOfURL: url)
                     //make sure your image in this url does exist, otherwise unwrap in a if let check
                     dispatch_async(dispatch_get_main_queue(), {
                         self.profileImageView.image = UIImage(data: data!)?.createRadius(self.profileImageView.bounds.size, radius: self.profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])

@@ -7,56 +7,43 @@
 //
 
 import Foundation
+import Firebase
 
 class User {
-    static var _currentUser: User?
+    var uid: String
+    var displayName: String!
+    var email: String!
+    var photoURL: String!
+    var providerID: String
     
-    var last_name: String?
-    var first_name: String?
-    var password: String?
-    var profileUrl: NSURL?
-    
-    var dictionary: NSDictionary?
-    
-    init(dictionary: NSDictionary) {
-        self.dictionary = dictionary
-        last_name = dictionary["last_name"] as? String
-        first_name = dictionary["first_name"] as? String
-        password = dictionary["password"] as? String
-        
-        if let picture = dictionary["picture"] as? NSDictionary, data = picture["data"] as? NSDictionary,
-            url = data["url"] as? String{
-            profileUrl = NSURL(string: url)
-        }
+    func toJSON() -> [String: AnyObject] {
+        let name = self.displayName
+        let email = self.email
+        let photoUrl = self.photoURL
+        let uid = self.uid;
+        let providerID = self.providerID
+        return ["uid": uid, "name": name!, "email": email!, "photo_url": photoUrl!, "provider_id": providerID]
     }
-    class var currentUser: User? {
-        get {
-            print("Get currentUser")
-            if _currentUser == nil {
-                let defaults = NSUserDefaults.standardUserDefaults()
-                let userData = defaults.objectForKey("currentUserData") as? NSData
-                
-                if let userData = userData {
-                    let dictionary = try! NSJSONSerialization.JSONObjectWithData(userData, options: []) as! NSDictionary
-                    _currentUser = User(dictionary: dictionary)
-                }
-            }
-            return _currentUser
-        }
-        set(user) {
-            print("Set currentUser")
-
-            _currentUser = user
-            
-            let defaults = NSUserDefaults.standardUserDefaults()
-            
-            if let user = user {
-                let data = try! NSJSONSerialization.dataWithJSONObject(user.dictionary!, options: [])
-                defaults.setObject(data, forKey: "currentUserData")
-            } else {
-                defaults.setObject(user, forKey: "currentUserData")
-            }
-            defaults.synchronize()
-        }
+    
+    init? (userInfo: [String: AnyObject]) {
+        guard let uid = userInfo["uid"] as? String,
+            displayName = userInfo["displayName"] as? String,
+            email = userInfo["email"] as? String,
+            photoUrl = userInfo["photo_url"] as? String,
+            providerID = userInfo["provider_id"] as? String
+            else { return nil }
+        self.uid = uid
+        self.displayName = displayName
+        self.email = email
+        self.photoURL = photoUrl
+        self.providerID = providerID
+    }
+    
+    init? (userInfo: FIRUserInfo) {
+        self.uid = userInfo.uid
+        self.displayName = userInfo.displayName
+        self.email = userInfo.email
+        self.photoURL = userInfo.photoURL?.absoluteString
+        self.providerID = userInfo.providerID
     }
 }

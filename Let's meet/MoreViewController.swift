@@ -27,8 +27,6 @@ class MoreViewController: BaseViewController {
         // If you haven't set up your authentications correctly these buttons
         // will still appear in the UI, but they'll crash the app when tapped.
         
-        self.authStateDidChangeHandle =
-            self.auth?.addAuthStateDidChangeListener(self.updateUI(auth:user:))
     }
     
     
@@ -63,30 +61,7 @@ class MoreViewController: BaseViewController {
             fatalError("Could not sign out: \(error)")
         }
     }
-    
-    func updateUI(auth auth: FIRAuth, user: FIRUser?) {
-        if let user = user {
-//            self.signOutButton.enabled = true
-//            self.startButton.enabled = false
-//            
-//            self.signedInLabel.text = "Signed in"
-//            self.nameLabel.text = "Name: " + (user.displayName ?? "(null)")
-//            self.emailLabel.text = "Email: " + (user.email ?? "(null)")
-//            self.uidLabel.text = "UID: " + user.uid
-            
-            print("signed in")
-        } else {
-//            self.signOutButton.enabled = false
-//            self.startButton.enabled = true
-//            
-//            self.signedInLabel.text = "Not signed in"
-//            self.nameLabel.text = "Name"
-//            self.emailLabel.text = "Email"
-//            self.uidLabel.text = "UID"
-            print("signed out")
-
-        }
-    }
+   
 
     /*
     // MARK: - Navigation
