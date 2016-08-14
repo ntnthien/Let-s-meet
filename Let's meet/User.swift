@@ -9,7 +9,6 @@
 import Foundation
 
 class User {
-    
     static var _currentUser: User?
     
     var last_name: String?

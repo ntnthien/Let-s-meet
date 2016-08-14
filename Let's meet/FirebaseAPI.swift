@@ -8,13 +8,19 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFacebookAuthUI
+import FirebaseAuthUI
 import FirebaseDatabase
 
 class FirebaseAPI {
-    let EVENT_KEY = "events"
+    private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
     
+    private(set) var auth: FIRAuth? = FIRAuth.auth()
+    private(set) var authUI: FIRAuthUI? = FIRAuthUI.authUI()
     
     static var sharedInstance = FirebaseAPI()
+    
+    // MARK: - Ref
     let eventsRef = FIRDatabase.database().reference().child("events")
     let discussionsRef =  FIRDatabase.database().reference().child("discussions")
     let tagsRef = FIRDatabase.database().reference().child("tags")
@@ -28,7 +34,14 @@ class FirebaseAPI {
         return tags
     }
     
+    init() {
+        let providers: [FIRAuthProviderUI] = [FIRFacebookAuthUI(appID: FACEBOOK_APP_ID)!]
+        self.authUI?.signInProviders = providers
+        self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
+    }
     
+    
+    // MARK: - Event
     func createEvent(event: Event) {
         let newEvent = eventsRef.childByAutoId()
         let newDiscussion = discussionsRef.childByAutoId()
@@ -55,8 +68,31 @@ class FirebaseAPI {
         
     }
     
-    func getUser(id: String) {
+    
+    // MARK: - User
+    func getUserInfo(id: String) {
         
     }
-
+    
+    func getUserInfo() -> FIRUserInfo? {
+        if let userInfo = FIRAuth.auth()?.currentUser?.providerData.first {
+            return userInfo
+        } else {
+            return nil
+        }
+    }
+    
+    func getLoginVC() -> UIViewController {
+        return self.authUI!.authViewController()
+    }
+    
+    func logout() {
+        do {
+            try self.auth?.signOut()
+            print("logout")
+        } catch let error {
+            
+            fatalError("Could not sign out: \(error)")
+        }
+    }
 }

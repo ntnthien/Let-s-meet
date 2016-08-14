@@ -27,8 +27,9 @@ let NAV_COLOR = UIColor(red: 78/255.0, green: 205/255.0, blue: 217/255.0, alpha:
 // MARK: - API
 let GOOGLE_API_KEY = "AIzaSyCqbPtzws6qpHd7V_JE7lNNZuLh3j6cejk"
 let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
-let kFacebookAppID     = "290508221310489"
+let FACEBOOK_APP_ID     = "290508221310489"
 let kFirebaseTermsOfService = NSURL(string: "https://firebase.google.com/terms/")!
+let EVENT_KEY = "events"
 
 
 // MARK: - Storyboard IDs

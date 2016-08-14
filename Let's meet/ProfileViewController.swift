@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FacebookLogin
+//import FacebookLogin
 
 class ProfileViewController: UIViewController {
 
@@ -15,7 +15,8 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let user = FirebaseAPI.sharedInstance.getUserInfo()
+        print(user)
         initTableView()
     }
 
@@ -36,10 +37,7 @@ class ProfileViewController: UIViewController {
     */
 
     @IBAction func logoutButtonTouched(sender: AnyObject) {
-        let loginManager = LoginManager()
-        loginManager.logOut()
-        User.currentUser = nil
-        self.navigationController?.popViewControllerAnimated(true)
+       FirebaseAPI.sharedInstance.logout()
     }
 }
 
@@ -68,11 +66,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.row {
-        case 1:
+        case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("profile_info") as! ProfileInfoTableViewCell
             cell.user = User.currentUser
             return cell
-        case 2:
+        case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("logout")
             return cell!
         default:
