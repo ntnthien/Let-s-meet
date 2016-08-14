@@ -11,6 +11,8 @@ import UIKit
 class EventDetailViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    let eventID = "-KP6-ec5wBDwgSLDWd6f"
+    var event: Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,10 @@ class EventDetailViewController: BaseViewController {
         // Customized the tableView
         tableView.separatorColor = UIColor.clearColor()
         
-        
+        FirebaseAPI.sharedInstance.getEvent(eventID) {snapshot in
+            self.event = Event(eventID: snapshot.key, eventInfo: (snapshot.value as? [String:AnyObject])!)
+            print (self.event)
+        }
         // Do any additional setup after loading the view.
     }
 

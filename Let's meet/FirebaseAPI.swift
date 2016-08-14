@@ -10,14 +10,24 @@ import Foundation
 import FirebaseAuth
 import FirebaseDatabase
 
- class FirebaseAPI {
- 
+class FirebaseAPI {
+    let EVENT_KEY = "events"
+    
+    
     static var sharedInstance = FirebaseAPI()
-    var eventsRef = FIRDatabase.database().reference().child("events")
-    var discussionsRef = FIRDatabase.database().reference().child("discussions")
-    var tagsRef = FIRDatabase.database().reference().child("tags")
+    let eventsRef = FIRDatabase.database().reference().child("events")
+    let discussionsRef =  FIRDatabase.database().reference().child("discussions")
+    let tagsRef = FIRDatabase.database().reference().child("tags")
+//    let userRef = FIRDatabase.database().reference().userRef
     
     let currentUser = FIRAuth.auth()?.currentUser
+    
+    
+    func separateTags(tags: String, handler: () -> ()) -> [String] {
+        let tags = tags.componentsSeparatedByString(",")
+        return tags
+    }
+    
     
     func createEvent(event: Event) {
         let newEvent = eventsRef.childByAutoId()
@@ -31,8 +41,22 @@ import FirebaseDatabase
         newDiscussion.setValue(newDiscussionData)
     }
     
-    func separateTags(tags: String) -> [String] {
-        let tags = tags.componentsSeparatedByString(",")
-        return tags
+    func getEvent(id: String, block: (FIRDataSnapshot) -> ()) {
+        let eventRef = eventsRef.child(id)
+        eventRef.observeSingleEventOfType(.Value, withBlock: block)
     }
+    
+    func getEvents(tags: [String], block: (FIRDataSnapshot) -> ()) {
+        eventsRef.observeSingleEventOfType(.Value, withBlock: block)
+
+    }
+    
+    func getEvents() {
+        
+    }
+    
+    func getUser(id: String) {
+        
+    }
+
 }
