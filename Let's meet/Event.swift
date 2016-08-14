@@ -65,6 +65,6 @@ struct Event {
     }
     
     func toJSON() -> [String: AnyObject] {
-        return ["event_id": self.id, "location": self.location, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": "123456", "join_amount": 0, "discussion_id": self.discussionID, "tags": self.tags.joinWithSeparator(","),"thumbnail_url": (self.thumbnailURL ?? ""), "online_stream": (self.onlineStream ?? "")]
+        return ["event_id": self.id, "location": self.location, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": NSDate().timeIntervalSince1970, "join_amount": 0, "discussion_id": self.discussionID, "tags": self.tags.joinWithSeparator(","),"thumbnail_url": (self.thumbnailURL ?? ""), "online_stream": (self.onlineStream ?? "")]
     }
 }
