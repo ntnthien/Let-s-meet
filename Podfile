@@ -5,6 +5,9 @@ target 'Lets meet' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'FirebaseUI', '~> 0.4' 
+  pod 'Firebase/Storage'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
   pod 'FacebookCore'
   pod 'FacebookShare'
   pod 'FacebookLogin'

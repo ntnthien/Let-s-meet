@@ -11,9 +11,10 @@ import UIKit
 @objc protocol CreateEventTableViewCellDelegate {
     optional func clickDatePicker(createEventTVC: CreateEventTableViewCell, isCliked: Bool)
     optional func clickEditImage(createEventTVC: CreateEventTableViewCell, isCliked: Bool)
+    func eventInfoValidateFaild(cell: CreateEventTableViewCell, msg:String)
 }
-class CreateEventTableViewCell: UITableViewCell {
-
+class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
+    
     @IBOutlet weak var panelImage: UIImageView!
     
     @IBOutlet weak var titleTextfield: UITextField!
@@ -24,23 +25,52 @@ class CreateEventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var locationTextfield: UITextField!
     
-    @IBOutlet weak var priceTextfield: UIView!
+    @IBOutlet weak var priceTextfield: UITextField!
     
     @IBOutlet weak var tagTextfield: UITextField!
     
     @IBOutlet weak var editButton: UIButton!
     
     var delegate: CreateEventTableViewCellDelegate!
+    
+    //    var id: String
+    //    var name: String
+    //    var description: String
+    //    var location: String
+    //    var time: NSDate
+    //    var hostID: String
+    //    var onlineStream: String?
+    //    var joinAmount: Int
+    //    var tags: [String]
+    //    var discussionID: String
+    //    var thumbnailURL: String?
+    
+    var observerCreateEvent:String? {
+        didSet {
+            getEventInfo()
+        }
+    }
 
+    
+    var event: Event? {
+        didSet {
+            titleTextfield.text = event?.name
+            timeLabel.text = event?.time.description
+            locationTextfield.text = event?.location
+            availableMeetTextfield.text = event?.location
+            priceTextfield.text = ""
+            tagTextfield.text = event?.tags.description
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         editButton.tintColor = UIColor.whiteColor()
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
     @IBAction func onEditButton(sender: UIButton) {
         print("Edit button is clicked")
         delegate.clickEditImage!(self, isCliked: true)
@@ -51,4 +81,22 @@ class CreateEventTableViewCell: UITableViewCell {
         delegate.clickDatePicker!(self, isCliked: true)
     }
     
+    func getEventInfo() -> Event? {
+        
+        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
+        
+        let event = Event(eventID: "1", eventInfo: newEventData)
+        
+        delegate?.eventInfoValidateFaild(self, msg: "Event is not valid")
+        
+        return event
+    }
+//    func textFieldDidEndEditing(textField: UITextField) {
+//        print("textFieldDidEndEditing")
+//    }
+//    
+//    func textFieldDidBeginEditing(textField: UITextField) {
+//        print("textFieldDidBeginEditing")
+//    }
 }
+

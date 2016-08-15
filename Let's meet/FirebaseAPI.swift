@@ -41,7 +41,7 @@ class FirebaseAPI {
         self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
         self.authStateDidChangeHandle =
             self.auth?.addAuthStateDidChangeListener(self.authStateHandler(auth:user:))
-
+        
     }
     
     
@@ -49,13 +49,19 @@ class FirebaseAPI {
     func createEvent(event: Event) {
         let newEvent = eventsRef.childByAutoId()
         let newDiscussion = discussionsRef.childByAutoId()
+        
         for tag in event.tags {
             tagsRef.child(tag).setValue(["event_id": newEvent.key])
         }
-        let newDiscussionData = ["discussionID": newDiscussion.key]
-        
-        newEvent.setValue(event.toJSON())
+        let newDiscussionData = ["discussion_id": newDiscussion.key]
         newDiscussion.setValue(newDiscussionData)
+        
+        var eventData = event.toJSON()
+        eventData["event_id"] = newEvent.key
+        eventData["host_id"] = currentUser?.uid
+        eventData["discussion_id"] = newDiscussion.key
+        newEvent.setValue(eventData)
+        
     }
     
     func getEvent(id: String, block: (FIRDataSnapshot) -> ()) {
@@ -65,7 +71,7 @@ class FirebaseAPI {
     
     func getEvents(tags: [String], block: (FIRDataSnapshot) -> ()) {
         eventsRef.observeSingleEventOfType(.Value, withBlock: block)
-
+        
     }
     
     func getEvents() {
@@ -112,7 +118,7 @@ class FirebaseAPI {
     
     func changeFavorite(user userID: String, eventID: String) {
         let favoriteRef = userRef.child(userID).child("favorites")
-
+        
     }
     
     func favoriteEvents(user userID: String) {

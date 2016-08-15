@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import MobileCoreServices
+import FirebaseStorage
 
 class CreateEventViewController: BaseViewController {
     
@@ -22,31 +23,27 @@ class CreateEventViewController: BaseViewController {
     var eventsRef = FIRDatabase.database().reference().child("events")
     var discussionsRef = FIRDatabase.database().reference().child("discussions")
     var tagsRef = FIRDatabase.database().reference().child("tags")
-
+    
     let currentUser = FIRAuth.auth()?.currentUser
+    var pannelImage = UIImage()
+    var cell:CreateEventTableViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initTable()
     }
     
     @IBAction func onSaveButton(sender: UIBarButtonItem) {
         print("On save event")
-//        
-//        let newEvent = eventsRef.childByAutoId()
-//        let newDiscussion = discussionsRef.childByAutoId()
-        let tags = "docker, firebase"
-//        for tag in separateTags(tags) {
-//            tagsRef.child(tag).setValue(["event_id": newEvent.key])
-//        }
-//        let newEventData = ["event_id": newEvent.key, "location": "12 Nguyen Trai", "description": "No description", "name": "WWDC 2016", "host_id": currentUser!.uid, "time_since_1970": "123456", "join_amount": 0, "discussion_id": newDiscussion.key, "tags": tags, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
-//        let newDiscussionData = ["discussion_id": newDiscussion.key]
-//        
-//        newEvent.setValue(newEventData)
-//        newDiscussion.setValue(newDiscussionData)
-        let newEventData = ["event_id": "", "location": "12 Nguyen Trai", "description": "No description", "name": "WWDC 2016", "host_id": currentUser!.uid, "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": tags, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
-        let eventObject = Event(eventID: "", eventInfo: newEventData as! [String : AnyObject])
-        FirebaseAPI.sharedInstance.createEvent(eventObject!)
+        let event = cell?.getEventInfo()
+        print(event?.name)
+//        let tags = "docker, firebase"
+//        let newEventData = ["event_id": "", "location": event!.location, "description": "No description", "name": event!.name, "host_id": currentUser!.uid, "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": event!.tags, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
+        
+//        let eventObject =
+//            Event(eventID: "", eventInfo: newEventData as! [String : AnyObject])
+        FirebaseAPI.sharedInstance.createEvent(event!)
     }
     
     
@@ -75,7 +72,7 @@ class CreateEventViewController: BaseViewController {
     
 }
 
-extension CreateEventViewController: UITableViewDataSource, UITableViewDelegate {
+extension CreateEventViewController: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     func initTable() {
         //        tableView.rowHeight = UITableViewAutomaticDimension
@@ -88,14 +85,25 @@ extension CreateEventViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("event_cell") as! CreateEventTableViewCell
-            cell.delegate = self
-            return cell
+             cell = (tableView.dequeueReusableCellWithIdentifier("event_cell") as! CreateEventTableViewCell)
+             
+            cell?.panelImage.image = pannelImage
+//            cell.titleTextfield.text = ""
+//            cell.titleTextfield.tag = indexPath.row
+//            cell.titleTextfield.delegate = self
+            cell?.delegate = self
+            return cell!
         default:
             let cell = UITableViewCell()
             return cell
         }
-        
+    }
+    func textFieldDidBeginEditing(textField: UITextField) {
+        print("textFieldDidBeginEditing")
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        print("textFieldDidEndEditing")
     }
 }
 
@@ -110,34 +118,83 @@ extension CreateEventViewController: CreateEventTableViewCellDelegate {
         showPopUp()
     }
     
-//    func getMediaFrom(type: CFString){
-//        let mediaPicker = UIImagePickerController()
-//        mediaPicker.delegate = self
-//        mediaPicker.mediaTypes = [type as String]
-//        self.presentViewController(mediaPicker, animated: true, completion: nil)
-//    }
+    func eventInfoValidateFaild(cell: CreateEventTableViewCell, msg: String) {
+        print(msg)
+    }
+    
+    func getMediaFrom(type: CFString){
+        let mediaPicker = UIImagePickerController()
+        mediaPicker.delegate = self
+        mediaPicker.mediaTypes = [type as String]
+        self.presentViewController(mediaPicker, animated: true, completion: nil)
+    }
+    
     
     func didPressImagePickerButton() {
         print("didPressImagePickerButton")
         let sheet = UIAlertController(title: "Media Messages", message: "Please select a media", preferredStyle: .ActionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (alertAction) in
-            
         }
         let photoLibrary = UIAlertAction(title: "Photo Library", style: .Default) { (alert) in
-//            self.getMediaFrom(kUTTypeImage)
-            
-        }
-        
-        let videoLibrary = UIAlertAction(title: "Video Library", style: .Default) { (alert) in
-//            self.getMediaFrom(kUTTypeMovie)
+            self.getMediaFrom(kUTTypeImage)
         }
         sheet.addAction(photoLibrary)
-        sheet.addAction(videoLibrary)
         sheet.addAction(cancel)
         self.presentViewController(sheet, animated: true, completion: nil)
         
         //        let imagePicker = UIImagePickerController()
         //        imagePicker.delegate = self
         //        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+}
+extension CreateEventViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        print(info)
+        if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            pannelImage = picture
+            // add image to screen
+            //            sendMedia(picture, video: nil)
+        }
+        // dismiss the photo
+        self.dismissViewControllerAnimated(true, completion: nil)
+        tableView.reloadData()
+    }
+    func sendMedia(picture: UIImage?, video: NSURL?) {
+        print(FIRStorage.storage().reference())
+        /*
+         if let picture = picture {
+         let filePath = "\(FIRAuth.auth()!.currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
+         print(filePath)
+         let data = UIImageJPEGRepresentation(picture, 0.1)
+         let metadata = FIRStorageMetadata()
+         metadata.contentType = "image/jpg"
+         FIRStorage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (metadata, error) in
+         if error != nil {
+         print(error?.localizedDescription)
+         return
+         }
+         print(metadata)
+         let fileUrl = metadata?.downloadURLs![0].absoluteString
+         event.thumbnailURL = fileUrl
+         }
+         } else if let video = video {
+         let filePath = "\(FIRAuth.auth()!.currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
+         print(filePath)
+         let data = NSData(contentsOfURL: video)
+         let metadata = FIRStorageMetadata()
+         metadata.contentType = "video/mp4"
+         FIRStorage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (metadata, error) in
+         if error != nil {
+         print(error?.localizedDescription)
+         return
+         }
+         print(metadata)
+         let fileUrl = metadata?.downloadURLs![0].absoluteString
+         let newMessage = self.messageRef.childByAutoId()
+         let messageData = ["fileUrl": fileUrl, "senderId": self.senderId, "senderName": self.senderDisplayName, "MediaType": "VIDEO" ]
+         newMessage.setValue(messageData)
+         }
+         
+         }*/
     }
 }
