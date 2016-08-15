@@ -51,7 +51,9 @@ class FirebaseAPI {
         let newDiscussion = discussionsRef.childByAutoId()
         
         for tag in event.tags {
-            tagsRef.child(tag).setValue(["event_id": newEvent.key])
+            if tag != "" {
+                tagsRef.child(tag).setValue(["event_id": newEvent.key])
+            }
         }
         let newDiscussionData = ["discussion_id": newDiscussion.key]
         newDiscussion.setValue(newDiscussionData)
