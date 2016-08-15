@@ -25,6 +25,7 @@ class LoginViewController: UIViewController {
         // will still appear in the UI, but they'll crash the app when tapped.
         
         if isFirstLoad {
+            
             let controller = FirebaseAPI.sharedInstance.getLoginVC()
             self.presentViewController(controller, animated: true, completion: nil)
             isFirstLoad = false

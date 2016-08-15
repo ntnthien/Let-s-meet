@@ -106,6 +106,7 @@ class FirebaseAPI {
     }
     
     func getLoginVC() -> UIViewController {
+        logout()
         return self.authUI!.authViewController()
     }
     

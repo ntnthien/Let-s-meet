@@ -20,11 +20,6 @@ class CreateEventViewController: BaseViewController {
     var popViewController : DatePickerPopupViewController!
     var event: Event!
     
-    var eventsRef = FIRDatabase.database().reference().child("events")
-    var discussionsRef = FIRDatabase.database().reference().child("discussions")
-    var tagsRef = FIRDatabase.database().reference().child("tags")
-    
-    let currentUser = FIRAuth.auth()?.currentUser
     var pannelImage = UIImage()
     var cell:CreateEventTableViewCell?
     
@@ -38,11 +33,6 @@ class CreateEventViewController: BaseViewController {
         print("On save event")
         let event = cell?.getEventInfo()
         print(event?.name)
-//        let tags = "docker, firebase"
-//        let newEventData = ["event_id": "", "location": event!.location, "description": "No description", "name": event!.name, "host_id": currentUser!.uid, "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": event!.tags, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
-        
-//        let eventObject =
-//            Event(eventID: "", eventInfo: newEventData as! [String : AnyObject])
         FirebaseAPI.sharedInstance.createEvent(event!)
     }
     
@@ -85,12 +75,9 @@ extension CreateEventViewController: UITableViewDataSource, UITableViewDelegate,
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-             cell = (tableView.dequeueReusableCellWithIdentifier("event_cell") as! CreateEventTableViewCell)
-             
+            cell = (tableView.dequeueReusableCellWithIdentifier("event_cell") as! CreateEventTableViewCell)
+            
             cell?.panelImage.image = pannelImage
-//            cell.titleTextfield.text = ""
-//            cell.titleTextfield.tag = indexPath.row
-//            cell.titleTextfield.delegate = self
             cell?.delegate = self
             return cell!
         default:

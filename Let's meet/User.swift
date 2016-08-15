@@ -22,7 +22,8 @@ class User {
         let photoUrl = self.photoURL
         let uid = self.uid;
         let providerID = self.providerID
-        return ["uid": uid, "name": name!, "email": email!, "photo_url": photoUrl!, "provider_id": providerID]
+        
+        return ["uid": uid, "name": name, "email": email, "photo_url": photoUrl, "provider_id": providerID]
     }
     
     init? (userInfo: [String: AnyObject]) {

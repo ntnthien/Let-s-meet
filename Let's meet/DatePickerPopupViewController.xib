@@ -18,16 +18,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ab-g9-uyO">
-                    <rect key="frame" x="59" y="119" width="376" height="310"/>
+                    <rect key="frame" x="103" y="128" width="342" height="305"/>
                     <subviews>
                         <datePicker contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="oo1-3e-VVK">
-                            <rect key="frame" x="0.0" y="38" width="376" height="216"/>
+                            <rect key="frame" x="0.0" y="38" width="342" height="144"/>
                             <date key="date" timeIntervalSinceReferenceDate="492604958.34885401">
                                 <!--2016-08-11 10:42:38 +0000-->
                             </date>
                         </datePicker>
                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSc-sm-T9G">
-                            <rect key="frame" x="159" y="272" width="39" height="30"/>
+                            <rect key="frame" x="152" y="267" width="39" height="30"/>
                             <state key="normal" title="Close"/>
                             <connections>
                                 <action selector="closePopup:" destination="-1" eventType="touchUpInside" id="L92-eZ-rgG"/>
@@ -36,8 +36,12 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="oo1-3e-VVK" firstAttribute="centerX" secondItem="8Ab-g9-uyO" secondAttribute="centerX" id="1uA-kI-tza"/>
+                        <constraint firstItem="oo1-3e-VVK" firstAttribute="centerY" secondItem="8Ab-g9-uyO" secondAttribute="centerY" id="33n-ny-FsD"/>
                         <constraint firstItem="VSc-sm-T9G" firstAttribute="centerX" secondItem="8Ab-g9-uyO" secondAttribute="centerX" id="TW3-Ci-xWK"/>
                         <constraint firstItem="VSc-sm-T9G" firstAttribute="top" secondItem="oo1-3e-VVK" secondAttribute="bottom" constant="10" id="XDb-LK-ztq"/>
+                        <constraint firstItem="oo1-3e-VVK" firstAttribute="leading" secondItem="8Ab-g9-uyO" secondAttribute="leading" id="h6R-vo-SdU"/>
+                        <constraint firstAttribute="trailing" secondItem="oo1-3e-VVK" secondAttribute="trailing" id="l5f-dK-nNp"/>
                     </constraints>
                 </view>
             </subviews>
