@@ -11,7 +11,7 @@ import UIKit
 @objc protocol CreateEventTableViewCellDelegate {
     optional func clickDatePicker(createEventTVC: CreateEventTableViewCell, isCliked: Bool)
     optional func clickEditImage(createEventTVC: CreateEventTableViewCell, isCliked: Bool)
-    func eventInfoValidateFaild(cell: CreateEventTableViewCell, msg:String)
+    func eventInfoValidateFail(cell: CreateEventTableViewCell, msg:String)
 }
 class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     
@@ -83,11 +83,11 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func getEventInfo() -> Event? {
         
-        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": "http://www.bahiadelaluna.com/blog/wp-content/uploads/2016/04/hotel-en-oaxaca-salud.png", "online_stream": ""]
+        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": " ", "online_stream": ""]
         
         let event = Event(eventID: "1", eventInfo: newEventData)
         
-        delegate?.eventInfoValidateFaild(self, msg: "Event is not valid")
+//        delegate?.eventInfoValidateFail(self, msg: "Event is not valid")
         
         return event
     }

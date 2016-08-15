@@ -31,8 +31,10 @@ class CreateEventViewController: BaseViewController {
     
     @IBAction func onSaveButton(sender: UIBarButtonItem) {
         print("On save event")
-        let event = cell?.getEventInfo()
+        var event = cell?.getEventInfo()
         print(event?.name)
+        
+        event!.thumbnailURL = FirebaseAPI.sharedInstance.sendMedia(pannelImage, video: nil)
         FirebaseAPI.sharedInstance.createEvent(event!)
     }
     
@@ -62,7 +64,7 @@ class CreateEventViewController: BaseViewController {
     
 }
 
-extension CreateEventViewController: UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+extension CreateEventViewController: UITableViewDataSource, UITableViewDelegate {
     
     func initTable() {
         //        tableView.rowHeight = UITableViewAutomaticDimension
@@ -85,13 +87,6 @@ extension CreateEventViewController: UITableViewDataSource, UITableViewDelegate,
             return cell
         }
     }
-    func textFieldDidBeginEditing(textField: UITextField) {
-        print("textFieldDidBeginEditing")
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        print("textFieldDidEndEditing")
-    }
 }
 
 extension CreateEventViewController: CreateEventTableViewCellDelegate {
@@ -105,7 +100,7 @@ extension CreateEventViewController: CreateEventTableViewCellDelegate {
         showPopUp()
     }
     
-    func eventInfoValidateFaild(cell: CreateEventTableViewCell, msg: String) {
+    func eventInfoValidateFail(cell: CreateEventTableViewCell, msg: String) {
         print(msg)
     }
     
@@ -115,7 +110,6 @@ extension CreateEventViewController: CreateEventTableViewCellDelegate {
         mediaPicker.mediaTypes = [type as String]
         self.presentViewController(mediaPicker, animated: true, completion: nil)
     }
-    
     
     func didPressImagePickerButton() {
         print("didPressImagePickerButton")
@@ -128,10 +122,6 @@ extension CreateEventViewController: CreateEventTableViewCellDelegate {
         sheet.addAction(photoLibrary)
         sheet.addAction(cancel)
         self.presentViewController(sheet, animated: true, completion: nil)
-        
-        //        let imagePicker = UIImagePickerController()
-        //        imagePicker.delegate = self
-        //        self.presentViewController(imagePicker, animated: true, completion: nil)
     }
 }
 extension CreateEventViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -139,49 +129,9 @@ extension CreateEventViewController: UIImagePickerControllerDelegate, UINavigati
         print(info)
         if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
             pannelImage = picture
-            // add image to screen
-            //            sendMedia(picture, video: nil)
         }
         // dismiss the photo
         self.dismissViewControllerAnimated(true, completion: nil)
         tableView.reloadData()
-    }
-    func sendMedia(picture: UIImage?, video: NSURL?) {
-        print(FIRStorage.storage().reference())
-        /*
-         if let picture = picture {
-         let filePath = "\(FIRAuth.auth()!.currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
-         print(filePath)
-         let data = UIImageJPEGRepresentation(picture, 0.1)
-         let metadata = FIRStorageMetadata()
-         metadata.contentType = "image/jpg"
-         FIRStorage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (metadata, error) in
-         if error != nil {
-         print(error?.localizedDescription)
-         return
-         }
-         print(metadata)
-         let fileUrl = metadata?.downloadURLs![0].absoluteString
-         event.thumbnailURL = fileUrl
-         }
-         } else if let video = video {
-         let filePath = "\(FIRAuth.auth()!.currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
-         print(filePath)
-         let data = NSData(contentsOfURL: video)
-         let metadata = FIRStorageMetadata()
-         metadata.contentType = "video/mp4"
-         FIRStorage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (metadata, error) in
-         if error != nil {
-         print(error?.localizedDescription)
-         return
-         }
-         print(metadata)
-         let fileUrl = metadata?.downloadURLs![0].absoluteString
-         let newMessage = self.messageRef.childByAutoId()
-         let messageData = ["fileUrl": fileUrl, "senderId": self.senderId, "senderName": self.senderDisplayName, "MediaType": "VIDEO" ]
-         newMessage.setValue(messageData)
-         }
-         
-         }*/
     }
 }

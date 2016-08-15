@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseFacebookAuthUI
 import FirebaseAuthUI
 import FirebaseDatabase
+import FirebaseStorage
 
 class FirebaseAPI {
     private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
@@ -139,4 +140,43 @@ class FirebaseAPI {
     func getFollowing(user userID: String) {
         
     }
+    
+    func sendMedia(picture: UIImage?, video: NSURL?) -> String {
+        print(FIRStorage.storage().reference())
+        var fileUrl = String()
+        if let picture = picture {
+            let filePath = "\(currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
+            print(filePath)
+            let data = UIImageJPEGRepresentation(picture, 0.1)
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpg"
+            FIRStorage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (metadata, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                print(metadata)
+                fileUrl = metadata!.downloadURLs![0].absoluteString
+            }
+        } else if let video = video {
+            let filePath = "\(currentUser?.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
+            print(filePath)
+            let data = NSData(contentsOfURL: video)
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "video/mp4"
+            FIRStorage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (metadata, error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                print(metadata)
+                
+                fileUrl = metadata!.downloadURLs![0].absoluteString
+//                fileUrl = metadata?.downloadURLs![0].absoluteString
+                //                let newMessage = self.messageRef.childByAutoId()
+                //                let messageData = ["fileUrl": fileUrl, "senderId": self.senderId, "senderName": self.senderDisplayName, "MediaType": "VIDEO" ]
+                //                newMessage.setValue(messageData)
+            }
+        }
+        return fileUrl
+    }
+    
 }
