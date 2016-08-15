@@ -109,4 +109,25 @@ class FirebaseAPI {
             fatalError("Could not sign out: \(error)")
         }
     }
+    
+    func changeFavorite(user userID: String, eventID: String) {
+        let favoriteRef = userRef.child(userID).child("favorites")
+
+    }
+    
+    func favoriteEvents(user userID: String) {
+        
+    }
+    
+    func follow(user userID: String) {
+        
+    }
+    
+    func getFollower(user userID: String) {
+        
+    }
+    
+    func getFollowing(user userID: String) {
+        
+    }
 }
