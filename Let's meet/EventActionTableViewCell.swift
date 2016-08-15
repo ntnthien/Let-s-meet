@@ -12,7 +12,6 @@ import UIKit
     optional func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton)
 }
 
-
 class EventActionTableViewCell: UITableViewCell {
     @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var chatButton: UIButton!

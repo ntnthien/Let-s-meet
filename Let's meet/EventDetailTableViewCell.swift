@@ -10,6 +10,10 @@ import UIKit
 
 class EventDetailTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +24,10 @@ class EventDetailTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func configureCell(event: Event) {
+        timeLabel.text = "\(event.time)"
+        locationLabel.text = event.location
+        descriptionLabel.text = event.description
+    }
 }

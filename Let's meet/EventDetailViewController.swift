@@ -64,8 +64,9 @@ extension EventDetailViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
             cell.selectionStyle = .None
+            cell.delegate = self
             return cell
 
         case 1:
@@ -75,7 +76,7 @@ extension EventDetailViewController: UITableViewDataSource {
             return cell
 
         case 2:
-            let cell = (tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! UITableViewCell)
+            let cell = (tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EventDetailTableViewCell)
             cell.selectionStyle = .None
             return cell
             
@@ -91,13 +92,15 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
     func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton) {
         switch button.tag {
         case 10:
-            print("Button join touched")
+            print("Join button touched")
         case 20:
-            print("Button share touched")
+            print("Share button touched")
         case 30:
-            print("Button chat touched")
+            print("Chat Button touched")
+        case 60:
+            print("Profile button touched")
         default:
-            print("Button wish touched")
+            print("Wish button touched")
         }
     }
 }

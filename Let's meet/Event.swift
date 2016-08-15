@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ObjectMapper
 
 struct Event {
     var id: String

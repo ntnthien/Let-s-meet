@@ -11,7 +11,7 @@ target 'Lets meet' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'JSQMessagesViewController'
-  pod 'ObjectMapper', '~> 1.3'
+  pod 'HanekeSwift'
 
   # Pods for Let's meet
 

@@ -7,9 +7,18 @@
 //
 
 import UIKit
+import Haneke
 
 class EventHeaderTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var goingLabel: UILabel!
+    @IBOutlet weak var hostNameButton: UIButton!
+    @IBOutlet weak var avatarButton: UIButton!
+    
+    weak var delegate: ActionTableViewCellDelegate!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +29,12 @@ class EventHeaderTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func configureCell(event: Event) {
+//        avatarImageView.image = 
+    }
 
+    @IBAction func profileButtonDidTouch(sender: UIButton) {
+        delegate.actionTableViewCell!(self, didTouchButton: sender)
+    }
 }
