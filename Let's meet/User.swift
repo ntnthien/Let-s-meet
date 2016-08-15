@@ -28,7 +28,7 @@ class User {
     
     init? (userInfo: [String: AnyObject]) {
         guard let uid = userInfo["uid"] as? String,
-            displayName = userInfo["displayName"] as? String,
+            displayName = userInfo["name"] as? String,
             email = userInfo["email"] as? String,
             photoUrl = userInfo["photo_url"] as? String,
             providerID = userInfo["provider_id"] as? String

@@ -31,7 +31,16 @@ class EventHeaderTableViewCell: UITableViewCell {
     }
     
     func configureCell(event: Event) {
-//        avatarImageView.image = 
+        avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
+        titleLabel.text = event.name
+        tagLabel.text = event.tags.joinWithSeparator(", ")
+        goingLabel.text = "\(event.joinAmount)"
+        hostNameButton.setTitle(event.user?.displayName, forState: .Normal)
+        
+        
+        
+//        avatarButton.hnk_setImageFromURL(NSURL(string: event.user.))(UIImage(named: "")?.createRadius(avatarButton.bounds.size, radius: avatarButton.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight]), forState: .Normal)
+        
     }
 
     @IBAction func profileButtonDidTouch(sender: UIButton) {

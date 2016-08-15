@@ -11,8 +11,9 @@ import UIKit
 class EventDetailViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    let eventID = "-KP6-ec5wBDwgSLDWd6f"
+    let eventID = "-KPCQnApII4z9n_1YGBB"
     var event: Event?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,11 @@ class EventDetailViewController: BaseViewController {
         
         FirebaseAPI.sharedInstance.getEvent(eventID) {snapshot in
             self.event = Event(eventID: snapshot.key, eventInfo: (snapshot.value as? [String:AnyObject])!)
-            print (self.event)
+            FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, block: { (snap) in
+                self.event?.user = User(userInfo: (snap.value as? [String: AnyObject])!)
+                self.tableView.reloadData()
+
+            })
         }
         // Do any additional setup after loading the view.
     }
@@ -66,6 +71,9 @@ extension EventDetailViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
             cell.selectionStyle = .None
+            if let event = event {
+                cell.configureCell(event)
+            }
             cell.delegate = self
             return cell
 

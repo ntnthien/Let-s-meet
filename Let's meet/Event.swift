@@ -20,6 +20,7 @@ struct Event {
     var tags: [String]
     var discussionID: String
     var thumbnailURL: String?
+    var user: User?
     
     init (id: String, name: String, description: String, location: String, time: NSDate, hostID: String, onlineStream: String?, joinAmount: Int, tags: [String], discussionID: String, thumbnailURL: String?) {
         self.id = id
