@@ -62,24 +62,42 @@ extension EventDetailViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell
         switch indexPath.row {
         case 0:
-            cell = (tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! UITableViewCell)
+            let cell = tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! UITableViewCell
+            cell.selectionStyle = .None
+            return cell
+
         case 1:
-            cell = (tableView.dequeueReusableCellWithIdentifier("actionCell", forIndexPath: indexPath) as! UITableViewCell)
+            let cell = tableView.dequeueReusableCellWithIdentifier("actionCell", forIndexPath: indexPath) as! EventActionTableViewCell
+            cell.selectionStyle = .None
+            cell.delegate = self
+            return cell
+
         case 2:
-            cell = (tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! UITableViewCell)
+            let cell = (tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! UITableViewCell)
+            cell.selectionStyle = .None
+            return cell
             
         default:
-            cell = UITableViewCell()
+            let cell = UITableViewCell()
+            return cell
         }
-        cell.selectionStyle = .None
 //        cell.configureCell(cell, forRowAtIndexPath: indexPath)
-        return cell
     }
-    
-    func configureCell(cell: UITableViewCell, forRowAtIndexPath: NSIndexPath) {
-        
+}
+
+extension EventDetailViewController: ActionTableViewCellDelegate {
+    func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton) {
+        switch button.tag {
+        case 10:
+            print("Button join touched")
+        case 20:
+            print("Button share touched")
+        case 30:
+            print("Button chat touched")
+        default:
+            print("Button wish touched")
+        }
     }
 }

@@ -31,9 +31,11 @@
 		C21820AA1D6181670035DBB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C21820A91D6181670035DBB5 /* GoogleService-Info.plist */; };
 		C21820AC1D61848F0035DBB5 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21820AB1D61848F0035DBB5 /* PaddingLabel.swift */; };
 		C21820AE1D6184C30035DBB5 /* UIView+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21820AD1D6184C30035DBB5 /* UIView+Border.swift */; };
+		C21820B01D6187090035DBB5 /* EventActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21820AF1D6187090035DBB5 /* EventActionTableViewCell.swift */; };
 		C2551C2B1D5C2C9F0053676E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2551C2A1D5C2C9F0053676E /* EventDetailViewController.swift */; };
 		C264464B1D5DCAA900610C4B /* EventHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */; };
 		C264464D1D5F0BEC00610C4B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264464C1D5F0BEC00610C4B /* FilterViewController.swift */; };
+		C283C3FD1D618FE4009A8CBE /* EventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C283C3FC1D618FE4009A8CBE /* EventDetailTableViewCell.swift */; };
 		C2F529421D51067100AB6337 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529411D51067100AB6337 /* AppDelegate.swift */; };
 		C2F529471D51067100AB6337 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2F529451D51067100AB6337 /* Main.storyboard */; };
 		C2F529491D51067100AB6337 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2F529481D51067100AB6337 /* Assets.xcassets */; };
@@ -97,9 +99,11 @@
 		C21820A91D6181670035DBB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C21820AB1D61848F0035DBB5 /* PaddingLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		C21820AD1D6184C30035DBB5 /* UIView+Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Border.swift"; sourceTree = "<group>"; };
+		C21820AF1D6187090035DBB5 /* EventActionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventActionTableViewCell.swift; sourceTree = "<group>"; };
 		C2551C2A1D5C2C9F0053676E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C264464C1D5F0BEC00610C4B /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		C283C3FC1D618FE4009A8CBE /* EventDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailTableViewCell.swift; sourceTree = "<group>"; };
 		C2F5293E1D51067000AB6337 /* Lets meet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lets meet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2F529411D51067100AB6337 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2F529461D51067100AB6337 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 				6B82EF301D5C610F00C76357 /* CreateEventTableViewCell.swift */,
 				6B82EF381D5C8CCB00C76357 /* DatePickerPopupViewController.xib */,
 				C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */,
+				C21820AF1D6187090035DBB5 /* EventActionTableViewCell.swift */,
+				C283C3FC1D618FE4009A8CBE /* EventDetailTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -724,12 +730,14 @@
 				6BC8C5D31D51EBCE0074C27F /* ProfileViewController.swift in Sources */,
 				6B82EF391D5C8CCB00C76357 /* DatePickerPopupViewController.swift in Sources */,
 				C21820AC1D61848F0035DBB5 /* PaddingLabel.swift in Sources */,
+				C21820B01D6187090035DBB5 /* EventActionTableViewCell.swift in Sources */,
 				846F6A191D54A9E400F34EAF /* EventListViewController.swift in Sources */,
 				C20FB7811D5C80FB0069F567 /* Event.swift in Sources */,
 				846F6A171D549CF500F34EAF /* EventListTableViewCell.swift in Sources */,
 				C2F529711D5106C700AB6337 /* BaseViewController.swift in Sources */,
 				6B82EF341D5C813C00C76357 /* LocalNotificationHelper.swift in Sources */,
 				C264464D1D5F0BEC00610C4B /* FilterViewController.swift in Sources */,
+				C283C3FD1D618FE4009A8CBE /* EventDetailTableViewCell.swift in Sources */,
 				C216DF021D5B175B0040BF6C /* MoreViewController.swift in Sources */,
 				6B82EF311D5C610F00C76357 /* CreateEventTableViewCell.swift in Sources */,
 				C2F529721D5106C700AB6337 /* Constants.swift in Sources */,
