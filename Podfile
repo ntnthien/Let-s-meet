@@ -12,6 +12,9 @@ target 'Lets meet' do
   pod 'GooglePlaces'
   pod 'JSQMessagesViewController'
   pod 'ObjectMapper', '~> 1.3'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
 
   # Pods for Let's meet
 

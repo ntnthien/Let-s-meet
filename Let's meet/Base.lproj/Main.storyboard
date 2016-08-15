@@ -840,8 +840,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="456"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo-1440558899941-2b58b4b0e6ad.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="6Rj-W6-Ca0">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image" translatesAutoresizingMaskIntoConstraints="NO" id="6Rj-W6-Ca0">
                                                     <rect key="frame" x="10" y="10" width="580" height="200"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="200" id="Zbx-fq-4di"/>
                                                     </constraints>
@@ -1051,7 +1052,7 @@
         <image name="filterIcon" width="32" height="32"/>
         <image name="home" width="21" height="21"/>
         <image name="main_event" width="1170" height="500"/>
-        <image name="photo-1440558899941-2b58b4b0e6ad.jpeg" width="3072" height="2461"/>
+        <image name="no_image" width="80" height="80"/>
         <image name="profile" width="21" height="21"/>
         <image name="rate" width="42" height="42"/>
         <image name="scheduled" width="21" height="21"/>
