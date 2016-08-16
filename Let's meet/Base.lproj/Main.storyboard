@@ -387,8 +387,113 @@
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="270" id="KE7-ep-DM1" customClass="EventHeaderTableViewCell" customModule="Lets_meet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="270"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KE7-ep-DM1" id="YdK-pr-ZQu">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="270"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oWf-05-50Q">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="261"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_event" translatesAutoresizingMaskIntoConstraints="NO" id="REr-eu-dM6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="600.5" height="170"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="170" id="QKw-ez-kWa"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Meetup event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yE2-GC-0bm">
+                                                            <rect key="frame" x="82" y="186" width="459" height="22"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13c-QI-c3Y">
+                                                            <rect key="frame" x="549" y="186" width="34.5" height="33"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="24"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Going" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3s-es-o2f">
+                                                            <rect key="frame" x="549" y="227" width="34.5" height="17"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
+                                                            <color key="textColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" misplaced="YES" text="#iOS, #Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWC-FL-wlb">
+                                                            <rect key="frame" x="82" y="237" width="459" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" tag="60" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDy-Fb-4h0">
+                                                            <rect key="frame" x="16" y="186" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="KjR-0E-9Q2"/>
+                                                                <constraint firstAttribute="width" secondItem="DDy-Fb-4h0" secondAttribute="height" multiplier="1:1" id="sGL-bF-8ob"/>
+                                                            </constraints>
+                                                            <state key="normal" image="user_profile"/>
+                                                            <connections>
+                                                                <action selector="profileButtonDidTouch:" destination="KE7-ep-DM1" eventType="touchUpInside" id="UhM-bB-sda"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" tag="60" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8v-hx-spp">
+                                                            <rect key="frame" x="82" y="208" width="69" height="26"/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="13"/>
+                                                            <state key="normal" title="Do Nguyen">
+                                                                <color key="titleColor" red="0.32156862749999998" green="0.3803921569" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="profileButtonDidTouch:" destination="KE7-ep-DM1" eventType="touchUpInside" id="fcG-7P-MTr"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="s8v-hx-spp" firstAttribute="top" secondItem="yE2-GC-0bm" secondAttribute="bottom" id="2du-Nj-Irj"/>
+                                                        <constraint firstAttribute="bottom" secondItem="nWC-FL-wlb" secondAttribute="bottom" constant="8" id="5tI-Ne-3Yx"/>
+                                                        <constraint firstItem="REr-eu-dM6" firstAttribute="leading" secondItem="oWf-05-50Q" secondAttribute="leading" id="7Ep-7Q-En5"/>
+                                                        <constraint firstItem="c3s-es-o2f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="s8v-hx-spp" secondAttribute="trailing" constant="8" id="BdC-xQ-3pk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="REr-eu-dM6" secondAttribute="trailing" id="H42-af-fPv"/>
+                                                        <constraint firstItem="nWC-FL-wlb" firstAttribute="top" secondItem="s8v-hx-spp" secondAttribute="bottom" constant="3" id="L2L-We-I8O"/>
+                                                        <constraint firstItem="13c-QI-c3Y" firstAttribute="leading" secondItem="yE2-GC-0bm" secondAttribute="trailing" constant="8" id="Q2R-O4-TQJ"/>
+                                                        <constraint firstItem="DDy-Fb-4h0" firstAttribute="leading" secondItem="oWf-05-50Q" secondAttribute="leading" constant="16" id="QJ5-q2-pkA"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="c3s-es-o2f" secondAttribute="bottom" id="SaX-qL-rTh"/>
+                                                        <constraint firstItem="yE2-GC-0bm" firstAttribute="leading" secondItem="DDy-Fb-4h0" secondAttribute="trailing" constant="16" id="ZA5-zE-vdX"/>
+                                                        <constraint firstItem="nWC-FL-wlb" firstAttribute="leading" secondItem="DDy-Fb-4h0" secondAttribute="trailing" constant="16" id="cWE-Ls-rWf"/>
+                                                        <constraint firstItem="c3s-es-o2f" firstAttribute="leading" secondItem="nWC-FL-wlb" secondAttribute="trailing" constant="8" id="cii-bv-Igj"/>
+                                                        <constraint firstItem="DDy-Fb-4h0" firstAttribute="top" secondItem="yE2-GC-0bm" secondAttribute="top" id="hz3-Du-TRp"/>
+                                                        <constraint firstAttribute="trailing" secondItem="13c-QI-c3Y" secondAttribute="trailing" constant="16" id="llF-YY-a2q"/>
+                                                        <constraint firstItem="s8v-hx-spp" firstAttribute="leading" secondItem="yE2-GC-0bm" secondAttribute="leading" id="lma-95-u45"/>
+                                                        <constraint firstItem="DDy-Fb-4h0" firstAttribute="top" secondItem="13c-QI-c3Y" secondAttribute="top" id="mya-3N-kdV"/>
+                                                        <constraint firstItem="c3s-es-o2f" firstAttribute="top" secondItem="13c-QI-c3Y" secondAttribute="bottom" constant="8" id="nI3-Rg-6Ca"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DDy-Fb-4h0" secondAttribute="bottom" id="nNI-Wr-YPu"/>
+                                                        <constraint firstItem="c3s-es-o2f" firstAttribute="width" secondItem="13c-QI-c3Y" secondAttribute="width" id="pwx-Xc-JCP"/>
+                                                        <constraint firstItem="REr-eu-dM6" firstAttribute="top" secondItem="oWf-05-50Q" secondAttribute="top" id="spr-Sh-EBR"/>
+                                                        <constraint firstItem="c3s-es-o2f" firstAttribute="trailing" secondItem="13c-QI-c3Y" secondAttribute="trailing" id="t8H-eq-aQE"/>
+                                                        <constraint firstItem="DDy-Fb-4h0" firstAttribute="top" secondItem="REr-eu-dM6" secondAttribute="bottom" constant="16" id="viI-qX-jQ8"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="oWf-05-50Q" secondAttribute="trailing" id="9FQ-3U-Bp5"/>
+                                                <constraint firstItem="oWf-05-50Q" firstAttribute="leading" secondItem="YdK-pr-ZQu" secondAttribute="leading" id="ZDD-DH-ZMY"/>
+                                                <constraint firstItem="oWf-05-50Q" firstAttribute="top" secondItem="YdK-pr-ZQu" secondAttribute="top" id="gsA-Gm-XhL"/>
+                                                <constraint firstAttribute="bottom" secondItem="oWf-05-50Q" secondAttribute="bottom" constant="8" id="mbA-AS-wUI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarButton" destination="DDy-Fb-4h0" id="HM8-0H-wce"/>
+                                            <outlet property="goingLabel" destination="13c-QI-c3Y" id="vSB-pV-y1Z"/>
+                                            <outlet property="hostNameButton" destination="s8v-hx-spp" id="hk2-Ba-3QP"/>
+                                            <outlet property="tagLabel" destination="nWC-FL-wlb" id="Fdv-fa-1Rw"/>
+                                            <outlet property="thumbnailImageView" destination="REr-eu-dM6" id="XRW-Ub-Y8I"/>
+                                            <outlet property="titleLabel" destination="yE2-GC-0bm" id="IxT-ya-2E0"/>
+                                            <segue destination="chP-ks-GsB" kind="show" identifier="ShowDetail" id="VqC-0t-Xyx"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventListCell" rowHeight="255" id="8Vj-KE-mdM" customClass="EventListTableViewCell" customModule="Lets_meet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="255"/>
+                                        <rect key="frame" x="0.0" y="298" width="600" height="255"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Vj-KE-mdM" id="vHc-GN-5l2">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="255"/>
@@ -471,7 +576,6 @@
                                             <outlet property="nameEventLabel" destination="snw-lh-aUY" id="IVb-s5-3aO"/>
                                             <outlet property="priceButton" destination="pe1-Vr-LAS" id="Jup-FT-hNG"/>
                                             <outlet property="timeEventLabel" destination="s8M-35-iuK" id="2zX-C2-Ndp"/>
-                                            <segue destination="chP-ks-GsB" kind="show" id="XoQ-Op-bzg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -13,7 +13,7 @@ class EventDetailViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     let eventID = "-KPCQnApII4z9n_1YGBB"
     var event: Event?
-    
+    var eventImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +41,8 @@ class EventDetailViewController: BaseViewController {
         }
         // Do any additional setup after loading the view.
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,8 +78,8 @@ extension EventDetailViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
             cell.selectionStyle = .None
-            if let event = event {
-                cell.configureCell(event)
+            if let event = event, image = eventImage {
+                cell.configureCell(event, image: image)
             }
             cell.delegate = self
             return cell

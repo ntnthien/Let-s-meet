@@ -4,7 +4,9 @@
 target 'Lets meet' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'FirebaseUI', '~> 0.4' 
+  inhibit_all_warnings!
+
+  pod 'FirebaseUI', '~> 0.4'
   pod 'Firebase/Storage'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
@@ -15,6 +17,8 @@ target 'Lets meet' do
   pod 'GooglePlaces'
   pod 'JSQMessagesViewController'
   pod 'HanekeSwift'
+  pod 'ReactiveKit', '~> 2.1'
+  pod 'ReactiveUIKit', '~> 2.0'
 
   # Pods for Let's meet
 
