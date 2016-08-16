@@ -9,7 +9,7 @@
 import UIKit
 
 class EventDetailViewController: BaseViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     let eventID = "-KPCQnApII4z9n_1YGBB"
     var event: Event?
@@ -26,41 +26,37 @@ class EventDetailViewController: BaseViewController {
         // Customized the tableView
         tableView.separatorColor = UIColor.clearColor()
         if event == nil {
-            FirebaseAPI.sharedInstance.getEvent(eventID) {snapshot in
-                self.event = Event(eventID: snapshot.key, eventInfo: (snapshot.value as? [String:AnyObject])!)
+            FirebaseAPI.sharedInstance.getEvent(eventID, completion: { (event) in
+                self.event = event
                 FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, block: { (snap) in
                     self.event?.user = User(userInfo: (snap.value as? [String: AnyObject])!)
                     self.tableView.reloadData()
                     
                 })
-                //            FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, completion: { (shareUser) in
-                //                self.event?.user = shareUser
-                //            })
-                
-                
-            }
+            })
+            
         }
         // Do any additional setup after loading the view.
     }
     
-
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension EventDetailViewController: UITableViewDataSource {
@@ -84,13 +80,13 @@ extension EventDetailViewController: UITableViewDataSource {
             }
             cell.delegate = self
             return cell
-
+            
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("actionCell", forIndexPath: indexPath) as! EventActionTableViewCell
             cell.selectionStyle = .None
             cell.delegate = self
             return cell
-
+            
         case 2:
             let cell = (tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EventDetailTableViewCell)
             cell.selectionStyle = .None
@@ -100,7 +96,7 @@ extension EventDetailViewController: UITableViewDataSource {
             let cell = UITableViewCell()
             return cell
         }
-//        cell.configureCell(cell, forRowAtIndexPath: indexPath)
+        //        cell.configureCell(cell, forRowAtIndexPath: indexPath)
     }
 }
 

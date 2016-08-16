@@ -58,7 +58,7 @@ class FirebaseAPI {
                 }
             })
         }
-       
+        
         let newDiscussionData = ["discussion_id": newDiscussion.key]
         newDiscussion.setValue(newDiscussionData)
         
@@ -66,7 +66,7 @@ class FirebaseAPI {
         eventData["event_id"] = newEvent.key
         eventData["host_id"] = currentUser?.uid
         eventData["discussion_id"] = newDiscussion.key
-//        eventData.flatMap { [$0:$1]}
+        //        eventData.flatMap { [$0:$1]}
         var dataEvent : [String:AnyObject] = [String:AnyObject]()
         
         eventData.forEach { (key,value) in
@@ -78,14 +78,16 @@ class FirebaseAPI {
                 dataEvent[key] = nil
             }
         }
-        
         newEvent.setValue(dataEvent)
-        
     }
     
-    func getEvent(id: String, block: (FIRDataSnapshot) -> ()) {
-        let eventRef = eventsRef.child(id)
-        eventRef.observeSingleEventOfType(.Value, withBlock: block)
+    func getEvent(id: String, completion: (Event?) -> ()) {
+        eventsRef.child(id).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
+            if let _dataSnapshot = dataSnapshot.value {
+                let event: Event = Event(eventID: id, eventInfo: ((_dataSnapshot as? [String:AnyObject]))!)!
+                completion(event)
+            }
+        }
     }
     
     func getEvents(tags: [String], block: (FIRDataSnapshot) -> ()) {
@@ -106,7 +108,7 @@ class FirebaseAPI {
             let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
             completion(user)
         }
-//        userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
+        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
         
         //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
         //            print(snap)
@@ -116,10 +118,10 @@ class FirebaseAPI {
     
     func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
         userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
-    
-//        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
-//            print(snap)
-//        })
+        
+        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
+        //            print(snap)
+        //        })
     }
     
     func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {
@@ -191,7 +193,7 @@ class FirebaseAPI {
                 print(metadata)
                 
                 fileUrl = metadata?.downloadURLs?[0].absoluteString
-                 completion(fileUrl)
+                completion(fileUrl)
             }
         } else if let video = video {
             let filePath = "\(currentUser?.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
@@ -205,8 +207,8 @@ class FirebaseAPI {
                 }
                 print(metadata)
                 fileUrl = metadata?.downloadURLs?[0].absoluteString
-                 completion(fileUrl)
-//                fileUrl = metadata?.downloadURLs![0].absoluteString
+                completion(fileUrl)
+                //                fileUrl = metadata?.downloadURLs![0].absoluteString
                 //                let newMessage = self.messageRef.childByAutoId()
                 //                let messageData = ["fileUrl": fileUrl, "senderId": self.senderId, "senderName": self.senderDisplayName, "MediaType": "VIDEO" ]
                 //                newMessage.setValue(messageData)
