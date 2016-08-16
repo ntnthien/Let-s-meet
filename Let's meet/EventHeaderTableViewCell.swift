@@ -34,6 +34,7 @@ class EventHeaderTableViewCell: UITableViewCell {
     func configureCell(event: Event, image: UIImage) {
         self.selectionStyle = .None
         titleLabel.text = event.name
+        
         tagLabel.text = event.tags?.map { "#" + $0 }.joinWithSeparator(", ")
         goingLabel.text = "\(event.joinAmount)"
         hostNameButton.setTitle(event.user?.displayName, forState: .Normal)

@@ -23,6 +23,13 @@ class EventListViewController: UIViewController {
         setUpTableView()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(selectedRow, animated: true)
+        }
+    }
+    
     func loadData() {
         FirebaseAPI.sharedInstance.getEvents() {snapshot in
             self.items.removeAll()
@@ -53,6 +60,7 @@ class EventListViewController: UIViewController {
             guard let weakSelf = self else { return UITableViewCell() }
             
             let cell = weakSelf.tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
+            cell.delegate = self
             cell.configureCell(self!.items[indexPath.row])
             return cell
         }
