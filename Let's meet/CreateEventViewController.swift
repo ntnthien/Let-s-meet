@@ -33,9 +33,32 @@ class CreateEventViewController: BaseViewController {
         print("On save event")
         var event = cell?.getEventInfo()
         print(event?.name)
+        if let eventTime = popViewController?.eventTime {
+            event?.time = eventTime
+        }
         
-        event!.thumbnailURL = FirebaseAPI.sharedInstance.sendMedia(pannelImage, video: nil)
-        FirebaseAPI.sharedInstance.createEvent(event!)
+        if let data = UIImageJPEGRepresentation(pannelImage, 0.1)
+        {
+            FirebaseAPI.sharedInstance.sendMedia(data, mediaType: MediaType.Image) { (fileUrl) in
+                event?.thumbnailURL = fileUrl
+                if let event = event {
+                    FirebaseAPI.sharedInstance.createEvent(event)
+                }
+            }
+        }
+        else {
+            if let event = event {
+                FirebaseAPI.sharedInstance.createEvent(event)
+            }
+        }
+        
+        
+//        FirebaseAPI.sharedInstance.sendMedia(pannelImage, video: nil, completion: { (fileUrl) in
+//            event?.thumbnailURL = fileUrl
+//            if let event = event {
+//                FirebaseAPI.sharedInstance.createEvent(event)
+//            }
+//        })
     }
     
     
@@ -52,6 +75,7 @@ class CreateEventViewController: BaseViewController {
         self.popViewController.title = "This is a popup view"
         self.popViewController.showInView(self.view, animated: true)
     }
+    
     /*
      // MARK: - Navigation
      

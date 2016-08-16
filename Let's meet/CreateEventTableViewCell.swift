@@ -50,16 +50,16 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
             getEventInfo()
         }
     }
-
+    
     
     var event: Event? {
         didSet {
             titleTextfield.text = event?.name
-            timeLabel.text = event?.time.description
+            timeLabel.text = event?.time?.description
             locationTextfield.text = event?.location
             availableMeetTextfield.text = event?.location
             priceTextfield.text = ""
-            tagTextfield.text = event?.tags.description
+            tagTextfield.text = event?.tags?.description
         }
     }
     override func awakeFromNib() {
@@ -83,20 +83,24 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func getEventInfo() -> Event? {
         
-        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!.removeDoudleWhitespaces(), "thumbnail_url": "http://www.aal-europe.eu/wp-content/uploads/2013/12/events_medium.jpg", "online_stream": ""]
+//        var dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        let currentDate = NSDate().timeIntervalSince1970
+
+        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": currentDate, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": " ", "online_stream": ""]
         
         let event = Event(eventID: "1", eventInfo: newEventData)
         
-//        delegate?.eventInfoValidateFail(self, msg: "Event is not valid")
+        //        delegate?.eventInfoValidateFail(self, msg: "Event is not valid")
         
         return event
     }
-//    func textFieldDidEndEditing(textField: UITextField) {
-//        print("textFieldDidEndEditing")
-//    }
-//    
-//    func textFieldDidBeginEditing(textField: UITextField) {
-//        print("textFieldDidBeginEditing")
-//    }
+    //    func textFieldDidEndEditing(textField: UITextField) {
+    //        print("textFieldDidEndEditing")
+    //    }
+    //
+    //    func textFieldDidBeginEditing(textField: UITextField) {
+    //        print("textFieldDidBeginEditing")
+    //    }
 }
 
