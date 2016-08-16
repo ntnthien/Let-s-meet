@@ -31,18 +31,41 @@ class EventHeaderTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(event: Event) {
-        avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
-        thumbnailImageView.hnk_setImageFromURL(NSURL(string: event.thumbnailURL!)!)
+    func configureCell(event: Event, image: UIImage) {
+        self.selectionStyle = .None
         titleLabel.text = event.name
         tagLabel.text = event.tags.joinWithSeparator(", ")
         goingLabel.text = "\(event.joinAmount)"
         hostNameButton.setTitle(event.user?.displayName, forState: .Normal)
-        print(event.thumbnailURL)
-
+        avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
+        thumbnailImageView.image = image
+    }
+    
+//    func configureCell(event: Event) {
+//        self.selectionStyle = .None
+//        titleLabel.text = event.name
+//        tagLabel.text = event.tags.map { "#" + $0}.joinWithSeparator(", ")
+//        goingLabel.text = "\(event.joinAmount)"
+//        hostNameButton.setTitle(event.user?.displayName, forState: .Normal)
+//        avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
+////        thumbnailImageView.hnk_setImageFromURL(NSURL(string: event.thumbnailURL!)!)
+//        if let urlString = event.thumbnailURL, url = NSURL(string: urlString) {
+//             thumbnailImageView.image = UIImage(data: NSData(contentsOfURL: url)!)?.scaleImage(thumbnailImageView.bounds.size)
+//        }
+//       
+//        
+////        avatarButton.hnk_setImageFromURL(NSURL(string: event.user.))(UIImage(named: "")?.createRadius(avatarButton.bounds.size, radius: avatarButton.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight]), forState: .Normal)
+//        
+//    }
+    
+    func configureCell(event: Event) {
+        //        thumbnailImageView.hnk_setImageFromURL(NSURL(string: event.thumbnailURL!)!)
+        if let urlString = event.thumbnailURL, url = NSURL(string: urlString) {
+            let image = UIImage(data: NSData(contentsOfURL: url)!)?.scaleImage(thumbnailImageView.bounds.size)
+            configureCell(event, image: image!)
+        }
         
-        
-//        avatarButton.hnk_setImageFromURL(NSURL(string: event.user.))(UIImage(named: "")?.createRadius(avatarButton.bounds.size, radius: avatarButton.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight]), forState: .Normal)
+        //        avatarButton.hnk_setImageFromURL(NSURL(string: event.user.))(UIImage(named: "")?.createRadius(avatarButton.bounds.size, radius: avatarButton.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight]), forState: .Normal)
         
     }
     

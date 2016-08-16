@@ -13,7 +13,7 @@ class EventDetailViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     let eventID = "-KPCQnApII4z9n_1YGBB"
     var event: Event?
-    
+    var eventImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,17 +25,23 @@ class EventDetailViewController: BaseViewController {
         
         // Customized the tableView
         tableView.separatorColor = UIColor.clearColor()
-        
-        FirebaseAPI.sharedInstance.getEvent(eventID) {snapshot in
-            self.event = Event(eventID: snapshot.key, eventInfo: (snapshot.value as? [String:AnyObject])!)
-            FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, block: { (snap) in
-                self.event?.user = User(userInfo: (snap.value as? [String: AnyObject])!)
-                self.tableView.reloadData()
-
-            })
+        if event == nil {
+            
+            FirebaseAPI.sharedInstance.getEvent(eventID) {snapshot in
+                self.event = Event(eventID: snapshot.key, eventInfo: (snapshot.value as? [String:AnyObject])!)
+                FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, block: { (snap) in
+                    self.event?.user = User(userInfo: (snap.value as? [String: AnyObject])!)
+                    self.tableView.reloadData()
+                    
+                })
+            }
+        } else {
+            tableView.reloadData()
         }
         // Do any additional setup after loading the view.
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -71,8 +77,8 @@ extension EventDetailViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
             cell.selectionStyle = .None
-            if let event = event {
-                cell.configureCell(event)
+            if let event = event, image = eventImage {
+                cell.configureCell(event, image: image)
             }
             cell.delegate = self
             return cell

@@ -8,15 +8,22 @@
 
 import UIKit
 import Firebase
+import ReactiveKit
+import ReactiveUIKit
+
 class EventListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var events: [Event] = []
+    var items = CollectionProperty<[Event]>([])
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpTableView()
         // Do any additional setup after loading the view.
 
+        loadData()
+        setUpTableView()
+    }
+    
+    func loadData() {
         FirebaseAPI.sharedInstance.getEvents() {snapshot in
             for child in snapshot.children {
                 if let data = child as? FIRDataSnapshot {
@@ -24,9 +31,8 @@ class EventListViewController: UIViewController {
                     if let hostID = event?.hostID {
                         FirebaseAPI.sharedInstance.getUser(hostID, block: { (snap) in
                             event!.user = User(userInfo: (snap.value as? [String: AnyObject])!)
-                            self.events.append(event!)
-                            print(self.events)
-                            self.tableView.reloadData()
+                            self.items.append(event!)
+                            print(self.items)
                         })
                     }
                 }
@@ -35,10 +41,21 @@ class EventListViewController: UIViewController {
     }
     
     func setUpTableView() {
+        
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.rDataSource.forwardTo = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 200
+        
+        
+        items.bindTo(tableView) { [weak self] indexPath, dataSource, tableView in
+            guard let weakSelf = self else { return UITableViewCell() }
+            
+            let cell = weakSelf.tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
+            cell.configureCell(self!.items[indexPath.row])
+            return cell
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,44 +63,17 @@ class EventListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+extension EventListViewController: UITableViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowDetail" {
+//            let navVC = segue.destinationViewController as! UINavigationController
+            let detailVC = segue.destinationViewController as! EventDetailViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                detailVC.event = items[indexPath.row]
+                detailVC.eventImage = (tableView.cellForRowAtIndexPath(indexPath) as! EventHeaderTableViewCell).thumbnailImageView.image
+            }
+        }
     }
-    */
-
 }
-
-extension EventListViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return events.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell  = tableView.dequeueReusableCellWithIdentifier("eventListCell")
-        
-        return cell!
-    }
-    
-    
-}
-
-
-
-
-
-
-
-
