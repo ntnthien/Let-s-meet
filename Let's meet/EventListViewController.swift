@@ -25,6 +25,7 @@ class EventListViewController: UIViewController {
     
     func loadData() {
         FirebaseAPI.sharedInstance.getEvents() {snapshot in
+            self.items.removeAll()
             for child in snapshot.children {
                 if let data = child as? FIRDataSnapshot {
                     var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! )
@@ -77,3 +78,22 @@ extension EventListViewController: UITableViewDelegate {
         }
     }
 }
+
+
+extension EventListViewController: ActionTableViewCellDelegate {
+    func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton) {
+        switch button.tag {
+        case 10:
+            print("Join button touched")
+        case 20:
+            print("Share button touched")
+        case 30:
+            print("Chat Button touched")
+        case 60:
+            print("Profile button touched")
+        default:
+            print("Wish button touched")
+        }
+    }
+}
+

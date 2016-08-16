@@ -83,7 +83,7 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func getEventInfo() -> Event? {
         
-        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": " ", "online_stream": ""]
+        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": 123534, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!.removeDoudleWhitespaces(), "thumbnail_url": "http://www.aal-europe.eu/wp-content/uploads/2013/12/events_medium.jpg", "online_stream": ""]
         
         let event = Event(eventID: "1", eventInfo: newEventData)
         
