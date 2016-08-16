@@ -8,12 +8,17 @@
 
 import UIKit
 
+protocol DatePickerPopupViewControllerDelegate {
+    func getDate(date: String)
+}
 class DatePickerPopupViewController: UIViewController {
-
+    
     @IBOutlet weak var popUpView: UIView!
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    
+    var eventTime: NSTimeInterval?
+    var appDelegate = UIApplication.sharedApplication().delegate
+//    let parentView: UIView?
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -21,7 +26,7 @@ class DatePickerPopupViewController: UIViewController {
     override public init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +34,15 @@ class DatePickerPopupViewController: UIViewController {
         self.popUpView.layer.cornerRadius = 5
         self.popUpView.layer.shadowOpacity = 0.8
         self.popUpView.layer.shadowOffset = CGSizeMake(0.0, 0.0)
-
+        
     }
     
     public func showInView(aView: UIView!, animated: Bool)
     {
+        print(aView.frame.size.width)
         self.view.frame.size.width = aView.frame.size.width
         aView.addSubview(self.view)
         
-        //        datePicker = picker
         if animated
         {
             self.showAnimate()
@@ -62,13 +67,24 @@ class DatePickerPopupViewController: UIViewController {
             }, completion:{(finished : Bool)  in
                 if (finished)
                 {
+                    
                     self.view.removeFromSuperview()
                 }
         });
     }
     
     @IBAction func closePopup(sender: AnyObject) {
+//        var dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+//        strDate = dateFormatter.stringFromDate(datePicker.date)
+        eventTime = datePicker.date.timeIntervalSince1970
         self.removeAnimate()
     }
-
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        
+    }
 }

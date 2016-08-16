@@ -33,6 +33,11 @@ class EventDetailViewController: BaseViewController {
                 self.tableView.reloadData()
 
             })
+//            FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, completion: { (shareUser) in
+//                self.event?.user = shareUser
+//            })
+            
+            
         }
         // Do any additional setup after loading the view.
     }

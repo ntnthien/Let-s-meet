@@ -51,19 +51,35 @@ class FirebaseAPI {
         let newEvent = eventsRef.childByAutoId()
         let newDiscussion = discussionsRef.childByAutoId()
         
-        for tag in event.tags {
-            if tag != "" {
-                tagsRef.child(tag).setValue(["event_id": newEvent.key])
-            }
+        if let tags = event.tags {
+            tags.forEach({ (tag) in
+                if !tag.isEmpty {
+                    tagsRef.child(tag).setValue(["event_id": newEvent.key])
+                }
+            })
         }
+       
         let newDiscussionData = ["discussion_id": newDiscussion.key]
         newDiscussion.setValue(newDiscussionData)
         
-        var eventData = event.toJSON()
+        var eventData : [String:AnyObject?] = event.toJSON()
         eventData["event_id"] = newEvent.key
         eventData["host_id"] = currentUser?.uid
         eventData["discussion_id"] = newDiscussion.key
-        newEvent.setValue(eventData)
+//        eventData.flatMap { [$0:$1]}
+        var dataEvent : [String:AnyObject] = [String:AnyObject]()
+        
+        eventData.forEach { (key,value) in
+            if let _value = value
+            {
+                dataEvent[key] = _value
+            }
+            else {
+                dataEvent[key] = nil
+            }
+        }
+        
+        newEvent.setValue(dataEvent)
         
     }
     
@@ -83,6 +99,21 @@ class FirebaseAPI {
     
     
     // MARK: - User
+    
+    func getUser(id: String, completion: (User) -> ()) {
+        
+        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
+            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
+            completion(user)
+        }
+//        userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
+        
+        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
+        //            print(snap)
+        //        })
+    }
+    
+    
     func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
         userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
     
@@ -145,21 +176,22 @@ class FirebaseAPI {
         
     }
     
-    func sendMedia(picture: UIImage?, video: NSURL?) -> String {
+    func sendMedia(picture: UIImage?, video: NSURL?, completion : (String?)-> Void) -> Void {
         print(FIRStorage.storage().reference())
-        var fileUrl = String()
-        if let picture = picture {
+        var fileUrl : String? = nil
+        if let picture = picture, data = UIImageJPEGRepresentation(picture, 0.1) {
             let filePath = "\(currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
             print(filePath)
-            let data = UIImageJPEGRepresentation(picture, 0.1)
             let metadata = FIRStorageMetadata()
             metadata.contentType = "image/jpg"
-            FIRStorage.storage().reference().child(filePath).putData(data!, metadata: metadata) { (metadata, error) in
+            FIRStorage.storage().reference().child(filePath).putData(data, metadata: metadata) { (metadata, error) in
                 if error != nil {
                     print(error?.localizedDescription)
                 }
                 print(metadata)
-                fileUrl = metadata!.downloadURLs![0].absoluteString
+                
+                fileUrl = metadata?.downloadURLs?[0].absoluteString
+                 completion(fileUrl)
             }
         } else if let video = video {
             let filePath = "\(currentUser?.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
@@ -172,15 +204,64 @@ class FirebaseAPI {
                     print(error?.localizedDescription)
                 }
                 print(metadata)
-                
-                fileUrl = metadata!.downloadURLs![0].absoluteString
+                fileUrl = metadata?.downloadURLs?[0].absoluteString
+                 completion(fileUrl)
 //                fileUrl = metadata?.downloadURLs![0].absoluteString
                 //                let newMessage = self.messageRef.childByAutoId()
                 //                let messageData = ["fileUrl": fileUrl, "senderId": self.senderId, "senderName": self.senderDisplayName, "MediaType": "VIDEO" ]
                 //                newMessage.setValue(messageData)
             }
         }
-        return fileUrl
+    }
+    
+    func sendMedia(data: NSData?, mediaType: MediaType, completion : (String?)-> Void) -> Void {
+        print(FIRStorage.storage().reference())
+        var fileUrl : String? = nil
+        
+        switch mediaType {
+        case .Image:
+            if let _data = data {
+                let filePath = "\(currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
+                print(filePath)
+                let metadata = FIRStorageMetadata()
+                metadata.contentType = "image/jpg"
+                FIRStorage.storage().reference().child(filePath).putData(_data, metadata: metadata) { (metadata, error) in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                    }
+                    print(metadata)
+                    
+                    fileUrl = metadata?.downloadURLs?[0].absoluteString
+                    completion(fileUrl)
+                }
+            }
+            
+        case .Video :
+            
+            if let _data = data {
+                let filePath = "\(currentUser?.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
+                print(filePath)
+                //                        let data = NSData(contentsOfURL: video)
+                let metadata = FIRStorageMetadata()
+                metadata.contentType = "video/mp4"
+                FIRStorage.storage().reference().child(filePath).putData(_data, metadata: metadata) { (metadata, error) in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                    }
+                    print(metadata)
+                    fileUrl = metadata?.downloadURLs?[0].absoluteString
+                    completion(fileUrl)
+                    //                fileUrl = metadata?.downloadURLs![0].absoluteString
+                    //                let newMessage = self.messageRef.childByAutoId()
+                    //                let messageData = ["fileUrl": fileUrl, "senderId": self.senderId, "senderName": self.senderDisplayName, "MediaType": "VIDEO" ]
+                    //                newMessage.setValue(messageData)
+                }
+            }
+            break
+        case .File :
+            break
+        }
+        
     }
     
 }

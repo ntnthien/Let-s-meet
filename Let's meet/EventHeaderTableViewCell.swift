@@ -35,7 +35,7 @@ class EventHeaderTableViewCell: UITableViewCell {
         avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
         thumbnailImageView.hnk_setImageFromURL(NSURL(string: event.thumbnailURL!)!)
         titleLabel.text = event.name
-        tagLabel.text = event.tags.joinWithSeparator(", ")
+        tagLabel.text = event.tags?.joinWithSeparator(", ")
         goingLabel.text = "\(event.joinAmount)"
         hostNameButton.setTitle(event.user?.displayName, forState: .Normal)
         print(event.thumbnailURL)

@@ -8,6 +8,13 @@
 
 import UIKit
 
+
+public enum MediaType {
+    case Image
+    case Video
+    case File
+}
+
 extension UIImage {
     
     func createRadius(newSize: CGSize, radius: CGFloat, byRoundingCorners: UIRectCorner?) -> UIImage {
