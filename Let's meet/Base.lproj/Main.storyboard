@@ -397,7 +397,7 @@
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oWf-05-50Q">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="261"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_event" translatesAutoresizingMaskIntoConstraints="NO" id="REr-eu-dM6">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_event" translatesAutoresizingMaskIntoConstraints="NO" id="REr-eu-dM6">
                                                             <rect key="frame" x="0.0" y="0.0" width="600.5" height="170"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="170" id="QKw-ez-kWa"/>

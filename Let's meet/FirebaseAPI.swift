@@ -91,7 +91,7 @@ class FirebaseAPI {
     }
     
     func getEvents(tags: [String], block: (FIRDataSnapshot) -> ()) {
-        eventsRef.observeSingleEventOfType(.Value, withBlock: block)
+        eventsRef.observeEventType(.Value, withBlock: block)
         
     }
     

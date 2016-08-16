@@ -83,9 +83,9 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func getEventInfo() -> Event? {
         
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
-        var currentDate = dateFormatter.stringFromDate(NSDate())
+//        var dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        let currentDate = NSDate().timeIntervalSince1970
         let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": currentDate, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": " ", "online_stream": ""]
         
         let event = Event(eventID: "1", eventInfo: newEventData)
