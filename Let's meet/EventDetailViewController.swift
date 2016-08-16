@@ -25,19 +25,20 @@ class EventDetailViewController: BaseViewController {
         
         // Customized the tableView
         tableView.separatorColor = UIColor.clearColor()
-        
-        FirebaseAPI.sharedInstance.getEvent(eventID) {snapshot in
-            self.event = Event(eventID: snapshot.key, eventInfo: (snapshot.value as? [String:AnyObject])!)
-            FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, block: { (snap) in
-                self.event?.user = User(userInfo: (snap.value as? [String: AnyObject])!)
-                self.tableView.reloadData()
-
-            })
-//            FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, completion: { (shareUser) in
-//                self.event?.user = shareUser
-//            })
-            
-            
+        if event == nil {
+            FirebaseAPI.sharedInstance.getEvent(eventID) {snapshot in
+                self.event = Event(eventID: snapshot.key, eventInfo: (snapshot.value as? [String:AnyObject])!)
+                FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, block: { (snap) in
+                    self.event?.user = User(userInfo: (snap.value as? [String: AnyObject])!)
+                    self.tableView.reloadData()
+                    
+                })
+                //            FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, completion: { (shareUser) in
+                //                self.event?.user = shareUser
+                //            })
+                
+                
+            }
         }
         // Do any additional setup after loading the view.
     }
