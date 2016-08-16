@@ -77,14 +77,18 @@ class FirebaseAPI {
         
     }
     
-    func getEvents() {
-        
+    func getEvents(block: (FIRDataSnapshot) -> ()) {
+        eventsRef.observeSingleEventOfType(.Value, withBlock: block)
     }
     
     
     // MARK: - User
     func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
         userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
+    
+//        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
+//            print(snap)
+//        })
     }
     
     func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {

@@ -633,6 +633,7 @@
                                             <outlet property="goingLabel" destination="qwE-cc-A9Z" id="8Mu-eA-Lat"/>
                                             <outlet property="hostNameButton" destination="GRN-PU-dIz" id="bjr-rT-rxs"/>
                                             <outlet property="tagLabel" destination="10h-5t-WUH" id="WKT-aL-mwj"/>
+                                            <outlet property="thumbnailImageView" destination="FG5-b5-xRl" id="AAy-QX-LP6"/>
                                             <outlet property="titleLabel" destination="Cpy-qb-Aka" id="6m4-OG-GQn"/>
                                         </connections>
                                     </tableViewCell>
