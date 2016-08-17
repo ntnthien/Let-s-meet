@@ -102,18 +102,20 @@ class FirebaseAPI {
     
     // MARK: - User
     
-    func getUser(id: String, completion: (User) -> ()) {
-        
-        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
-            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
-            completion(user)
-        }
-        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
-        
-        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
-        //            print(snap)
-        //        })
-    }
+//    func getUser(id: String, completion: (User?) -> ()) {
+//        
+//        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
+//            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
+//            completion(user)
+//        }
+//        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
+//        
+//        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
+//        //            print(snap)
+//        //        })
+//    }
+    
+    
     
     
     func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
@@ -156,6 +158,11 @@ class FirebaseAPI {
             fatalError("Could not sign out: \(error)")
         }
     }
+    
+    func userIsLogin() -> Bool{
+       return FIRAuth.auth()?.currentUser != nil
+    }
+
     
     func changeFavorite(user userID: String, eventID: String) {
         let favoriteRef = userRef.child(userID).child("favorites")
