@@ -9,6 +9,7 @@
 import UIKit
 import ReactiveKit
 import ReactiveUIKit
+import Firebase
 
 class EventListViewController: UIViewController {
     
@@ -17,9 +18,9 @@ class EventListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        loadData()
         setUpTableView()
+
+        loadData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -31,10 +32,25 @@ class EventListViewController: UIViewController {
     
     func loadData() {
         self.items.removeAll()
-        FirebaseAPI.sharedInstance.getEvents { (events) in
-            for event in events {
-                self.items.append(event!)
-                print(event)
+//        FirebaseAPI.sharedInstance.getEvents { (events: [Event?]) in
+//            for event in events {
+//                self.items.append(event!)
+//                print(event)
+//            }
+//        }
+        FirebaseAPI.sharedInstance.getEvents() {(snapshot: FIRDataSnapshot) in
+            self.items.removeAll()
+            for child in snapshot.children {
+                if let data = child as? FIRDataSnapshot {
+                    var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! )
+                    if let hostID = event?.hostID {
+                        FirebaseAPI.sharedInstance.getUser(hostID, block: { (snap) in
+                            event!.user = User(userInfo: (snap.value as? [String: AnyObject])!)
+                            self.items.append(event!)
+                            print(self.items)
+                        })
+                    }
+                }
             }
         }
     }

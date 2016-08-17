@@ -21,6 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static var mainStoryboard: UIStoryboard {
         return UIStoryboard(name: "Main", bundle: nil)
     }
+    
+    override init() {
+        super.init()
+        FIRApp.configure()
+        // not really needed unless you really need it FIRDatabase.database().persistenceEnabled = true
+    }
 
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -32,7 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Facebook delegate
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         // Firebase configure
-        FIRApp.configure()
         // Google map configure
         GMSServices.provideAPIKey(GOOGLE_API_KEY)
         GMSPlacesClient.provideAPIKey(GOOGLE_API_KEY)
