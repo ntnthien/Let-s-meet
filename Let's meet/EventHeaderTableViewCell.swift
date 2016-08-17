@@ -17,6 +17,7 @@ class EventHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var hostNameButton: UIButton!
     @IBOutlet weak var avatarButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var blurImageView: UIImageView!
     
     weak var delegate: ActionTableViewCellDelegate!
     
@@ -40,6 +41,7 @@ class EventHeaderTableViewCell: UITableViewCell {
         goingLabel.text = "\(event.joinAmount!)"
         hostNameButton.setTitle(event.user?.displayName, forState: .Normal)
         avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
+    
         thumbnailImageView.image = image
     }
     
@@ -69,7 +71,6 @@ class EventHeaderTableViewCell: UITableViewCell {
             //                configureCell(event, image: UIImage(named: "main_event")!)
             //            }
             thumbnailImageView.hnk_setImageFromURL(url)
-            
             self.selectionStyle = .None
             titleLabel.text = event.name
 

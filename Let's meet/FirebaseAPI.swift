@@ -202,9 +202,9 @@ class FirebaseAPI {
     }
     
     func userIsLogin() -> Bool{
-       return FIRAuth.auth()?.currentUser != nil
+        return FIRAuth.auth()?.currentUser != nil
     }
-
+    
     
     func changeFavorite(user userID: String, eventID: String) {
         let favoriteRef = userRef.child(userID).child("favorites")
@@ -213,6 +213,56 @@ class FirebaseAPI {
     
     func favoriteEvents(user userID: String) {
         
+    }
+    
+    func changeJoinValue(event eventID: String)  {
+        let userID = FIRAuth.auth()?.currentUser?.uid
+//        print(eventsRef.child(eventID))
+        eventsRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+            if snapshot.hasChild(eventID) {
+                self.userRef.child(userID!).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+                    if snapshot.hasChild("events") {
+                        self.userRef.child(userID!).child("events").observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+                            if snapshot.hasChild(eventID) {
+                                self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
+                                    (currentData: FIRMutableData!) in
+                                    var value = currentData.value as? Int
+                                    if value == nil  {
+                                        value = 0
+                                    }
+                                    currentData.value = value! - 1
+                                    self.userRef.child(userID!).child("events").child(eventID).removeValue()
+                                    
+                                    return FIRTransactionResult.successWithValue(currentData)
+                                })
+                            } else {
+                                self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
+                                    (currentData: FIRMutableData!) in
+                                    var value = currentData.value as? Int
+                                    if value == nil  {
+                                        value = 0
+                                    }
+                                    currentData.value = value! + 1
+                                    self.userRef.child(userID!).child("events").child(eventID).setValue(NSDate().timeIntervalSince1970)
+                                    return FIRTransactionResult.successWithValue(currentData)
+                                })
+                            }
+                        }
+                    } else {
+                        self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
+                            (currentData: FIRMutableData!) in
+                            var value = currentData.value as? Int
+                            if value == nil  {
+                                value = 0
+                            }
+                            currentData.value = value! + 1
+                            self.userRef.child(userID!).child("events").child(eventID).setValue(NSDate().timeIntervalSince1970)
+                            return FIRTransactionResult.successWithValue(currentData)
+                        })
+                    }
+                }
+            }
+        }
     }
     
     func follow(user userID: String) {

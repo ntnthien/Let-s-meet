@@ -99,6 +99,7 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
         switch button.tag {
         case 10:
             print("Join button touched")
+            FirebaseAPI.sharedInstance.changeJoinValue(event: (event?.id)!)
         case 20:
             print("Share button touched")
         case 30:
