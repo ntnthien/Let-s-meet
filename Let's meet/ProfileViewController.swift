@@ -81,7 +81,7 @@ class ProfileViewController: UIViewController {
 
     
     func loadData() {
-        FirebaseAPI.sharedInstance.getEvents() {snapshot in
+        FirebaseAPI.sharedInstance.getEvents() {(snapshot: FIRDataSnapshot) in
             self.items.removeAll()
             for child in snapshot.children {
                 if let data = child as? FIRDataSnapshot {

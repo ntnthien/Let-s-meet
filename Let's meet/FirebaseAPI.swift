@@ -91,6 +91,10 @@ class FirebaseAPI {
         }
     }
     
+    func getEvents(block: (FIRDataSnapshot) -> ()) {
+        eventsRef.observeEventType(.Value, withBlock: block)
+    }
+    
     func getEvents(tags: [String], block: (FIRDataSnapshot) -> ()) {
         eventsRef.observeEventType(.Value, withBlock: block)
     }
@@ -141,18 +145,17 @@ class FirebaseAPI {
     
     // MARK: - User
     
-//    func getUser(id: String, completion: (User?) -> ()) {
-//        
+    func getUser(id: String, completion: (User) -> ()) {
+        userRef.child(id).observeSingleEventOfType(.Value) { (dataSnapshot:FIRDataSnapshot) in
+            if let user: User = User(userInfo: (dataSnapshot.value as? [String:AnyObject])!) {
+                completion(user)
+            }
+        }
 //        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
 //            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
 //            completion(user)
 //        }
-//        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
-//        
-//        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
-//        //            print(snap)
-//        //        })
-//    }
+    }
     
     
     
