@@ -59,13 +59,13 @@ class FirebaseAPI {
             })
         }
         
-        let newDiscussionData = ["discussion_id": newDiscussion.key]
+        let newDiscussionData = ["discussion_id": newEvent.key]
         newDiscussion.setValue(newDiscussionData)
         
         var eventData : [String:AnyObject?] = event.toJSON()
         eventData["event_id"] = newEvent.key
         eventData["host_id"] = currentUser?.uid
-        eventData["discussion_id"] = newDiscussion.key
+        eventData["discussion_id"] = newEvent.key
         //        eventData.flatMap { [$0:$1]}
         var dataEvent : [String:AnyObject] = [String:AnyObject]()
         
@@ -128,7 +128,7 @@ class FirebaseAPI {
                                 event.user = user
                                 _events.append(event)
                                 print (event)
-
+                                
                             })
                         }
                     }
@@ -147,10 +147,10 @@ class FirebaseAPI {
                 completion(user)
             }
         }
-//        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
-//            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
-//            completion(user)
-//        }
+        //        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
+        //            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
+        //            completion(user)
+        //        }
     }
     
     func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {
@@ -295,4 +295,39 @@ class FirebaseAPI {
         
     }
     
+    // MARK: - Discussions
+    
+    func getDiscussions(event_id: String, completionHandler: ([Discussion?] -> Void)) {
+        discussionsRef.child(event_id).observeEventType(.Value) { (dataSnapshot:
+            FIRDataSnapshot) in
+            var discussions: [Discussion?] = []
+            for child in dataSnapshot.children {
+                if let data = child as? FIRDataSnapshot {
+                    if let discussion = Discussion(discussion_id: data.key, discussionInfo: (data.value as? [String: AnyObject])!) {
+                        discussions.append(discussion)
+                    }
+                }
+            }
+            completionHandler(discussions)
+        }
+    }
+    
+    func createDiscussion(event_id: String, discussion: Discussion) {
+        let newDiscussion = discussionsRef.child(event_id).childByAutoId()
+        var discussionData: [String: AnyObject?] = discussion.toJSON()
+        discussionData["discussion_id"] = newDiscussion.key
+        
+        var dataEvent : [String:AnyObject] = [String:AnyObject]()
+        
+        discussionData.forEach { (key,value) in
+            if let _value = value
+            {
+                dataEvent[key] = _value
+            }
+            else {
+                dataEvent[key] = nil
+            }
+        }
+        newDiscussion.setValue(dataEvent)
+    }
 }

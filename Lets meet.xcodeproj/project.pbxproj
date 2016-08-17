@@ -20,6 +20,7 @@
 		6B82EF3A1D5C8CCB00C76357 /* DatePickerPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B82EF381D5C8CCB00C76357 /* DatePickerPopupViewController.xib */; };
 		6B8E2C9A1D51BDB8002C2193 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E2C991D51BDB8002C2193 /* User.swift */; };
 		6BAD561B1D64616A002F8116 /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAD561A1D646169002F8116 /* Discussion.swift */; };
+		6BAD561D1D646F25002F8116 /* DiscussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAD561C1D646F25002F8116 /* DiscussionViewController.swift */; };
 		6BC8C5D31D51EBCE0074C27F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */; };
 		6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */; };
 		6CF6CCF1C287AEC6D05DD7DF /* Pods_Lets_meetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AEA2A2A8682B15B1D6A1FC /* Pods_Lets_meetTests.framework */; };
@@ -87,6 +88,7 @@
 		6B82EF381D5C8CCB00C76357 /* DatePickerPopupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerPopupViewController.xib; sourceTree = "<group>"; };
 		6B8E2C991D51BDB8002C2193 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6BAD561A1D646169002F8116 /* Discussion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discussion.swift; sourceTree = "<group>"; };
+		6BAD561C1D646F25002F8116 /* DiscussionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionViewController.swift; sourceTree = "<group>"; };
 		6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				C2551C2A1D5C2C9F0053676E /* EventDetailViewController.swift */,
 				6B82EF2A1D5C30E100C76357 /* CreateEventViewController.swift */,
 				C264464C1D5F0BEC00610C4B /* FilterViewController.swift */,
+				6BAD561C1D646F25002F8116 /* DiscussionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -753,6 +756,7 @@
 				C216DF021D5B175B0040BF6C /* MoreViewController.swift in Sources */,
 				6B82EF311D5C610F00C76357 /* CreateEventTableViewCell.swift in Sources */,
 				C2F529721D5106C700AB6337 /* Constants.swift in Sources */,
+				6BAD561D1D646F25002F8116 /* DiscussionViewController.swift in Sources */,
 				6B671CD11D524AC000357BE5 /* UIImage_Extension.swift in Sources */,
 				6B82EF2B1D5C30E100C76357 /* CreateEventViewController.swift in Sources */,
 			);
