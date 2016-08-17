@@ -28,14 +28,9 @@ class EventDetailViewController: BaseViewController {
         if event == nil {
             FirebaseAPI.sharedInstance.getEvent(eventID, completion: { (event) in
                 self.event = event
-                FirebaseAPI.sharedInstance.getUser((self.event?.hostID)!, block: { (snap) in
-                    self.event?.user = User(userInfo: (snap.value as? [String: AnyObject])!)
-                    self.tableView.reloadData()
-                    
-                })
             })
-            
         }
+        self.tableView.reloadData()
         // Do any additional setup after loading the view.
     }
     
@@ -96,7 +91,6 @@ extension EventDetailViewController: UITableViewDataSource {
             let cell = UITableViewCell()
             return cell
         }
-        //        cell.configureCell(cell, forRowAtIndexPath: indexPath)
     }
 }
 

@@ -84,44 +84,73 @@ class FirebaseAPI {
     func getEvent(id: String, completion: (Event?) -> ()) {
         eventsRef.child(id).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
             if let _dataSnapshot = dataSnapshot.value {
-                let event: Event = Event(eventID: id, eventInfo: ((_dataSnapshot as? [String:AnyObject]))!)!
-                completion(event)
+                if let event: Event = Event(eventID: id, eventInfo: ((_dataSnapshot as? [String:AnyObject]))!)! {
+                    completion(event)
+                }
             }
         }
     }
     
     func getEvents(tags: [String], block: (FIRDataSnapshot) -> ()) {
         eventsRef.observeEventType(.Value, withBlock: block)
-        
     }
+    func getEventsByTags(tags: [String], completion: (Event?)) {
+        eventsRef.observeEventType(.Value) { (dataSnapshot: FIRDataSnapshot) in
+            
+        }
+    }
+    //    FirebaseAPI.sharedInstance.getEvents() {snapshot in
+    //    self.items.removeAll()
+    //    for child in snapshot.children {
+    //    if let data = child as? FIRDataSnapshot {
+    //    var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! )
+    //    if let hostID = event?.hostID {
+    //    FirebaseAPI.sharedInstance.getUser(hostID, block: { (snap) in
+    //    event!.user = User(userInfo: (snap.value as? [String: AnyObject])!)
+    //    self.items.append(event!)
+    //    print(self.items)
+    //    })
+    //    }
+    //    }
+    //    }
+    //    }
     
-    func getEvents(block: (FIRDataSnapshot) -> ()) {
-        eventsRef.observeEventType(.Value, withBlock: block)
+    
+    func getEvents(completion: (events: [Event?]) -> Void) -> Void {
+        var _events: [Event?] = []
+        eventsRef.observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
+            for child in dataSnapshot.children {
+                if let data = child as? FIRDataSnapshot {
+                    
+                    if var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! ) {
+                        if let hostId = event.hostID {
+                            self.getUser(hostId, completion: { (user) in
+                                event.user = user
+                                _events.append(event)
+                                print (event)
+
+                            })
+                        }
+                    }
+                }
+            }
+            completion(events: _events)
+        }
     }
     
     
     // MARK: - User
     
     func getUser(id: String, completion: (User) -> ()) {
-        
-        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
-            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
-            completion(user)
+        userRef.child(id).observeSingleEventOfType(.Value) { (dataSnapshot:FIRDataSnapshot) in
+            if let user: User = User(userInfo: (dataSnapshot.value as? [String:AnyObject])!) {
+                completion(user)
+            }
         }
-        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
-        
-        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
-        //            print(snap)
-        //        })
-    }
-    
-    
-    func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
-        userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
-        
-        //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
-        //            print(snap)
-        //        })
+//        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
+//            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
+//            completion(user)
+//        }
     }
     
     func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {
