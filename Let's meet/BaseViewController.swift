@@ -52,6 +52,19 @@ class BaseViewController: UIViewController {
         return tags
     }
     
+    func switchToViewController(identifierVC: SBIdentifier.RawValue) {
+        // switch view by betting navigation controller as root view controller
+        // Create app view
+        if let vc = self.storyboard?.instantiateViewControllerWithIdentifier(identifierVC) {
+            // From mainstoryboard intantiate a navigation controller
+            let naviVC = self.storyboard?.instantiateViewControllerWithIdentifier(SBIdentifier.NavigationController.rawValue) as! UINavigationController
+            // Get the app delegate
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.changeRootView(naviVC)
+            appDelegate.changeAppView(vc)
+            self.beginAppearanceTransition(true, animated: true)
+        }
+    }
     /*
      // MARK: - Navigation
      

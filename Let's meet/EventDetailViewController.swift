@@ -103,6 +103,9 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
             print("Share button touched")
         case 30:
             print("Chat Button touched")
+            if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("DiscussionVC") {
+                
+            }
         case 60:
             print("Profile button touched")
         default:
