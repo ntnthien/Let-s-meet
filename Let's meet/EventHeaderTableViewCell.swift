@@ -34,8 +34,9 @@ class EventHeaderTableViewCell: UITableViewCell {
     func configureCell(event: Event, image: UIImage) {
         self.selectionStyle = .None
         titleLabel.text = event.name
-        
-        tagLabel.text = event.tags?.map { "#" + $0 }.joinWithSeparator(", ")
+        if let tags = event.tags {
+            tagLabel.text = tags.map { "#" + $0 }.joinWithSeparator(", ")
+        }
         goingLabel.text = "\(event.joinAmount)"
         hostNameButton.setTitle(event.user?.displayName, forState: .Normal)
         avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
@@ -71,7 +72,9 @@ class EventHeaderTableViewCell: UITableViewCell {
             
             self.selectionStyle = .None
             titleLabel.text = event.name
-            tagLabel.text = event.tags?.map { "#" + $0 }.joinWithSeparator(", ")
+            if let tags = event.tags {
+                tagLabel.text = tags.map { "#" + $0 }.joinWithSeparator(", ")
+            }
             goingLabel.text = "\(event.joinAmount)"
             hostNameButton.setTitle(event.user?.displayName, forState: .Normal)
             if let photoUrl = event.user?.photoURL as? NSURL {
