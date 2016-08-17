@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import Firebase
 import ReactiveKit
 import ReactiveUIKit
 
 class EventListViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     var items = CollectionProperty<[Event]>([])
     override func viewDidLoad() {
@@ -31,19 +30,11 @@ class EventListViewController: UIViewController {
     }
     
     func loadData() {
-        FirebaseAPI.sharedInstance.getEvents() {snapshot in
-            self.items.removeAll()
-            for child in snapshot.children {
-                if let data = child as? FIRDataSnapshot {
-                    var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! )
-                    if let hostID = event?.hostID {
-                        FirebaseAPI.sharedInstance.getUser(hostID, block: { (snap) in
-                            event!.user = User(userInfo: (snap.value as? [String: AnyObject])!)
-                            self.items.append(event!)
-                            print(self.items)
-                        })
-                    }
-                }
+        self.items.removeAll()
+        FirebaseAPI.sharedInstance.getEvents { (events) in
+            for event in events {
+                self.items.append(event!)
+                print(event)
             }
         }
     }
@@ -64,9 +55,8 @@ class EventListViewController: UIViewController {
             cell.configureCell(self!.items[indexPath.row])
             return cell
         }
-
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -77,7 +67,7 @@ class EventListViewController: UIViewController {
 extension EventListViewController: UITableViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "ShowDetail" {
-//            let navVC = segue.destinationViewController as! UINavigationController
+            //            let navVC = segue.destinationViewController as! UINavigationController
             let detailVC = segue.destinationViewController as! EventDetailViewController
             if let indexPath = tableView.indexPathForSelectedRow {
                 detailVC.event = items[indexPath.row]
