@@ -21,6 +21,9 @@
 		6B8E2C9A1D51BDB8002C2193 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8E2C991D51BDB8002C2193 /* User.swift */; };
 		6BAD561B1D64616A002F8116 /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAD561A1D646169002F8116 /* Discussion.swift */; };
 		6BAD561D1D646F25002F8116 /* DiscussionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAD561C1D646F25002F8116 /* DiscussionViewController.swift */; };
+		6BAD56211D64BFAA002F8116 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAD56201D64BFAA002F8116 /* ChatTableViewCell.swift */; };
+		6BAD56231D64C045002F8116 /* ChatTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAD56221D64C045002F8116 /* ChatTextTableViewCell.swift */; };
+		6BAD56251D64C054002F8116 /* ChatPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAD56241D64C054002F8116 /* ChatPhotoTableViewCell.swift */; };
 		6BC8C5D31D51EBCE0074C27F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */; };
 		6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */; };
 		6CF6CCF1C287AEC6D05DD7DF /* Pods_Lets_meetTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28AEA2A2A8682B15B1D6A1FC /* Pods_Lets_meetTests.framework */; };
@@ -89,6 +92,9 @@
 		6B8E2C991D51BDB8002C2193 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6BAD561A1D646169002F8116 /* Discussion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discussion.swift; sourceTree = "<group>"; };
 		6BAD561C1D646F25002F8116 /* DiscussionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscussionViewController.swift; sourceTree = "<group>"; };
+		6BAD56201D64BFAA002F8116 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		6BAD56221D64C045002F8116 /* ChatTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTextTableViewCell.swift; sourceTree = "<group>"; };
+		6BAD56241D64C054002F8116 /* ChatPhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPhotoTableViewCell.swift; sourceTree = "<group>"; };
 		6BC8C5D21D51EBCE0074C27F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6BC8C5D41D51F1E30074C27F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListTableViewCell.swift; sourceTree = "<group>"; };
@@ -322,6 +328,9 @@
 				C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */,
 				C21820AF1D6187090035DBB5 /* EventActionTableViewCell.swift */,
 				C283C3FC1D618FE4009A8CBE /* EventDetailTableViewCell.swift */,
+				6BAD56201D64BFAA002F8116 /* ChatTableViewCell.swift */,
+				6BAD56221D64C045002F8116 /* ChatTextTableViewCell.swift */,
+				6BAD56241D64C054002F8116 /* ChatPhotoTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -730,9 +739,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BAD56231D64C045002F8116 /* ChatTextTableViewCell.swift in Sources */,
 				6B671CCE1D5242A700357BE5 /* ProfileInfoTableViewCell.swift in Sources */,
 				6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */,
 				6B5848B31D55D56900CA26FD /* EventsMapViewController.swift in Sources */,
+				6BAD56251D64C054002F8116 /* ChatPhotoTableViewCell.swift in Sources */,
 				6BAD561B1D64616A002F8116 /* Discussion.swift in Sources */,
 				C21D43AE1D63130200A80CF2 /* StringHelper.swift in Sources */,
 				6B13C5811D5F1A9D00CC445C /* FirebaseAPI.swift in Sources */,
@@ -757,6 +768,7 @@
 				6B82EF311D5C610F00C76357 /* CreateEventTableViewCell.swift in Sources */,
 				C2F529721D5106C700AB6337 /* Constants.swift in Sources */,
 				6BAD561D1D646F25002F8116 /* DiscussionViewController.swift in Sources */,
+				6BAD56211D64BFAA002F8116 /* ChatTableViewCell.swift in Sources */,
 				6B671CD11D524AC000357BE5 /* UIImage_Extension.swift in Sources */,
 				6B82EF2B1D5C30E100C76357 /* CreateEventViewController.swift in Sources */,
 			);

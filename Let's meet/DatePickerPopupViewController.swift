@@ -18,12 +18,12 @@ class DatePickerPopupViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     var eventTime: NSTimeInterval?
     var appDelegate = UIApplication.sharedApplication().delegate
-//    let parentView: UIView?
-    required public init?(coder aDecoder: NSCoder) {
+    //    let parentView: UIView?
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override public init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -37,7 +37,7 @@ class DatePickerPopupViewController: UIViewController {
         
     }
     
-    public func showInView(aView: UIView!, animated: Bool)
+    func showInView(aView: UIView!, animated: Bool)
     {
         print(aView.frame.size.width)
         self.view.frame.size.width = aView.frame.size.width
@@ -74,9 +74,9 @@ class DatePickerPopupViewController: UIViewController {
     }
     
     @IBAction func closePopup(sender: AnyObject) {
-//        var dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
-//        strDate = dateFormatter.stringFromDate(datePicker.date)
+        //        var dateFormatter = NSDateFormatter()
+        //        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        //        strDate = dateFormatter.stringFromDate(datePicker.date)
         eventTime = datePicker.date.timeIntervalSince1970
         self.removeAnimate()
     }
