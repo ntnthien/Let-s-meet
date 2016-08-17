@@ -33,7 +33,7 @@ class EventListViewController: UIViewController {
         self.items.removeAll()
         FirebaseAPI.sharedInstance.getEvents { (events) in
             for event in events {
-                self.items.append(event)
+                self.items.append(event!)
                 print(event)
             }
         }
