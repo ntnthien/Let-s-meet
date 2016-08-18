@@ -13,6 +13,7 @@ public enum MediaType {
     case Image
     case Video
     case File
+    case Text
 }
 
 enum SBIdentifier: String {

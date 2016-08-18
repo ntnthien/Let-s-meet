@@ -10,6 +10,8 @@ import UIKit
 
 class ChatTextTableViewCell: ChatTableViewCell {
 
+    @IBOutlet weak var contentMessageLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

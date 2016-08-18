@@ -361,6 +361,8 @@ class FirebaseAPI {
             break
         case .File :
             break
+        default:
+            break
         }
         
     }
