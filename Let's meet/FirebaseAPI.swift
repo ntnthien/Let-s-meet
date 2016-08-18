@@ -26,7 +26,7 @@ class FirebaseAPI {
     let discussionsRef =  FIRDatabase.database().reference().child("discussions")
     let tagsRef = FIRDatabase.database().reference().child("tags")
     let userRef = FIRDatabase.database().reference().child("users")
-    
+    let rootRef = FIRDatabase.database().reference()
     let currentUser = FIRAuth.auth()?.currentUser
     
     
@@ -119,6 +119,13 @@ class FirebaseAPI {
     //    }
     //    }
     
+    
+//    func getTags() {
+//        tagsRef.observeSingleEventOfType(.Value) { (snapshot) in
+//            
+//        }
+//        
+//    }
     
     func getEvents(completion: (events: [Event?]) -> Void) -> Void {
         var _events: [Event?] = []

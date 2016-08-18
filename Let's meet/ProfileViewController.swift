@@ -11,8 +11,9 @@ import UIKit
 import ReactiveKit
 import ReactiveUIKit
 import Firebase
+import Haneke
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: BaseViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     
     @IBOutlet weak var fullNameLabel: UILabel!
@@ -21,20 +22,24 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var userID: String?
+    
     var user: User? {
         didSet {
             if let name = user?.displayName {
                 fullNameLabel.text = "\(name)"
             }
             if let url = NSURL(string: (user?.photoURL)!) {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                    let data = NSData(contentsOfURL: url)
-                    //make sure your image in this url does exist, otherwise unwrap in a if let check
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.profileImageView.image = UIImage(data: data!)
-//                        self.profileImageView.image = UIImage(data: data!)?.createRadius(self.profileImageView.bounds.size, radius: self.profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
-                    })
-                }
+//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+//                    //make sure your image in this url does exist, otherwise unwrap in a if let check
+//                    dispatch_async(dispatch_get_main_queue(), {
+//                        self.profileImageView.image = UIImage(data: data!)
+////                        self.profileImageView.image = UIImage(data: data!)?.createRadius(self.profileImageView.bounds.size, radius: self.profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
+//                    })
+//                }
+                 self.profileImageView.hnk_setImageFromURL(url)
+                
+
             } else {
                 profileImageView.image = UIImage(named: "user_profile")?.createRadius(profileImageView.bounds.size, radius: profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
             }
@@ -45,6 +50,10 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let id = userID {
+            
+        } else
         if FirebaseAPI.sharedInstance.userIsLogin() {
             user = User(userInfo: FirebaseAPI.sharedInstance.getUserInfo()!)
             setUpTableView()
@@ -66,14 +75,15 @@ class ProfileViewController: UIViewController {
             fullNameLabel.text = "\(name)"
         }
         if let url = NSURL(string: (user?.photoURL)!) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                let data = NSData(contentsOfURL: url)
-                //make sure your image in this url does exist, otherwise unwrap in a if let check
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.profileImageView.image = UIImage(data: data!)
-                    //                        self.profileImageView.image = UIImage(data: data!)?.createRadius(self.profileImageView.bounds.size, radius: self.profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
-                })
-            }
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+//                let data = NSData(contentsOfURL: url)
+//                //make sure your image in this url does exist, otherwise unwrap in a if let check
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    self.profileImageView.image = UIImage(data: data!)
+//                    //                        self.profileImageView.image = UIImage(data: data!)?.createRadius(self.profileImageView.bounds.size, radius: self.profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
+//                })
+//            }
+            self.profileImageView.hnk_setImageFromURL(url)
         } else {
             profileImageView.image = UIImage(named: "user_profile")?.createRadius(profileImageView.bounds.size, radius: profileImageView.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
         }

@@ -429,7 +429,7 @@
 				TargetAttributes = {
 					C2F5293D1D51067000AB6337 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 42GHUCGJCJ;
+						DevelopmentTeam = 9S4XSSR34J;
 					};
 					C2F529511D51067100AB6337 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -922,6 +922,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zincer.Letsmeet;
 				PRODUCT_NAME = "Lets meet";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -937,6 +938,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zincer.Letsmeet;
 				PRODUCT_NAME = "Lets meet";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -19,6 +19,7 @@ class EventDetailViewController: BaseViewController {
     var event: Event?
     var eventImage: UIImage?
     var joinString = "Join"
+    var joinValueChanged = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +45,17 @@ class EventDetailViewController: BaseViewController {
     
     func loadJoinValue() {
         FirebaseAPI.sharedInstance.getjoinValue(event: (event?.id)!) { (snapshot) in
+            var change = 1
             if snapshot.hasChild((self.event?.id)!) {
                 self.joinString = "Leave"
             } else {
                 self.joinString = "Join"
+                change = -1
+            }
+            
+            if self.joinValueChanged {
+                self.joinValueChanged = false
+                self.event?.joinAmount! += change
             }
             self.tableView.reloadData()
             
@@ -55,6 +63,7 @@ class EventDetailViewController: BaseViewController {
     }
     
     @objc func joinValueDidChange(notification: NSNotification) {
+        joinValueChanged = true
         loadJoinValue()
 //        self.joinString = (joinString == "Join") ? "Leave" : "Join"
 //        self.tableView.reloadData()
@@ -102,6 +111,12 @@ extension EventDetailViewController: UITableViewDataSource {
             if let event = event, image = eventImage {
                 cell.configureCell(event, image: image)
             }
+//            if joinValueChanged {
+//                joinValueChanged = false
+//                var value = Int(cell.goingLabel.text!)!
+//                value = (joinString == "Join") ? (value) : (value + 1)
+//                cell.goingLabel.text = "\(value)"
+//            }
             cell.delegate = self
             return cell
             
@@ -110,6 +125,8 @@ extension EventDetailViewController: UITableViewDataSource {
             cell.selectionStyle = .None
             cell.delegate = self
             cell.joinButton.setTitle(joinString, forState: .Normal)
+//             joinString == "Join"
+            cell.joinButton.backgroundColor = (joinString == "Join") ? MAIN_COLOR : RED_COLOR
             return cell
             
         case 2:
