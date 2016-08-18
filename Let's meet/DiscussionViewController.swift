@@ -100,14 +100,12 @@ class DiscussionViewController: BaseViewController {
     
     func getMessageInfo() -> Discussion? {
         if let message = messageTextInputView.text {
-            let currentDate = NSDate().timeIntervalSince1970
-            let newMessageData: [String:AnyObject] = ["discussion_id": "1", "media_type": "", "sender_id": currentuserID, "sender_name": "nhung", "sender_photo": "", "time": NSDate().timeIntervalSinceNow, "content_msg": message, "file_Url": ""]
-            
+            let newMessageData: [String:AnyObject] = ["discussion_id": "1", "content_type": "","content_msg": message, "sender_id": currentuserID, "sender_name": "nhung", "sender_photo": "", "time": NSDate().timeIntervalSinceNow]
             return Discussion(discussion_id: "1", discussionInfo: newMessageData)
         }
         return nil
     }
-
+    
     /*
      // MARK: - Navigation
      
@@ -167,7 +165,7 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
          }
          */
         // Nếu message là hình ảnh
-        if message.media_type == nil {
+        if message.content_type == ContentType.Photo.rawValue {
             /*
              let photoChatCell = cell as! PhotoChatCell
              

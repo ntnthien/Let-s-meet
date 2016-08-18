@@ -235,7 +235,7 @@ class FirebaseAPI {
             if value == nil  {
                 value = 0
             }
-//            currentData.value = willJoin ? (value! + 1) : (value! - 1)
+            //            currentData.value = willJoin ? (value! + 1) : (value! - 1)
             
             if willJoin {
                 self.userRef.child(userID!).child("events").child(eventID).setValue(NSDate().timeIntervalSince1970)
@@ -245,7 +245,7 @@ class FirebaseAPI {
                 currentData.value = value! - 1
             }
             NSNotificationCenter.defaultCenter().postNotificationName(JOIN_VALUE_CHANGED_KEY, object: nil, userInfo: nil)
-
+            
             return FIRTransactionResult.successWithValue(currentData)
         })
     }
@@ -275,7 +275,7 @@ class FirebaseAPI {
     func getjoinValue(event eventID: String, block: (FIRDataSnapshot) -> ())  {
         self.userRef.child(getUserID()!).child("events").observeSingleEventOfType(.Value, withBlock: block)
     }
-
+    
     func follow(user userID: String) {
         
     }
@@ -326,17 +326,17 @@ class FirebaseAPI {
         }
     }
     
-    func sendMedia(data: NSData?, mediaType: MediaType, completion : (String?)-> Void) -> Void {
+    func sendMedia(data: NSData?, contentType: ContentType, completion : (String?)-> Void) -> Void {
         print(FIRStorage.storage().reference())
         var fileUrl : String? = nil
         
-        switch mediaType {
-        case .Image:
+        switch contentType {
+        case .Photo:
             if let _data = data {
                 let filePath = "\(currentUser!.uid)/\(NSDate.timeIntervalSinceReferenceDate())"
                 print(filePath)
                 let metadata = FIRStorageMetadata()
-                metadata.contentType = "image/jpg"
+                metadata.contentType = ContentType.Photo.rawValue
                 FIRStorage.storage().reference().child(filePath).putData(_data, metadata: metadata) { (metadata, error) in
                     if error != nil {
                         print(error?.localizedDescription)
@@ -355,7 +355,7 @@ class FirebaseAPI {
                 print(filePath)
                 //                        let data = NSData(contentsOfURL: video)
                 let metadata = FIRStorageMetadata()
-                metadata.contentType = "video/mp4"
+                metadata.contentType = ContentType.Video.rawValue
                 FIRStorage.storage().reference().child(filePath).putData(_data, metadata: metadata) { (metadata, error) in
                     if error != nil {
                         print(error?.localizedDescription)

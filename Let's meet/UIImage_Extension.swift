@@ -9,11 +9,11 @@
 import UIKit
 
 
-public enum MediaType {
-    case Image
-    case Video
-    case File
-    case Text
+public enum ContentType: String {
+    case Photo = "Photo"
+    case Video = "Video"
+    case File = "File"
+    case Text = "Text"
 }
 
 enum SBIdentifier: String {

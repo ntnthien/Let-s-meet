@@ -39,7 +39,7 @@ class CreateEventViewController: BaseViewController {
         
         if let data = UIImageJPEGRepresentation(pannelImage, 0.1)
         {
-            FirebaseAPI.sharedInstance.sendMedia(data, mediaType: MediaType.Image) { (fileUrl) in
+            FirebaseAPI.sharedInstance.sendMedia(data, contentType: ContentType.Photo) { (fileUrl) in
                 event?.thumbnailURL = fileUrl
                 if let event = event {
                     FirebaseAPI.sharedInstance.createEvent(event)
