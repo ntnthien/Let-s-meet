@@ -10,6 +10,9 @@ import UIKit
 
 class FilterViewController: BaseViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +24,7 @@ class FilterViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
 
@@ -32,4 +35,11 @@ class FilterViewController: BaseViewController {
     }
     */
 
+    @IBAction func searchAcion(sender: AnyObject) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func cancelAction(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
