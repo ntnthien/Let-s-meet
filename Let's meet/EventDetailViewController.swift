@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Social
+import Firebase
+import ReactiveKit
+import ReactiveUIKit
 
 class EventDetailViewController: BaseViewController {
     
@@ -14,6 +18,7 @@ class EventDetailViewController: BaseViewController {
     let eventID = "-KPCQnApII4z9n_1YGBB"
     var event: Event?
     var eventImage: UIImage?
+    var joinString = "Join"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +35,36 @@ class EventDetailViewController: BaseViewController {
                 self.event = event
             })
         }
-        self.tableView.reloadData()
-        // Do any additional setup after loading the view.
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(joinValueDidChange(_:)), name: JOIN_VALUE_CHANGED_KEY, object: nil)
+
+        loadJoinValue()
+               // Do any additional setup after loading the view.
     }
     
+    func loadJoinValue() {
+        FirebaseAPI.sharedInstance.getjoinValue(event: (event?.id)!) { (snapshot) in
+            if snapshot.hasChild((self.event?.id)!) {
+                self.joinString = "Leave"
+            } else {
+                self.joinString = "Join"
+            }
+            self.tableView.reloadData()
+            
+        }
+    }
     
+    @objc func joinValueDidChange(notification: NSNotification) {
+        loadJoinValue()
+//        self.joinString = (joinString == "Join") ? "Leave" : "Join"
+//        self.tableView.reloadData()
+//
+    }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,12 +109,15 @@ extension EventDetailViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("actionCell", forIndexPath: indexPath) as! EventActionTableViewCell
             cell.selectionStyle = .None
             cell.delegate = self
+            cell.joinButton.setTitle(joinString, forState: .Normal)
             return cell
             
         case 2:
             let cell = (tableView.dequeueReusableCellWithIdentifier("detailCell", forIndexPath: indexPath) as! EventDetailTableViewCell)
+            cell.configureCell(event!)
             cell.selectionStyle = .None
             return cell
+            
             
         default:
             let cell = UITableViewCell()
@@ -102,6 +134,7 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
             FirebaseAPI.sharedInstance.changeJoinValue(event: (event?.id)!)
         case 20:
             print("Share button touched")
+            shareAction()
         case 30:
             print("Chat Button touched")
             if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("DiscussionVC") {
@@ -112,5 +145,44 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
         default:
             print("Wish button touched")
         }
+    }
+    
+    func shareAction() {
+        let shareActionSheet = UIAlertController(title: nil, message: SHARE_WITH, preferredStyle: .ActionSheet)
+        let twitterShareAction = UIAlertAction(title: TWITTER, style: .Default , handler: {
+            (action) -> Void in
+            // display the twitter composer
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+                let tweetComposer = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+                tweetComposer.setInitialText(self.event!.name)
+                //              tweetComposer.addImage(product!.images)
+                self.presentViewController(tweetComposer, animated: true, completion: nil)
+            } else {
+                self.showAlert(TWITTER_UNAVAILABLE, msg: TWITTER_ERROR_MSG)
+                
+            }
+        })
+        
+        let facebookShareAction = UIAlertAction(title: FACEBOOK, style: .Default , handler: {
+            (action) -> Void in
+            // display the twitter composer
+            if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook) {
+                let facebookComposer = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                facebookComposer.setInitialText(self.event!.name)
+                // tweetComposer.addImage(<#T##image: UIImage!##UIImage!#>)
+                //                facebookComposer.addURL("http://google.com")
+                self.presentViewController(facebookComposer, animated: true, completion: nil)
+            } else {
+                self.showAlert(FACEBOOK_UNAVAILABLE, msg: FACEBOOK_ERROR_MSG)
+                
+            }
+        })
+        
+        let cancelShareAction = UIAlertAction(title: CANCEL, style: .Cancel, handler: nil)
+        
+        shareActionSheet.addAction(twitterShareAction)
+        shareActionSheet.addAction(facebookShareAction)
+        shareActionSheet.addAction(cancelShareAction)
+        self.presentViewController(shareActionSheet, animated: true, completion: nil)
     }
 }

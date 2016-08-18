@@ -179,6 +179,10 @@ class FirebaseAPI {
         }
     }
     
+    func getUserID() -> String? {
+        return FIRAuth.auth()?.currentUser?.uid
+    }
+    
     func getUserInfo() -> FIRUserInfo? {
         if let userInfo = FIRAuth.auth()?.currentUser?.providerData.first {
             return userInfo
@@ -215,56 +219,56 @@ class FirebaseAPI {
         
     }
     
+    
+    private func changeJoinValue(eventID: String, willJoin: Bool) {
+        let userID = getUserID()
+        self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
+            (currentData: FIRMutableData!) in
+            var value = currentData.value as? Int
+            if value == nil  {
+                value = 0
+            }
+//            currentData.value = willJoin ? (value! + 1) : (value! - 1)
+            
+            if willJoin {
+                self.userRef.child(userID!).child("events").child(eventID).setValue(NSDate().timeIntervalSince1970)
+                currentData.value = value! + 1
+            } else {
+                self.userRef.child(userID!).child("events").child(eventID).removeValue()
+                currentData.value = value! - 1
+            }
+            NSNotificationCenter.defaultCenter().postNotificationName(JOIN_VALUE_CHANGED_KEY, object: nil, userInfo: nil)
+
+            return FIRTransactionResult.successWithValue(currentData)
+        })
+    }
+    
     func changeJoinValue(event eventID: String)  {
-        let userID = FIRAuth.auth()?.currentUser?.uid
-//        print(eventsRef.child(eventID))
+        let userID = getUserID()
         eventsRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
             if snapshot.hasChild(eventID) {
                 self.userRef.child(userID!).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
                     if snapshot.hasChild("events") {
                         self.userRef.child(userID!).child("events").observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
                             if snapshot.hasChild(eventID) {
-                                self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
-                                    (currentData: FIRMutableData!) in
-                                    var value = currentData.value as? Int
-                                    if value == nil  {
-                                        value = 0
-                                    }
-                                    currentData.value = value! - 1
-                                    self.userRef.child(userID!).child("events").child(eventID).removeValue()
-                                    
-                                    return FIRTransactionResult.successWithValue(currentData)
-                                })
+                                self.changeJoinValue(eventID, willJoin: false)
                             } else {
-                                self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
-                                    (currentData: FIRMutableData!) in
-                                    var value = currentData.value as? Int
-                                    if value == nil  {
-                                        value = 0
-                                    }
-                                    currentData.value = value! + 1
-                                    self.userRef.child(userID!).child("events").child(eventID).setValue(NSDate().timeIntervalSince1970)
-                                    return FIRTransactionResult.successWithValue(currentData)
-                                })
+                                self.changeJoinValue(eventID, willJoin: true)
+                                
                             }
                         }
                     } else {
-                        self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
-                            (currentData: FIRMutableData!) in
-                            var value = currentData.value as? Int
-                            if value == nil  {
-                                value = 0
-                            }
-                            currentData.value = value! + 1
-                            self.userRef.child(userID!).child("events").child(eventID).setValue(NSDate().timeIntervalSince1970)
-                            return FIRTransactionResult.successWithValue(currentData)
-                        })
+                        self.changeJoinValue(eventID, willJoin: true)
                     }
                 }
             }
         }
     }
     
+    func getjoinValue(event eventID: String, block: (FIRDataSnapshot) -> ())  {
+        self.userRef.child(getUserID()!).child("events").observeSingleEventOfType(.Value, withBlock: block)
+    }
+
     func follow(user userID: String) {
         
     }

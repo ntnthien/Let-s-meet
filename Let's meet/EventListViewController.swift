@@ -60,7 +60,7 @@ class EventListViewController: UIViewController {
         tableView.delegate = self
         tableView.rDataSource.forwardTo = self
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = 130
         
         
         items.bindTo(tableView) { [weak self] indexPath, dataSource, tableView in
