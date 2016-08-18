@@ -1284,10 +1284,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="47" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Efi-qa-2Cf">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="800"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="711"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellTextReceiver" rowHeight="50" id="YLo-xF-QtR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellReceiver" rowHeight="50" id="YLo-xF-QtR" customClass="ChatTextTableViewCell" customModule="Lets_meet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="600" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YLo-xF-QtR" id="APX-En-8WZ">
@@ -1317,8 +1317,13 @@
                                                 <constraint firstItem="9HA-QD-hcO" firstAttribute="leading" secondItem="APX-En-8WZ" secondAttribute="leading" constant="5" id="g8k-Fp-qSO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImg" destination="9HA-QD-hcO" id="bv8-yb-KAp"/>
+                                            <outlet property="contentMessageLabel" destination="QdT-hE-yJ4" id="EXD-Av-IRz"/>
+                                            <outlet property="messageBubbleView" destination="QdT-hE-yJ4" id="pAj-0k-p1j"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellTextSender" rowHeight="50" id="R1K-Wf-9jX">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellSender" rowHeight="50" id="R1K-Wf-9jX" customClass="ChatTextTableViewCell" customModule="Lets_meet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="142" width="600" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R1K-Wf-9jX" id="jK2-Wf-wdz">
@@ -1348,8 +1353,13 @@
                                                 <constraint firstItem="WdA-yP-N1E" firstAttribute="top" secondItem="C1g-Dt-rcy" secondAttribute="top" id="usc-uR-6g9"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImg" destination="C1g-Dt-rcy" id="vnR-FI-xNJ"/>
+                                            <outlet property="contentMessageLabel" destination="WdA-yP-N1E" id="eHF-zA-cX4"/>
+                                            <outlet property="messageBubbleView" destination="WdA-yP-N1E" id="Hqy-CX-s57"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellPhotoReceiver" rowHeight="90" id="YaK-as-MCh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellReceiverPhoto" rowHeight="90" id="YaK-as-MCh" customClass="ChatPhotoTableViewCell" customModule="Lets_meet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="192" width="600" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YaK-as-MCh" id="ogV-kS-5Di">
@@ -1378,8 +1388,13 @@
                                                 <constraint firstItem="Jbc-rG-bCY" firstAttribute="leading" secondItem="ogV-kS-5Di" secondAttribute="leading" constant="5" id="yEz-gt-ThB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImg" destination="Jbc-rG-bCY" id="zCb-5Q-CDE"/>
+                                            <outlet property="messageBubbleView" destination="PKc-03-CrT" id="lga-IS-bFa"/>
+                                            <outlet property="messagePhotoImgView" destination="PKc-03-CrT" id="zKr-RY-bRQ"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellPhotoSender" rowHeight="90" id="5iA-J3-69Q">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellSenderPhoto" rowHeight="90" id="5iA-J3-69Q" customClass="ChatPhotoTableViewCell" customModule="Lets_meet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="282" width="600" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5iA-J3-69Q" id="C8L-9R-GBq">
@@ -1408,20 +1423,82 @@
                                                 <constraint firstItem="Xrw-N0-Qjb" firstAttribute="top" secondItem="C8L-9R-GBq" secondAttribute="top" constant="5" id="zTu-94-OnK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImg" destination="Xrw-N0-Qjb" id="zEI-6X-46n"/>
+                                            <outlet property="messageBubbleView" destination="P7w-Xg-DHi" id="lrl-jz-Sjj"/>
+                                            <outlet property="messagePhotoImgView" destination="P7w-Xg-DHi" id="fAt-ZB-3iU"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwd-g9-VaR">
+                                <rect key="frame" x="0.0" y="711" width="600" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kfw-2w-KlZ">
+                                        <rect key="frame" x="560" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Kfw-2w-KlZ" secondAttribute="height" multiplier="1:1" id="V4M-gD-XDJ"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="Sent"/>
+                                        <connections>
+                                            <action selector="onSendMessageButton:" destination="4Ga-60-vxK" eventType="touchUpInside" id="upe-te-Afn"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gbQ-qJ-WpN">
+                                        <rect key="frame" x="40" y="0.0" width="520" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EbV-bC-Ep6">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="62" id="CFL-LS-7w3"/>
+                                            <constraint firstAttribute="width" secondItem="EbV-bC-Ep6" secondAttribute="height" multiplier="1:1" id="FJM-9g-a9e"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="Attach"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="CFL-LS-7w3"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onAttachFileButton:" destination="4Ga-60-vxK" eventType="touchUpInside" id="4W4-7w-FX5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Kfw-2w-KlZ" firstAttribute="height" secondItem="lwd-g9-VaR" secondAttribute="height" id="0Op-jK-jRE"/>
+                                    <constraint firstItem="EbV-bC-Ep6" firstAttribute="top" secondItem="lwd-g9-VaR" secondAttribute="top" id="1Qd-Wy-h89"/>
+                                    <constraint firstItem="gbQ-qJ-WpN" firstAttribute="top" secondItem="lwd-g9-VaR" secondAttribute="top" id="8NF-pr-AEp"/>
+                                    <constraint firstItem="gbQ-qJ-WpN" firstAttribute="leading" secondItem="EbV-bC-Ep6" secondAttribute="trailing" id="8n5-5n-t2V"/>
+                                    <constraint firstItem="EbV-bC-Ep6" firstAttribute="height" secondItem="lwd-g9-VaR" secondAttribute="height" id="Ins-sm-bbm"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kfw-2w-KlZ" secondAttribute="trailing" id="Nxb-XJ-kol"/>
+                                    <constraint firstAttribute="bottom" secondItem="gbQ-qJ-WpN" secondAttribute="bottom" id="PkM-Sr-c5w"/>
+                                    <constraint firstItem="Kfw-2w-KlZ" firstAttribute="leading" secondItem="gbQ-qJ-WpN" secondAttribute="trailing" id="QXa-bQ-c3A"/>
+                                    <constraint firstAttribute="height" constant="40" id="VeP-UM-612"/>
+                                    <constraint firstItem="EbV-bC-Ep6" firstAttribute="leading" secondItem="lwd-g9-VaR" secondAttribute="leading" id="cYD-1b-uGO"/>
+                                    <constraint firstItem="Kfw-2w-KlZ" firstAttribute="top" secondItem="lwd-g9-VaR" secondAttribute="top" id="oIy-kM-ynG"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lwd-g9-VaR" secondAttribute="trailing" id="4Ue-D2-tIL"/>
+                            <constraint firstItem="lwd-g9-VaR" firstAttribute="leading" secondItem="X7c-22-BMN" secondAttribute="leading" id="6Yi-Nq-Yp5"/>
                             <constraint firstItem="Efi-qa-2Cf" firstAttribute="top" secondItem="X7c-22-BMN" secondAttribute="top" id="H8V-N7-mrj"/>
+                            <constraint firstItem="lwd-g9-VaR" firstAttribute="top" secondItem="Efi-qa-2Cf" secondAttribute="bottom" id="MHz-hM-JcY"/>
                             <constraint firstAttribute="trailing" secondItem="Efi-qa-2Cf" secondAttribute="trailing" id="MhS-h6-Min"/>
-                            <constraint firstAttribute="bottom" secondItem="Efi-qa-2Cf" secondAttribute="bottom" id="gr2-Qs-2Yl"/>
+                            <constraint firstItem="5rp-tY-La6" firstAttribute="top" secondItem="lwd-g9-VaR" secondAttribute="bottom" id="N6y-l9-KmS"/>
                             <constraint firstItem="Efi-qa-2Cf" firstAttribute="leading" secondItem="X7c-22-BMN" secondAttribute="leading" id="lGK-Nr-cmO"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="Efi-qa-2Cf" id="4gZ-5e-xtM"/>
+                        <outlet property="chatTableView" destination="Efi-qa-2Cf" id="OJC-g3-3h3"/>
+                        <outlet property="messageTextInputView" destination="gbQ-qJ-WpN" id="2dp-Fu-tyv"/>
+                        <outlet property="sendMessageButtonOutlet" destination="Kfw-2w-KlZ" id="8dN-Jc-28t"/>
+                        <outlet property="viewInputSendMessage" destination="lwd-g9-VaR" id="IjS-Ka-Tks"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3S9-G7-hDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2108,7 +2185,9 @@ AMIA2QDbAN1gN2A8YEdgUGBjYGdgcmB7YIBgiGCLYJBgn2CjYKpgsmC/YMRgxmDIYM1g1WDYYN1g5WDo
 YPpg/WECAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAYQQ
 </mutableData>
         </image>
+        <image name="Attach" width="33" height="33"/>
         <image name="Exit" width="25" height="25"/>
+        <image name="Sent" width="33" height="33"/>
         <image name="badge" width="21" height="21"/>
         <image name="calendar" width="21" height="21"/>
         <image name="chat" width="70" height="70"/>
