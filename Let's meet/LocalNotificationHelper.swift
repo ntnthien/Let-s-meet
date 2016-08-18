@@ -18,23 +18,23 @@ class LocalNotificationHelper {
         if (notificationSettings.types == UIUserNotificationType.None){
             
             // Specify the notification types.
-            var notificationTypes = UIUserNotificationType.Alert.union(.Sound)
+            let notificationTypes = UIUserNotificationType.Alert.union(.Sound)
             // Specify the notification actions.
-            var justInformAction = UIMutableUserNotificationAction()
+            let justInformAction = UIMutableUserNotificationAction()
             justInformAction.identifier = "justInform"
             justInformAction.title = "OK, got it"
             justInformAction.activationMode = UIUserNotificationActivationMode.Background
             justInformAction.destructive = false
             justInformAction.authenticationRequired = false
             
-            var modifyListAction = UIMutableUserNotificationAction()
+            let modifyListAction = UIMutableUserNotificationAction()
             modifyListAction.identifier = "editList"
             modifyListAction.title = "Edit list"
             modifyListAction.activationMode = UIUserNotificationActivationMode.Foreground
             modifyListAction.destructive = false
             modifyListAction.authenticationRequired = true
             
-            var trashAction = UIMutableUserNotificationAction()
+            let trashAction = UIMutableUserNotificationAction()
             trashAction.identifier = "trashAction"
             trashAction.title = "Delete list"
             trashAction.activationMode = UIUserNotificationActivationMode.Background
@@ -45,14 +45,14 @@ class LocalNotificationHelper {
             let actionsArrayMinimal = NSArray(objects: trashAction, modifyListAction)
             
             // Specify the category related to the above actions.
-            var shoppingListReminderCategory = UIMutableUserNotificationCategory()
+            let shoppingListReminderCategory = UIMutableUserNotificationCategory()
             shoppingListReminderCategory.identifier = "shoppingListReminderCategory"
-            shoppingListReminderCategory.setActions(actionsArray as! [UIUserNotificationAction], forContext: .Default)
-            shoppingListReminderCategory.setActions(actionsArrayMinimal as! [UIUserNotificationAction], forContext: UIUserNotificationActionContext.Minimal)
+            shoppingListReminderCategory.setActions(actionsArray as? [UIUserNotificationAction], forContext: .Default)
+            shoppingListReminderCategory.setActions(actionsArrayMinimal as? [UIUserNotificationAction], forContext: UIUserNotificationActionContext.Minimal)
             
             let categoriesForSettings = NSSet(objects: shoppingListReminderCategory)
             
-            let newNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: categoriesForSettings as! Set<UIUserNotificationCategory>)
+            let newNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: categoriesForSettings as? Set<UIUserNotificationCategory>)
             //The first time the above code will work, it will create a new record for our application in the Settings app.
             UIApplication.sharedApplication().registerUserNotificationSettings(newNotificationSettings)
         }
@@ -64,7 +64,7 @@ class LocalNotificationHelper {
         
     }
     func scheduleLocalNotification() {
-        var localNotification = UILocalNotification()
+        let localNotification = UILocalNotification()
         localNotification.fireDate = fixNotificationDate(NSDate())
         localNotification.alertBody = "Hey, you must go shopping, remember?"
         localNotification.alertAction = "View List"
@@ -74,11 +74,11 @@ class LocalNotificationHelper {
     }
     func fixNotificationDate(dateToFix: NSDate) -> NSDate {
         
-        var dateComponets: NSDateComponents = NSCalendar.currentCalendar().components((NSCalendarUnit.Day.union(.Month).union(.Year).union(.Hour).union(.Minute)), fromDate: dateToFix)
+        let dateComponets: NSDateComponents = NSCalendar.currentCalendar().components((NSCalendarUnit.Day.union(.Month).union(.Year).union(.Hour).union(.Minute)), fromDate: dateToFix)
         
         dateComponets.second = 0
         
-        var fixedDate: NSDate! = NSCalendar.currentCalendar().dateFromComponents(dateComponets)
+        let fixedDate: NSDate! = NSCalendar.currentCalendar().dateFromComponents(dateComponets)
         
         return fixedDate
     }
