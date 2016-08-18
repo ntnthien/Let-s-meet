@@ -8,6 +8,25 @@
 
 import UIKit
 
+@objc
+class Filter: NSObject {
+    
+    var tag: Int?
+    var name: String?
+    
+    init(tag: Int, name: String) {
+        self.tag = tag
+        self.name = name
+    }
+}
+
+@objc
+protocol FilterViewControllerDelegate {
+   optional func filterViewController(filterViewController: FilterViewController, didUpdateFilter filter: Filter)
+}
+
+
+
 class FilterViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -16,7 +35,7 @@ class FilterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        initTableView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,15 +44,12 @@ class FilterViewController: BaseViewController {
     }
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func initTableView() {
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
     }
-    */
 
     @IBAction func searchAcion(sender: AnyObject) {
         
@@ -42,4 +58,45 @@ class FilterViewController: BaseViewController {
     @IBAction func cancelAction(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    
+    
 }
+
+extension FilterViewController: UITableViewDelegate {
+    
+    
+}
+
+extension FilterViewController: UITableViewDataSource {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return "Section"
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 2
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell")
+        cell?.textLabel?.text = "Cell"
+        cell?.selectionStyle = .None
+        return cell!
+    }
+    
+    
+    
+}
+
+
+
+
+
+
