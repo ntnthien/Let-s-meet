@@ -34,3 +34,16 @@ let EVENT_KEY = "events"
 
 // MARK: - Storyboard IDs
 let MORE_VC_ID = "MoreViewController"
+
+// MARK: - NOTFICATION KEYS
+let JOIN_VALUE_CHANGED_KEY = "kJoinValueDidChangeNotification"
+
+// MARK: - ProductDetailsViewController constants
+let SHARE_WITH = "Share with"
+let TWITTER = "Twitter"
+let TWITTER_UNAVAILABLE = "Twitter unavailable"
+let TWITTER_ERROR_MSG = "Be sure to go to Settings > Twitter to set up you Twitter account"
+let FACEBOOK = "Facebook"
+let FACEBOOK_UNAVAILABLE = "Facebook unavailable"
+let FACEBOOK_ERROR_MSG = "Be sure to go to Settings > Facebook to set up you Facebook account"
+let CANCEL = "Cancel"

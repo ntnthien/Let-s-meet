@@ -65,6 +65,12 @@ class BaseViewController: UIViewController {
             self.beginAppearanceTransition(true, animated: true)
         }
     }
+    
+    func showAlert(title: String, msg: String) {
+        let alertVC = UIAlertController(title: title, message: msg, preferredStyle: .Alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+        self.presentViewController(alertVC, animated: true, completion: nil)
+    }
     /*
      // MARK: - Navigation
      

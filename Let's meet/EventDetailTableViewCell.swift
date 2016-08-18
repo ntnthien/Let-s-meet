@@ -26,7 +26,12 @@ class EventDetailTableViewCell: UITableViewCell {
     }
     
     func configureCell(event: Event) {
-        timeLabel.text = "\(event.time)"
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "dd'-'MM'-'yyyy' 'HH':'mm':'ss"
+        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 7)
+        let date = formatter.stringFromDate(NSDate(timeIntervalSince1970: event.time!))
+    
+        timeLabel.text = "\(date)"
         locationLabel.text = event.location
         descriptionLabel.text = event.description
     }
