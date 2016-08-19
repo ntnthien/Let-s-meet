@@ -20,8 +20,8 @@ class DiscussionViewController: BaseViewController {
     @IBOutlet weak var viewInputSendMessageBottomConstraint: NSLayoutConstraint!
     
     var currentuserID = "Rxup9VnrnPbpODuSK65ggUBj4w72"
-    var eventID = "-KPMddCnTDeaeDPFEXu1"
-    var discussionID = "-KPMddCnTDeaeDPFEXu2"
+    var eventID = "-KPVjTT3za3KXapXni6P"
+    var discussionID = "-KPVjTT3za3KXapXni6P"
     var discussion:Array<Discussion> = []
     
     // Dictionary lưu các url avatar users
@@ -51,7 +51,7 @@ class DiscussionViewController: BaseViewController {
     //    var messagesRef:FIRDatabaseReference!
     
     // Avatar placeholder image
-    //    let avtPlace HolderImg:UIImage = UIImage.imageWithColor(UIColor.lightGray(), size: CGSize(width: 30, height: 30)).createRadius(newSize: CGSize(width: 30, height: 30), radius: 15, byRoundingCorners: .allCorners)
+    let avtPlace :UIImage = UIImage.imageWithColor(UIColor.lightGrayColor(), size: CGSize(width: 30, height: 30)).createRadius(CGSize(width: 30, height: 30), radius: 15, byRoundingCorners: UIRectCorner.AllCorners)
     
     // Refesh controler for chat table
     let refeshControl = UIRefreshControl()
@@ -66,19 +66,38 @@ class DiscussionViewController: BaseViewController {
             chatTableView.contentInset.bottom = tabbarHeight + 40
             chatTableView.scrollIndicatorInsets = chatTableView.contentInset
         }
+        chatTableView.rowHeight = UITableViewAutomaticDimension
+        chatTableView.estimatedRowHeight = 400
         
         loadDiscussion()
         // Do any additional setup after loading the view.
     }
     
+    private func setUpView() {
+        //self.changeTitle(title: "General Room")
+        
+        messageTextInputView.layer.borderWidth = 1
+        messageTextInputView.layer.borderColor = UIColor(red: 206/255 ,green: 206/255, blue: 206/255 ,  alpha: 1 ).CGColor
+        messageTextInputView.layer.cornerRadius = 5
+        //        self.sendMessageButtonOutlet.isEnabled = false
+        
+        self.chatTableView.addSubview(refeshControl)
+    }
+    
+    
     func loadDiscussion () {
+        print("loadDiscussion")
+        
+        
         FirebaseAPI.sharedInstance.getDiscussions(eventID) { (discussions) in
+            self.discussion.removeAll()
             for discussion in discussions {
                 print(discussion)
                 self.discussion.append(discussion!)
             }
+            self.chatTableView.reloadData()
         }
-        chatTableView.reloadData()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -91,7 +110,6 @@ class DiscussionViewController: BaseViewController {
         if let discussion = getMessageInfo() {
             FirebaseAPI.sharedInstance.createDiscussion(eventID, discussion: discussion)
         }
-        chatTableView.reloadData()
     }
     
     @IBAction func onAttachFileButton(sender: UIButton) {
@@ -100,7 +118,7 @@ class DiscussionViewController: BaseViewController {
     
     func getMessageInfo() -> Discussion? {
         if let message = messageTextInputView.text {
-            let newMessageData: [String:AnyObject] = ["discussion_id": "1", "content_type": "","content_msg": message, "sender_id": currentuserID, "sender_name": "nhung", "sender_photo": "", "time": NSDate().timeIntervalSinceNow]
+            let newMessageData: [String:AnyObject] = ["discussion_id": "1", "content_type": ContentType.Text.rawValue,"content_msg": message, "sender_id": currentuserID, "sender_name": "nhung", "sender_photo": "", "time": NSDate().timeIntervalSince1970]
             return Discussion(discussion_id: "1", discussionInfo: newMessageData)
         }
         return nil
@@ -121,6 +139,7 @@ class DiscussionViewController: BaseViewController {
 extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(discussion.count)
         return discussion.count
     }
     
@@ -147,6 +166,7 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             cell.messageBubbleView.backgroundColor = UIColor(red: 242/255, green: 120/255, blue: 5/255 , alpha: 1)
         }
+        
         /*
          // Hiển thị avatar
          cell.avtImageView.image = avtPlaceHolderImg
@@ -203,7 +223,7 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
         else {
             let textChatCell = cell as! ChatTextTableViewCell
             textChatCell.contentMessageLabel.text       = message.content_msg
-            textChatCell.contentMessageLabel.textColor  = UIColor.whiteColor()
+            textChatCell.contentMessageLabel.textColor  = UIColor.blueColor()
         }
         
         return cell

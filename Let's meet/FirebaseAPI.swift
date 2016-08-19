@@ -59,8 +59,9 @@ class FirebaseAPI {
             })
         }
         
-        let newDiscussionData = ["discussion_id": newEvent.key]
-        newDiscussion.setValue(newDiscussionData)
+        discussionsRef.child(newEvent.key)
+//        let newDiscussionData = ["discussion_id": newEvent.key]
+//        newDiscussion.setValue(newDiscussionData)
         
         var eventData : [String:AnyObject?] = event.toJSON()
         eventData["event_id"] = newEvent.key

@@ -71,7 +71,8 @@ class BaseViewController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alertVC, animated: true, completion: nil)
     }
-    /*
+    
+        /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
