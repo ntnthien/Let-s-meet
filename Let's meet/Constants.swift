@@ -35,6 +35,7 @@ let EVENT_KEY = "events"
 
 // MARK: - Storyboard IDs
 let MORE_VC_ID = "MoreViewController"
+let PROFILE_VC_ID = "profileVC"
 
 // MARK: - NOTFICATION KEYS
 let JOIN_VALUE_CHANGED_KEY = "kJoinValueDidChangeNotification"

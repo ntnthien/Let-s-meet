@@ -1261,7 +1261,9 @@
                             <constraint firstItem="0qZ-9z-OkA" firstAttribute="leading" secondItem="XG4-1y-0UO" secondAttribute="leading" id="ufi-aW-OMg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Event Details" id="kgU-mM-fwg"/>
+                    <navigationItem key="navigationItem" title="Event Details" id="kgU-mM-fwg">
+                        <barButtonItem key="backBarButtonItem" title=" " id="cUg-oY-PK9"/>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="800"/>
                     <connections>

@@ -52,13 +52,18 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         
         if let id = userID {
-            
-        } else
-        if FirebaseAPI.sharedInstance.userIsLogin() {
+            FirebaseAPI.sharedInstance.getUser(id, block: { (snap) in
+                self.user = User(userInfo: snap.value as! [String: AnyObject])
+                self.setUpTableView()
+                self.loadData()
+            })
+        } else if FirebaseAPI.sharedInstance.userIsLogin() {
             user = User(userInfo: FirebaseAPI.sharedInstance.getUserInfo()!)
             setUpTableView()
             loadData()
         }
+
+
     }
     
     
@@ -125,6 +130,7 @@ class ProfileViewController: BaseViewController {
             
             let cell = weakSelf.tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
             cell.delegate = self
+            cell.indexPath = indexPath
             cell.configureCell(self!.items[indexPath.row])
             return cell
         }
@@ -165,16 +171,13 @@ extension ProfileViewController: UITableViewDelegate {
 extension ProfileViewController: ActionTableViewCellDelegate {
     func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton) {
         switch button.tag {
-        case 10:
-            print("Join button touched")
-        case 20:
-            print("Share button touched")
-        case 30:
-            print("Chat Button touched")
         case 60:
             print("Profile button touched")
+            if let indexPath = (actionTableViewCell as? EventHeaderTableViewCell)?.indexPath, hostID = items[indexPath.row].hostID {
+                showProfileViewController(hostID)
+            }
         default:
-            print("Wish button touched")
+            print("Unassigned button touched")
         }
     }
 }

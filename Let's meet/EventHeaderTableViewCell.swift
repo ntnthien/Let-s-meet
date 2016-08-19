@@ -18,6 +18,7 @@ class EventHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var avatarButton: UIButton!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var blurImageView: UIImageView!
+    var indexPath: NSIndexPath?
     
     weak var delegate: ActionTableViewCellDelegate!
     

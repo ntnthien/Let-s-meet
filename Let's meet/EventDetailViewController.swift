@@ -91,6 +91,7 @@ class EventDetailViewController: BaseViewController {
     }
     
     @objc func wishValueDidChange(notification: NSNotification) {
+        valueChanged = true
         loadWishValue()
         //        self.joinString = (joinString == "Join") ? "Leave" : "Join"
         //        self.tableView.reloadData()
@@ -186,10 +187,12 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
         case 30:
             print("Chat Button touched")
             if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("DiscussionVC") {
+                self.navigationItem.backBarButtonItem?.title = " "
                 
             }
         case 60:
             print("Profile button touched")
+            showProfileViewController((event?.hostID)!)
         default:
             print("Wish button touched")
             FirebaseAPI.sharedInstance.changeWishValue(event: (event?.id)!)
