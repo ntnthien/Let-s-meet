@@ -38,6 +38,8 @@ let MORE_VC_ID = "MoreViewController"
 
 // MARK: - NOTFICATION KEYS
 let JOIN_VALUE_CHANGED_KEY = "kJoinValueDidChangeNotification"
+let WISH_VALUE_CHANGED_KEY = "kWishValueDidChangeNotification"
+
 
 // MARK: - ProductDetailsViewController constants
 let SHARE_WITH = "Share with"
