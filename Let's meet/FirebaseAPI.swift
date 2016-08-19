@@ -233,7 +233,6 @@ class FirebaseAPI {
         
     }
     
-    
     private func changeJoinValue(eventID: String, willJoin: Bool) {
         let userID = getUserID()
         self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
@@ -245,10 +244,10 @@ class FirebaseAPI {
             //            currentData.value = willJoin ? (value! + 1) : (value! - 1)
             
             if willJoin {
-                self.userRef.child(userID!).child("events").child(eventID).setValue(NSDate().timeIntervalSince1970)
+                self.userRef.child(userID!).child("events").child("joined").child(eventID).setValue(NSDate().timeIntervalSince1970)
                 currentData.value = value! + 1
             } else {
-                self.userRef.child(userID!).child("events").child(eventID).removeValue()
+                self.userRef.child(userID!).child("events").child("joined").child(eventID).removeValue()
                 currentData.value = value! - 1
             }
             NSNotificationCenter.defaultCenter().postNotificationName(JOIN_VALUE_CHANGED_KEY, object: nil, userInfo: nil)
@@ -263,7 +262,7 @@ class FirebaseAPI {
             if snapshot.hasChild(eventID) {
                 self.userRef.child(userID!).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
                     if snapshot.hasChild("events") {
-                        self.userRef.child(userID!).child("events").observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+                        self.userRef.child(userID!).child("events").child("joined").observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
                             if snapshot.hasChild(eventID) {
                                 self.changeJoinValue(eventID, willJoin: false)
                             } else {
@@ -280,8 +279,36 @@ class FirebaseAPI {
     }
     
     func getjoinValue(event eventID: String, block: (FIRDataSnapshot) -> ())  {
-        self.userRef.child(getUserID()!).child("events").observeSingleEventOfType(.Value, withBlock: block)
+        self.userRef.child(getUserID()!).child("events").child("joined").observeSingleEventOfType(.Value, withBlock: block)
     }
+    
+    func changeWishValue(event eventID: String)  {
+        let userID = getUserID()
+        eventsRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+            if snapshot.hasChild(eventID) {
+                self.userRef.child(userID!).observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+                    if snapshot.hasChild("events") {
+                        self.userRef.child(userID!).child("events").child("wished").observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+                            if snapshot.hasChild(eventID) {
+                                self.userRef.child(userID!).child("events").child("wished").child(eventID).removeValue()
+                            } else {
+                                self.userRef.child(userID!).child("events").child("wished").child(eventID).setValue(NSDate().timeIntervalSince1970)
+
+                            }
+                        }
+                    } else {
+                        self.userRef.child(userID!).child("events").child("wished").child(eventID).setValue(NSDate().timeIntervalSince1970)
+                    }
+                    NSNotificationCenter.defaultCenter().postNotificationName(WISH_VALUE_CHANGED_KEY, object: nil, userInfo: nil)
+                }
+            }
+        }
+    }
+    
+    func getWishValue(event eventID: String, block: (FIRDataSnapshot) -> ())  {
+        self.userRef.child(getUserID()!).child("events").child("wished").observeSingleEventOfType(.Value, withBlock: block)
+    }
+
     
     func follow(user userID: String) {
         

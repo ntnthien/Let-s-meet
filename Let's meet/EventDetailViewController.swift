@@ -19,7 +19,8 @@ class EventDetailViewController: BaseViewController {
     var event: Event?
     var eventImage: UIImage?
     var joinString = "Join"
-    var joinValueChanged = false
+    var wished = false
+    var valueChanged = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,10 @@ class EventDetailViewController: BaseViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(joinValueDidChange(_:)), name: JOIN_VALUE_CHANGED_KEY, object: nil)
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(wishValueDidChange(_:)), name: WISH_VALUE_CHANGED_KEY, object: nil)
+
         loadJoinValue()
+        loadWishValue()
                // Do any additional setup after loading the view.
     }
     
@@ -53,8 +57,8 @@ class EventDetailViewController: BaseViewController {
                 change = -1
             }
             
-            if self.joinValueChanged {
-                self.joinValueChanged = false
+            if self.valueChanged {
+                self.valueChanged = false
                 self.event?.joinAmount! += change
             }
             self.tableView.reloadData()
@@ -62,13 +66,38 @@ class EventDetailViewController: BaseViewController {
         }
     }
     
+    func loadWishValue() {
+        FirebaseAPI.sharedInstance.getWishValue(event: (event?.id)!) { (snapshot) in
+            if snapshot.hasChild((self.event?.id)!) {
+                self.wished = true
+            } else {
+                self.wished = false
+            }
+            
+            if self.valueChanged {
+                self.wished = !self.wished
+            }
+            self.tableView.reloadData()
+            
+        }
+    }
+    
     @objc func joinValueDidChange(notification: NSNotification) {
-        joinValueChanged = true
+        valueChanged = true
         loadJoinValue()
 //        self.joinString = (joinString == "Join") ? "Leave" : "Join"
 //        self.tableView.reloadData()
 //
     }
+    
+    @objc func wishValueDidChange(notification: NSNotification) {
+        valueChanged = true
+        loadWishValue()
+        //        self.joinString = (joinString == "Join") ? "Leave" : "Join"
+        //        self.tableView.reloadData()
+        //
+    }
+
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -127,6 +156,9 @@ extension EventDetailViewController: UITableViewDataSource {
             cell.joinButton.setTitle(joinString, forState: .Normal)
 //             joinString == "Join"
             cell.joinButton.backgroundColor = (joinString == "Join") ? MAIN_COLOR : RED_COLOR
+            let wishImage = wished ? "wish-fill" : "wish"
+            
+            cell.wishButton.setImage(UIImage(named: wishImage), forState: .Normal)
             return cell
             
         case 2:
@@ -155,12 +187,16 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
         case 30:
             print("Chat Button touched")
             if let vc = self.storyboard?.instantiateViewControllerWithIdentifier("DiscussionVC") {
+                self.navigationItem.backBarButtonItem?.title = " "
                 
             }
         case 60:
             print("Profile button touched")
+            showProfileViewController((event?.hostID)!)
         default:
             print("Wish button touched")
+            FirebaseAPI.sharedInstance.changeWishValue(event: (event?.id)!)
+
         }
     }
     

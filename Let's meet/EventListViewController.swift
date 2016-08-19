@@ -11,7 +11,7 @@ import ReactiveKit
 import ReactiveUIKit
 import Firebase
 
-class EventListViewController: UIViewController {
+class EventListViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var items = CollectionProperty<[Event]>([])
@@ -68,6 +68,7 @@ class EventListViewController: UIViewController {
             
             let cell = weakSelf.tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
             cell.delegate = self
+            cell.indexPath = indexPath
             cell.configureCell(self!.items[indexPath.row])
             return cell
         }
@@ -97,16 +98,13 @@ extension EventListViewController: UITableViewDelegate {
 extension EventListViewController: ActionTableViewCellDelegate {
     func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton) {
         switch button.tag {
-        case 10:
-            print("Join button touched")
-        case 20:
-            print("Share button touched")
-        case 30:
-            print("Chat Button touched")
         case 60:
             print("Profile button touched")
+            if let indexPath = (actionTableViewCell as? EventHeaderTableViewCell)?.indexPath, hostID = items[indexPath.row].hostID {
+                showProfileViewController(hostID)
+            }
         default:
-            print("Wish button touched")
+            print("Unassigned button touched")
         }
     }
 }

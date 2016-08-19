@@ -72,6 +72,14 @@ class BaseViewController: UIViewController {
         self.presentViewController(alertVC, animated: true, completion: nil)
     }
     
+    func showProfileViewController(id: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewControllerWithIdentifier(PROFILE_VC_ID) as? ProfileViewController {
+            vc.userID = id
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    }
         /*
      // MARK: - Navigation
      
