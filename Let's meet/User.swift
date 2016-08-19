@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 
 class User {
     var uid: String
@@ -40,11 +39,11 @@ class User {
         self.providerID = providerID
     }
     
-    init? (userInfo: FIRUserInfo) {
-        self.uid = userInfo.uid
-        self.displayName = userInfo.displayName
-        self.email = userInfo.email
-        self.photoURL = userInfo.photoURL?.absoluteString
-        self.providerID = userInfo.providerID
+    init?(uid: String, displayName: String, email: String, photoURL: String, providerID: String) {
+        self.uid = uid
+        self.displayName = displayName
+        self.email = email
+        self.photoURL = photoURL
+        self.providerID = providerID
     }
 }

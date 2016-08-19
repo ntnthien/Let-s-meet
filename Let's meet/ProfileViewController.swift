@@ -52,10 +52,14 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         
         if let id = userID {
-            
+            FirebaseAPI.sharedInstance.getUser(id, block: { (snap) in
+                self.user = User(userInfo: snap.value as! [String: AnyObject])
+                self.setUpTableView()
+                self.loadData()
+            })
         } else
         if FirebaseAPI.sharedInstance.userIsLogin() {
-            user = User(userInfo: FirebaseAPI.sharedInstance.getUserInfo()!)
+            user = FirebaseAPI.sharedInstance.getUserInfo()
             setUpTableView()
             loadData()
         }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Haneke
 
 class DiscussionViewController: BaseViewController {
     
@@ -19,7 +20,8 @@ class DiscussionViewController: BaseViewController {
     @IBOutlet weak var viewInputSendMessage: UIView!
     @IBOutlet weak var viewInputSendMessageBottomConstraint: NSLayoutConstraint!
     
-    var currentuserID = "Rxup9VnrnPbpODuSK65ggUBj4w72"
+    var currentUser: User?
+    
     var eventID = "-KPVjTT3za3KXapXni6P"
     var discussionID = "-KPVjTT3za3KXapXni6P"
     var discussion:Array<Discussion> = []
@@ -51,7 +53,7 @@ class DiscussionViewController: BaseViewController {
     //    var messagesRef:FIRDatabaseReference!
     
     // Avatar placeholder image
-    let avtPlace :UIImage = UIImage.imageWithColor(UIColor.lightGrayColor(), size: CGSize(width: 30, height: 30)).createRadius(CGSize(width: 30, height: 30), radius: 15, byRoundingCorners: UIRectCorner.AllCorners)
+    let avtPlaceHolderImg :UIImage = UIImage.imageWithColor(UIColor.lightGrayColor(), size: CGSize(width: 30, height: 30)).createRadius(CGSize(width: 30, height: 30), radius: 15, byRoundingCorners: UIRectCorner.AllCorners)
     
     // Refesh controler for chat table
     let refeshControl = UIRefreshControl()
@@ -60,6 +62,8 @@ class DiscussionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentUser = FirebaseAPI.sharedInstance.getUserInfo()
         
         if let tabbar = self.tabBarController?.tabBar {
             let tabbarHeight = tabbar.bounds.size.height
@@ -74,25 +78,22 @@ class DiscussionViewController: BaseViewController {
     }
     
     private func setUpView() {
-        //self.changeTitle(title: "General Room")
+        self.navigationItem.title = "Event title"
         
         messageTextInputView.layer.borderWidth = 1
         messageTextInputView.layer.borderColor = UIColor(red: 206/255 ,green: 206/255, blue: 206/255 ,  alpha: 1 ).CGColor
         messageTextInputView.layer.cornerRadius = 5
-        //        self.sendMessageButtonOutlet.isEnabled = false
+//                self.sendMessageButtonOutlet.isEnabled = false
         
         self.chatTableView.addSubview(refeshControl)
     }
     
     
     func loadDiscussion () {
-        print("loadDiscussion")
-        
         
         FirebaseAPI.sharedInstance.getDiscussions(eventID) { (discussions) in
             self.discussion.removeAll()
             for discussion in discussions {
-                print(discussion)
                 self.discussion.append(discussion!)
             }
             self.chatTableView.reloadData()
@@ -105,8 +106,6 @@ class DiscussionViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func onSendMessageButton(sender: AnyObject) {
-        
-        print("Send msg is clicked")
         if let discussion = getMessageInfo() {
             FirebaseAPI.sharedInstance.createDiscussion(eventID, discussion: discussion)
         }
@@ -117,8 +116,10 @@ class DiscussionViewController: BaseViewController {
     }
     
     func getMessageInfo() -> Discussion? {
-        if let message = messageTextInputView.text {
-            let newMessageData: [String:AnyObject] = ["discussion_id": "1", "content_type": ContentType.Text.rawValue,"content_msg": message, "sender_id": currentuserID, "sender_name": "nhung", "sender_photo": "", "time": NSDate().timeIntervalSince1970]
+        if let message = messageTextInputView.text, currentUser = currentUser {
+            self.messageTextInputView.text = nil
+            
+            let newMessageData: [String:AnyObject] = ["discussion_id": "1", "content_type": ContentType.Text.rawValue,"content_msg": message, "sender_id": currentUser.uid, "sender_name": currentUser.displayName, "sender_photo": currentUser.photoURL, "time": NSDate().timeIntervalSince1970]
             return Discussion(discussion_id: "1", discussionInfo: newMessageData)
         }
         return nil
@@ -139,7 +140,6 @@ class DiscussionViewController: BaseViewController {
 extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(discussion.count)
         return discussion.count
     }
     
@@ -148,7 +148,7 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
         let message = discussion[indexPath.row]
         
         // Xác định cell id là của cell cho sender hay reciever
-        var cellId = (message.sender_id == currentuserID) ? "cellSender" : "cellReceiver"
+        var cellId = (message.sender_id == currentUser?.uid) ? "cellSender" : "cellReceiver"
         
         // Nếu message là hình thì cell id thêm Photo
         //        if message.type == .Photo  {
@@ -161,17 +161,24 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
         //        cell.delegate = self
         
         // Thiết lập màu cho bong bóng chat
-        if (message.sender_id == currentuserID) {
+        if (message.sender_id == currentUser?.uid) {
             cell.messageBubbleView.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255 , alpha: 1)
         } else {
             cell.messageBubbleView.backgroundColor = UIColor(red: 242/255, green: 120/255, blue: 5/255 , alpha: 1)
         }
         
+        
+        // Hiển thị avatar
+        
+        
+        
+        if let url = NSURL(string: message.sender_photo!) {
+            cell.avatarImg.hnk_setImageFromURL(url)
+             cell.avatarImg.image = avtPlaceHolderImg
+        }
+        cell.avatarImg.image = avtPlaceHolderImg
+        // Lấy url user từ userAvtDict đã cache sẵn
         /*
-         // Hiển thị avatar
-         cell.avtImageView.image = avtPlaceHolderImg
-         
-         // Lấy url user từ userAvtDict đã cache sẵn
          if let avtURL = self.userAvtDict[message.sender] {
          
          // Nếu avt đã được download vào cache, lấy hình ra xài luôn

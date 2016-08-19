@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ZB-2w-xcM">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ZB-2w-xcM" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -236,7 +236,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
-                        <outlet property="mapView" destination="8ZB-2w-xcM" id="1Fx-5M-yN6"/>
+                        <outlet property="mapView" destination="8ZB-2w-xcM" id="Uz8-L1-hZj"/>
                         <outlet property="tableView" destination="THH-ds-AZH" id="55t-h7-Xc9"/>
                     </connections>
                 </viewController>
@@ -1303,7 +1303,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QdT-hE-yJ4">
-                                                    <rect key="frame" x="45" y="5" width="545" height="21"/>
+                                                    <rect key="frame" x="45" y="5" width="505.5" height="37"/>
                                                     <string key="text">Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1312,12 +1312,19 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="QdT-hE-yJ4" firstAttribute="leading" secondItem="9HA-QD-hcO" secondAttribute="trailing" constant="10" id="7Bv-LV-azn"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9HA-QD-hcO" secondAttribute="bottom" constant="10" id="BqG-wT-1KJ"/>
                                                 <constraint firstItem="QdT-hE-yJ4" firstAttribute="top" secondItem="9HA-QD-hcO" secondAttribute="top" id="KUV-8j-Zpp"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QdT-hE-yJ4" secondAttribute="trailing" constant="10" id="OiV-RR-3YS"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QdT-hE-yJ4" secondAttribute="bottom" constant="5" id="VuV-aU-fBf"/>
                                                 <constraint firstItem="9HA-QD-hcO" firstAttribute="top" secondItem="APX-En-8WZ" secondAttribute="top" constant="5" id="dAI-sK-ddn"/>
                                                 <constraint firstItem="9HA-QD-hcO" firstAttribute="leading" secondItem="APX-En-8WZ" secondAttribute="leading" constant="5" id="g8k-Fp-qSO"/>
+                                                <constraint firstItem="QdT-hE-yJ4" firstAttribute="top" secondItem="APX-En-8WZ" secondAttribute="top" constant="5" id="q8X-LK-3ed"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="KUV-8j-Zpp"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImg" destination="9HA-QD-hcO" id="bv8-yb-KAp"/>
@@ -1340,7 +1347,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WdA-yP-N1E">
-                                                    <rect key="frame" x="5" y="5" width="550" height="36.5"/>
+                                                    <rect key="frame" x="5" y="5" width="550" height="37"/>
                                                     <string key="text">Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1349,9 +1356,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="WdA-yP-N1E" firstAttribute="top" secondItem="C1g-Dt-rcy" secondAttribute="top" id="LBV-os-FMb"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="C1g-Dt-rcy" secondAttribute="bottom" constant="10" id="MVG-8f-b2g"/>
                                                 <constraint firstAttribute="trailing" secondItem="C1g-Dt-rcy" secondAttribute="trailing" constant="5" id="Ohw-Eh-qmO"/>
                                                 <constraint firstAttribute="trailing" secondItem="C1g-Dt-rcy" secondAttribute="trailing" constant="5" id="OlH-Vc-tyZ"/>
                                                 <constraint firstItem="WdA-yP-N1E" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jK2-Wf-wdz" secondAttribute="leading" constant="5" id="U5d-Ys-0Ss"/>
+                                                <constraint firstItem="WdA-yP-N1E" firstAttribute="centerY" secondItem="C1g-Dt-rcy" secondAttribute="centerY" id="Uvn-Mz-IBb"/>
+                                                <constraint firstItem="WdA-yP-N1E" firstAttribute="top" secondItem="jK2-Wf-wdz" secondAttribute="top" constant="5" id="YEI-de-Nyo"/>
                                                 <constraint firstItem="C1g-Dt-rcy" firstAttribute="leading" secondItem="WdA-yP-N1E" secondAttribute="trailing" constant="10" id="aZx-vO-KXT"/>
                                                 <constraint firstItem="C1g-Dt-rcy" firstAttribute="top" secondItem="jK2-Wf-wdz" secondAttribute="top" constant="5" id="bBv-LI-Fbi"/>
                                                 <constraint firstAttribute="bottom" secondItem="C1g-Dt-rcy" secondAttribute="bottom" constant="5" id="bhj-T7-6UP"/>
@@ -1361,6 +1371,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="LBV-os-FMb"/>
+                                                    <exclude reference="Uvn-Mz-IBb"/>
                                                     <exclude reference="usc-uR-6g9"/>
                                                     <exclude reference="Ohw-Eh-qmO"/>
                                                     <exclude reference="aZx-vO-KXT"/>

@@ -60,8 +60,8 @@ class FirebaseAPI {
         }
         
         discussionsRef.child(newEvent.key)
-//        let newDiscussionData = ["discussion_id": newEvent.key]
-//        newDiscussion.setValue(newDiscussionData)
+        //        let newDiscussionData = ["discussion_id": newEvent.key]
+        //        newDiscussion.setValue(newDiscussionData)
         
         var eventData : [String:AnyObject?] = event.toJSON()
         eventData["event_id"] = newEvent.key
@@ -121,12 +121,12 @@ class FirebaseAPI {
     //    }
     
     
-//    func getTags() {
-//        tagsRef.observeSingleEventOfType(.Value) { (snapshot) in
-//            
-//        }
-//        
-//    }
+    //    func getTags() {
+    //        tagsRef.observeSingleEventOfType(.Value) { (snapshot) in
+    //
+    //        }
+    //
+    //    }
     
     func getEvents(completion: (events: [Event?]) -> Void) -> Void {
         var _events: [Event?] = []
@@ -177,9 +177,14 @@ class FirebaseAPI {
     }
     
     func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {
-        if let user = user, userInfo = User(userInfo: user.providerData.first!) {
-            userRef.child(user.uid).setValue(userInfo.toJSON())
-            
+        if let user = user, userInfo = getUserInfo() {
+//            userRef.child(user.uid).setValue(userInfo.toJSON())
+            userRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+                if !snapshot.hasChild(user.uid) {
+                    self.userRef.child(user.uid).setValue(userInfo.toJSON())
+                }
+            }
+
             print("signed in")
         } else {
             print("signed out")
@@ -191,9 +196,10 @@ class FirebaseAPI {
         return FIRAuth.auth()?.currentUser?.uid
     }
     
-    func getUserInfo() -> FIRUserInfo? {
+    func getUserInfo() -> User? {
         if let userInfo = FIRAuth.auth()?.currentUser?.providerData.first {
-            return userInfo
+            
+            return User(uid: userInfo.uid, displayName: userInfo.displayName == nil ? "Unknow" : userInfo.displayName!, email: userInfo.email == nil ? "Unknow" : userInfo.email!, photoURL: userInfo.photoURL?.absoluteString == nil ? "Unknow" : userInfo.photoURL!.absoluteString, providerID: userInfo.providerID)
         } else {
             return nil
         }
