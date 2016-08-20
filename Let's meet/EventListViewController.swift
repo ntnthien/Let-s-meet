@@ -9,7 +9,6 @@
 import UIKit
 import ReactiveKit
 import ReactiveUIKit
-import Firebase
 
 class EventListViewController: BaseViewController {
     
@@ -17,9 +16,8 @@ class EventListViewController: BaseViewController {
     var items = CollectionProperty<[Event]>([])
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         setUpTableView()
-
         loadData()
     }
     
@@ -29,29 +27,17 @@ class EventListViewController: BaseViewController {
             tableView.deselectRowAtIndexPath(selectedRow, animated: true)
         }
     }
-    
+    var eventArray : [Event] = [Event]()
     func loadData() {
         self.items.removeAll()
-//        FirebaseAPI.sharedInstance.getEvents { (events: [Event?]) in
-//            for event in events {
-//                self.items.append(event!)
-//                print(event)
-//            }
-//        }
-        FirebaseAPI.sharedInstance.getEvents() {(snapshot: FIRDataSnapshot) in
-            self.items.removeAll()
-            for child in snapshot.children {
-                if let data = child as? FIRDataSnapshot {
-                    var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! )
-                    if let hostID = event?.hostID {
-                        FirebaseAPI.sharedInstance.getUser(hostID, block: { (snap) in
-                            event!.user = User(userInfo: (snap.value as? [String: AnyObject])!)
-                            self.items.append(event!)
-                            print(self.items)
-                        })
-                    }
-                }
+        FirebaseAPI.sharedInstance.getEvents { (events: [Event?]) in
+            for event in events {
+                self.items.append(event!)
+                self.eventArray.append(event!)
             }
+            //           let indexPath = NSIndexPath.init(forRow:  self.eventArray.count, inSection: 1)
+            //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            print(self.items.collection)
         }
     }
     
@@ -61,7 +47,6 @@ class EventListViewController: BaseViewController {
         tableView.rDataSource.forwardTo = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 130
-        
         
         items.bindTo(tableView) { [weak self] indexPath, dataSource, tableView in
             guard let weakSelf = self else { return UITableViewCell() }

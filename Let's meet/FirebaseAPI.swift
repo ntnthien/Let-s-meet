@@ -127,7 +127,6 @@ class FirebaseAPI {
     //        }
     //
     //    }
-    
     func getEvents(completion: (events: [Event?]) -> Void) -> Void {
         var _events: [Event?] = []
         eventsRef.observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
@@ -136,37 +135,33 @@ class FirebaseAPI {
                     
                     if var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! ) {
                         if let hostId = event.hostID {
-                            self.getUser(hostId, completion: { (user) in
+                            self.getUser(hostId,completion: { (user) in
                                 event.user = user
                                 _events.append(event)
-                                print (event)
-                                
+                                print("Event \(_events.count) and \(dataSnapshot.childrenCount.hashValue)")
+                                if _events.count == Int(dataSnapshot.childrenCount) {
+                                    completion(events: _events)
+                                }
                             })
                         }
                     }
                 }
             }
-            completion(events: _events)
+            //            completion(events: _events)
         }
     }
     
     
     // MARK: - User
     
-    func getUser(id: String, completion: (User) -> ()) {
+    func getUser(id: String , completion: (User) -> ()) {
+        
         userRef.child(id).observeSingleEventOfType(.Value) { (dataSnapshot:FIRDataSnapshot) in
             if let user: User = User(userInfo: (dataSnapshot.value as? [String:AnyObject])!) {
                 completion(user)
             }
         }
-        //        userRef.child(id).observeEventType(.Value) { (dataSnapshot : FIRDataSnapshot) in
-        //            let user : User = User(userInfo: (dataSnapshot.value as? [String: AnyObject])!)!
-        //            completion(user)
-        //        }
     }
-    
-    
-    
     
     func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
         userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
@@ -178,13 +173,13 @@ class FirebaseAPI {
     
     func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {
         if let user = user, userInfo = getUserInfo() {
-//            userRef.child(user.uid).setValue(userInfo.toJSON())
+            //            userRef.child(user.uid).setValue(userInfo.toJSON())
             userRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
                 if !snapshot.hasChild(user.uid) {
                     self.userRef.child(user.uid).setValue(userInfo.toJSON())
                 }
             }
-
+            
             print("signed in")
         } else {
             print("signed out")
@@ -293,7 +288,7 @@ class FirebaseAPI {
                                 self.userRef.child(userID!).child("events").child("wished").child(eventID).removeValue()
                             } else {
                                 self.userRef.child(userID!).child("events").child("wished").child(eventID).setValue(NSDate().timeIntervalSince1970)
-
+                                
                             }
                         }
                     } else {
@@ -308,7 +303,7 @@ class FirebaseAPI {
     func getWishValue(event eventID: String, block: (FIRDataSnapshot) -> ())  {
         self.userRef.child(getUserID()!).child("events").child("wished").observeSingleEventOfType(.Value, withBlock: block)
     }
-
+    
     
     func follow(user userID: String) {
         
