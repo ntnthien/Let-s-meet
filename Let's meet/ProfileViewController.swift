@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import FacebookLogin
 import ReactiveKit
 import ReactiveUIKit
 import Haneke
@@ -51,8 +50,8 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         
         if let id = userID {
-            FirebaseAPI.sharedInstance.getUser(id, block: { (snap) in
-                self.user = User(userInfo: snap.value as! [String: AnyObject])
+            FirebaseAPI.sharedInstance.getUser(id, completion: { (user) in
+                self.user = user
                 self.setUpTableView()
                 self.loadData()
             })

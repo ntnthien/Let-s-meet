@@ -35,7 +35,7 @@ class FirebaseAPI {
         return tags
     }
     
-    init() {
+    private init() {
         let providers: [FIRAuthProviderUI] = [FIRFacebookAuthUI(appID: FACEBOOK_APP_ID)!]
         self.authUI?.signInProviders = providers
         self.authUI?.signInWithEmailHidden = true
@@ -49,7 +49,6 @@ class FirebaseAPI {
     // MARK: - Event
     func createEvent(event: Event) {
         let newEvent = eventsRef.childByAutoId()
-        let newDiscussion = discussionsRef.childByAutoId()
         
         if let tags = event.tags {
             tags.forEach({ (tag) in
@@ -60,8 +59,6 @@ class FirebaseAPI {
         }
         
         discussionsRef.child(newEvent.key)
-        //        let newDiscussionData = ["discussion_id": newEvent.key]
-        //        newDiscussion.setValue(newDiscussionData)
         
         var eventData : [String:AnyObject?] = event.toJSON()
         eventData["event_id"] = newEvent.key
@@ -96,37 +93,12 @@ class FirebaseAPI {
         eventsRef.observeEventType(.Value, withBlock: block)
     }
     
-    func getEvents(tags: [String], block: (FIRDataSnapshot) -> ()) {
-        eventsRef.observeEventType(.Value, withBlock: block)
-    }
     func getEventsByTags(tags: [String], completion: (Event?)) {
         eventsRef.observeEventType(.Value) { (dataSnapshot: FIRDataSnapshot) in
             
         }
     }
-    //    FirebaseAPI.sharedInstance.getEvents() {snapshot in
-    //    self.items.removeAll()
-    //    for child in snapshot.children {
-    //    if let data = child as? FIRDataSnapshot {
-    //    var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! )
-    //    if let hostID = event?.hostID {
-    //    FirebaseAPI.sharedInstance.getUser(hostID, block: { (snap) in
-    //    event!.user = User(userInfo: (snap.value as? [String: AnyObject])!)
-    //    self.items.append(event!)
-    //    print(self.items)
-    //    })
-    //    }
-    //    }
-    //    }
-    //    }
     
-    
-    //    func getTags() {
-    //        tagsRef.observeSingleEventOfType(.Value) { (snapshot) in
-    //
-    //        }
-    //
-    //    }
     func getEvents(completion: (events: [Event?]) -> Void) -> Void {
         var _events: [Event?] = []
         eventsRef.observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
@@ -138,7 +110,7 @@ class FirebaseAPI {
                             self.getUser(hostId,completion: { (user) in
                                 event.user = user
                                 _events.append(event)
-                                print("Event \(_events.count) and \(dataSnapshot.childrenCount.hashValue)")
+                                //            completion(events: _events)
                                 if _events.count == Int(dataSnapshot.childrenCount) {
                                     completion(events: _events)
                                 }
@@ -147,7 +119,6 @@ class FirebaseAPI {
                     }
                 }
             }
-            //            completion(events: _events)
         }
     }
     
@@ -163,7 +134,7 @@ class FirebaseAPI {
         }
     }
     
-    func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
+    private func getUser(id: String, block: (FIRDataSnapshot) -> ()) {
         userRef.child(id).observeSingleEventOfType(.Value, withBlock: block)
         
         //        userRef.child(id).observeSingleEventOfType(.Value, withBlock: { snap in
@@ -171,7 +142,7 @@ class FirebaseAPI {
         //        })
     }
     
-    func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {
+    private func authStateHandler(auth auth: FIRAuth, user: FIRUser?) {
         if let user = user, userInfo = getUserInfo() {
             //            userRef.child(user.uid).setValue(userInfo.toJSON())
             userRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
@@ -179,7 +150,6 @@ class FirebaseAPI {
                     self.userRef.child(user.uid).setValue(userInfo.toJSON())
                 }
             }
-            
             print("signed in")
         } else {
             print("signed out")
