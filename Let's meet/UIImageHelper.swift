@@ -61,7 +61,7 @@ extension UIImage {
         return result!
     }
 
-    static func imageWithColor(_ color: UIColor, size: CGSize) -> UIImage {
+    static func imageWithColor(color: UIColor, size: CGSize) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         
         UIGraphicsBeginImageContextWithOptions(size, false, 0)

@@ -189,16 +189,6 @@ class FirebaseAPI {
         return FIRAuth.auth()?.currentUser != nil
     }
     
-    
-    func changeFavorite(user userID: String, eventID: String) {
-        let favoriteRef = userRef.child(userID).child("favorites")
-        
-    }
-    
-    func favoriteEvents(user userID: String) {
-        
-    }
-    
     private func changeJoinValue(eventID: String, willJoin: Bool) {
         let userID = getUserID()
         self.eventsRef.child(eventID).child("join_amount").runTransactionBlock({
