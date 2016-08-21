@@ -35,15 +35,16 @@ class EventListViewController: BaseViewController {
     }
     var eventArray : [Event] = [Event]()
     func loadData() {
-        self.items.removeAll()
         FirebaseAPI.sharedInstance.getEvents { (events: [Event?]) in
+            self.items.removeAll()
+
             for event in events {
                 self.items.append(event!)
                 self.eventArray.append(event!)
             }
             //           let indexPath = NSIndexPath.init(forRow:  self.eventArray.count, inSection: 1)
             //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            print(self.items.collection)
+//            print(self.items.collection)
         }
     }
     

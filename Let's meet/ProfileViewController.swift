@@ -96,9 +96,8 @@ class ProfileViewController: BaseViewController {
     
     
     func loadData() {
-        self.items.removeAll()
-        
-        FirebaseAPI.sharedInstance.getEvents { (events: [Event?]) in
+        FirebaseAPI.sharedInstance.getWishedEvents { (events: [Event?]) in
+            self.items.removeAll()
             for event in events {
                 self.items.append(event!)
             }

@@ -31,7 +31,7 @@ class EventsMapViewController: BaseViewController {
         
         setUpTableView()
         loadData()
-
+        
         
     }
     
@@ -99,9 +99,9 @@ class EventsMapViewController: BaseViewController {
     
     
     func loadData() {
-        self.items.removeAll()
-        
-        FirebaseAPI.sharedInstance.getEvents { (events: [Event?]) in
+        FirebaseAPI.sharedInstance.getJoinedEvents { (events: [Event?]) in
+            self.items.removeAll()
+
             for event in events {
                 self.items.append(event!)
             }
