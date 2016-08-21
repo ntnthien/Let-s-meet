@@ -48,6 +48,10 @@ class EventListViewController: BaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 130
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+        
         items.bindTo(tableView) { [weak self] indexPath, dataSource, tableView in
             guard let weakSelf = self else { return UITableViewCell() }
             
@@ -59,6 +63,13 @@ class EventListViewController: BaseViewController {
         }
     }
     
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        loadData()
+        refreshControl.endRefreshing()
+    }
+    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -33,11 +33,11 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d17-N1-8MZ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d17-N1-8MZ">
                                 <rect key="frame" x="0.0" y="500" width="600" height="500"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="129" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="THH-ds-AZH">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="451"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" rowHeight="155" id="Dp5-Gs-Omr" customClass="EventHeaderTableViewCell" customModule="Lets_meet" customModuleProvider="target">
@@ -207,9 +207,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="THH-ds-AZH" secondAttribute="bottom" constant="49" id="0II-Ev-hHl"/>
                                     <constraint firstItem="THH-ds-AZH" firstAttribute="leading" secondItem="d17-N1-8MZ" secondAttribute="leading" id="HQ8-b5-Kot"/>
                                     <constraint firstItem="THH-ds-AZH" firstAttribute="top" secondItem="d17-N1-8MZ" secondAttribute="top" id="Hbt-6k-6Te"/>
-                                    <constraint firstAttribute="bottom" secondItem="THH-ds-AZH" secondAttribute="bottom" id="Lvx-bI-9BF"/>
                                     <constraint firstAttribute="trailing" secondItem="THH-ds-AZH" secondAttribute="trailing" id="rwN-ds-Jxy"/>
                                 </constraints>
                             </view>
@@ -351,7 +351,7 @@
             </objects>
             <point key="canvasLocation" x="706" y="661"/>
         </scene>
-        <!--Me-->
+        <!--Profile-->
         <scene sceneID="t0p-Gt-82u">
             <objects>
                 <viewController storyboardIdentifier="profileVC" id="u3y-Lv-WRt" customClass="ProfileViewController" customModule="Lets_meet" customModuleProvider="target" sceneMemberID="viewController">
@@ -512,8 +512,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vB9-YI-d71">
                                         <rect key="frame" x="0.0" y="189" width="600" height="31"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joined Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Foo-KV-Kgl">
-                                                <rect key="frame" x="8" y="5" width="110" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wished Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Foo-KV-Kgl">
+                                                <rect key="frame" x="8" y="5" width="116" height="21"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -554,7 +554,7 @@
                             <constraint firstAttribute="trailing" secondItem="Ggv-a9-06Y" secondAttribute="trailing" id="yQf-cd-kHg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Me" id="SdA-hm-Hvv">
+                    <navigationItem key="navigationItem" title="Profile" id="SdA-hm-Hvv">
                         <barButtonItem key="backBarButtonItem" title=" " id="sYB-zz-DwU"/>
                         <barButtonItem key="rightBarButtonItem" image="Exit" id="78h-jk-Qae">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -566,6 +566,7 @@
                     <connections>
                         <outlet property="fullNameLabel" destination="6ys-56-OAs" id="UCZ-mJ-XFH"/>
                         <outlet property="locationLabel" destination="1CU-9v-b2O" id="2CF-5J-KhO"/>
+                        <outlet property="logoutButton" destination="78h-jk-Qae" id="dv4-uQ-6kw"/>
                         <outlet property="profileImageView" destination="pNW-oE-20r" id="aPp-Vc-VfN"/>
                         <outlet property="tableView" destination="SaL-Y8-GMK" id="qwa-wZ-qwe"/>
                     </connections>

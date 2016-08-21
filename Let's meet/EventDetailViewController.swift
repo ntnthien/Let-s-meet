@@ -76,6 +76,8 @@ class EventDetailViewController: BaseViewController {
             
             if self.valueChanged {
                 self.wished = !self.wished
+//                print(self.wished)
+            
             }
             self.tableView.reloadData()
             
@@ -157,7 +159,7 @@ extension EventDetailViewController: UITableViewDataSource {
 //             joinString == "Join"
             cell.joinButton.backgroundColor = (joinString == "Join") ? MAIN_COLOR : RED_COLOR
             let wishImage = wished ? "wish-fill" : "wish"
-            
+//            print(wishImage)
             cell.wishButton.setImage(UIImage(named: wishImage), forState: .Normal)
             return cell
             
