@@ -30,6 +30,10 @@
 		846F6A171D549CF500F34EAF /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */; };
 		846F6A191D54A9E400F34EAF /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F6A181D54A9E400F34EAF /* EventListViewController.swift */; };
 		A0B322E22327BA6BF927D635 /* Pods_Let_s_meetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */; };
+		A28EF1331D683F9900E7B250 /* FilterCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28EF1321D683F9900E7B250 /* FilterCheckCell.swift */; };
+		A28EF1351D68400700E7B250 /* FilterSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28EF1341D68400700E7B250 /* FilterSwitchCell.swift */; };
+		A2BC58B31D680BA500EE6412 /* FilterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BC58B21D680BA500EE6412 /* FilterSectionView.swift */; };
+		A2BC58B51D680CF500EE6412 /* FilterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2BC58B41D680CF500EE6412 /* FilterSectionView.xib */; };
 		BF50F3722877FB4C2F7A3CB1 /* Pods_Lets_meet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2C45AB3DCC9D72B7EBDB998 /* Pods_Lets_meet.framework */; };
 		C20FB7811D5C80FB0069F567 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20FB7801D5C80FB0069F567 /* Event.swift */; };
 		C216DF021D5B175B0040BF6C /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C216DF011D5B175B0040BF6C /* MoreViewController.swift */; };
@@ -102,6 +106,10 @@
 		898152F44DBA90BC33E92291 /* Pods-Let's meet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet.release.xcconfig"; sourceTree = "<group>"; };
 		957D949BEEC61C628D46F2B1 /* Pods_Lets_meetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lets_meetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5708975E01FC1F96C4EF42 /* Pods-Lets meetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meetUITests/Pods-Lets meetUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A28EF1321D683F9900E7B250 /* FilterCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCheckCell.swift; sourceTree = "<group>"; };
+		A28EF1341D68400700E7B250 /* FilterSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSwitchCell.swift; sourceTree = "<group>"; };
+		A2BC58B21D680BA500EE6412 /* FilterSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSectionView.swift; sourceTree = "<group>"; };
+		A2BC58B41D680CF500EE6412 /* FilterSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterSectionView.xib; sourceTree = "<group>"; };
 		A2C45AB3DCC9D72B7EBDB998 /* Pods_Lets_meet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lets_meet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAF5919EB86C07FDCE4FC8E7 /* Pods-Lets meetTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meetTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meetTests/Pods-Lets meetTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B07E38175CA9BF2A2D9CD0DC /* Pods-Let's meetTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meetTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meetTests/Pods-Let's meetTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -229,6 +237,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A28EF1311D683F7300E7B250 /* FilterTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A2BC58B21D680BA500EE6412 /* FilterSectionView.swift */,
+				A2BC58B41D680CF500EE6412 /* FilterSectionView.xib */,
+				A28EF1321D683F9900E7B250 /* FilterCheckCell.swift */,
+				A28EF1341D68400700E7B250 /* FilterSwitchCell.swift */,
+			);
+			name = FilterTableViewCell;
+			sourceTree = "<group>";
+		};
 		C2F529351D51067000AB6337 = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +340,7 @@
 		C2F529751D51070700AB6337 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A28EF1311D683F7300E7B250 /* FilterTableViewCell */,
 				6B671CCD1D5242A700357BE5 /* ProfileInfoTableViewCell.swift */,
 				846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */,
 				6B82EF301D5C610F00C76357 /* CreateEventTableViewCell.swift */,
@@ -470,6 +490,7 @@
 				C2F529491D51067100AB6337 /* Assets.xcassets in Resources */,
 				C2F529471D51067100AB6337 /* Main.storyboard in Resources */,
 				6B82EF291D5C307C00C76357 /* photo-1440558899941-2b58b4b0e6ad.jpeg in Resources */,
+				A2BC58B51D680CF500EE6412 /* FilterSectionView.xib in Resources */,
 				6B82EF3A1D5C8CCB00C76357 /* DatePickerPopupViewController.xib in Resources */,
 				C21820AA1D6181670035DBB5 /* GoogleService-Info.plist in Resources */,
 			);
@@ -743,8 +764,10 @@
 				6B671CCE1D5242A700357BE5 /* ProfileInfoTableViewCell.swift in Sources */,
 				6BC8C5D51D51F1E30074C27F /* LoginViewController.swift in Sources */,
 				6B5848B31D55D56900CA26FD /* EventsMapViewController.swift in Sources */,
+				A28EF1351D68400700E7B250 /* FilterSwitchCell.swift in Sources */,
 				6BAD56251D64C054002F8116 /* ChatPhotoTableViewCell.swift in Sources */,
 				6BAD561B1D64616A002F8116 /* Discussion.swift in Sources */,
+				A2BC58B31D680BA500EE6412 /* FilterSectionView.swift in Sources */,
 				C21D43AE1D63130200A80CF2 /* StringHelper.swift in Sources */,
 				6B13C5811D5F1A9D00CC445C /* FirebaseAPI.swift in Sources */,
 				C21820AE1D6184C30035DBB5 /* UIView+Border.swift in Sources */,
@@ -769,6 +792,7 @@
 				C2F529721D5106C700AB6337 /* Constants.swift in Sources */,
 				6BAD561D1D646F25002F8116 /* DiscussionViewController.swift in Sources */,
 				6BAD56211D64BFAA002F8116 /* ChatTableViewCell.swift in Sources */,
+				A28EF1331D683F9900E7B250 /* FilterCheckCell.swift in Sources */,
 				6B671CD11D524AC000357BE5 /* UIImage_Extension.swift in Sources */,
 				6B82EF2B1D5C30E100C76357 /* CreateEventViewController.swift in Sources */,
 			);
