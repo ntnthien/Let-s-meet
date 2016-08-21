@@ -100,6 +100,7 @@ class FirebaseAPI {
     }
     
     func getEvents(completion: (events: [Event?]) -> Void) -> Void {
+        
         var _events: [Event?] = []
         eventsRef.observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
             for child in dataSnapshot.children {
@@ -385,8 +386,10 @@ class FirebaseAPI {
             var discussions: [Discussion?] = []
             for child in dataSnapshot.children {
                 if let data = child as? FIRDataSnapshot {
-                    if let discussion = Discussion(discussion_id: data.key, discussionInfo: (data.value as? [String: AnyObject])!) {
-                        discussions.append(discussion)
+                    if let dataValue = data.value as? [String: AnyObject] {
+                        if let discussion = Discussion(discussion_id: data.key, discussionInfo: dataValue) {
+                            discussions.append(discussion)
+                        }
                     }
                 }
             }

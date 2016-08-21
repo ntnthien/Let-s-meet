@@ -23,11 +23,12 @@ class DiscussionViewController: BaseViewController {
     var currentUser: User?
     
     var eventID = "-KPVjTT3za3KXapXni6P"
+//    var eventID = "-KPMddCnTDeaeDPFEXu2"
     var discussionID = "-KPVjTT3za3KXapXni6P"
-    var discussion:Array<Discussion> = []
+    var discussionArray:Array<Discussion> = []
     
     // Dictionary lưu các url avatar users
-    var userAvtDict         = Dictionary<String,String>()
+    var userAvtDict = Dictionary<String,String>()
     
     //Firebase Storage Image
     var imgSelected: String?
@@ -48,6 +49,8 @@ class DiscussionViewController: BaseViewController {
     
     // Keyboard is presenting or not
     var keyboardPresenting              = false
+    var keyboardHidden = false
+    var hideKeyboardTap:UITapGestureRecognizer!
     
     // Data source from Firebase
     //    var messagesRef:FIRDatabaseReference!
@@ -57,7 +60,6 @@ class DiscussionViewController: BaseViewController {
     
     // Refesh controler for chat table
     let refeshControl = UIRefreshControl()
-    
     
     
     override func viewDidLoad() {
@@ -74,16 +76,23 @@ class DiscussionViewController: BaseViewController {
         chatTableView.estimatedRowHeight = 400
         
         loadDiscussion()
+        // add keyboard notification
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willShowKeyBoard(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willHideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        // Tap screen
+        hideKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(tapScreen))
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     private func setUpView() {
         self.navigationItem.title = "Event title"
         
         messageTextInputView.layer.borderWidth = 1
         messageTextInputView.layer.borderColor = UIColor(red: 206/255 ,green: 206/255, blue: 206/255 ,  alpha: 1 ).CGColor
         messageTextInputView.layer.cornerRadius = 5
-//                self.sendMessageButtonOutlet.isEnabled = false
         
         self.chatTableView.addSubview(refeshControl)
     }
@@ -92,13 +101,12 @@ class DiscussionViewController: BaseViewController {
     func loadDiscussion () {
         
         FirebaseAPI.sharedInstance.getDiscussions(eventID) { (discussions) in
-            self.discussion.removeAll()
+            self.discussionArray.removeAll()
             for discussion in discussions {
-                self.discussion.append(discussion!)
+                self.discussionArray.append(discussion!)
             }
             self.chatTableView.reloadData()
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -125,6 +133,90 @@ class DiscussionViewController: BaseViewController {
         return nil
     }
     
+    // MARK: Keyboard handler
+    
+    func willShowKeyBoard(notification : NSNotification){
+        print("Keyboard is shown")
+        keyboardPresenting = true
+        keyboardHidden = false
+        let userInfo: NSDictionary! = notification.userInfo
+        
+        var duration : NSTimeInterval = 0
+        
+        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let keyboardFrame = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
+        
+        handleKeyboardWillShow(duration,keyBoardRect: keyboardFrame)
+    }
+    
+    func willHideKeyBoard(notification : NSNotification){
+        print("Keyboard is hide")
+        keyboardPresenting = false
+        keyboardHidden = true
+        var userInfo: NSDictionary!
+        userInfo = notification.userInfo
+        
+        var duration : NSTimeInterval = 0
+        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let keyboardFrame = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
+        
+        handleKeyboardWillHide(duration, keyBoardRect: keyboardFrame)
+        
+    }
+    func handleKeyboardWillShow(duration: NSTimeInterval, keyBoardRect: CGRect) {
+        self.view.addGestureRecognizer(hideKeyboardTap)
+        keyBoardChatDetailControl(0, duration: duration, keyBoardRect: keyBoardRect)
+    }
+    func handleKeyboardWillHide(duration: NSTimeInterval, keyBoardRect: CGRect) {
+        self.view.removeGestureRecognizer (hideKeyboardTap)
+        keyBoardChatDetailControl(1, duration: duration, keyBoardRect: keyBoardRect)
+        
+    }
+    func tapScreen() {
+        print("Screen is tapped")
+        if !keyboardHidden {
+            self.view.endEditing(true)
+        }
+    }
+    
+    func keyBoardChatDetailControl(flagKeyboard: Int, duration: NSTimeInterval, keyBoardRect: CGRect) {
+        
+        var keyboardHeight: CGFloat = 0
+        keyboardHeight = 0
+        
+        let tabbarHeight:CGFloat = tabBarController?.tabBar.bounds.size.height ?? 0
+        
+        if flagKeyboard == 0 {
+            keyboardHeight = (keyBoardRect.height - tabbarHeight )
+        }
+        
+        self.keyboardPresenting = flagKeyboard == 0
+        
+        UIView.animateWithDuration(duration, animations: {
+            
+            self.viewInputSendMessageBottomConstraint.constant = keyboardHeight
+            
+            self.messageTextInputView.superview?.layoutIfNeeded()
+            
+            self.chatTableView.contentInset.bottom = (flagKeyboard == 0) ? keyBoardRect.height + 40  : 40 + tabbarHeight
+            
+            if self.discussionArray.count == 0 { return }
+            self.scrollTableViewToEnd()
+            
+        }) { (Bool) in
+        }
+    }
+    
+    // Remove Observer
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    // scroll to the end of table view
+    private func scrollTableViewToEnd() {
+        let rowIndex = self.discussionArray.count > 0 ? self.discussionArray.count - 1 : 0
+        let lastIndexPath = NSIndexPath(forRow: rowIndex, inSection: 0)
+        self.chatTableView.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: .Bottom, animated: false)
+    }
     /*
      // MARK: - Navigation
      
@@ -140,26 +232,17 @@ class DiscussionViewController: BaseViewController {
 extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return discussion.count
+        return discussionArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Lấy message ở row index
-        let message = discussion[indexPath.row]
+        let message = discussionArray[indexPath.row]
         
         // Xác định cell id là của cell cho sender hay reciever
-        var cellId = (message.sender_id == currentUser?.uid) ? "cellSender" : "cellReceiver"
-        
-        // Nếu message là hình thì cell id thêm Photo
-        //        if message.type == .Photo  {
-        //            cellId += "Photo"
-        //        }
-        //
-        
+        let cellId = (message.sender_id == currentUser?.uid) ? "cellSender" : "cellReceiver"
         let cell = chatTableView.dequeueReusableCellWithIdentifier(cellId) as! ChatTableViewCell
         cell.discussion = message
-        //        cell.delegate = self
-        
         // Thiết lập màu cho bong bóng chat
         if (message.sender_id == currentUser?.uid) {
             cell.messageBubbleView.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255 , alpha: 1)
@@ -167,64 +250,16 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
             cell.messageBubbleView.backgroundColor = UIColor(red: 242/255, green: 120/255, blue: 5/255 , alpha: 1)
         }
         
-        
         // Hiển thị avatar
-        
-        
-        
+        cell.avatarImg.image = avtPlaceHolderImg
         if let url = NSURL(string: message.sender_photo!) {
             cell.avatarImg.hnk_setImageFromURL(url)
-             cell.avatarImg.image = avtPlaceHolderImg
+            cell.avatarImg.layer.cornerRadius = 15.0
+            cell.avatarImg.clipsToBounds = true
         }
-        cell.avatarImg.image = avtPlaceHolderImg
-        // Lấy url user từ userAvtDict đã cache sẵn
-        /*
-         if let avtURL = self.userAvtDict[message.sender] {
-         
-         // Nếu avt đã được download vào cache, lấy hình ra xài luôn
-         if let avtDownloaded = cacheImages.object(forKey: avtURL) as? UIImage {
-         cell.avtImageView.image = avtDownloaded
-         } else {
-         
-         let photoDownloader = MessageDownloadPhotoOperation(key: message.messageId, photoURL: avtURL, photoPosition: .avatar, delegate: self)
-         self.startDownloadPhoto(downloader: photoDownloader)
-         }
-         }
-         */
         // Nếu message là hình ảnh
         if message.content_type == ContentType.Photo.rawValue {
-            /*
-             let photoChatCell = cell as! PhotoChatCell
-             
-             photoChatCell.delegatePhotoChatCell = self
-             
-             let urlImage = message.content
-             
-             // Scale size
-             let newh = CGFloat(200 * message.imgHeight / message.imgWidth)
-             
-             photoChatCell.photoHeightConstraint.constant    = newh
-             photoChatCell.photoWidthConstraint.constant     = 200
-             
-             // Check photo đã được download và đưa vào cache chưa,
-             // nếu đã có thể lấy ra gán vào image view
-             photoChatCell.messgePhotoImgView.image = nil
-             
-             if let downloadedPhoto = cacheImages.object(forKey: urlImage) as? UIImage {
-             
-             photoChatCell.messgePhotoImgView.image = downloadedPhoto
-             
-             } else {
-             // Ngược lại nếu table view đang đứng yên (không scroll) thì bắt đầu download hình
-             //imageViewSendFromCurrentUser.image = #imageLiteral(resourceName: "default_msg")
-             
-             if !tableView.isDecelerating {
-             
-             let photoDownloader = MessageDownloadPhotoOperation(key: message.messageId, photoURL: urlImage, photoPosition: .message, delegate: self)
-             self.startDownloadPhoto(downloader: photoDownloader)
-             }
-             }
-             */
+            
         }
             // Nếu message là text bình thường
         else {

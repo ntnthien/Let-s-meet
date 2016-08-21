@@ -1308,7 +1308,7 @@
                                                     <rect key="frame" x="45" y="5" width="505.5" height="37"/>
                                                     <string key="text">Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1341,7 +1341,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="badge" translatesAutoresizingMaskIntoConstraints="NO" id="C1g-Dt-rcy">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="badge" translatesAutoresizingMaskIntoConstraints="NO" id="C1g-Dt-rcy">
                                                     <rect key="frame" x="565" y="5" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="750-eO-t3b"/>
@@ -1352,7 +1352,7 @@
                                                     <rect key="frame" x="5" y="5" width="550" height="37"/>
                                                     <string key="text">Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1463,6 +1463,7 @@
                         <outlet property="messageTextInputView" destination="gbQ-qJ-WpN" id="2dp-Fu-tyv"/>
                         <outlet property="sendMessageButtonOutlet" destination="Kfw-2w-KlZ" id="8dN-Jc-28t"/>
                         <outlet property="viewInputSendMessage" destination="lwd-g9-VaR" id="IjS-Ka-Tks"/>
+                        <outlet property="viewInputSendMessageBottomConstraint" destination="N6y-l9-KmS" id="J8l-gB-dYW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3S9-G7-hDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
