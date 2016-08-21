@@ -13,12 +13,10 @@ import Haneke
 
 class ProfileViewController: BaseViewController {
     @IBOutlet weak var profileImageView: UIImageView!
-    
     @IBOutlet weak var fullNameLabel: UILabel!
-    
     @IBOutlet weak var locationLabel: UILabel!
-    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     
     var userID: String?
     
@@ -50,6 +48,9 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         
         if let id = userID {
+            if id != FirebaseAPI.sharedInstance.getUserID()! {
+                self.navigationItem.rightBarButtonItem = nil
+            }
             FirebaseAPI.sharedInstance.getUser(id, completion: { (user) in
                 self.user = user
                 self.setUpTableView()
@@ -129,6 +130,7 @@ class ProfileViewController: BaseViewController {
     }
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
+        loadData()
         refreshControl.endRefreshing()
     }
     
