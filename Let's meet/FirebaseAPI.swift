@@ -151,6 +151,8 @@ class FirebaseAPI {
                     self.userRef.child(user.uid).setValue(userInfo.toJSON())
                 }
             }
+            
+            
             print("signed in")
         } else {
             print("signed out")

@@ -16,9 +16,15 @@ class EventListViewController: BaseViewController {
     var items = CollectionProperty<[Event]>([])
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpTableView()
+        if (FirebaseAPI.sharedInstance.userIsLogin() == false) {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
+            self.showViewController(vc, sender: self)
+        }
         loadData()
+
     }
     
     override func viewWillAppear(animated: Bool) {

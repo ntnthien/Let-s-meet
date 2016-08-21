@@ -154,12 +154,17 @@ class ProfileViewController: BaseViewController {
     
     @IBAction func logoutButtonTouched(sender: AnyObject) {
         FirebaseAPI.sharedInstance.logout()
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
+        vc.navigationItem.leftBarButtonItem = nil
+        self.showViewController(vc, sender: self)
     }
 }
 
 extension ProfileViewController: UITableViewDelegate {
     
 }
+
 
 extension ProfileViewController: ActionTableViewCellDelegate {
     func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton) {

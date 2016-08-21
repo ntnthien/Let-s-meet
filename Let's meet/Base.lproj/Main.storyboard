@@ -555,7 +555,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="SdA-hm-Hvv">
-                        <barButtonItem key="backBarButtonItem" title=" " id="sYB-zz-DwU"/>
+                        <barButtonItem key="backBarButtonItem" title="  " id="sYB-zz-DwU"/>
                         <barButtonItem key="rightBarButtonItem" image="Exit" id="78h-jk-Qae">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -1702,19 +1702,6 @@
             </objects>
             <point key="canvasLocation" x="-388" y="2279"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pM8-SQ-T02">
-            <objects>
-                <navigationController storyboardIdentifier="NavigationController" id="hiJ-gy-kkZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tex-B4-uta">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dFW-Us-Hb1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-409" y="-55"/>
-        </scene>
         <!--Events-->
         <scene sceneID="iYo-c5-haX">
             <objects>
@@ -1747,7 +1734,6 @@
                         <segue destination="lH5-6y-Ms5" kind="relationship" relationship="viewControllers" id="hEp-I2-TSR"/>
                         <segue destination="gln-Dl-bHr" kind="relationship" relationship="viewControllers" id="PnN-9e-pao"/>
                         <segue destination="N6X-ue-Jn2" kind="relationship" relationship="viewControllers" id="6YN-U4-4Js"/>
-                        <segue destination="Igs-Bc-CWK" kind="relationship" relationship="viewControllers" id="D8C-Yc-s0q"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wgw-bA-lJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
