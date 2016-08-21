@@ -8,19 +8,6 @@
 
 import UIKit
 
-//this class for filter
-@objc
-class Filter: NSObject {
-    
-    var tag: Int?
-    var name: String?
-    
-    init(tag: Int, name: String) {
-        self.tag = tag
-        self.name = name
-    }
-}
-
 @objc
 protocol FilterViewControllerDelegate {
    optional func filterViewController(filterViewController: FilterViewController, didUpdateFilter filter: Filter)
@@ -29,20 +16,26 @@ protocol FilterViewControllerDelegate {
 class FilterViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var isLoadedSection = false
+    
     let dummyDataForCellInTagsSection = ["DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1", "DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3"]
+    let dummyDataAnother = ["Something"]
+    //Location
+    var dummyDataLocation = ["Ho Chi Minh"]
+    var dummyCollapseLocation = ["Ho Chi Minh"]
+    var dummyExpandLocation = ["Ho Chi Minh", "Ha Noi", "Da Nang"]
+    
     //handle page index
     var pageIndex = 1
     var pageNumber = 0
     var milestoneUpdated = 0
+    let numRowPerPage = 20
     
-    var dummyDataForCellInTag = []
+    //handle expand section, get cell selected in tags section
+    var isSeletedButtonInCellTags = false
+    var isVisitedAtRowInTagSection: [Bool] = [Bool](count: 3, repeatedValue: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dummyDataForCellInTag = dummyDataForCellInTagsSection
-        pageNumber = dummyDataForCellInTagsSection.count / 20
         
         initTableView()
     }
@@ -57,23 +50,66 @@ class FilterViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "FilterSectionView", bundle: nil) , forHeaderFooterViewReuseIdentifier: "FilterSectionView")
+        
+        //data for cell tag
+        pageNumber = dummyDataForCellInTagsSection.count / numRowPerPage
+        
     }
 
     @IBAction func searchAcion(sender: AnyObject) {
-        
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func cancelAction(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
-    
+    @IBAction func resetAllFilter(sender: AnyObject) {
+        
+        let alertVC = UIAlertController(title: "Reset filters?", message: "Do you want reset filters to default", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            
+        }
+        alertVC.addAction(okAction)
+        alertVC.addAction(cancelAction)
+        presentViewController(alertVC, animated: true, completion: nil)
+    }
 }
 
 extension FilterViewController: UITableViewDelegate {
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
+        if indexPath.section == 1 {
+            
+            
+            if isVisitedAtRowInTagSection[indexPath.row] {
+                
+                //expand section
+                dummyDataLocation = dummyExpandLocation
+                
+                //reset all boolean in all row
+                for i in 0..<isVisitedAtRowInTagSection.count {
+                    isVisitedAtRowInTagSection[i] = false
+                }
+                
+            } else {
+                //collapse section
+                dummyDataLocation = dummyCollapseLocation
+                
+                //reset all boolean
+                for i in 0..<isVisitedAtRowInTagSection.count {
+                    isVisitedAtRowInTagSection[i] = true
+                }
+            }
+            dummyDataLocation[0] = dummyExpandLocation[indexPath.row]
+            
+            //reload section
+            tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
+        }
+    }
 }
 
 extension FilterViewController: UITableViewDataSource {
@@ -89,9 +125,9 @@ extension FilterViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Location"
-        case 1:
             return "Another"
+        case 1:
+            return "Location"
         default:
             return ""
         }
@@ -101,11 +137,11 @@ extension FilterViewController: UITableViewDataSource {
         
         switch section {
         case 0:
-            return 1
+            return dummyDataAnother.count
         case 1:
-            return 2
+            return dummyDataLocation.count
         default:
-            return 20
+            return numRowPerPage
         }
     }
     
@@ -117,20 +153,20 @@ extension FilterViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("checkCell") as! FilterCheckCell
             cell.delegate = self
             cell.selectionStyle = .None
-            cell.titleCheckCell.text = "Ho Chi Minh"
+            cell.titleCheckCell.text = dummyDataAnother[indexPath.row]
             return cell
             
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("checkCell") as! FilterCheckCell
-            cell.delegate = self
-            cell.selectionStyle = .None
-            cell.titleCheckCell.text = "Some thing"
+            cell.titleCheckCell.text = dummyDataLocation[indexPath.row]
+            cell.checkButton.enabled = false
+            cell.checkButton.alpha = 0
             return cell
             
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier("switchCell") as! FilterSwitchCell
             cell.selectionStyle = .None
-            cell.titleSwitchCell.text = (dummyDataForCellInTag[indexPath.row + milestoneUpdated] as? String)!
+            cell.titleSwitchCell.text = dummyDataForCellInTagsSection[indexPath.row + milestoneUpdated]
             return cell
         }
     }
@@ -179,7 +215,7 @@ extension FilterViewController: FilterSectionViewDelegate {
         }
         
         //update milestone to next milestone, milestone may be: 0, 20, 40...
-        milestoneUpdated = (milestoneUpdated - 1) * 20
+        milestoneUpdated = (milestoneUpdated - 1) * numRowPerPage
         
         //animation for tags section
         if isNextAction {
@@ -190,23 +226,21 @@ extension FilterViewController: FilterSectionViewDelegate {
     }
 }
 
-extension FilterViewController: FilterCheckCellDelegate {
-    
-    func filterCheckCell(filterCheckCell: FilterCheckCell, isChecked: Bool) {
-        if isChecked {
-            filterCheckCell.checkButton.setImage(UIImage(named: "check"), forState: .Normal)
-            
-        } else {
-            filterCheckCell.checkButton.setImage(nil, forState: .Normal)
-
-        }
-    }
-}
 
 extension FilterViewController: FilterSwitchCellDelegate {
     
     func filterSwitchCell(filterSwitchCell: FilterSwitchCell, isSwitch: Bool) {
         
+    }
+}
+
+extension FilterViewController: FilterCheckCellDelegate {
+    func filterCheckCell(filterCheckCell: FilterCheckCell, isChecked: Bool) {
+        if isChecked {
+            filterCheckCell.checkButton.setImage(UIImage(named: "check"), forState: .Normal)
+        } else {
+            filterCheckCell.checkButton.setImage(nil, forState: .Normal)
+        }
     }
 }
 

@@ -30,6 +30,7 @@
 		846F6A171D549CF500F34EAF /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */; };
 		846F6A191D54A9E400F34EAF /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F6A181D54A9E400F34EAF /* EventListViewController.swift */; };
 		A0B322E22327BA6BF927D635 /* Pods_Let_s_meetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */; };
+		A28495C91D699B5300908F15 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28495C81D699B5300908F15 /* Filter.swift */; };
 		A28EF1331D683F9900E7B250 /* FilterCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28EF1321D683F9900E7B250 /* FilterCheckCell.swift */; };
 		A28EF1351D68400700E7B250 /* FilterSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28EF1341D68400700E7B250 /* FilterSwitchCell.swift */; };
 		A2BC58B31D680BA500EE6412 /* FilterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BC58B21D680BA500EE6412 /* FilterSectionView.swift */; };
@@ -106,6 +107,7 @@
 		898152F44DBA90BC33E92291 /* Pods-Let's meet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet.release.xcconfig"; sourceTree = "<group>"; };
 		957D949BEEC61C628D46F2B1 /* Pods_Lets_meetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lets_meetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5708975E01FC1F96C4EF42 /* Pods-Lets meetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meetUITests/Pods-Lets meetUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A28495C81D699B5300908F15 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		A28EF1321D683F9900E7B250 /* FilterCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCheckCell.swift; sourceTree = "<group>"; };
 		A28EF1341D68400700E7B250 /* FilterSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSwitchCell.swift; sourceTree = "<group>"; };
 		A2BC58B21D680BA500EE6412 /* FilterSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSectionView.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				A2BC58B41D680CF500EE6412 /* FilterSectionView.xib */,
 				A28EF1321D683F9900E7B250 /* FilterCheckCell.swift */,
 				A28EF1341D68400700E7B250 /* FilterSwitchCell.swift */,
+				A28495C81D699B5300908F15 /* Filter.swift */,
 			);
 			name = FilterTableViewCell;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				846F6A171D549CF500F34EAF /* EventListTableViewCell.swift in Sources */,
 				C2F529711D5106C700AB6337 /* BaseViewController.swift in Sources */,
 				6B82EF341D5C813C00C76357 /* LocalNotificationHelper.swift in Sources */,
+				A28495C91D699B5300908F15 /* Filter.swift in Sources */,
 				C264464D1D5F0BEC00610C4B /* FilterViewController.swift in Sources */,
 				C283C3FD1D618FE4009A8CBE /* EventDetailTableViewCell.swift in Sources */,
 				C216DF021D5B175B0040BF6C /* MoreViewController.swift in Sources */,

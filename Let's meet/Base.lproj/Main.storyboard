@@ -587,7 +587,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CaD-3R-Uc5">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchCell" id="WAd-pe-FSB" customClass="FilterSwitchCell" customModule="Lets_meet" customModuleProvider="target">
@@ -641,7 +641,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="IOU-3e-gtZ" secondAttribute="height" multiplier="1:1" id="iYD-wM-hgT"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="checkAction:" destination="Bw9-R8-WLJ" eventType="touchUpInside" id="uMQ-bl-FhY"/>
                                                     </connections>
@@ -662,13 +661,30 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIT-dP-q0O">
+                                <rect key="frame" x="0.0" y="560" width="600" height="40"/>
+                                <color key="backgroundColor" red="0.30588235289999999" green="0.80392156859999997" blue="0.8497681077" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1sH-C5-D35"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Reset All Filter">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetAllFilter:" destination="RGc-rG-Q0l" eventType="touchUpInside" id="QOa-JU-xeN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="eBl-oC-847" firstAttribute="top" secondItem="uIT-dP-q0O" secondAttribute="bottom" id="4Cy-Qm-miL"/>
                             <constraint firstItem="CaD-3R-Uc5" firstAttribute="leading" secondItem="zTr-Pc-B1U" secondAttribute="leading" id="73I-1A-3kZ"/>
                             <constraint firstItem="CaD-3R-Uc5" firstAttribute="top" secondItem="zTr-Pc-B1U" secondAttribute="top" id="96c-6n-PaD"/>
+                            <constraint firstItem="uIT-dP-q0O" firstAttribute="leading" secondItem="zTr-Pc-B1U" secondAttribute="leading" id="QRv-Bz-gtZ"/>
                             <constraint firstAttribute="trailing" secondItem="CaD-3R-Uc5" secondAttribute="trailing" id="aDG-V2-9BG"/>
-                            <constraint firstAttribute="bottom" secondItem="CaD-3R-Uc5" secondAttribute="bottom" id="ikk-0Y-RK5"/>
+                            <constraint firstItem="uIT-dP-q0O" firstAttribute="top" secondItem="CaD-3R-Uc5" secondAttribute="bottom" id="aLJ-d9-YI2"/>
+                            <constraint firstAttribute="trailing" secondItem="uIT-dP-q0O" secondAttribute="trailing" id="xag-vz-lcn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Filter" id="ejJ-2Y-p2b">
