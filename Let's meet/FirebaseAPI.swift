@@ -109,7 +109,31 @@ class FirebaseAPI {
     func getEvents(completion: (events: [Event?]) -> Void) -> Void {
         
         var _events: [Event?] = []
-        eventsRef.observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
+        eventsRef.queryOrderedByChild("time_since_1970").observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
+            for child in dataSnapshot.children {
+                if let data = child as? FIRDataSnapshot {
+                    
+                    if var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! ) {
+                        if let hostId = event.hostID {
+                            self.getUser(hostId,completion: { (user) in
+                                event.user = user
+                                _events.append(event)
+                                //            completion(events: _events)
+                                if _events.count == Int(dataSnapshot.childrenCount) {
+                                    completion(events: _events)
+                                }
+                            })
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func getEvents(orderBy: String, completion: (events: [Event?]) -> Void) -> Void {
+        
+        var _events: [Event?] = []
+        eventsRef.queryOrderedByChild(orderBy).observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
             for child in dataSnapshot.children {
                 if let data = child as? FIRDataSnapshot {
                     
@@ -132,7 +156,7 @@ class FirebaseAPI {
     
     func getJoinedEvents(completion: (events: [Event?]) -> Void) -> Void {
         var _events: [Event?] = []
-        userRef.child(getUserID()!).child("events").child("joined").observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
+        userRef.child(getUserID()!).child("events").child("joined").queryOrderedByValue().observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
             for child in snapshot.children {
                 if let snap = child as? FIRDataSnapshot {
                     self.eventsRef.child(snap.key).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
@@ -158,7 +182,7 @@ class FirebaseAPI {
     
     func getWishedEvents(completion: (events: [Event?]) -> Void) -> Void {
         var _events: [Event?] = []
-        userRef.child(getUserID()!).child("events").child("wished").observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
+        userRef.child(getUserID()!).child("events").child("wished").queryOrderedByValue().observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
             for child in snapshot.children {
                 if let snap = child as? FIRDataSnapshot {
                     self.eventsRef.child(snap.key).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in

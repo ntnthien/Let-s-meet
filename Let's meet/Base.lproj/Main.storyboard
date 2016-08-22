@@ -995,9 +995,13 @@
                                 <segment title="Hot Events"/>
                                 <segment title="All Events"/>
                             </segments>
+                            <connections>
+                                <action selector="segmentValueChange:" destination="5bp-Rw-VwR" eventType="valueChanged" id="x12-XC-ZOK"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
+                        <outlet property="orderSegment" destination="oQb-3p-ANu" id="bH0-n9-UZe"/>
                         <outlet property="tableView" destination="cha-SN-cyR" id="LST-TJ-kpe"/>
                     </connections>
                 </viewController>

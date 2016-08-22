@@ -14,6 +14,9 @@ class EventListViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var items = CollectionProperty<[Event]>([])
+    @IBOutlet weak var orderSegment: UISegmentedControl!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
@@ -33,14 +36,17 @@ class EventListViewController: BaseViewController {
             tableView.deselectRowAtIndexPath(selectedRow, animated: true)
         }
     }
-    var eventArray : [Event] = [Event]()
+//    var eventArray : [Event] = [Event]()
     func loadData() {
-        FirebaseAPI.sharedInstance.getEvents { (events: [Event?]) in
+        let orderString =  (orderSegment.selectedSegmentIndex == 0) ? "join_amount" : "time_since_1970"
+            
+        FirebaseAPI.sharedInstance.getEvents(orderString) { (events: [Event?]) in
             self.items.removeAll()
 
-            for event in events {
-                self.items.append(event!)
-                self.eventArray.append(event!)
+            for index in (events.count - 1).stride(to: 0, by: -1) {
+                self.items.append(events[index]!)
+//                print(event!.joinAmount)
+//                self.eventArray.append(event!)
             }
             //           let indexPath = NSIndexPath.init(forRow:  self.eventArray.count, inSection: 1)
             //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -82,6 +88,9 @@ class EventListViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func segmentValueChange(sender: AnyObject) {
+        loadData()
+    }
 }
 
 extension EventListViewController: UITableViewDelegate {
