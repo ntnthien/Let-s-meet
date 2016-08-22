@@ -10,6 +10,7 @@ target 'Lets meet' do
   pod 'Firebase/Storage'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod ‘FirebaseAnalytics’
   pod 'FacebookCore'
   pod 'FacebookShare'
   pod 'FacebookLogin'
@@ -19,6 +20,8 @@ target 'Lets meet' do
   pod 'HanekeSwift'
   pod 'ReactiveKit', '~> 2.1'
   pod 'ReactiveUIKit', '~> 2.0'
+  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+  
 
   # Pods for Let's meet
 

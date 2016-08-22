@@ -12,6 +12,7 @@ import FirebaseFacebookAuthUI
 import FirebaseAuthUI
 import FirebaseDatabase
 import FirebaseStorage
+import GeoFire
 
 class FirebaseAPI {
     private var authStateDidChangeHandle: FIRAuthStateDidChangeListenerHandle?
@@ -83,6 +84,19 @@ class FirebaseAPI {
                 return
             }
             successHandler(databaseReference.key)
+        }
+        
+        let geoFire = GeoFire(firebaseRef: rootRef.child("locations"))
+        
+        let encodedAddress = event.location!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        let location = Geocoder.getLatLngForAddress(encodedAddress!)
+
+        geoFire.setLocation(location, forKey: newEvent.key) { (error) in
+            if (error != nil) {
+                print("An error occured: \(error)")
+            } else {
+                print("Saved location successfully!")
+            }
         }
     }
     
