@@ -55,6 +55,7 @@ class CreateEventViewController: BaseViewController {
                                 LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", message: "Open Meetup", date: notidyTime, userInfo: nil)
                             }
                         }
+                        self.navigationController?.popViewControllerAnimated(true)
                         }, failureHandler: { (error) in
                             print("Event was not saved yet!")
                     })
