@@ -41,9 +41,18 @@ class EventHeaderTableViewCell: UITableViewCell {
         }
         goingLabel.text = "\(event.joinAmount!)"
         hostNameButton.setTitle(event.user?.displayName, forState: .Normal)
-        avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
-    
+//        avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!)
+        
+        let cache = Shared.imageCache
+        
+        let iconFormat = Format<UIImage>(name: "icons", diskCapacity: 10 * 1024 * 1024) { image in
+            return image.createRadius(self.avatarButton.bounds.size, radius: self.avatarButton.bounds.height/2, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft,.BottomRight])
+        }
+        cache.addFormat(iconFormat)
+
+        avatarButton.hnk_setImageFromURL(NSURL(string:(event.user?.photoURL)!)!, state: .Normal, placeholder: nil, format: iconFormat, failure: nil, success:  nil)
         thumbnailImageView.image = image
+        
     }
     
     //    func configureCell(event: Event) {
