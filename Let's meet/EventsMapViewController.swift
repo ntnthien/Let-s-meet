@@ -26,9 +26,9 @@ class EventsMapViewController: BaseViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
 //        getLatitude()
-        setUpTableView()
-        
-        loadData()
+//        setUpTableView()
+//        
+//        loadData()
 
         let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(48.857165, longitude: 2.354613, zoom: 2.0)
         mapView.camera = camera
@@ -50,9 +50,6 @@ class EventsMapViewController: BaseViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if let selectedRow = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedRow, animated: true)
-        }
     }
     
     override func didReceiveMemoryWarning() {
