@@ -8,15 +8,18 @@
 
 import UIKit
 import GoogleMaps
+import ReactiveKit
+import ReactiveUIKit
 
-class EventsMapViewController: UIViewController {
-    
-    
+class EventsMapViewController: BaseViewController {
     @IBOutlet weak var mapView: GMSMapView!
     
     @IBOutlet weak var tableView: UITableView!
     
     let locationManager = CLLocationManager()
+    
+    var items = CollectionProperty<[Event]>([])
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +29,17 @@ class EventsMapViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         getLatitude()
         
+        setUpTableView()
+        loadData()
+        
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if let selectedRow = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(selectedRow, animated: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,6 +97,48 @@ class EventsMapViewController: UIViewController {
         }
     }
     
+    
+    func loadData() {
+        FirebaseAPI.sharedInstance.getJoinedEvents { (events: [Event?]) in
+            self.items.removeAll()
+
+            for event in events {
+                self.items.append(event!)
+            }
+        }
+    }
+    
+    
+    func setUpTableView() {
+        
+        //        tableView.delegate = self
+        tableView.rDataSource.forwardTo = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 200
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+        
+        items.bindTo(tableView) { [weak self] indexPath, dataSource, tableView in
+            guard let weakSelf = self else { return UITableViewCell() }
+            
+            let cell = weakSelf.tableView.dequeueReusableCellWithIdentifier("headerCell", forIndexPath: indexPath) as! EventHeaderTableViewCell
+            cell.delegate = self
+            cell.indexPath = indexPath
+            cell.configureCell(self!.items[indexPath.row])
+            return cell
+        }
+        
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        loadData()
+        refreshControl.endRefreshing()
+    }
+    
+
+    
     /*
      // MARK: - Navigation
      
@@ -94,14 +150,8 @@ class EventsMapViewController: UIViewController {
      */
     
 }
-extension EventsMapViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        return cell
-    }
+extension EventsMapViewController: UITableViewDelegate {
+    
 }
 
 // MARK: - CLLocationManagerDelegate
@@ -130,3 +180,19 @@ extension EventsMapViewController: CLLocationManagerDelegate {
 extension EventsMapViewController: GMSMapViewDelegate {
     
 }
+
+
+extension EventsMapViewController: ActionTableViewCellDelegate {
+    func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton) {
+        switch button.tag {
+        case 60:
+            print("Profile button touched")
+            if let indexPath = (actionTableViewCell as? EventHeaderTableViewCell)?.indexPath, hostID = items[indexPath.row].hostID {
+                showProfileViewController(hostID)
+            }
+        default:
+            print("Unassigned button touched")
+        }
+    }
+}
+

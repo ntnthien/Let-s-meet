@@ -130,7 +130,58 @@ class FirebaseAPI {
         }
     }
     
+    func getJoinedEvents(completion: (events: [Event?]) -> Void) -> Void {
+        var _events: [Event?] = []
+        userRef.child(getUserID()!).child("events").child("joined").observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
+            for child in snapshot.children {
+                if let snap = child as? FIRDataSnapshot {
+                    self.eventsRef.child(snap.key).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
+                        if let _dataSnapshot = dataSnapshot.value {
+                            if var event: Event = Event(eventID: snap.key, eventInfo: ((_dataSnapshot as? [String:AnyObject]))!)! {
+                                if let hostId = event.hostID {
+                                    self.getUser(hostId,completion: { (user) in
+                                        event.user = user
+                                        _events.append(event)
+                                        //            completion(events: _events)
+                                        if _events.count == Int(snapshot.childrenCount) {
+                                            completion(events: _events)
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
+    func getWishedEvents(completion: (events: [Event?]) -> Void) -> Void {
+        var _events: [Event?] = []
+        userRef.child(getUserID()!).child("events").child("wished").observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
+            for child in snapshot.children {
+                if let snap = child as? FIRDataSnapshot {
+                    self.eventsRef.child(snap.key).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
+                        if let _dataSnapshot = dataSnapshot.value {
+                            if var event: Event = Event(eventID: snap.key, eventInfo: ((_dataSnapshot as? [String:AnyObject]))!)! {
+                                if let hostId = event.hostID {
+                                    self.getUser(hostId,completion: { (user) in
+                                        event.user = user
+                                        _events.append(event)
+                                        //            completion(events: _events)
+                                        if _events.count == Int(snapshot.childrenCount) {
+                                            completion(events: _events)
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // MARK: - User
     
     func getUser(id: String , completion: (User) -> ()) {
@@ -158,6 +209,8 @@ class FirebaseAPI {
                     self.userRef.child(user.uid).setValue(userInfo.toJSON())
                 }
             }
+            
+            
             print("signed in")
         } else {
             print("signed out")

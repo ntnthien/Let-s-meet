@@ -24,13 +24,13 @@ class LoginViewController: UIViewController {
         // If you haven't set up your authentications correctly these buttons
         // will still appear in the UI, but they'll crash the app when tapped.
         
-        if isFirstLoad {
+        if isFirstLoad || FirebaseAPI.sharedInstance.userIsLogin() == false {
             
             let controller = FirebaseAPI.sharedInstance.getLoginVC()
             self.presentViewController(controller, animated: true, completion: nil)
             isFirstLoad = false
         } else {
-            navigationController?.popViewControllerAnimated(false)
+            navigationController?.popToRootViewControllerAnimated(false)
         }
     }
     

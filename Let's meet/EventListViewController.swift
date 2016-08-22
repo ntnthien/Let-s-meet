@@ -16,9 +16,15 @@ class EventListViewController: BaseViewController {
     var items = CollectionProperty<[Event]>([])
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpTableView()
+        if (FirebaseAPI.sharedInstance.userIsLogin() == false) {
+            let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
+            self.showViewController(vc, sender: self)
+        }
         loadData()
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -29,15 +35,16 @@ class EventListViewController: BaseViewController {
     }
     var eventArray : [Event] = [Event]()
     func loadData() {
-        self.items.removeAll()
         FirebaseAPI.sharedInstance.getEvents { (events: [Event?]) in
+            self.items.removeAll()
+
             for event in events {
                 self.items.append(event!)
                 self.eventArray.append(event!)
             }
             //           let indexPath = NSIndexPath.init(forRow:  self.eventArray.count, inSection: 1)
             //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            print(self.items.collection)
+//            print(self.items.collection)
         }
     }
     
@@ -47,6 +54,10 @@ class EventListViewController: BaseViewController {
         tableView.rDataSource.forwardTo = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 130
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
         
         items.bindTo(tableView) { [weak self] indexPath, dataSource, tableView in
             guard let weakSelf = self else { return UITableViewCell() }
@@ -59,6 +70,13 @@ class EventListViewController: BaseViewController {
         }
     }
     
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        loadData()
+        refreshControl.endRefreshing()
+    }
+    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
