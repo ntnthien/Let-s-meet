@@ -47,7 +47,8 @@ class FirebaseAPI {
     
     
     // MARK: - Event
-    func createEvent(event: Event) {
+    func createEvent(event: Event, successHandler: (String) -> Void,
+                     failureHandler: (NSError) -> Void) {
         let newEvent = eventsRef.childByAutoId()
         
         if let tags = event.tags {
@@ -76,7 +77,13 @@ class FirebaseAPI {
                 dataEvent[key] = nil
             }
         }
-        newEvent.setValue(dataEvent)
+        newEvent.setValue(dataEvent) { (error, databaseReference) in
+            if error != nil {
+                failureHandler(error!)
+                return
+            }
+            successHandler(databaseReference.key)
+        }
     }
     
     func getEvent(id: String, completion: (Event?) -> ()) {

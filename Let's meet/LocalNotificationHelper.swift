@@ -11,75 +11,119 @@ import UIKit
 
 class LocalNotificationHelper {
     
-    func setupNotificationSettings() {
-        
-        let notificationSettings: UIUserNotificationSettings! = UIApplication.sharedApplication().currentUserNotificationSettings()
-        //If its value equals to None, meaning that no notification types have been set
-        if (notificationSettings.types == UIUserNotificationType.None){
-            
-            // Specify the notification types.
-            let notificationTypes = UIUserNotificationType.Alert.union(.Sound)
-            // Specify the notification actions.
-            let justInformAction = UIMutableUserNotificationAction()
-            justInformAction.identifier = "justInform"
-            justInformAction.title = "OK, got it"
-            justInformAction.activationMode = UIUserNotificationActivationMode.Background
-            justInformAction.destructive = false
-            justInformAction.authenticationRequired = false
-            
-            let modifyListAction = UIMutableUserNotificationAction()
-            modifyListAction.identifier = "editList"
-            modifyListAction.title = "Edit list"
-            modifyListAction.activationMode = UIUserNotificationActivationMode.Foreground
-            modifyListAction.destructive = false
-            modifyListAction.authenticationRequired = true
-            
-            let trashAction = UIMutableUserNotificationAction()
-            trashAction.identifier = "trashAction"
-            trashAction.title = "Delete list"
-            trashAction.activationMode = UIUserNotificationActivationMode.Background
-            trashAction.destructive = true
-            trashAction.authenticationRequired = true
-            
-            let actionsArray = NSArray(objects: justInformAction, modifyListAction, trashAction)
-            let actionsArrayMinimal = NSArray(objects: trashAction, modifyListAction)
-            
-            // Specify the category related to the above actions.
-            let shoppingListReminderCategory = UIMutableUserNotificationCategory()
-            shoppingListReminderCategory.identifier = "shoppingListReminderCategory"
-            shoppingListReminderCategory.setActions(actionsArray as? [UIUserNotificationAction], forContext: .Default)
-            shoppingListReminderCategory.setActions(actionsArrayMinimal as? [UIUserNotificationAction], forContext: UIUserNotificationActionContext.Minimal)
-            
-            let categoriesForSettings = NSSet(objects: shoppingListReminderCategory)
-            
-            let newNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: categoriesForSettings as? Set<UIUserNotificationCategory>)
-            //The first time the above code will work, it will create a new record for our application in the Settings app.
-            UIApplication.sharedApplication().registerUserNotificationSettings(newNotificationSettings)
-        }
-        
-        
+    let LOCAL_NOTIFICATION_CATEGORY : String = "LocalNotificationCategory"
+    
+    // MARK: - Shared Instance
+    static var sharedInstance = LocalNotificationHelper()
+    private init?(){
     }
     
-    func setActions(_ actions: [AnyObject]!, forContext context: UIUserNotificationActionContext) {
-        
+    // MARK: - Schedule Notification
+    
+    func scheduleNotificationWithKey(key: String, title: String, message: String, seconds: Double, userInfo: [NSObject: AnyObject]?) {
+        let date = NSDate(timeIntervalSinceNow: NSTimeInterval(seconds))
+        let notification = notificationWithTitle(key, title: title, message: message, date: date, userInfo: userInfo, soundName: nil, hasAction: true)
+        notification.category = LOCAL_NOTIFICATION_CATEGORY
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
-    func scheduleLocalNotification() {
-        let localNotification = UILocalNotification()
-        localNotification.fireDate = fixNotificationDate(NSDate())
-        localNotification.alertBody = "Hey, you must go shopping, remember?"
-        localNotification.alertAction = "View List"
-        localNotification.category = "shoppingListReminderCategory"
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        
+    
+    func scheduleNotificationWithKey(key: String, title: String, message: String, date: NSDate, userInfo: [NSObject: AnyObject]?){
+        let notification = notificationWithTitle(key, title: title, message: message, date: date, userInfo: ["key": key], soundName: nil, hasAction: true)
+        notification.category = LOCAL_NOTIFICATION_CATEGORY
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
-    func fixNotificationDate(dateToFix: NSDate) -> NSDate {
-        
-        let dateComponets: NSDateComponents = NSCalendar.currentCalendar().components((NSCalendarUnit.Day.union(.Month).union(.Year).union(.Hour).union(.Minute)), fromDate: dateToFix)
-        
-        dateComponets.second = 0
-        
-        let fixedDate: NSDate! = NSCalendar.currentCalendar().dateFromComponents(dateComponets)
-        
-        return fixedDate
+    
+    func scheduleNotificationWithKey(key: String, title: String, message: String, seconds: Double, soundName: String, userInfo: [NSObject: AnyObject]?){
+        let date = NSDate(timeIntervalSinceNow: NSTimeInterval(seconds))
+        let notification = notificationWithTitle(key, title: title, message: message, date: date, userInfo: ["key": key], soundName: soundName, hasAction: true)
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
+    
+    func scheduleNotificationWithKey(key: String, title: String, message: String, date: NSDate, soundName: String, userInfo: [NSObject: AnyObject]?){
+        let notification = notificationWithTitle(key, title: title, message: message, date: date, userInfo: ["key": key], soundName: soundName, hasAction: true)
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
+    
+    // MARK: - Present Notification
+    
+    func presentNotificationWithKey(key: String, title: String, message: String, soundName: String, userInfo: [NSObject: AnyObject]?) {
+        let notification = notificationWithTitle(key, title: title, message: message, date: nil, userInfo: ["key": key], soundName: nil, hasAction: true)
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+    }
+    
+    // MARK: - Create Notification
+    
+    func notificationWithTitle(key : String, title: String, message: String, date: NSDate?, userInfo: [NSObject: AnyObject]?, soundName: String?, hasAction: Bool) -> UILocalNotification {
+        
+        var dct : Dictionary<String,AnyObject> = userInfo as! Dictionary<String,AnyObject>
+        dct["key"] = NSString(string: key) as String
+        
+        let notification = UILocalNotification()
+        notification.alertAction = title
+        notification.alertBody = message
+        notification.userInfo = dct
+        notification.soundName = soundName ?? UILocalNotificationDefaultSoundName
+        notification.fireDate = date
+        notification.hasAction = hasAction
+        return notification
+    }
+    
+    func getNotificationWithKey(key : String) -> UILocalNotification {
+        
+        var notif : UILocalNotification?
+        
+        for notification in UIApplication.sharedApplication().scheduledLocalNotifications! where notification.userInfo!["key"] as! String == key{
+            notif = notification
+            break
+        }
+        
+        return notif!
+    }
+    
+    func cancelNotification(key : String){
+        
+        for notification in UIApplication.sharedApplication().scheduledLocalNotifications! where notification.userInfo!["key"] as! String == key{
+            UIApplication.sharedApplication().cancelLocalNotification(notification)
+            break
+        }
+    }
+    
+    func getAllNotifications() -> [UILocalNotification]? {
+        return UIApplication.sharedApplication().scheduledLocalNotifications
+    }
+    
+    func cancelAllNotifications() {
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+    }
+    
+    func registerUserNotificationWithActionButtons(actions actions : [UIUserNotificationAction]){
+        
+        let category = UIMutableUserNotificationCategory()
+        category.identifier = LOCAL_NOTIFICATION_CATEGORY
+        
+        category.setActions(actions, forContext: UIUserNotificationActionContext.Default)
+//        category.setActions(actions, forContext: UIUserNotificationActionContext.Minimal)
+
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: NSSet(object: category) as? Set<UIUserNotificationCategory>)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+    }
+    
+    func registerUserNotification(){
+        
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+    }
+    
+    func createUserNotificationActionButton(identifier identifier : String, title : String) -> UIUserNotificationAction{
+        
+        let actionButton = UIMutableUserNotificationAction()
+        actionButton.identifier = identifier
+        actionButton.title = title
+        actionButton.activationMode = UIUserNotificationActivationMode.Background
+        actionButton.authenticationRequired = true
+        actionButton.destructive = false
+        
+        return actionButton
+    }
+    
 }
