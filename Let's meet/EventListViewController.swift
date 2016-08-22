@@ -20,7 +20,7 @@ class EventListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
-        if (FirebaseAPI.sharedInstance.userIsLogin() == false) {
+        if (serviceInstance.userIsLogin() == false) {
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             
             let vc = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
@@ -40,7 +40,7 @@ class EventListViewController: BaseViewController {
     func loadData() {
         let orderString =  (orderSegment.selectedSegmentIndex == 0) ? "join_amount" : "time_since_1970"
             
-        FirebaseAPI.sharedInstance.getEvents(orderString) { (events: [Event?]) in
+        serviceInstance.getEvents(orderString) { (events: [Event?]) in
             self.items.removeAll()
 
             for index in (events.count - 1).stride(to: 0, by: -1) {

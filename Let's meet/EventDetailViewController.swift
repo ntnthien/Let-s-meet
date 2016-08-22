@@ -33,7 +33,7 @@ class EventDetailViewController: BaseViewController {
         // Customized the tableView
         tableView.separatorColor = UIColor.clearColor()
         if event == nil {
-            FirebaseAPI.sharedInstance.getEvent(eventID, completion: { (event) in
+            serviceInstance.getEvent(eventID, completion: { (event) in
                 self.event = event
             })
         }
@@ -48,7 +48,7 @@ class EventDetailViewController: BaseViewController {
     }
     
     func loadJoinValue() {
-        FirebaseAPI.sharedInstance.getjoinValue(event: (event?.id)!) { (snapshot) in
+        serviceInstance.getjoinValue(event: (event?.id)!) { (snapshot) in
             var change = 1
             if snapshot.hasChild((self.event?.id)!) {
                 self.joinString = "Leave"
@@ -67,7 +67,7 @@ class EventDetailViewController: BaseViewController {
     }
     
     func loadWishValue() {
-        FirebaseAPI.sharedInstance.getWishValue(event: (event?.id)!) { (snapshot) in
+        serviceInstance.getWishValue(event: (event?.id)!) { (snapshot) in
             if snapshot.hasChild((self.event?.id)!) {
                 self.wished = true
             } else {
@@ -182,7 +182,7 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
         switch button.tag {
         case 10:
             print("Join button touched")
-            FirebaseAPI.sharedInstance.changeJoinValue(event: (event?.id)!)
+            serviceInstance.changeJoinValue(event: (event?.id)!)
         case 20:
             print("Share button touched")
             shareAction()
@@ -196,7 +196,7 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
             showProfileViewController((event?.hostID)!)
         default:
             print("Wish button touched")
-            FirebaseAPI.sharedInstance.changeWishValue(event: (event?.id)!)
+            serviceInstance.changeWishValue(event: (event?.id)!)
 
         }
     }

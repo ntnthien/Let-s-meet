@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     var isFirstLoad = true
     
     override func viewDidLoad() {
@@ -24,9 +24,9 @@ class LoginViewController: UIViewController {
         // If you haven't set up your authentications correctly these buttons
         // will still appear in the UI, but they'll crash the app when tapped.
         
-        if isFirstLoad || FirebaseAPI.sharedInstance.userIsLogin() == false {
+        if isFirstLoad || serviceInstance.userIsLogin() == false {
             
-            let controller = FirebaseAPI.sharedInstance.getLoginVC()
+            let controller = serviceInstance.getLoginVC()
             self.presentViewController(controller, animated: true, completion: nil)
             isFirstLoad = false
         } else {
@@ -39,13 +39,13 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonTouched(sender: AnyObject) {
-        let controller = FirebaseAPI.sharedInstance.getLoginVC()
+        let controller = serviceInstance.getLoginVC()
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
     
     @IBAction func logoutButtonTouched(sender: AnyObject) {
-        FirebaseAPI.sharedInstance.logout()
+        serviceInstance.logout()
     }
     
     override func didReceiveMemoryWarning() {

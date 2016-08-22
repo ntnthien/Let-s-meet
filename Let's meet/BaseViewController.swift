@@ -12,6 +12,7 @@ class BaseViewController: UIViewController {
     
     var keyboardHidden = true
     var hideKeyboardTap:UITapGestureRecognizer!
+    var serviceInstance = FirebaseAPI.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()

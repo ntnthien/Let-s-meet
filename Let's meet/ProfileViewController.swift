@@ -48,17 +48,17 @@ class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         
         if let id = userID {
-            if id != FirebaseAPI.sharedInstance.getUserID()! {
+            if id != serviceInstance.getUserID()! {
                 self.navigationItem.rightBarButtonItem = nil
             }
-            FirebaseAPI.sharedInstance.getUser(id, completion: { (user) in
+            serviceInstance.getUser(id, completion: { (user) in
                 self.user = user
                 self.setUpTableView()
                 self.loadData()
             })
         } else
-            if FirebaseAPI.sharedInstance.userIsLogin() {
-                user = FirebaseAPI.sharedInstance.getUserInfo()
+            if serviceInstance.userIsLogin() {
+                user = serviceInstance.getUserInfo()
                 setUpTableView()
                 loadData()
         }
@@ -96,7 +96,7 @@ class ProfileViewController: BaseViewController {
     
     
     func loadData() {
-        FirebaseAPI.sharedInstance.getWishedEvents { (events: [Event?]) in
+        serviceInstance.getWishedEvents { (events: [Event?]) in
             self.items.removeAll()
             for event in events {
                 self.items.append(event!)
@@ -152,7 +152,7 @@ class ProfileViewController: BaseViewController {
      */
     
     @IBAction func logoutButtonTouched(sender: AnyObject) {
-        FirebaseAPI.sharedInstance.logout()
+        serviceInstance.logout()
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
         vc.navigationItem.leftBarButtonItem = nil

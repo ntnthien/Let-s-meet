@@ -45,10 +45,10 @@ class CreateEventViewController: BaseViewController {
         }
         if let data = UIImageJPEGRepresentation(pannelImage, 0.1)
         {
-            FirebaseAPI.sharedInstance.sendMedia(data, contentType: ContentType.Photo) { (fileUrl) in
+            serviceInstance.sendMedia(data, contentType: ContentType.Photo) { (fileUrl) in
                 event?.thumbnailURL = fileUrl
                 if let event = event {
-                    FirebaseAPI.sharedInstance.createEvent(event, successHandler: { (eventKey) in
+                    self.serviceInstance.createEvent(event, successHandler: { (eventKey) in
                         print(eventKey)
                         if let eventTimeInterval = event.time {
                             if let notidyTime: NSDate = NSDate(timeIntervalSince1970: eventTimeInterval) {
@@ -64,7 +64,7 @@ class CreateEventViewController: BaseViewController {
         }
         else {
             if let event = event {
-                FirebaseAPI.sharedInstance.createEvent(event, successHandler: { (eventKey) in
+                serviceInstance.createEvent(event, successHandler: { (eventKey) in
                     if let eventTimeInterval = event.time {
                         if let notidyTime: NSDate = NSDate(timeIntervalSince1970: eventTimeInterval) {
                             LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", message: "Open Meetup", date: notidyTime, userInfo: nil)

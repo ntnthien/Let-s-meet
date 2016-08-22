@@ -12,29 +12,42 @@ import ReactiveKit
 import ReactiveUIKit
 
 class EventsMapViewController: BaseViewController {
-    @IBOutlet weak var mapView: GMSMapView!
     
+    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableView: UITableView!
     
-    let locationManager = CLLocationManager()
-    
     var items = CollectionProperty<[Event]>([])
+    let locationManager = CLLocationManager()
+    var didFindMyLocation = false
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //instantiate a CLLocationManager property named locationManager
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        getLatitude()
-        
+//        getLatitude()
         setUpTableView()
-        loadData()
         
+        loadData()
+
+        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(48.857165, longitude: 2.354613, zoom: 2.0)
+        mapView.camera = camera
+        mapView.delegate = self
+        
+        mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+
         
     }
     
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if !didFindMyLocation {
+            let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
+            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
+            mapView.settings.myLocationButton = true
+            
+            didFindMyLocation = true
+        }
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if let selectedRow = tableView.indexPathForSelectedRow {
@@ -46,25 +59,30 @@ class EventsMapViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    deinit{
+        removeObserver(self, forKeyPath: "myLocation", context: nil)
+        
+    }
     override func loadView() {
         super.loadView()
         
         // Create a GMSCameraPosition that tells the map to display the
         // coordinate -33.86,151.20 at zoom level 6.
         
-        let camera = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 17.0)
+        let camera = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 15.0)
 
         let mapView = GMSMapView.mapWithFrame(self.mapView.bounds, camera: camera)
         dispatch_async(dispatch_get_main_queue()) { 
             mapView.myLocationEnabled = true
 
         }
+        
         mapView.mapType = kGMSTypeNormal
         mapView.indoorEnabled = false
-        
+        mapView.myLocationEnabled = true
+        print("my location is \(mapView.myLocation)")
         let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7803616, longitude: 106.6860085)
-        FirebaseAPI.sharedInstance.getNearByEvents(location, radius: 10) { (key, location) in
+        serviceInstance.getNearByEvents(location, radius: 10) { (key, location) in
             let marker = GMSMarker()
             marker.position = location.coordinate
             marker.title = "Docker Meetup - \(key)"
@@ -100,7 +118,7 @@ class EventsMapViewController: BaseViewController {
     
     
     func loadData() {
-        FirebaseAPI.sharedInstance.getJoinedEvents { (events: [Event?]) in
+        serviceInstance.getJoinedEvents { (events: [Event?]) in
             self.items.removeAll()
 
             for event in events {
@@ -159,17 +177,17 @@ extension EventsMapViewController: UITableViewDelegate {
 extension EventsMapViewController: CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedWhenInUse {
-            
-            // 4
-            locationManager.startUpdatingLocation()
-            
             mapView.myLocationEnabled = true
+            locationManager.startUpdatingLocation()
             mapView.settings.myLocationButton = true
         }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
+            
+            mapView.myLocationEnabled = true
+            mapView.settings.myLocationButton = true
             
             mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
             locationManager.stopUpdatingLocation()

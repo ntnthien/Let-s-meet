@@ -63,7 +63,7 @@ class DiscussionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentUser = FirebaseAPI.sharedInstance.getUserInfo()
+        currentUser = serviceInstance.getUserInfo()
         
         if let tabbar = self.tabBarController?.tabBar {
             let tabbarHeight = tabbar.bounds.size.height
@@ -97,7 +97,7 @@ class DiscussionViewController: BaseViewController {
     
     func loadDiscussion () {
         
-        FirebaseAPI.sharedInstance.getDiscussions(eventID) { (discussions) in
+        serviceInstance.getDiscussions(eventID) { (discussions) in
             self.discussionArray.removeAll()
             for discussion in discussions {
                 self.discussionArray.append(discussion!)
@@ -112,7 +112,7 @@ class DiscussionViewController: BaseViewController {
     }
     @IBAction func onSendMessageButton(sender: AnyObject) {
         if let discussion = getMessageInfo() {
-            FirebaseAPI.sharedInstance.createDiscussion(eventID, discussion: discussion)
+            serviceInstance.createDiscussion(eventID, discussion: discussion)
         }
     }
     
