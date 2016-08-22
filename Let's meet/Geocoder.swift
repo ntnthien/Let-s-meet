@@ -66,4 +66,12 @@ class Geocoder {
             }
         }
     }
+   
+}
+
+
+extension CLLocationCoordinate2D {
+    func toCLLocation() -> CLLocation {
+        return CLLocation(latitude: self.latitude, longitude: self.longitude)
+    }
 }

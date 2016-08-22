@@ -54,6 +54,7 @@ class EventsMapViewController: BaseViewController {
         // coordinate -33.86,151.20 at zoom level 6.
         
         let camera = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 17.0)
+
         let mapView = GMSMapView.mapWithFrame(self.mapView.bounds, camera: camera)
         dispatch_async(dispatch_get_main_queue()) { 
             mapView.myLocationEnabled = true
@@ -62,22 +63,22 @@ class EventsMapViewController: BaseViewController {
         mapView.mapType = kGMSTypeNormal
         mapView.indoorEnabled = false
         
-        if let mylocation = mapView.myLocation {
-            print("User's location: \(mylocation)")
-        } else {
-            print("User's location is unknown")
+        let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7803616, longitude: 106.6860085)
+        FirebaseAPI.sharedInstance.getNearByEvents(location, radius: 10) { (key, location) in
+            let marker = GMSMarker()
+            marker.position = location.coordinate
+            marker.title = "Docker Meetup - \(key)"
+            marker.snippet = "Work Sai Gon"
+            
+            marker.map = mapView
+            
+            self.mapView.addSubview(mapView)
         }
         
         
+        
         // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 10.7803616, longitude: 106.6860085)
-        marker.title = "Docker Meetup"
-        marker.snippet = "Work Sai Gon"
-        
-        marker.map = mapView
-        
-        self.mapView.addSubview(mapView)
+       
     }
  
     func getLatitude() {

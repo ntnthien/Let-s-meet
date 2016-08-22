@@ -168,6 +168,19 @@ class FirebaseAPI {
         }
     }
     
+    
+    func getNearByEvents(location: CLLocation, radius: Double, block: GFQueryResultBlock) {
+        let geoFire = GeoFire(firebaseRef: rootRef.child("locations"))
+        let query = geoFire.queryAtLocation(location, withRadius: radius)
+        query.observeEventType(.KeyEntered, withBlock: block)
+//        query.observeEventType(.KeyEntered, withBlock: {
+//            (key: String!, location: CLLocation!) in
+////            print("+ + + + Key '\(key)' entered the search area and is at location '\(location)'")
+//           
+//        })
+    }
+    
+    
     func getJoinedEvents(completion: (events: [Event?]) -> Void) -> Void {
         var _events: [Event?] = []
         userRef.child(getUserID()!).child("events").child("joined").queryOrderedByValue().observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
@@ -283,7 +296,7 @@ class FirebaseAPI {
         }
     }
     
-    func userIsLogin() -> Bool{
+    func userIsLogin() -> Bool {
         return FIRAuth.auth()?.currentUser != nil
     }
     

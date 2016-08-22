@@ -27,7 +27,7 @@ class EventListViewController: BaseViewController {
             self.showViewController(vc, sender: self)
         }
         loadData()
-
+        
     }
     
     override func viewWillAppear(animated: Bool) {
