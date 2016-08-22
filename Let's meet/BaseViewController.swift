@@ -10,6 +10,9 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
+    var keyboardHidden = true
+    var hideKeyboardTap:UITapGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,7 +83,61 @@ class BaseViewController: UIViewController {
         }
         
     }
-        /*
+    
+    func createNotificationCenter() {
+        // add keyboard notification
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willShowKeyBoard(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willHideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    
+    func tapScreen() {
+        if !keyboardHidden {
+            self.view.endEditing(true)
+        }
+    }
+    
+    // Remove Observer
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    // MARK: Keyboard handler
+    
+    func willShowKeyBoard(notification : NSNotification){
+        print("Keyboard is shown")
+        keyboardHidden = false
+        let userInfo: NSDictionary! = notification.userInfo
+        
+        var duration : NSTimeInterval = 0
+        
+        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let keyboardFrame = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
+        
+        handleKeyboardWillShow(duration,keyBoardRect: keyboardFrame)
+    }
+    
+    func willHideKeyBoard(notification : NSNotification){
+        print("Keyboard is hide")
+        keyboardHidden = true
+        var userInfo: NSDictionary!
+        userInfo = notification.userInfo
+        
+        var duration : NSTimeInterval = 0
+        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let keyboardFrame = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
+        
+        handleKeyboardWillHide(duration, keyBoardRect: keyboardFrame)
+        
+    }
+
+    
+    // Override in sub class
+    
+    func handleKeyboardWillShow(duration: NSTimeInterval, keyBoardRect: CGRect) {}
+    func handleKeyboardWillHide(duration: NSTimeInterval, keyBoardRect: CGRect) {}
+    
+    
+    /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation

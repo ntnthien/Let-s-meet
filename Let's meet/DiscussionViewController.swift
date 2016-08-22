@@ -49,8 +49,6 @@ class DiscussionViewController: BaseViewController {
     
     // Keyboard is presenting or not
     var keyboardPresenting              = false
-    var keyboardHidden = false
-    var hideKeyboardTap:UITapGestureRecognizer!
     
     // Data source from Firebase
     //    var messagesRef:FIRDatabaseReference!
@@ -76,9 +74,8 @@ class DiscussionViewController: BaseViewController {
         chatTableView.estimatedRowHeight = 400
         
         loadDiscussion()
-        // add keyboard notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willShowKeyBoard(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willHideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        
+        createNotificationCenter()
         // Tap screen
         hideKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(tapScreen))
         // Do any additional setup after loading the view.
@@ -135,44 +132,16 @@ class DiscussionViewController: BaseViewController {
     
     // MARK: Keyboard handler
     
-    func willShowKeyBoard(notification : NSNotification){
-        print("Keyboard is shown")
-        keyboardPresenting = true
-        keyboardHidden = false
-        let userInfo: NSDictionary! = notification.userInfo
-        
-        var duration : NSTimeInterval = 0
-        
-        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
-        let keyboardFrame = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
-        
-        handleKeyboardWillShow(duration,keyBoardRect: keyboardFrame)
-    }
-    
-    func willHideKeyBoard(notification : NSNotification){
-        print("Keyboard is hide")
-        keyboardPresenting = false
-        keyboardHidden = true
-        var userInfo: NSDictionary!
-        userInfo = notification.userInfo
-        
-        var duration : NSTimeInterval = 0
-        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
-        let keyboardFrame = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
-        
-        handleKeyboardWillHide(duration, keyBoardRect: keyboardFrame)
-        
-    }
-    func handleKeyboardWillShow(duration: NSTimeInterval, keyBoardRect: CGRect) {
+    override func handleKeyboardWillShow(duration: NSTimeInterval, keyBoardRect: CGRect) {
         self.view.addGestureRecognizer(hideKeyboardTap)
         keyBoardChatDetailControl(0, duration: duration, keyBoardRect: keyBoardRect)
     }
-    func handleKeyboardWillHide(duration: NSTimeInterval, keyBoardRect: CGRect) {
+    override func handleKeyboardWillHide(duration: NSTimeInterval, keyBoardRect: CGRect) {
         self.view.removeGestureRecognizer (hideKeyboardTap)
         keyBoardChatDetailControl(1, duration: duration, keyBoardRect: keyBoardRect)
-        
     }
-    func tapScreen() {
+    
+    override func tapScreen() {
         print("Screen is tapped")
         if !keyboardHidden {
             self.view.endEditing(true)

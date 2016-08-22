@@ -11,7 +11,7 @@ import UIKit
 protocol DatePickerPopupViewControllerDelegate {
     func getDate(date: String)
 }
-class DatePickerPopupViewController: UIViewController {
+class DatePickerPopupViewController: BaseViewController {
     
     @IBOutlet weak var popUpView: UIView!
     
@@ -34,6 +34,8 @@ class DatePickerPopupViewController: UIViewController {
         self.popUpView.layer.cornerRadius = 5
         self.popUpView.layer.shadowOpacity = 0.8
         self.popUpView.layer.shadowOffset = CGSizeMake(0.0, 0.0)
+        // Tap screen
+        hideKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(tapScreen))
         
     }
     
@@ -82,9 +84,16 @@ class DatePickerPopupViewController: UIViewController {
     }
     // MARK: - Navigation
     
+    override func tapScreen() {
+        print("Screen is tapped")
+        eventTime = datePicker.date.timeIntervalSince1970
+        self.removeAnimate()
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         
     }
+    
 }

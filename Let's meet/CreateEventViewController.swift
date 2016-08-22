@@ -21,9 +21,9 @@ class CreateEventViewController: BaseViewController {
     var cell:CreateEventTableViewCell?
     
     // Keyboard is presenting or not
-    var keyboardPresenting              = false
-    var keyboardHidden = false
-    var hideKeyboardTap:UITapGestureRecognizer!
+    var keyboardPresenting = false
+    
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +33,11 @@ class CreateEventViewController: BaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willShowKeyBoard(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(willHideKeyBoard(_:)), name: UIKeyboardWillHideNotification, object: nil)
         // Tap screen
-//        hideKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(tapScreen))
+        hideKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(tapScreen))
     }
     
     @IBAction func onSaveButton(sender: UIBarButtonItem) {
         print("On save event")
-        
         var event = cell?.getEventInfo()
         print(event?.name)
         if let eventTime = popViewController?.eventTime {
@@ -82,56 +81,27 @@ class CreateEventViewController: BaseViewController {
         self.popViewController = DatePickerPopupViewController(nibName: "DatePickerPopupViewController", bundle: nil)
         self.popViewController.title = "This is a popup view"
         self.popViewController.showInView(self.view, animated: true)
+        self.view.endEditing(true)
     }
-    
     
     // MARK: Keyboard handler
-    
-    func willShowKeyBoard(notification : NSNotification){
-        print("Keyboard is shown")
-        keyboardPresenting = true
-        keyboardHidden = false
-        let userInfo: NSDictionary! = notification.userInfo
-        
-        var duration : NSTimeInterval = 0
-        
-        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
-        let keyboardFrame = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
-        
-        handleKeyboardWillShow(duration,keyBoardRect: keyboardFrame)
-    }
-    
-    func willHideKeyBoard(notification : NSNotification){
-        print("Keyboard is hide")
-        keyboardPresenting = false
-        keyboardHidden = true
-        var userInfo: NSDictionary!
-        userInfo = notification.userInfo
-        
-        var duration : NSTimeInterval = 0
-        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
-        let keyboardFrame = (userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue).CGRectValue()
-        
-        handleKeyboardWillHide(duration, keyBoardRect: keyboardFrame)
-        
-    }
-    func handleKeyboardWillShow(duration: NSTimeInterval, keyBoardRect: CGRect) {
+    override func handleKeyboardWillShow(duration: NSTimeInterval, keyBoardRect: CGRect) {
         self.view.addGestureRecognizer(hideKeyboardTap)
-        keyBoardChatDetailControl(0, duration: duration, keyBoardRect: keyBoardRect)
+        keyBoardDetailControl(0, duration: duration, keyBoardRect: keyBoardRect)
     }
-    func handleKeyboardWillHide(duration: NSTimeInterval, keyBoardRect: CGRect) {
+    override func handleKeyboardWillHide(duration: NSTimeInterval, keyBoardRect: CGRect) {
         self.view.removeGestureRecognizer (hideKeyboardTap)
-        keyBoardChatDetailControl(1, duration: duration, keyBoardRect: keyBoardRect)
+        keyBoardDetailControl(1, duration: duration, keyBoardRect: keyBoardRect)
         
     }
-    func tapScreen() {
+    override func tapScreen() {
         print("Screen is tapped")
         if !keyboardHidden {
             self.view.endEditing(true)
         }
     }
     
-    func keyBoardChatDetailControl(flagKeyboard: Int, duration: NSTimeInterval, keyBoardRect: CGRect) {
+    func keyBoardDetailControl(flagKeyboard: Int, duration: NSTimeInterval, keyBoardRect: CGRect) {
         
         var keyboardHeight: CGFloat = 0
         keyboardHeight = 0
@@ -145,16 +115,7 @@ class CreateEventViewController: BaseViewController {
         self.keyboardPresenting = flagKeyboard == 0
         
         UIView.animateWithDuration(duration, animations: {
-            
-//            self.viewInputSendMessageBottomConstraint.constant = keyboardHeight
-//            
-//            self.messageTextInputView.superview?.layoutIfNeeded()
-//            
-//            self.chatTableView.contentInset.bottom = (flagKeyboard == 0) ? keyBoardRect.height + 40  : 40 + tabbarHeight
-//            
-//            if self.discussionArray.count == 0 { return }
-//            self.scrollTableViewToEnd()
-            
+            self.tableViewBottomConstraint.constant = keyboardHeight
         }) { (Bool) in
         }
     }

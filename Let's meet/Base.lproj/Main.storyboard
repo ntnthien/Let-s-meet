@@ -232,7 +232,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Joined Events Map" id="VmF-A3-1Kj"/>
+                    <navigationItem key="navigationItem" title="Joined Events Map" id="VmF-A3-1Kj">
+                        <barButtonItem key="rightBarButtonItem" title="Add new" id="1T7-nK-70R">
+                            <connections>
+                                <segue destination="YeO-Ed-fmT" kind="show" id="SjZ-hS-3pD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
@@ -1527,6 +1533,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="lwd-g9-VaR" secondAttribute="trailing" id="4Ue-D2-tIL"/>
                             <constraint firstItem="lwd-g9-VaR" firstAttribute="leading" secondItem="X7c-22-BMN" secondAttribute="leading" id="6Yi-Nq-Yp5"/>
@@ -1536,6 +1543,9 @@
                             <constraint firstItem="5rp-tY-La6" firstAttribute="top" secondItem="lwd-g9-VaR" secondAttribute="bottom" id="N6y-l9-KmS"/>
                             <constraint firstItem="Efi-qa-2Cf" firstAttribute="leading" secondItem="X7c-22-BMN" secondAttribute="leading" id="lGK-Nr-cmO"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="EI9-if-7OT" appends="YES" id="lGe-ii-kCP"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="chatTableView" destination="Efi-qa-2Cf" id="OJC-g3-3h3"/>
@@ -1546,6 +1556,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3S9-G7-hDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="EI9-if-7OT"/>
             </objects>
             <point key="canvasLocation" x="2371" y="1807"/>
         </scene>
@@ -1558,11 +1569,11 @@
                         <viewControllerLayoutGuide type="bottom" id="LTO-eg-GxL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hbV-v7-u41">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="456" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oj1-Y5-vzh">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="event_cell" rowHeight="456" id="8Db-7U-oM9" userLabel="event_cell" customClass="CreateEventTableViewCell" customModule="Lets_meet" customModuleProvider="target">
@@ -1680,12 +1691,16 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="oj1-Y5-vzh" secondAttribute="trailing" id="5Mq-qi-YJj"/>
                             <constraint firstItem="oj1-Y5-vzh" firstAttribute="leading" secondItem="hbV-v7-u41" secondAttribute="leading" id="Sbt-bj-8et"/>
                             <constraint firstAttribute="bottom" secondItem="oj1-Y5-vzh" secondAttribute="bottom" id="cn4-U6-D6g"/>
                             <constraint firstItem="oj1-Y5-vzh" firstAttribute="top" secondItem="hbV-v7-u41" secondAttribute="top" id="wh6-4a-wKE"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0ia-r5-Z8Z" appends="YES" id="vaK-ep-zEq"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="New Event" id="H4m-Gj-e8B">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="bKK-Ua-OfV">
@@ -1696,9 +1711,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="oj1-Y5-vzh" id="jzd-DV-dDV"/>
+                        <outlet property="tableViewBottomConstraint" destination="cn4-U6-D6g" id="eOz-hm-ggi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysZ-Fo-W6U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="0ia-r5-Z8Z"/>
             </objects>
             <point key="canvasLocation" x="-388" y="2279"/>
         </scene>
@@ -1813,4 +1830,7 @@
         <image name="user_profile" width="75" height="74"/>
         <image name="wish" width="70" height="70"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="SjZ-hS-3pD"/>
+    </inferredMetricsTieBreakers>
 </document>
