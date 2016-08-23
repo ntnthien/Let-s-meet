@@ -172,12 +172,12 @@ class FirebaseAPI {
     func getNearByEvents(location: CLLocation, radius: Double, block: GFQueryResultBlock) {
         let geoFire = GeoFire(firebaseRef: rootRef.child("locations"))
         let query = geoFire.queryAtLocation(location, withRadius: radius)
-        query.observeEventType(.KeyEntered, withBlock: block)
-//        query.observeEventType(.KeyEntered, withBlock: {
-//            (key: String!, location: CLLocation!) in
-////            print("+ + + + Key '\(key)' entered the search area and is at location '\(location)'")
-//           
-//        })
+//        query.observeEventType(.KeyEntered, withBlock: block)
+        query.observeEventType(.KeyEntered, withBlock: {
+            (key: String!, location: CLLocation!) in
+            print("+ + + + Key '\(key)' entered the search area and is at location '\(location)'")
+           
+        })
     }
     
     

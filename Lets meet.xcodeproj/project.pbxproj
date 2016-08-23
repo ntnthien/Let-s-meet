@@ -223,6 +223,16 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		6BE957861D6C91590024BE60 /* DiscussionTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6BAD56201D64BFAA002F8116 /* ChatTableViewCell.swift */,
+				6BAD56221D64C045002F8116 /* ChatTextTableViewCell.swift */,
+				6BAD56241D64C054002F8116 /* ChatPhotoTableViewCell.swift */,
+			);
+			name = DiscussionTableViewCell;
+			sourceTree = "<group>";
+		};
 		74248B76A500F1C6298C0F4E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +356,7 @@
 		C2F529751D51070700AB6337 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6BE957861D6C91590024BE60 /* DiscussionTableViewCell */,
 				A28EF1311D683F7300E7B250 /* FilterTableViewCell */,
 				6B671CCD1D5242A700357BE5 /* ProfileInfoTableViewCell.swift */,
 				846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */,
@@ -354,9 +365,6 @@
 				C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */,
 				C21820AF1D6187090035DBB5 /* EventActionTableViewCell.swift */,
 				C283C3FC1D618FE4009A8CBE /* EventDetailTableViewCell.swift */,
-				6BAD56201D64BFAA002F8116 /* ChatTableViewCell.swift */,
-				6BAD56221D64C045002F8116 /* ChatTextTableViewCell.swift */,
-				6BAD56241D64C054002F8116 /* ChatPhotoTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

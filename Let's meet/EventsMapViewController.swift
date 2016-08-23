@@ -16,6 +16,9 @@ class EventsMapViewController: BaseViewController {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableView: UITableView!
     
+    var london: GMSMarker?
+    var londonView: UIImageView?
+    
     var items = CollectionProperty<[Event]>([])
     
     let locationManager = CLLocationManager()
@@ -30,28 +33,54 @@ class EventsMapViewController: BaseViewController {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(48.857165, longitude: 2.354613, zoom: 8.0)
+        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 17.0)
+//        let marker = GMSMarker()
+////        marker.position = camera.target
+//        marker.snippet = "Hello World"
+//        marker.appearAnimation = kGMSMarkerAnimationPop
+//        marker.map = mapView
+////        marker.position = location.coordinate
+//        marker.title = "Docker Meetup "
+//        marker.snippet = "Work Sai Gon"
+        
+        // adding marker
         mapView.camera = camera
-        
-        
-//        getLatitude()
-//        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(48.857165, longitude: 2.354613, zoom: 2.0)
-//        mapView.camera = camera
-//        mapView.delegate = self
-        
+
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
 
+        let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7695186, longitude: 106.6835976)
+//        let mapView1 = GMSMapView.mapWithFrame(self.mapView.bounds, camera: camera)
+
+        let marker = GMSMarker()
+        marker.position = location.coordinate
+        marker.title = "Docker Meetup "
+        marker.snippet = "Work Sai Gon"
+        marker.map = mapView
         
+//        self.mapView.addSubview(mapView1)
+        
+        
+
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
-            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
+            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 14.0)
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
-            print("My location is \(mapView.myLocation)")
+            print("My location is in obseveValue \(mapView.myLocation)")
+            
+            serviceInstance.getNearByEvents(mapView.myLocation!, radius: 10) { (key, location) in
+                let marker = GMSMarker()
+                marker.position = location.coordinate
+                marker.title = "Docker Meetup - \(key)"
+                marker.snippet = "Work Sai Gon"
+                print(key, location)
+                marker.map = self.mapView
+            }
 
+            
         }
     }
     override func viewWillAppear(animated: Bool) {
@@ -69,27 +98,15 @@ class EventsMapViewController: BaseViewController {
     override func loadView() {
         super.loadView()
         
-        // Create a GMSCameraPosition that tells the map to display the
-        // coordinate -33.86,151.20 at zoom level 6.
-        
         let camera = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 15.0)
         mapView.camera = camera
         mapView.myLocationEnabled = true
         mapView.mapType = kGMSTypeNormal
         mapView.indoorEnabled = false
         mapView.myLocationEnabled = true
-        print("my location is \(mapView.myLocation)")
-//        let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7803616, longitude: 106.6860085)
-//        serviceInstance.getNearByEvents(location, radius: 10) { (key, location) in
-//            let marker = GMSMarker()
-//            marker.position = location.coordinate
-//            marker.title = "Docker Meetup - \(key)"
-//            marker.snippet = "Work Sai Gon"
-//            
-//            marker.map = self.mapView
-//            
-////            self.mapView.addSubview(mapView)
-//        }
+        print("my location is load view \(mapView.myLocation)")
+        
+       
         
         
         
@@ -214,4 +231,3 @@ extension EventsMapViewController: ActionTableViewCellDelegate {
         }
     }
 }
-
