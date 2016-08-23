@@ -8,6 +8,7 @@
 
 import UIKit
 import Haneke
+import MobileCoreServices
 
 class DiscussionViewController: BaseViewController {
     
@@ -23,10 +24,10 @@ class DiscussionViewController: BaseViewController {
     var currentUser: User?
     
     var eventID = "-KPVjTT3za3KXapXni6P"
-//    var eventID = "-KPMddCnTDeaeDPFEXu2"
+    //    var eventID = "-KPMddCnTDeaeDPFEXu2"
     var discussionID = "-KPVjTT3za3KXapXni6P"
     var discussionArray:Array<Discussion> = []
-    
+    var fileURL: String?
     // Dictionary lưu các url avatar users
     var userAvtDict = Dictionary<String,String>()
     
@@ -88,10 +89,9 @@ class DiscussionViewController: BaseViewController {
         self.navigationItem.title = "Event title"
         
         messageTextInputView.layer.borderWidth = 1
-//        messageTextInputView.layer.borderColor = UIColor(red: 206/255 ,green: 206/255, blue: 206/255 ,  alpha: 1 ).CGColor
         messageTextInputView.layer.cornerRadius = 5
         
-        self.chatTableView.addSubview(refeshControl)
+//        self.chatTableView.addSubview(refeshControl)
     }
     
     
@@ -111,20 +111,54 @@ class DiscussionViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func onSendMessageButton(sender: AnyObject) {
-        if let discussion = getMessageInfo() {
-            serviceInstance.createDiscussion(eventID, discussion: discussion)
+        if let discussion = getMessageInfo(ContentType.Text.rawValue) {
+            if discussion.content_msg?.hash > 0 {
+                serviceInstance.createDiscussion(eventID, discussion: discussion)
+            }
         }
     }
     
     @IBAction func onAttachFileButton(sender: UIButton) {
         print("onAttachFileButton is clicked")
+        let sheet = UIAlertController(title: "Media Messages", message: "Please select a media", preferredStyle: .ActionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel) { (alertAction) in
+            
+        }
+        let photoLibrary = UIAlertAction(title: "Photo Library", style: .Default) { (alert) in
+            self.getMediaFrom(kUTTypeImage)
+            
+        }
+        
+        let videoLibrary = UIAlertAction(title: "Video Library", style: .Default) { (alert) in
+            self.getMediaFrom(kUTTypeMovie)
+        }
+        sheet.addAction(photoLibrary)
+//        sheet.addAction(videoLibrary)
+        sheet.addAction(cancel)
+        self.presentViewController(sheet, animated: true, completion: nil)
+        
     }
-    
-    func getMessageInfo() -> Discussion? {
-        if let message = messageTextInputView.text, currentUser = currentUser {
+    func getMediaFrom(type: CFString){
+        let mediaPicker = UIImagePickerController()
+        mediaPicker.delegate = self
+        mediaPicker.mediaTypes = [type as String]
+        self.presentViewController(mediaPicker, animated: true, completion: nil)
+    }
+    func getMessageInfo(contentType: String) -> Discussion? {
+        if contentType == ContentType.Text.rawValue && messageTextInputView.text.hash > 0 {
+            let message = messageTextInputView.text
+            guard let currentUser = currentUser else { return nil }
             self.messageTextInputView.text = nil
             
             let newMessageData: [String:AnyObject] = ["discussion_id": "1", "content_type": ContentType.Text.rawValue,"content_msg": message, "sender_id": currentUser.uid, "sender_name": currentUser.displayName, "sender_photo": currentUser.photoURL, "time": NSDate().timeIntervalSince1970]
+            return Discussion(discussion_id: "1", discussionInfo: newMessageData)
+            
+        } else if let fileURL = fileURL, currentUser = currentUser {
+            self.fileURL = nil
+            let mediaType = contentType == ContentType.Photo.rawValue ? ContentType.Photo.rawValue: ContentType.Video.rawValue
+            
+            let newMessageData: [String:AnyObject] = ["discussion_id": "1", "content_type": mediaType,"content_msg": fileURL, "sender_id": currentUser.uid, "sender_name": currentUser.displayName, "sender_photo": currentUser.photoURL, "time": NSDate().timeIntervalSince1970]
+            
             return Discussion(discussion_id: "1", discussionInfo: newMessageData)
         }
         return nil
@@ -209,7 +243,12 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
         let message = discussionArray[indexPath.row]
         
         // Xác định cell id là của cell cho sender hay reciever
-        let cellId = (message.sender_id == currentUser?.uid) ? "cellSender" : "cellReceiver"
+        var cellId = (message.sender_id == currentUser?.uid) ? "cellSender" : "cellReceiver"
+        // Nếu message là hình thì cell id thêm Photo
+        if message.content_type == ContentType.Photo.rawValue  {
+            cellId += "Photo"
+        }
+
         let cell = chatTableView.dequeueReusableCellWithIdentifier(cellId) as! ChatTableViewCell
         cell.discussion = message
         // Thiết lập màu cho bong bóng chat
@@ -222,13 +261,17 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
         // Hiển thị avatar
         cell.avatarImg.image = avtPlaceHolderImg
         if let url = NSURL(string: message.sender_photo!) {
+
             cell.avatarImg.hnk_setImageFromURL(url)
             cell.avatarImg.layer.cornerRadius = 15.0
             cell.avatarImg.clipsToBounds = true
         }
         // Nếu message là hình ảnh
         if message.content_type == ContentType.Photo.rawValue {
-            
+            cell.messageBubbleView.backgroundColor = UIColor.whiteColor()
+            let photoChatCell = cell as! ChatPhotoTableViewCell
+            guard let path = NSURL(string: message.content_msg!) else { return cell }
+            photoChatCell.messagePhotoImgView.hnk_setImageFromURL(path)
         }
             // Nếu message là text bình thường
         else {
@@ -243,4 +286,28 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+}
+extension DiscussionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        print(info)
+        
+        if let picture = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            serviceInstance.sendMedia(picture, video: nil, completion: { (urlFile) in
+                self.fileURL = urlFile
+                guard let discussion = self.getMessageInfo(ContentType.Photo.rawValue)  else { return }
+                self.serviceInstance.createDiscussion(self.eventID, discussion: discussion)
+            })
+        }
+        //        else if let video = info[UIImagePickerControllerMediaURL] as? NSURL {
+        //            serviceInstance.sendMedia(nil, video: video, completion: { (urlFile) in
+        //                self.fileURL = urlFile
+        //                guard let discussion = self.getMessageInfo(ContentType.Photo.rawValue)  else { return }
+        //                self.serviceInstance.createDiscussion(self.eventID, discussion: discussion)
+        //            })
+        //        }
+        //        // dismiss the photo
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.chatTableView.reloadData()
+    }
+    
 }
