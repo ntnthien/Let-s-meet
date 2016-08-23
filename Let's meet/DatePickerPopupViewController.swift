@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DatePickerPopupViewControllerDelegate {
-    func getDate(date: String)
+    func getDate(date: NSTimeInterval)
 }
 class DatePickerPopupViewController: BaseViewController {
     
@@ -18,7 +18,9 @@ class DatePickerPopupViewController: BaseViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     var eventTime: NSTimeInterval?
     var appDelegate = UIApplication.sharedApplication().delegate
-    //    let parentView: UIView?
+    
+    var delegate: DatePickerPopupViewControllerDelegate!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -81,6 +83,7 @@ class DatePickerPopupViewController: BaseViewController {
         //        strDate = dateFormatter.stringFromDate(datePicker.date)
         eventTime = datePicker.date.timeIntervalSince1970
         self.removeAnimate()
+        self.delegate.getDate(eventTime!)
     }
     // MARK: - Navigation
     

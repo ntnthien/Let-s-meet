@@ -82,6 +82,7 @@ class CreateEventViewController: BaseViewController {
         self.popViewController = DatePickerPopupViewController(nibName: "DatePickerPopupViewController", bundle: nil)
         self.popViewController.title = "This is a popup view"
         self.popViewController.showInView(self.view, animated: true)
+        self.popViewController.delegate = self
         self.view.endEditing(true)
     }
     
@@ -206,5 +207,17 @@ extension CreateEventViewController: UIImagePickerControllerDelegate, UINavigati
         // dismiss the photo
         self.dismissViewControllerAnimated(true, completion: nil)
         tableView.reloadData()
+    }
+}
+
+extension CreateEventViewController: DatePickerPopupViewControllerDelegate {
+    func getDate(date: NSTimeInterval) {
+        let formatter = NSDateFormatter()
+            formatter.dateFormat = "dd'-'MM'-'yyyy' 'HH':'mm':'ss"
+            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 7)
+            let date = formatter.stringFromDate(NSDate(timeIntervalSince1970: date))
+        
+        cell?.timeLabel.text = date
+        
     }
 }
