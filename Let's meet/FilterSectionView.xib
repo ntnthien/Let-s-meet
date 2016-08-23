@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -21,16 +21,6 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfU-lx-gS3">
-                            <rect key="frame" x="359" y="0.0" width="60" height="60"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="KfU-lx-gS3" secondAttribute="height" multiplier="1:1" id="3DA-9C-Lcl"/>
-                            </constraints>
-                            <state key="normal" image="next"/>
-                            <connections>
-                                <action selector="nextAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="XBF-5t-58b"/>
-                            </connections>
-                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5v-1Z-iHo">
                             <rect key="frame" x="269" y="20" width="20" height="21"/>
                             <constraints>
@@ -51,9 +41,19 @@
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="V48-MZ-Zv3" secondAttribute="height" multiplier="1:1" id="DsK-rG-bu2"/>
                             </constraints>
-                            <state key="normal" image="Previous"/>
+                            <state key="normal" image="previous"/>
                             <connections>
                                 <action selector="previousAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="K35-pj-o1d"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfU-lx-gS3">
+                            <rect key="frame" x="359" y="0.0" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="KfU-lx-gS3" secondAttribute="height" multiplier="1:1" id="3DA-9C-Lcl"/>
+                            </constraints>
+                            <state key="normal" image="next"/>
+                            <connections>
+                                <action selector="nextAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="XBF-5t-58b"/>
                             </connections>
                         </button>
                     </subviews>
@@ -89,7 +89,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Previous" width="100" height="100"/>
         <image name="next" width="100" height="100"/>
+        <image name="previous" width="100" height="100"/>
     </resources>
 </document>

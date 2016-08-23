@@ -30,6 +30,8 @@
 		846F6A171D549CF500F34EAF /* EventListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */; };
 		846F6A191D54A9E400F34EAF /* EventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F6A181D54A9E400F34EAF /* EventListViewController.swift */; };
 		A0B322E22327BA6BF927D635 /* Pods_Let_s_meetUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2097A710752B1B9FF691FF51 /* Pods_Let_s_meetUITests.framework */; };
+		A2254F4E1D6CAB3B00D874DC /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264464C1D5F0BEC00610C4B /* FilterViewController.swift */; };
+		A22EA8E91D6CB7490081959F /* NSUserDefault .swift in Sources */ = {isa = PBXBuildFile; fileRef = A22EA8E81D6CB7490081959F /* NSUserDefault .swift */; };
 		A28495C91D699B5300908F15 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28495C81D699B5300908F15 /* Filter.swift */; };
 		A28EF1331D683F9900E7B250 /* FilterCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28EF1321D683F9900E7B250 /* FilterCheckCell.swift */; };
 		A28EF1351D68400700E7B250 /* FilterSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28EF1341D68400700E7B250 /* FilterSwitchCell.swift */; };
@@ -47,7 +49,6 @@
 		C21D43AE1D63130200A80CF2 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21D43AD1D63130200A80CF2 /* StringHelper.swift */; };
 		C2551C2B1D5C2C9F0053676E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2551C2A1D5C2C9F0053676E /* EventDetailViewController.swift */; };
 		C264464B1D5DCAA900610C4B /* EventHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */; };
-		C264464D1D5F0BEC00610C4B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C264464C1D5F0BEC00610C4B /* FilterViewController.swift */; };
 		C26A08071D6AC7380007906B /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26A08061D6AC7380007906B /* Geocoder.swift */; };
 		C283C3FD1D618FE4009A8CBE /* EventDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C283C3FC1D618FE4009A8CBE /* EventDetailTableViewCell.swift */; };
 		C2F529421D51067100AB6337 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F529411D51067100AB6337 /* AppDelegate.swift */; };
@@ -109,6 +110,7 @@
 		898152F44DBA90BC33E92291 /* Pods-Let's meet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Let's meet.release.xcconfig"; path = "Pods/Target Support Files/Pods-Let's meet/Pods-Let's meet.release.xcconfig"; sourceTree = "<group>"; };
 		957D949BEEC61C628D46F2B1 /* Pods_Lets_meetUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lets_meetUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F5708975E01FC1F96C4EF42 /* Pods-Lets meetUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lets meetUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lets meetUITests/Pods-Lets meetUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A22EA8E81D6CB7490081959F /* NSUserDefault .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefault .swift"; sourceTree = "<group>"; };
 		A28495C81D699B5300908F15 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		A28EF1321D683F9900E7B250 /* FilterCheckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCheckCell.swift; sourceTree = "<group>"; };
 		A28EF1341D68400700E7B250 /* FilterSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSwitchCell.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				6B671CD01D524AC000357BE5 /* UIImage_Extension.swift */,
+				A22EA8E81D6CB7490081959F /* NSUserDefault .swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -838,6 +841,8 @@
 				C211A8391D6CAE2C000A7AB4 /* LiveViewController.swift in Sources */,
 				A2BC58B31D680BA500EE6412 /* FilterSectionView.swift in Sources */,
 				C21D43AE1D63130200A80CF2 /* StringHelper.swift in Sources */,
+				A22EA8E91D6CB7490081959F /* NSUserDefault .swift in Sources */,
+				A2254F4E1D6CAB3B00D874DC /* FilterViewController.swift in Sources */,
 				6B13C5811D5F1A9D00CC445C /* FirebaseAPI.swift in Sources */,
 				C21820AE1D6184C30035DBB5 /* UIView+Border.swift in Sources */,
 				C264464B1D5DCAA900610C4B /* EventHeaderTableViewCell.swift in Sources */,
@@ -855,7 +860,6 @@
 				C2F529711D5106C700AB6337 /* BaseViewController.swift in Sources */,
 				6B82EF341D5C813C00C76357 /* LocalNotificationHelper.swift in Sources */,
 				A28495C91D699B5300908F15 /* Filter.swift in Sources */,
-				C264464D1D5F0BEC00610C4B /* FilterViewController.swift in Sources */,
 				C283C3FD1D618FE4009A8CBE /* EventDetailTableViewCell.swift in Sources */,
 				C216DF021D5B175B0040BF6C /* MoreViewController.swift in Sources */,
 				6B82EF311D5C610F00C76357 /* CreateEventTableViewCell.swift in Sources */,
