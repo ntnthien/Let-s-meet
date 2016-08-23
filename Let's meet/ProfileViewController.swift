@@ -17,6 +17,7 @@ class ProfileViewController: BaseViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logoutButton: UIBarButtonItem!
+    @IBOutlet weak var switchSegmentedControl: UISegmentedControl!
     
     var userID: String?
     
@@ -96,7 +97,8 @@ class ProfileViewController: BaseViewController {
     
     
     func loadData() {
-        serviceInstance.getWishedEvents { (events: [Event?]) in
+        let actionString = (switchSegmentedControl.selectedSegmentIndex == 0) ? "wished" : "joined"
+        serviceInstance.getSubcribedEvents(actionString) { (events: [Event?]) in
             self.items.removeAll()
             for event in events {
                 self.items.append(event!)
@@ -134,6 +136,9 @@ class ProfileViewController: BaseViewController {
     }
     
     
+    @IBAction func switchChanged(sender: AnyObject) {
+        loadData()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -161,9 +166,17 @@ class ProfileViewController: BaseViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate {
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            //            let navVC = segue.destinationViewController as! UINavigationController
+            let detailVC = segue.destinationViewController as! EventDetailViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                detailVC.event = items[indexPath.row]
+                detailVC.eventImage = (tableView.cellForRowAtIndexPath(indexPath) as! EventHeaderTableViewCell).thumbnailImageView.image
+            }
+        }
+    }
 }
-
 
 extension ProfileViewController: ActionTableViewCellDelegate {
     func actionTableViewCell(actionTableViewCell: UITableViewCell, didTouchButton button: UIButton) {

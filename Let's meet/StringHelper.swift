@@ -17,4 +17,9 @@ extension String {
         return self.replace("  ", replacement: " ")
     }
     
+    func removeWhitespaces() -> String {
+        return self.replace(" ", replacement: "")
+    }
+    
+    
 }

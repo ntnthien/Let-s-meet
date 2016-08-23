@@ -56,9 +56,6 @@ class EventsMapViewController: BaseViewController {
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if let selectedRow = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(selectedRow, animated: true)
-        }
     }
     
     override func didReceiveMemoryWarning() {

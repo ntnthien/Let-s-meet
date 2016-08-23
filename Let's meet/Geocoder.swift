@@ -34,16 +34,17 @@ class Geocoder {
         let url = NSURL(string: "\(baseUrl)address=\(address)&key=\(apikey)")
         print(url?.absoluteString)
 
-        let data = NSData(contentsOfURL: url!)
-        let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-        if let result = json["results"] as? NSArray {
-            for data in result {
-                if let geometry = data["geometry"] as? NSDictionary {
-                    if let location = geometry["location"] as? NSDictionary {
-                        let latitude = location["lat"] as! Double
-                        let longitude = location["lng"] as! Double
-//                        print("\n\(latitude), \(longitude)")
-                        return CLLocation(latitude: latitude, longitude: longitude)
+        if let data = NSData(contentsOfURL: url!) {
+            let json = try! NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+            if let result = json["results"] as? NSArray {
+                for data in result {
+                    if let geometry = data["geometry"] as? NSDictionary {
+                        if let location = geometry["location"] as? NSDictionary {
+                            let latitude = location["lat"] as! Double
+                            let longitude = location["lng"] as! Double
+                            //                        print("\n\(latitude), \(longitude)")
+                            return CLLocation(latitude: latitude, longitude: longitude)
+                        }
                     }
                 }
             }

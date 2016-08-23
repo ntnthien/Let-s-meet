@@ -46,8 +46,10 @@ struct Event {
         self.joinAmount = eventInfo["join_amount"] as? Int
         self.thumbnailURL = eventInfo["thumbnail_url"] as? String
         self.discussionID = eventInfo["discussion_id"] as? String
-        let tagString = (eventInfo["tags"])
-        if let _tagString = tagString, tags = _tagString as? [String] {
+        let tagString = (eventInfo["tags"]) as? String
+        if let _tagString = tagString?.removeWhitespaces(){
+            let tags = _tagString.componentsSeparatedByString(",")
+            print(tags)
             self.tags = tags
         }
         self.onlineStream = eventInfo["online_stream"] as? String
@@ -59,6 +61,6 @@ struct Event {
     }
     
     func toJSON() -> [String: AnyObject?] {
-        return ["event_id": self.id, "location": self.location, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": NSDate().timeIntervalSince1970, "join_amount": self.joinAmount, "discussion_id": self.discussionID, "tags": self.tags,"thumbnail_url": self.thumbnailURL, "online_stream": self.onlineStream]
+        return ["event_id": self.id, "location": self.location, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": NSDate().timeIntervalSince1970, "join_amount": self.joinAmount, "discussion_id": self.discussionID, "tags": self.tags?.joinWithSeparator(", "),"thumbnail_url": self.thumbnailURL, "online_stream": self.onlineStream]
     }
 }
