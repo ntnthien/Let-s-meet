@@ -112,14 +112,20 @@ class EventDetailViewController: BaseViewController {
     
     
     /*
-     // MARK: - Navigation
+      MARK: - Navigation
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+      In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+      Get the new view controller using segue.destinationViewController.
+      Pass the selected object to the new view controller.
      }
      */
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showLiveVC" {
+            
+        }
+    }
     
 }
 
@@ -183,6 +189,7 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
         case 10:
             print("Join button touched")
             serviceInstance.changeJoinValue(event: (event?.id)!)
+            
         case 20:
             print("Share button touched")
             shareAction()
@@ -194,6 +201,9 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
         case 60:
             print("Profile button touched")
             showProfileViewController((event?.hostID)!)
+        case 70:
+            print("Stream button touched")
+            performSegueWithIdentifier("showLiveVC", sender: self)
         default:
             print("Wish button touched")
             serviceInstance.changeWishValue(event: (event?.id)!)

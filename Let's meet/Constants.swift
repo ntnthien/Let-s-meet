@@ -31,6 +31,7 @@ let kGoogleAppClientID = (FIRApp.defaultApp()?.options.clientID)!
 let FACEBOOK_APP_ID     = "290508221310489"
 let kFirebaseTermsOfService = NSURL(string: "https://firebase.google.com/terms/")!
 let EVENT_KEY = "events"
+let RTMP_URL = "rtmp://rtmp-api.facebook.com:80/rtmp/"
 
 
 // MARK: - Storyboard IDs
