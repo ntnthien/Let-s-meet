@@ -15,7 +15,6 @@ class EventListViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var items = CollectionProperty<[Event]>([])
     @IBOutlet weak var orderSegment: UISegmentedControl!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +35,7 @@ class EventListViewController: BaseViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tapScreen()
+      
         if let selectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(selectedRow, animated: true)
         }
@@ -47,11 +47,16 @@ class EventListViewController: BaseViewController {
         serviceInstance.getEvents(orderString) { (events: [Event?]) in
             self.items.removeAll()
 
-            for index in (events.count - 1).stride(to: 0, by: -1) {
-                self.items.append(events[index]!)
-//                print(event!.joinAmount)
-//                self.eventArray.append(event!)
+            for event in events.reverse() {
+                self.items.append(event!)
+                print(event)
             }
+//            for index in (events.count - 1).stride(to: 0, by: -1) {
+//                self.items.append(events[index]!)
+//                print(events[index])
+////                print(event!.joinAmount)
+////                self.eventArray.append(event!)
+//            }
             //           let indexPath = NSIndexPath.init(forRow:  self.eventArray.count, inSection: 1)
             //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 //            print(self.items.collection)

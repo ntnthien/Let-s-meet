@@ -24,8 +24,8 @@ class EventsMapViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpTableView()
-        loadData()
+//        setUpTableView()
+//        loadData()
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
