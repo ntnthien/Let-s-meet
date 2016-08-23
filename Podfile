@@ -17,6 +17,7 @@ target 'Lets meet' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'HanekeSwift'
+  pod 'lf'
   pod 'ReactiveKit', '~> 2.1'
   pod 'ReactiveUIKit', '~> 2.0'
   pod 'RSKImageCropper'

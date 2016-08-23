@@ -542,8 +542,10 @@ class FirebaseAPI {
     }
     
     func getTags () {
+//        var tags = []
         tagsRef.observeEventType(.Value) { (snap: FIRDataSnapshot) in
             for child in snap.children {
+            
                 if let snapshot = child as? FIRDataSnapshot {
                     print (snapshot.key)
                 }

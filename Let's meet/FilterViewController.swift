@@ -17,7 +17,9 @@ class FilterViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let dummyDataForCellInTagsSection = ["DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1", "DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3"]
+    var dummyDataForCellInTagsSection = []//["DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1", "DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3"]
+    
+    var tags = [String]()
     let dummyDataAnother = ["Something"]
     //Location
     var dummyDataLocation = ["Ho Chi Minh"]
@@ -36,6 +38,17 @@ class FilterViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        serviceInstance.tagsRef.observeEventType(.Value) { (snap: FIRDataSnapshot) in
+            for child in snap.children {
+                if let snapshot = child as? FIRDataSnapshot {
+                    let tag = snapshot.key
+                    self.tags.append(tag)
+                    self.dummyDataForCellInTagsSection = self.tags
+                    self.tableView.reloadData()
+                }
+            }
+        }
         
         initTableView()
     }
@@ -141,7 +154,15 @@ extension FilterViewController: UITableViewDataSource {
         case 1:
             return dummyDataLocation.count
         default:
-            return numRowPerPage
+            if dummyDataForCellInTagsSection.count > 0 {
+                if dummyDataForCellInTagsSection.count < numRowPerPage {
+                    return dummyDataForCellInTagsSection.count
+                } else {
+                    return numRowPerPage
+                }
+            } else {
+                return 0
+            }
         }
     }
     
@@ -166,7 +187,10 @@ extension FilterViewController: UITableViewDataSource {
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier("switchCell") as! FilterSwitchCell
             cell.selectionStyle = .None
-            cell.titleSwitchCell.text = dummyDataForCellInTagsSection[indexPath.row + milestoneUpdated]
+            if dummyDataForCellInTagsSection.count > 0 {
+                cell.titleSwitchCell.text = dummyDataForCellInTagsSection[indexPath.row + milestoneUpdated] as? String
+            }
+            
             return cell
         }
     }
