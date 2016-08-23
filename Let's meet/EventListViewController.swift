@@ -27,11 +27,15 @@ class EventListViewController: BaseViewController {
             self.showViewController(vc, sender: self)
         }
         loadData()
+        createNotificationCenter()
+        // Tap screen
+        hideKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(tapScreen))
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        tapScreen()
         if let selectedRow = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(selectedRow, animated: true)
         }
@@ -90,6 +94,11 @@ class EventListViewController: BaseViewController {
     
     @IBAction func segmentValueChange(sender: AnyObject) {
         loadData()
+    }
+    override func tapScreen() {
+        if !keyboardHidden {
+            self.view.endEditing(true)
+        }
     }
 }
 

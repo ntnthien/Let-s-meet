@@ -31,6 +31,8 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var editButton: UIButton!
     
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
     var delegate: CreateEventTableViewCellDelegate!
     
     //    var id: String
@@ -60,11 +62,16 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
             availableMeetTextfield.text = event?.location
             priceTextfield.text = ""
             tagTextfield.text = event?.tags?.description
+            descriptionTextView.text = event?.description
+          
         }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         editButton.tintColor = UIColor.whiteColor()
+        descriptionTextView.layer.borderWidth = 0.5
+        descriptionTextView.layer.borderColor = UIColor(red: 200/255, green: 200/255, blue: 205/255, alpha: 1.0).CGColor
+        descriptionTextView.layer.cornerRadius = 5.0
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -83,10 +90,8 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func getEventInfo() -> Event? {
         
-//        var dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
         let currentDate = NSDate().timeIntervalSince1970
-        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": " " , "name": titleTextfield.text!, "host_id": "", "time_since_1970": currentDate, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": " ", "online_stream": ""]
+        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": descriptionTextView.text , "name": titleTextfield.text!, "host_id": "", "time_since_1970": currentDate, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": " ", "online_stream": ""]
         
         let event = Event(eventID: "1", eventInfo: newEventData)
         
