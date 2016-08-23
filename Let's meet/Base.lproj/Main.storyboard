@@ -194,7 +194,7 @@
                                                                 <constraint firstAttribute="width" secondItem="BPD-rU-kUV" secondAttribute="height" id="T0J-C0-RYG"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tl-Lw-ccJ">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tl-Lw-ccJ">
                                                             <rect key="frame" x="533" y="16" width="35" height="33"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="24"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1664,7 +1664,7 @@
         <image name="wish" width="70" height="70"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VqC-0t-Xyx"/>
+        <segue reference="NdL-lR-XUx"/>
         <segue reference="EhO-xD-mez"/>
     </inferredMetricsTieBreakers>
 </document>
