@@ -7,17 +7,17 @@
 //
 
 import Foundation
+import CoreLocation
+
 
 //this class for filter
 @objc
 class Filter: NSObject {
     
-    var tag: Int?
-    var name: String?
+    var location: CLLocation?
     
-    init(tag: Int, name: String) {
-        self.tag = tag
-        self.name = name
+    init(location: CLLocation) {
+        self.location = location
     }
 }
 

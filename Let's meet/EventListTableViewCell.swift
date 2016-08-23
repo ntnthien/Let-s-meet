@@ -16,6 +16,7 @@ class EventListTableViewCell: UITableViewCell {
     @IBOutlet weak var contentEventLabel: UILabel!
     @IBOutlet weak var addressButton: UIButton!
     @IBOutlet weak var priceButton: UIButton!
+    @IBOutlet weak var location: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

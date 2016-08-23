@@ -45,6 +45,7 @@ class EventListViewController: BaseViewController {
 
             for index in (events.count - 1).stride(to: 0, by: -1) {
                 self.items.append(events[index]!)
+                print(self.items.first())
 //                print(event!.joinAmount)
 //                self.eventArray.append(event!)
             }

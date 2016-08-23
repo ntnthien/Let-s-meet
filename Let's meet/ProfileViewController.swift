@@ -64,7 +64,6 @@ class ProfileViewController: BaseViewController {
                 loadData()
         }
         
-        
     }
     
     
