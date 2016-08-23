@@ -1710,10 +1710,9 @@
         <image name="wish" width="70" height="70"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-=======
+
         <segue reference="NdL-lR-XUx"/>
->>>>>>> origin/master
+
         <segue reference="EhO-xD-mez"/>
         <segue reference="VqC-0t-Xyx"/>
     </inferredMetricsTieBreakers>
