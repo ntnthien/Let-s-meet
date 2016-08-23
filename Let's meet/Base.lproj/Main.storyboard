@@ -456,6 +456,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="IOU-3e-gtZ" secondAttribute="height" multiplier="1:1" id="iYD-wM-hgT"/>
                                                     </constraints>
+                                                    <color key="tintColor" red="0.2156862745" green="0.63921568630000003" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="checkAction:" destination="Bw9-R8-WLJ" eventType="touchUpInside" id="uMQ-bl-FhY"/>
                                                     </connections>
