@@ -217,6 +217,7 @@ extension CreateEventViewController: DatePickerPopupViewControllerDelegate {
             formatter.timeZone = NSTimeZone(forSecondsFromGMT: 7)
             let date = formatter.stringFromDate(NSDate(timeIntervalSince1970: date))
         
+        cell?.timeLabel.text = date
         
     }
 }
