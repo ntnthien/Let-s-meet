@@ -114,9 +114,26 @@ class FirebaseAPI {
         eventsRef.observeEventType(.Value, withBlock: block)
     }
     
-    func getEventsByTags(tags: [String], completion: (Event?)) {
-        eventsRef.observeEventType(.Value) { (dataSnapshot: FIRDataSnapshot) in
-            
+    func getEventsByTags(tags: [String], completion: (events: [Event?]) -> Void) -> Void {
+        var _events: [Event?] = []
+        eventsRef.queryOrderedByChild("time_since_1970").observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
+            for child in dataSnapshot.children {
+                if let data = child as? FIRDataSnapshot {
+                    
+                    if var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! ) {
+                        if let hostId = event.hostID {
+                            self.getUser(hostId,completion: { (user) in
+                                event.user = user
+                                _events.append(event)
+                                //            completion(events: _events)
+                                if _events.count == Int(dataSnapshot.childrenCount) {
+                                    completion(events: _events)
+                                }
+                            })
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -172,12 +189,12 @@ class FirebaseAPI {
     func getNearByEvents(location: CLLocation, radius: Double, block: GFQueryResultBlock) {
         let geoFire = GeoFire(firebaseRef: rootRef.child("locations"))
         let query = geoFire.queryAtLocation(location, withRadius: radius)
-        query.observeEventType(.KeyEntered, withBlock: block)
-//        query.observeEventType(.KeyEntered, withBlock: {
-//            (key: String!, location: CLLocation!) in
-////            print("+ + + + Key '\(key)' entered the search area and is at location '\(location)'")
-//           
-//        })
+//        query.observeEventType(.KeyEntered, withBlock: block)
+        query.observeEventType(.KeyEntered, withBlock: {
+            (key: String!, location: CLLocation!) in
+            print("+ + + + Key '\(key)' entered the search area and is at location '\(location)'")
+           
+        })
     }
     
     
@@ -521,6 +538,16 @@ class FirebaseAPI {
                 }
             }
             completionHandler(discussions)
+        }
+    }
+    
+    func getTags () {
+        tagsRef.observeEventType(.Value) { (snap: FIRDataSnapshot) in
+            for child in snap.children {
+                if let snapshot = child as? FIRDataSnapshot {
+                    print (snapshot.key)
+                }
+            }
         }
     }
     

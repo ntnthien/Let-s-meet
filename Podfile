@@ -16,10 +16,10 @@ target 'Lets meet' do
   pod 'FacebookLogin'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-  pod 'JSQMessagesViewController'
   pod 'HanekeSwift'
   pod 'ReactiveKit', '~> 2.1'
   pod 'ReactiveUIKit', '~> 2.0'
+  pod 'RSKImageCropper'
   pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
   
 

@@ -62,7 +62,7 @@ class DiscussionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewInputSendMessage.layer.backgroundColor = MAIN_COLOR.CGColor
         currentUser = serviceInstance.getUserInfo()
         
         if let tabbar = self.tabBarController?.tabBar {
@@ -88,7 +88,7 @@ class DiscussionViewController: BaseViewController {
         self.navigationItem.title = "Event title"
         
         messageTextInputView.layer.borderWidth = 1
-        messageTextInputView.layer.borderColor = UIColor(red: 206/255 ,green: 206/255, blue: 206/255 ,  alpha: 1 ).CGColor
+//        messageTextInputView.layer.borderColor = UIColor(red: 206/255 ,green: 206/255, blue: 206/255 ,  alpha: 1 ).CGColor
         messageTextInputView.layer.cornerRadius = 5
         
         self.chatTableView.addSubview(refeshControl)
@@ -214,9 +214,9 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
         cell.discussion = message
         // Thiết lập màu cho bong bóng chat
         if (message.sender_id == currentUser?.uid) {
-            cell.messageBubbleView.backgroundColor = UIColor(red: 204/255, green: 204/255, blue: 204/255 , alpha: 1)
+            cell.messageBubbleView.backgroundColor = MAIN_COLOR
         } else {
-            cell.messageBubbleView.backgroundColor = UIColor(red: 242/255, green: 120/255, blue: 5/255 , alpha: 1)
+            cell.messageBubbleView.backgroundColor = SENDER_BORDER_COLOR
         }
         
         // Hiển thị avatar
@@ -233,8 +233,12 @@ extension DiscussionViewController: UITableViewDataSource, UITableViewDelegate {
             // Nếu message là text bình thường
         else {
             let textChatCell = cell as! ChatTextTableViewCell
+            if (message.sender_id == currentUser?.uid) {
+                textChatCell.contentMessageLabel.textColor  = UIColor.whiteColor()
+            } else {
+                textChatCell.contentMessageLabel.textColor  = UIColor.blackColor()
+            }
             textChatCell.contentMessageLabel.text       = message.content_msg
-            textChatCell.contentMessageLabel.textColor  = UIColor.blueColor()
         }
         
         return cell

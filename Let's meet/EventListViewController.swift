@@ -15,10 +15,12 @@ class EventListViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var items = CollectionProperty<[Event]>([])
     @IBOutlet weak var orderSegment: UISegmentedControl!
+    var isFirstLoad = true
     
-
     override func viewDidLoad() {
+        orderSegment.selectedSegmentIndex = 0
         super.viewDidLoad()
+        FirebaseAPI.sharedInstance.getTags()
         setUpTableView()
         if (serviceInstance.userIsLogin() == false) {
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -27,7 +29,11 @@ class EventListViewController: BaseViewController {
             self.showViewController(vc, sender: self)
         }
         loadData()
-        
+
+        createNotificationCenter()
+        // Tap screen
+        hideKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(tapScreen))
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(joinValueDidChange(_:)), name: JOIN_VALUE_CHANGED_KEY, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,18 +43,39 @@ class EventListViewController: BaseViewController {
         }
     }
 //    var eventArray : [Event] = [Event]()
+    
+    func joinValueDidChange(notification: NSNotification) {
+        loadData()
+
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
+    
     func loadData() {
         let orderString =  (orderSegment.selectedSegmentIndex == 0) ? "join_amount" : "time_since_1970"
             
         serviceInstance.getEvents(orderString) { (events: [Event?]) in
-            self.items.removeAll()
-
-            for index in (events.count - 1).stride(to: 0, by: -1) {
-                self.items.append(events[index]!)
-                print(self.items.first())
-//                print(event!.joinAmount)
-//                self.eventArray.append(event!)
+            if self.isFirstLoad {
+                self.isFirstLoad = false
+                
+                self.loadData()
+            } else {
+                self.items.removeAll()
+//                print(events)
+                for event in events.reverse() {
+                    self.items.append(event!)
+                }
             }
+          
+//            for index in (events.count - 1).stride(to: 0, by: -1) {
+//                self.items.append(events[index]!)
+//                print(events[index])
+////                print(event!.joinAmount)
+////                self.eventArray.append(event!)
+//            }
             //           let indexPath = NSIndexPath.init(forRow:  self.eventArray.count, inSection: 1)
             //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 //            print(self.items.collection)

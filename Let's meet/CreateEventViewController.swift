@@ -52,7 +52,7 @@ class CreateEventViewController: BaseViewController {
                         print(eventKey)
                         if let eventTimeInterval = event.time {
                             if let notidyTime: NSDate = NSDate(timeIntervalSince1970: eventTimeInterval) {
-                                LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", message: "Open Meetup", date: notidyTime, userInfo: nil)
+                                LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "View it", message: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", date: notidyTime, userInfo: nil)
                             }
                         }
                         self.navigationController?.popViewControllerAnimated(true)

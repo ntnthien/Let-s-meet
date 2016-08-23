@@ -20,7 +20,8 @@ class ProfileViewController: BaseViewController {
     @IBOutlet weak var switchSegmentedControl: UISegmentedControl!
     
     var userID: String?
-    
+    var isFirstLoad = true
+
     var user: User? {
         didSet {
             if let name = user?.displayName {
@@ -98,9 +99,15 @@ class ProfileViewController: BaseViewController {
     func loadData() {
         let actionString = (switchSegmentedControl.selectedSegmentIndex == 0) ? "wished" : "joined"
         serviceInstance.getSubcribedEvents(actionString) { (events: [Event?]) in
-            self.items.removeAll()
-            for event in events {
-                self.items.append(event!)
+            if self.isFirstLoad {
+                self.isFirstLoad = false
+                
+                self.loadData()
+            } else  {
+                self.items.removeAll()
+                for event in events {
+                    self.items.append(event!)
+                }
             }
         }
     }

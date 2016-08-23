@@ -14,6 +14,8 @@ class ChatTextTableViewCell: ChatTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        contentMessageLabel.layer.cornerRadius = 12.0
+        contentMessageLabel.clipsToBounds = true
         // Initialization code
     }
 
