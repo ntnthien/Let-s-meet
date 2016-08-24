@@ -21,6 +21,7 @@ class EventDetailViewController: BaseViewController {
     var joinString = "Join"
     var wished = false
     var valueChanged = false
+    var isStreamer = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,8 @@ class EventDetailViewController: BaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(joinValueDidChange(_:)), name: JOIN_VALUE_CHANGED_KEY, object: nil)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(wishValueDidChange(_:)), name: WISH_VALUE_CHANGED_KEY, object: nil)
-
+        
+        isStreamer = (FirebaseAPI.sharedInstance.getUserID() == event?.hostID) ? true : false
         loadJoinValue()
         loadWishValue()
                // Do any additional setup after loading the view.
@@ -163,9 +165,11 @@ extension EventDetailViewController: UITableViewDataSource {
             cell.delegate = self
             cell.joinButton.setTitle(joinString, forState: .Normal)
 //             joinString == "Join"
-            cell.joinButton.backgroundColor = (joinString == "Join") ? MAIN_COLOR : RED_COLOR
             let wishImage = wished ? "wish-fill" : "wish"
 //            print(wishImage)
+            let steamTitle = isStreamer ? "Start Live Stream" : "Watch Live Stream"
+            cell.streamButton.backgroundColor = RED_COLOR
+            cell.streamButton.setTitle(steamTitle, forState: .Normal)
             cell.wishButton.setImage(UIImage(named: wishImage), forState: .Normal)
             return cell
             
@@ -203,7 +207,16 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
             showProfileViewController((event?.hostID)!)
         case 70:
             print("Stream button touched")
-            performSegueWithIdentifier("showLiveVC", sender: self)
+            if (isStreamer) {
+                performSegueWithIdentifier("showLiveVC", sender: self)
+            } else {
+                if let uid = event?.user!.uid {
+                    UIApplication.tryURL([
+                        "fb://profile/\(uid)", // App
+                        "http://www.facebook.com/\(uid)" // Website if app fails
+                        ])
+                }
+            }
         default:
             print("Wish button touched")
             serviceInstance.changeWishValue(event: (event?.id)!)

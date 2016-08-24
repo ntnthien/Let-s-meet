@@ -19,6 +19,7 @@ class EventActionTableViewCell: UITableViewCell {
     @IBOutlet weak var emailButton: UIButton!
     weak var delegate: ActionTableViewCellDelegate!
     
+    @IBOutlet weak var streamButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

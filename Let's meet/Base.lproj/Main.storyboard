@@ -1034,6 +1034,7 @@
                                             <outlet property="chatButton" destination="M4d-Ab-lhi" id="7dU-pN-x4o"/>
                                             <outlet property="emailButton" destination="Bbw-de-ErY" id="dc4-vb-9cU"/>
                                             <outlet property="joinButton" destination="9iF-XQ-j0m" id="irb-gU-gTO"/>
+                                            <outlet property="streamButton" destination="JvS-qH-24L" id="41d-yS-ePM"/>
                                             <outlet property="wishButton" destination="hCA-rj-YUr" id="NCZ-H6-FLQ"/>
                                         </connections>
                                     </tableViewCell>
