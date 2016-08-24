@@ -87,15 +87,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYw-8r-jdw">
-                                <rect key="frame" x="82" y="121" width="138" height="30"/>
-                                <state key="normal" title="Login with facebook"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="mfZ-cM-ugD">
+                                <rect key="frame" x="230" y="230" width="140" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mfZ-cM-ugD" secondAttribute="height" multiplier="1:1" id="BVi-2r-Ph1"/>
+                                    <constraint firstAttribute="width" constant="140" id="pep-Mf-lX9"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's meet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EUh-kF-WtW">
+                                <rect key="frame" x="204.5" y="80" width="190.5" height="55"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYw-8r-jdw">
+                                <rect key="frame" x="185" y="478" width="230" height="52"/>
+                                <state key="normal" image="facebook-login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="fbButtonTapped:" destination="o5R-Vo-nIf" eventType="touchUpInside" id="Y9p-Wt-lvO"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.2156862745" green="0.63921568630000003" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="SEe-k1-arZ" firstAttribute="top" secondItem="uYw-8r-jdw" secondAttribute="bottom" constant="70" id="FQr-YI-Rfj"/>
+                            <constraint firstItem="EUh-kF-WtW" firstAttribute="centerX" secondItem="mLw-8s-2dJ" secondAttribute="centerX" id="Qn1-PU-LAd"/>
+                            <constraint firstItem="uYw-8r-jdw" firstAttribute="centerX" secondItem="mLw-8s-2dJ" secondAttribute="centerX" id="VBT-Nq-rNy"/>
+                            <constraint firstItem="mfZ-cM-ugD" firstAttribute="centerY" secondItem="mLw-8s-2dJ" secondAttribute="centerY" id="eOa-Jm-dN6"/>
+                            <constraint firstItem="mfZ-cM-ugD" firstAttribute="centerX" secondItem="mLw-8s-2dJ" secondAttribute="centerX" id="ha8-8h-jLH"/>
+                            <constraint firstItem="EUh-kF-WtW" firstAttribute="top" secondItem="5uU-kZ-wFK" secondAttribute="bottom" constant="60" id="sPu-EK-Ze7"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="03h-gP-lRq">
                         <barButtonItem key="backBarButtonItem" title=" " id="h2i-cO-MLS"/>
@@ -967,19 +990,8 @@
                                                                         <segue destination="4Ga-60-vxK" kind="show" id="dbL-Cn-zQN"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button opaque="NO" tag="10" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-XQ-j0m">
-                                                                    <rect key="frame" x="332" y="0.0" width="70" height="70"/>
-                                                                    <color key="backgroundColor" red="0.2156862745" green="0.63921568630000003" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="9iF-XQ-j0m" secondAttribute="height" multiplier="1:1" id="L2r-jc-CjT"/>
-                                                                    </constraints>
-                                                                    <state key="normal" title="join"/>
-                                                                    <connections>
-                                                                        <action selector="buttonDidTouched:" destination="D05-nO-Kan" eventType="touchUpInside" id="HG4-Ha-GA3"/>
-                                                                    </connections>
-                                                                </button>
                                                                 <button opaque="NO" tag="40" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCA-rj-YUr">
-                                                                    <rect key="frame" x="498" y="0.0" width="70" height="70"/>
+                                                                    <rect key="frame" x="332" y="0.0" width="70" height="70"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="hCA-rj-YUr" secondAttribute="height" multiplier="1:1" id="VB5-xE-TFy"/>
                                                                     </constraints>
@@ -988,6 +1000,17 @@
                                                                     </state>
                                                                     <connections>
                                                                         <action selector="buttonDidTouched:" destination="D05-nO-Kan" eventType="touchUpInside" id="wmb-2l-crp"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" tag="10" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-XQ-j0m">
+                                                                    <rect key="frame" x="498" y="0.0" width="70" height="70"/>
+                                                                    <color key="backgroundColor" red="0.2156862745" green="0.63921568630000003" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="9iF-XQ-j0m" secondAttribute="height" multiplier="1:1" id="L2r-jc-CjT"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="join"/>
+                                                                    <connections>
+                                                                        <action selector="buttonDidTouched:" destination="D05-nO-Kan" eventType="touchUpInside" id="HG4-Ha-GA3"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -1874,8 +1897,10 @@
         <image name="calendar" width="21" height="21"/>
         <image name="chat" width="70" height="70"/>
         <image name="edit" width="21" height="21"/>
+        <image name="facebook-login" width="230" height="52"/>
         <image name="filterIcon" width="32" height="32"/>
         <image name="home" width="21" height="21"/>
+        <image name="icon" width="228" height="228"/>
         <image name="main_event" width="1170" height="500"/>
         <image name="map" width="21" height="21"/>
         <image name="no_image" width="80" height="80"/>
