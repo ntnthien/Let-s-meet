@@ -42,7 +42,7 @@ class FirebaseAPI {
         self.authUI?.signInWithEmailHidden = true
         self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
         self.authStateDidChangeHandle =
-            self.auth?.addAuthStateDidChangeListener(self.authStateHandler(auth:user:))
+        self.auth?.addAuthStateDidChangeListener(self.authStateHandler(auth:user:))
         
     }
     
@@ -76,30 +76,32 @@ class FirebaseAPI {
                 failureHandler(error!)
                 return
             }
+            let tags = tagString.removeWhitespaces().componentsSeparatedByString(",")
+            var tagsDict = [String: String]()
+            tags.forEach({ (tag) in
+                if !tag.isEmpty {
+                    self.tagsRef.child(tag).setValue(["event_id": newEvent.key])
+                    tagsDict[tag] = tag
+                }
+            })
+            newEvent.child("tags").setValue(tagsDict)
+            let geoFire = GeoFire(firebaseRef: self.rootRef.child("locations"))
+            
+            let encodedAddress = event.location!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            let location = Geocoder.getLatLngForAddress(encodedAddress!)
+            
+            geoFire.setLocation(location, forKey: newEvent.key) { (error) in
+                if (error != nil) {
+                    print("An error occured: \(error)")
+                } else {
+                    print("Saved location successfully!")
+                }
+            }
+
+            
             successHandler(databaseReference.key)
         }
         
-        let tags = tagString.removeWhitespaces().componentsSeparatedByString(",")
-        tags.forEach({ (tag) in
-            if !tag.isEmpty {
-                tagsRef.child(tag).setValue(["event_id": newEvent.key])
-                newEvent.child("tags").child(tag).setValue(tag)
-            }
-        })
-        
-        
-        let geoFire = GeoFire(firebaseRef: rootRef.child("locations"))
-        
-        let encodedAddress = event.location!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-        let location = Geocoder.getLatLngForAddress(encodedAddress!)
-
-        geoFire.setLocation(location, forKey: newEvent.key) { (error) in
-            if (error != nil) {
-                print("An error occured: \(error)")
-            } else {
-                print("Saved location successfully!")
-            }
-        }
     }
     
     func getEvent(id: String, completion: (Event?) -> ()) {
