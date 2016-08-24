@@ -96,20 +96,21 @@ class LoginViewController: BaseViewController {
                             if error != nil {
                                 self.showError("Error Logging into Facebook", message: error!.localizedDescription)
                             } else {
-                                let request = FBSDKGraphRequest(graphPath:"me", parameters: ["fields": "id, first_name, last_name, email, age_range, gender, verified, timezone, picture"])
+                                let request = FBSDKGraphRequest(graphPath:"me", parameters: ["fields": "id, first_name, last_name, email, age_range, gender, verified, timezone, picture.type(large)"])
                                 request.startWithCompletionHandler {
                                     (connection, result, error) in
                                     if error != nil {
                                         print (error)
                                     } else if let userData = result as? [String : AnyObject] {
                                         guard let userID = FIRAuth.auth()?.currentUser?.uid else { return }
+                                        
                                         let name = "\(userData["first_name"] as! String) \(userData["last_name"] as! String)"
                                         let userInfo = ["name": name, "email": userData["email"] as! String,
                                             "photo_url": (userData["picture"]!["data"] as! [String: AnyObject])["url"] as! String, "uid": userData["id"] as! String, "provider_id": "facebook.com"]
                                         
                                         
                                         self.createFirebaseUser(userID, user: userInfo)
-                                        self.navigationController?.popToRootViewControllerAnimated(true)
+                                        self.dismissViewControllerAnimated(true, completion: nil)
                                     }
                                 }
                             }

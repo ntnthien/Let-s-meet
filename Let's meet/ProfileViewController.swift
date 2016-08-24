@@ -167,7 +167,7 @@ class ProfileViewController: BaseViewController {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
         vc.navigationItem.leftBarButtonItem = nil
-        self.showViewController(vc, sender: self)
+        self.presentViewController(vc, animated: true, completion: nil)
     }
 }
 
