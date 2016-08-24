@@ -330,6 +330,9 @@ class FirebaseAPI {
         return self.authUI!.authViewController()
     }
     
+    
+    
+    
     func logout() {
         do {
             try self.auth?.signOut()

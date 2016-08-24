@@ -7,31 +7,18 @@
 //
 
 import UIKit
+import FirebaseAuth
 import FBSDKLoginKit
 
 class LoginViewController: BaseViewController {
-    var isFirstLoad = true
+//    var loginSucessIdentifier = "showHomeVC"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Facebook login
-//        initFacebookButton()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // If you haven't set up your authentications correctly these buttons
-        // will still appear in the UI, but they'll crash the app when tapped.
-        
-        if isFirstLoad || serviceInstance.userIsLogin() == false {
-            
-            let controller = serviceInstance.getLoginVC()
-            self.presentViewController(controller, animated: true, completion: nil)
-            isFirstLoad = false
-        } else {
-            navigationController?.popToRootViewControllerAnimated(false)
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -56,6 +43,89 @@ class LoginViewController: BaseViewController {
         return storyboard.instantiateViewControllerWithIdentifier("AuthViewController") as! LoginViewController
     }
     
+    
+    
+    @IBAction func fbButtonTapped(sender: UIButton) {
+        let facebookReadPermissions = ["email", "public_profile", "user_photos",  "user_videos"]
+        let facebookPublishPermissions = ["publish_actions"]
+        FBSDKLoginManager().logInWithReadPermissions(facebookReadPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult?, error:NSError?) -> Void in
+            if error != nil {
+                // Process error
+                FBSDKLoginManager().logOut()
+                self.showError("Error Logging into Facebook", message: error!.localizedDescription)
+            } else if result!.isCancelled {
+                // Handle cancellations
+                FBSDKLoginManager().logOut()
+            }  else {
+                
+                FBSDKLoginManager().logInWithPublishPermissions(facebookPublishPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult?, error:NSError?) -> Void in
+                    if error != nil {
+                        // Process error
+                        FBSDKLoginManager().logOut()
+                        self.showError("Error Logging into Facebook", message: error!.localizedDescription)
+                    }
+                    else if result!.isCancelled {
+                        // Handle cancellations
+                        FBSDKLoginManager().logOut()
+                    }
+                    else {
+//                        // If you ask for multiple permissions at once, you
+//                        // should check if specific permissions missing
+//                        if result.grantedPermissions.contains("publish_actions") {
+//                            // Do work
+//                            login.logInWithReadPermissions(["user_likes", "user_birthday"], handler: {(result, error) in
+//                                if error != nil {
+//                                    // Process error
+//                                }
+//                                else if result.isCancelled {
+//                                    // Handle cancellations
+//                                }
+//                                else {
+//                                    // If you ask for multiple permissions at once, you
+//                                    // should check if specific permissions missing
+//                                    if result.grantedPermissions.contains("user_birthday") {
+//                                        // Do work
+//                                        print("Permission  2: \(result.grantedPermissions)")
+//                                    }
+//                                }
+//                                
+//                            })
+//                        }
+                        let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+                        FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+                            if error != nil {
+                                self.showError("Error Logging into Facebook", message: error!.localizedDescription)
+                            } else {
+                                let request = FBSDKGraphRequest(graphPath:"me", parameters: ["fields": "id, first_name, last_name, email, age_range, gender, verified, timezone, picture"])
+                                request.startWithCompletionHandler {
+                                    (connection, result, error) in
+                                    if error != nil {
+                                        print (error)
+                                    } else if let userData = result as? [String : AnyObject] {
+                                        guard let userID = FIRAuth.auth()?.currentUser?.uid else { return }
+                                        let name = "\(userData["first_name"] as! String) \(userData["last_name"] as! String)"
+                                        let userInfo = ["name": name, "email": userData["email"] as! String,
+                                            "photo_url": (userData["picture"]!["data"] as! [String: AnyObject])["url"] as! String, "uid": userData["id"] as! String, "provider_id": "facebook.com"]
+                                        
+                                        
+                                        self.createFirebaseUser(userID, user: userInfo)
+                                        self.navigationController?.popToRootViewControllerAnimated(true)
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    
+                })
+                
+            }
+        })
+    }
+    
+    func createFirebaseUser(uid: String, user: [String : AnyObject]) {
+        FirebaseAPI.sharedInstance.userRef.child(uid).setValue(user)
+    }
     /*
      // MARK: - Navigation
      
