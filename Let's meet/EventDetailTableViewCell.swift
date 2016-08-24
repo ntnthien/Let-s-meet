@@ -9,7 +9,7 @@
 import UIKit
 
 class EventDetailTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -18,10 +18,10 @@ class EventDetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -30,9 +30,11 @@ class EventDetailTableViewCell: UITableViewCell {
         formatter.dateFormat = "dd'-'MM'-'yyyy' 'HH':'mm':'ss"
         formatter.timeZone = NSTimeZone(forSecondsFromGMT: 7)
         let date = formatter.stringFromDate(NSDate(timeIntervalSince1970: event.time!))
-    
+        
         timeLabel.text = "\(date)"
-        locationLabel.text = event.location
+        if let address = event.address, district = event.district, city = event.city {
+            locationLabel.text = ("\(address), \(district), \(city), \(event.country)")
+        }
         descriptionLabel.text = event.description
     }
 }

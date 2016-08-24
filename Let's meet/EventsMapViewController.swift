@@ -39,6 +39,8 @@ class EventsMapViewController: BaseViewController {
         
         let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7695186, longitude: 106.6835976)
         createMaker(location)
+        getLatitude()
+        Geocoder.getLatLngForAddress("91 Pasteur, District 1, Ho Chi Minh, Vietnam")
     }
     
     func createMaker(location: CLLocation?) -> GMSMarker?{
@@ -61,7 +63,7 @@ class EventsMapViewController: BaseViewController {
             didFindMyLocation = true
             print("My location is in obseveValue \(mapView.myLocation)")
             
-            serviceInstance.getNearByEvents(mapView.myLocation!, radius: 10) { (key, location) in
+            serviceInstance.getNearByEvents(mapView.myLocation!, radius: 100) { (key, location) in
                 let marker = GMSMarker()
                 marker.position = location.coordinate
                 marker.title = "Docker Meetup - \(key)"
@@ -97,7 +99,7 @@ class EventsMapViewController: BaseViewController {
     
     
     func getLatitude() {
-        let address = "1 Infinite Loop, CA, USA"
+        let address = "91 Pasteur, District 1, Ho Chi Minh, Vietnam"
         let geocoder = CLGeocoder()
         let event: [String: AnyObject]?
         geocoder.geocodeAddressString(address) { (placemarks, error) in

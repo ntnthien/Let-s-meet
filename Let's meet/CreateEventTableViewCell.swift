@@ -21,11 +21,11 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var timeLabel: UILabel!
     
-    @IBOutlet weak var availableMeetTextfield: UITextField!
+    @IBOutlet weak var addressTextfield: UITextField!
     
-    @IBOutlet weak var locationTextfield: UITextField!
+    @IBOutlet weak var districtTextfield: UITextField!
     
-    @IBOutlet weak var priceTextfield: UITextField!
+    @IBOutlet weak var cityTextfield: UITextField!
     
     @IBOutlet weak var tagTextfield: UITextField!
     
@@ -58,12 +58,12 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
         didSet {
             titleTextfield.text = event?.name
             timeLabel.text = event?.time?.description
-            locationTextfield.text = event?.location
-            availableMeetTextfield.text = event?.location
-            priceTextfield.text = ""
+            addressTextfield.text = event?.address
+            districtTextfield.text = event?.district
+            cityTextfield.text = event?.city
             tagTextfield.text = event?.tags?.description
             descriptionTextView.text = event?.description
-          
+            
         }
     }
     override func awakeFromNib() {
@@ -96,7 +96,7 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
         for tag in tagTextfield.text!.removeWhitespaces().componentsSeparatedByString(",") {
             tagDictionary[tag] = tag
         }
-        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": descriptionTextView.text , "name": titleTextfield.text!, "host_id": "", "time_since_1970": currentDate, "join_amount": 0, "discussion_id": "", "tags": tagDictionary, "thumbnail_url": " ", "online_stream": ""]
+        let newEventData: [String:AnyObject] = [ "event_id": " ", "address": addressTextfield.text!, "district": districtTextfield.text!, "city": cityTextfield.text!, "country": "Vietnam", "description": descriptionTextView.text , "name": titleTextfield.text!, "host_id": "", "time_since_1970": currentDate, "duration": 1, "join_amount": 0, "discussion_id": "", "tags": tagDictionary, "thumbnail_url": " ", "online_stream": ""]
         
         let event = Event(eventID: "1", eventInfo: newEventData)
         

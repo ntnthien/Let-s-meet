@@ -12,8 +12,12 @@ struct Event {
     var id: String
     var name: String
     var description: String?
-    var location: String?
+    var address: String?
+    var district: String?
+    var city:String?
+    var country = "Vietnam"
     var time: NSTimeInterval?
+    var duration: UInt = 1
     var hostID: String?
     var onlineStream: String?
     var joinAmount: Int?
@@ -22,12 +26,18 @@ struct Event {
     var thumbnailURL: String?
     var user: User?
     
-    init (id: String, name: String, description: String, location: String, time: NSTimeInterval, hostID: String, onlineStream: String?, joinAmount: Int, tags: [String], discussionID: String, thumbnailURL: String?) {
+    init (id: String, name: String, description: String, address: String, district: String, city: String, country: String?, time: NSTimeInterval, duration: UInt, hostID: String, onlineStream: String?, joinAmount: Int, tags: [String], discussionID: String, thumbnailURL: String?) {
         self.id = id
         self.name = name
         self.description = description
-        self.location = location
+        self.address = address
+        self.district = district
+        self.city = city
+        if let country = country {
+            self.country = country
+        }
         self.time = time
+        self.duration = duration
         self.hostID = hostID
         self.onlineStream = onlineStream
         self.joinAmount = joinAmount
@@ -56,14 +66,20 @@ struct Event {
             }
         }
         self.onlineStream = eventInfo["online_stream"] as? String
-        self.location = eventInfo["location"] as? String
+        self.address = eventInfo["address"] as? String
+        self.district = eventInfo["district"] as? String
+        self.city = eventInfo["city"] as? String
+        if let country = eventInfo["country"] as? String {
+            self.country = country
+        }
         self.description = eventInfo["description"] as? String
         self.time =  eventInfo["time_since_1970"] as? NSTimeInterval
-
-       
+        if let duration = eventInfo["duration"] as? UInt {
+            self.duration = duration
+        }
     }
     
     func toJSON() -> [String: AnyObject?] {
-        return ["event_id": self.id, "location": self.location, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": NSDate().timeIntervalSince1970, "join_amount": self.joinAmount, "discussion_id": self.discussionID, "thumbnail_url": self.thumbnailURL, "online_stream": self.onlineStream]
+        return ["event_id": self.id, "address": self.address, "district": self.district, "city": self.city, "country": self.country, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": NSDate().timeIntervalSince1970,"duration": 1, "join_amount": self.joinAmount, "discussion_id": self.discussionID, "thumbnail_url": self.thumbnailURL, "online_stream": self.onlineStream]
     }
 }

@@ -1670,12 +1670,12 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="availableMeetTextfield" destination="Qdg-ku-chQ" id="WUF-aX-ZF2"/>
+                                            <outlet property="addressTextfield" destination="Qdg-ku-chQ" id="riJ-Pq-GYQ"/>
+                                            <outlet property="cityTextfield" destination="L3L-nz-9DM" id="4me-fc-Yb8"/>
                                             <outlet property="descriptionTextView" destination="qhn-0H-bnp" id="7nb-oH-qBM"/>
+                                            <outlet property="districtTextfield" destination="dZq-oL-9W3" id="Cfg-97-mFT"/>
                                             <outlet property="editButton" destination="wMa-u5-kbA" id="A9a-m9-weI"/>
-                                            <outlet property="locationTextfield" destination="dZq-oL-9W3" id="9cO-F0-gUb"/>
                                             <outlet property="panelImage" destination="6Rj-W6-Ca0" id="fc4-o9-iR2"/>
-                                            <outlet property="priceTextfield" destination="b1f-er-0Zh" id="z8g-VD-4Bh"/>
                                             <outlet property="tagTextfield" destination="zHn-26-CDT" id="IPb-yu-ec7"/>
                                             <outlet property="timeLabel" destination="yYv-ai-GXe" id="dSU-qn-vTB"/>
                                             <outlet property="titleTextfield" destination="Zf1-aP-Zur" id="j4A-Cj-cGW"/>
