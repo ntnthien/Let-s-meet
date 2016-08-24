@@ -27,7 +27,11 @@ class FirebaseAPI {
     let discussionsRef =  FIRDatabase.database().reference().child("discussions")
     let tagsRef = FIRDatabase.database().reference().child("tags")
     let userRef = FIRDatabase.database().reference().child("users")
+    let geofireRef = FIRDatabase.database().reference().child("locations")
+    let geoFire: GeoFire!
+    
     let rootRef = FIRDatabase.database().reference()
+    
     let currentUser = FIRAuth.auth()?.currentUser
     
     
@@ -37,12 +41,13 @@ class FirebaseAPI {
     }
     
     private init() {
+        geoFire = GeoFire(firebaseRef: geofireRef)
         let providers: [FIRAuthProviderUI] = [FIRFacebookAuthUI(appID: FACEBOOK_APP_ID)!]
         self.authUI?.signInProviders = providers
         self.authUI?.signInWithEmailHidden = true
         self.authUI?.termsOfServiceURL = kFirebaseTermsOfService
         self.authStateDidChangeHandle =
-        self.auth?.addAuthStateDidChangeListener(self.authStateHandler(auth:user:))
+            self.auth?.addAuthStateDidChangeListener(self.authStateHandler(auth:user:))
         
     }
     
@@ -51,7 +56,7 @@ class FirebaseAPI {
     func createEvent(event: Event, tagString: String, successHandler: (String) -> Void,
                      failureHandler: (NSError) -> Void) {
         let newEvent = eventsRef.childByAutoId()
-      
+        
         
         discussionsRef.child(newEvent.key)
         
@@ -73,6 +78,7 @@ class FirebaseAPI {
         }
         newEvent.setValue(dataEvent) { (error, databaseReference) in
             if error != nil {
+                print(error.debugDescription)
                 failureHandler(error!)
                 return
             }
@@ -85,23 +91,21 @@ class FirebaseAPI {
                 }
             })
             newEvent.child("tags").setValue(tagsDict)
-            let geoFire = GeoFire(firebaseRef: self.rootRef.child("locations"))
             
-            let encodedAddress = event.location!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            let location = Geocoder.getLatLngForAddress(encodedAddress!)
-            
-            geoFire.setLocation(location, forKey: newEvent.key) { (error) in
-                if (error != nil) {
-                    print("An error occured: \(error)")
-                } else {
-                    print("Saved location successfully!")
+            if let address = event.address, district = event.district, city = event.city {
+                let encodedAddress = "\(address), \(district), \(city), \(event.country)"
+                let location = Geocoder.getLatLngForAddress(encodedAddress)
+                
+                self.geoFire.setLocation(location, forKey: event.id) { (error) in
+                    if (error != nil) {
+                        print("An error occured: \(error)")
+                    } else {
+                        print("Saved location successfully!")
+                    }
                 }
             }
-
-            
             successHandler(databaseReference.key)
         }
-        
     }
     
     func getEvent(id: String, completion: (Event?) -> ()) {
@@ -154,8 +158,21 @@ class FirebaseAPI {
                                 event.user = user
                                 _events.append(event)
                                 //            completion(events: _events)
+                                let encodedAddress = ("\(event.address), \(event.district), \(event.city), \(event.country)").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+                                let location = Geocoder.getLatLngForAddress(encodedAddress!)
+                                
+                                self.geoFire.setLocation(location, forKey: event.id) { (error) in
+                                    if (error != nil) {
+                                        print("An error occured: \(error)")
+                                    } else {
+                                        print("Saved location successfully!")
+                                    }
+                                }
                                 if _events.count == Int(dataSnapshot.childrenCount) {
+                                    
+                                    
                                     completion(events: _events)
+                                    
                                 }
                             })
                         }
@@ -177,6 +194,20 @@ class FirebaseAPI {
                             self.getUser(hostId,completion: { (user) in
                                 event.user = user
                                 _events.append(event)
+                                /*
+                                if let address = event.address, district = event.district, city = event.city {
+                                    let encodedAddress = "\(address), \(district), \(city), \(event.country)"
+                                    let location = Geocoder.getLatLngForAddress(encodedAddress)
+                                    
+                                    self.geoFire.setLocation(location, forKey: event.id) { (error) in
+                                        if (error != nil) {
+                                            print("An error occured: \(error)")
+                                        } else {
+                                            print("Saved location successfully!")
+                                        }
+                                    }
+                                }
+                                 */
                                 //            completion(events: _events)
                                 if _events.count == Int(dataSnapshot.childrenCount) {
                                     completion(events: _events)
@@ -199,6 +230,22 @@ class FirebaseAPI {
      //       print("+ + + + Key '\(key)' entered the search area and is at location '\(location)'")
            
      //   })
+//    func getNearByEvents(center: CLLocation, radius: Double, block: GFQueryResultBlock) {
+//        
+//        var circleQuery = geoFire.queryAtLocation(center, withRadius: radius)
+//        // Query location by region
+//        let span = MKCoordinateSpanMake(0.001, 0.001)
+//        let region = MKCoordinateRegionMake(center.coordinate, span)
+//        var regionQuery = geoFire.queryWithRegion(region)
+//        regionQuery.observeEventType(.KeyEntered, withBlock: { (key: String!, location: CLLocation!) in
+//            print("Key '\(key)' entered the search area and is at location '\(location)'")
+//        })
+//        //
+//        //        print("getNearByEvents: \(location)")
+//        //        circleQuery.observeEventType(.KeyEntered, withBlock: {
+//        //            (key: String!, location: CLLocation!) in
+//        //            print("+ + + + Key '\(key)' entered the search area and is at location '\(location)'")
+//        //        })
     }
     
     
@@ -279,7 +326,7 @@ class FirebaseAPI {
             }
         }
     }
-
+    
     // MARK: - User
     
     func getUser(id: String , completion: (User) -> ()) {
@@ -549,10 +596,10 @@ class FirebaseAPI {
     }
     
     func getTags () {
-//        var tags = []
+        //        var tags = []
         tagsRef.observeEventType(.Value) { (snap: FIRDataSnapshot) in
             for child in snap.children {
-            
+                
                 if let snapshot = child as? FIRDataSnapshot {
                     print (snapshot.key)
                 }

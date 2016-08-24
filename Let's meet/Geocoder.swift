@@ -31,7 +31,7 @@ class Geocoder {
 //    -> CLLocationCoordinate2D? 
     
     static func getLatLngForAddress(address: String) -> CLLocation? {
-        let url = NSURL(string: "\(baseUrl)address=\(address)&key=\(apikey)")
+        let url = NSURL(string: "\(baseUrl)address=\(address.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!)&key=\(apikey)")
         print(url?.absoluteString)
 
         if let data = NSData(contentsOfURL: url!) {
@@ -42,7 +42,7 @@ class Geocoder {
                         if let location = geometry["location"] as? NSDictionary {
                             let latitude = location["lat"] as! Double
                             let longitude = location["lng"] as! Double
-                            //                        print("\n\(latitude), \(longitude)")
+                                                    print("\n\(latitude), \(longitude)")
                             return CLLocation(latitude: latitude, longitude: longitude)
                         }
                     }

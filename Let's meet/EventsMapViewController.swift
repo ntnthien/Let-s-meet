@@ -37,8 +37,10 @@ class EventsMapViewController: BaseViewController {
         
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
-       // let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7695186, longitude: 106.6835976)
-        //createMaker(location)
+//        let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7695186, longitude: 106.6835976)
+//        createMaker(location)
+//        getLatitude()
+//        Geocoder.getLatLngForAddress("91 Pasteur, District 1, Ho Chi Minh, Vietnam")
     }
     
     func createMaker(location: CLLocation?) -> GMSMarker?{
@@ -70,12 +72,15 @@ class EventsMapViewController: BaseViewController {
                     marker.title = "\(event!.name)"
                    
                     let date = formatter.stringFromDate(NSDate(timeIntervalSince1970: event!.time!))
-                    marker.snippet = "\(date)\n\(event?.location)"
+                    if let location = event!.getLocation() {
+                        marker.snippet = "\(date)\n\(location))"
+                    }
 //                    marker.icon = UIImage(data: NSData(contentsOfURL: NSURL(string: (event?.thumbnailURL)!)!)!)?.scaleImage(CGSize(width: 50, height: 50))
 //                    print(key, location)
                     marker.map = self.mapView
                 }
                 
+
             }
         }
     }
@@ -105,7 +110,7 @@ class EventsMapViewController: BaseViewController {
     
     
     func getLatitude() {
-        let address = "1 Infinite Loop, CA, USA"
+        let address = "91 Pasteur, District 1, Ho Chi Minh, Vietnam"
         let geocoder = CLGeocoder()
         let event: [String: AnyObject]?
         geocoder.geocodeAddressString(address) { (placemarks, error) in
