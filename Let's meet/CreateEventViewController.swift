@@ -48,7 +48,7 @@ class CreateEventViewController: BaseViewController {
             serviceInstance.sendMedia(data, contentType: ContentType.Photo) { (fileUrl) in
                 event?.thumbnailURL = fileUrl
                 if let event = event {
-                    self.serviceInstance.createEvent(event, successHandler: { (eventKey) in
+                    self.serviceInstance.createEvent(event, tagString: (event.tags?.joinWithSeparator(", "))!, successHandler: { (eventKey) in
                         print(eventKey)
                         if let eventTimeInterval = event.time {
                             if let notidyTime: NSDate = NSDate(timeIntervalSince1970: eventTimeInterval) {
@@ -65,7 +65,7 @@ class CreateEventViewController: BaseViewController {
         }
         else {
             if let event = event {
-                serviceInstance.createEvent(event, successHandler: { (eventKey) in
+                serviceInstance.createEvent(event, tagString: (event.tags?.joinWithSeparator(", "))!, successHandler: { (eventKey) in
                     if let eventTimeInterval = event.time {
                         if let notidyTime: NSDate = NSDate(timeIntervalSince1970: eventTimeInterval) {
                             LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", message: "Open Meetup", date: notidyTime, userInfo: nil)

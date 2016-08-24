@@ -48,17 +48,10 @@ class FirebaseAPI {
     
     
     // MARK: - Event
-    func createEvent(event: Event, successHandler: (String) -> Void,
+    func createEvent(event: Event, tagString: String, successHandler: (String) -> Void,
                      failureHandler: (NSError) -> Void) {
         let newEvent = eventsRef.childByAutoId()
-        
-        if let tags = event.tags {
-            tags.forEach({ (tag) in
-                if !tag.isEmpty {
-                    tagsRef.child(tag).setValue(["event_id": newEvent.key])
-                }
-            })
-        }
+      
         
         discussionsRef.child(newEvent.key)
         
@@ -85,6 +78,15 @@ class FirebaseAPI {
             }
             successHandler(databaseReference.key)
         }
+        
+        let tags = tagString.removeWhitespaces().componentsSeparatedByString(",")
+        tags.forEach({ (tag) in
+            if !tag.isEmpty {
+                tagsRef.child(tag).setValue(["event_id": newEvent.key])
+                newEvent.child("tags").child(tag).setValue(tag)
+            }
+        })
+        
         
         let geoFire = GeoFire(firebaseRef: rootRef.child("locations"))
         

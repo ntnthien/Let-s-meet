@@ -92,9 +92,14 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
     func getEventInfo() -> Event? {
         
         let currentDate = NSDate().timeIntervalSince1970
-        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": descriptionTextView.text , "name": titleTextfield.text!, "host_id": "", "time_since_1970": currentDate, "join_amount": 0, "discussion_id": "", "tags": tagTextfield.text!, "thumbnail_url": " ", "online_stream": ""]
+        var tagDictionary = [String: String]()
+        for tag in tagTextfield.text!.removeWhitespaces().componentsSeparatedByString(",") {
+            tagDictionary[tag] = tag
+        }
+        let newEventData: [String:AnyObject] = [ "event_id": " ", "location": locationTextfield.text!, "description": descriptionTextView.text , "name": titleTextfield.text!, "host_id": "", "time_since_1970": currentDate, "join_amount": 0, "discussion_id": "", "tags": tagDictionary, "thumbnail_url": " ", "online_stream": ""]
         
         let event = Event(eventID: "1", eventInfo: newEventData)
+        
         
         //        delegate?.eventInfoValidateFail(self, msg: "Event is not valid")
         

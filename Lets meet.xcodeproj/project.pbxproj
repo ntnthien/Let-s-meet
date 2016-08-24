@@ -130,6 +130,7 @@
 		C21820AF1D6187090035DBB5 /* EventActionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventActionTableViewCell.swift; sourceTree = "<group>"; };
 		C21D43AB1D62F4B200A80CF2 /* UIImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageHelper.swift; sourceTree = "<group>"; };
 		C21D43AD1D63130200A80CF2 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		C21FDB1D1D6D9F8200BC6892 /* Lets meet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Lets meet.entitlements"; sourceTree = SOURCE_ROOT; };
 		C2551C2A1D5C2C9F0053676E /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C264464C1D5F0BEC00610C4B /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
@@ -306,6 +307,7 @@
 		C2F529401D51067100AB6337 /* Lets meet */ = {
 			isa = PBXGroup;
 			children = (
+				C21FDB1D1D6D9F8200BC6892 /* Lets meet.entitlements */,
 				6B82EF271D5C304F00C76357 /* Resources */,
 				6B82EF321D5C811E00C76357 /* Helpers */,
 				6B671CCF1D524A5500357BE5 /* Extensions */,
@@ -483,6 +485,11 @@
 					C2F5293D1D51067000AB6337 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 9S4XSSR34J;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					C2F529511D51067100AB6337 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1022,6 +1029,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Lets meet.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Let's meet/Info.plist";
@@ -1041,6 +1049,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Lets meet.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Let's meet/Info.plist";

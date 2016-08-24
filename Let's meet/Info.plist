@@ -25,6 +25,7 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>letsmeet</string>
 				<string>fb290508221310489</string>
 			</array>
 		</dict>
@@ -34,7 +35,7 @@
 	<key>FacebookAppID</key>
 	<string>290508221310489</string>
 	<key>FacebookDisplayName</key>
-	<string>Let's meet</string>
+	<string>Let&apos;s meet</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

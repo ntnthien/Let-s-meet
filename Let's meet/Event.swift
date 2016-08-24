@@ -37,8 +37,7 @@ struct Event {
     }
     
     init? (eventID: String, eventInfo: [String: AnyObject]) {
-        guard let name = eventInfo["name"] as? String
-                        else { return nil }
+        guard let name = eventInfo["name"] as? String else { return nil }
         
         self.id = eventID
         self.name = name
@@ -46,9 +45,15 @@ struct Event {
         self.joinAmount = eventInfo["join_amount"] as? Int
         self.thumbnailURL = eventInfo["thumbnail_url"] as? String
         self.discussionID = eventInfo["discussion_id"] as? String
-        let tagString = (eventInfo["tags"])
-        if let _tagString = tagString, tags = _tagString as? [String] {
-            self.tags = tags
+        
+        if let tagPairs = (eventInfo["tags"]) as? [String: String] {
+            var tags = [String]()
+            for (_, v) in tagPairs {
+                tags.append(v)
+            }
+            if tags.count >= 1 {
+                self.tags = tags
+            }
         }
         self.onlineStream = eventInfo["online_stream"] as? String
         self.location = eventInfo["location"] as? String
@@ -59,6 +64,6 @@ struct Event {
     }
     
     func toJSON() -> [String: AnyObject?] {
-        return ["event_id": self.id, "location": self.location, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": NSDate().timeIntervalSince1970, "join_amount": self.joinAmount, "discussion_id": self.discussionID, "tags": self.tags,"thumbnail_url": self.thumbnailURL, "online_stream": self.onlineStream]
+        return ["event_id": self.id, "location": self.location, "description": self.description, "name": self.name, "host_id": self.hostID, "time_since_1970": NSDate().timeIntervalSince1970, "join_amount": self.joinAmount, "discussion_id": self.discussionID, "thumbnail_url": self.thumbnailURL, "online_stream": self.onlineStream]
     }
 }
