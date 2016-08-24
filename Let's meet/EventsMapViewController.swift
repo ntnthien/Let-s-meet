@@ -37,8 +37,8 @@ class EventsMapViewController: BaseViewController {
         
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
-        let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7695186, longitude: 106.6835976)
-        createMaker(location)
+       // let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7695186, longitude: 106.6835976)
+        //createMaker(location)
     }
     
     func createMaker(location: CLLocation?) -> GMSMarker?{
@@ -60,14 +60,22 @@ class EventsMapViewController: BaseViewController {
             mapView.settings.myLocationButton = true
             didFindMyLocation = true
             print("My location is in obseveValue \(mapView.myLocation)")
-            
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "dd'-'MM'-'yyyy' 'HH':'mm':'ss"
+            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 7)
             serviceInstance.getNearByEvents(mapView.myLocation!, radius: 10) { (key, location) in
-                let marker = GMSMarker()
-                marker.position = location.coordinate
-                marker.title = "Docker Meetup - \(key)"
-                marker.snippet = "Work Sai Gon"
-                print(key, location)
-                marker.map = self.mapView
+                self.serviceInstance.getEvent(key) { event in
+                    let marker = GMSMarker()
+                    marker.position = location.coordinate
+                    marker.title = "\(event!.name)"
+                   
+                    let date = formatter.stringFromDate(NSDate(timeIntervalSince1970: event!.time!))
+                    marker.snippet = "\(date)\n\(event?.location)"
+//                    marker.icon = UIImage(data: NSData(contentsOfURL: NSURL(string: (event?.thumbnailURL)!)!)!)?.scaleImage(CGSize(width: 50, height: 50))
+//                    print(key, location)
+                    marker.map = self.mapView
+                }
+                
             }
         }
     }
