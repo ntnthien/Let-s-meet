@@ -96,7 +96,7 @@ class FirebaseAPI {
                 let encodedAddress = "\(address), \(district), \(city), \(event.country)"
                 let location = Geocoder.getLatLngForAddress(encodedAddress)
                 
-                self.geoFire.setLocation(location, forKey: event.id) { (error) in
+                self.geoFire.setLocation(location, forKey: newEvent.key) { (error) in
                     if (error != nil) {
                         print("An error occured: \(error)")
                     } else {
@@ -161,7 +161,7 @@ class FirebaseAPI {
                                 let encodedAddress = ("\(event.address), \(event.district), \(event.city), \(event.country)").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
                                 let location = Geocoder.getLatLngForAddress(encodedAddress!)
                                 
-                                self.geoFire.setLocation(location, forKey: event.id) { (error) in
+                                self.geoFire.setLocation(location, forKey: data.key) { (error) in
                                     if (error != nil) {
                                         print("An error occured: \(error)")
                                     } else {

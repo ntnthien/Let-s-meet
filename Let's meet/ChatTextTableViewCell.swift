@@ -16,6 +16,7 @@ class ChatTextTableViewCell: ChatTableViewCell {
         super.awakeFromNib()
         contentMessageLabel.layer.cornerRadius = 12.0
         contentMessageLabel.clipsToBounds = true
+        self.selectionStyle = .None
         // Initialization code
     }
 

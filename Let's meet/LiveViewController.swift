@@ -22,7 +22,7 @@ class LiveViewController: BaseViewController {
     //    let lfView:GLLFView! = GLLFView(frame: CGRectZero)
     let touchView: UIView! = UIView()
     var cameraBackPosition = true
-    @IBOutlet weak var changeCameraButton: UIButton!
+    @IBOutlet weak var changeCameraButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,6 @@ class LiveViewController: BaseViewController {
         rtmpStream.attachCamera(AVMixer.deviceWithPosition(.Back))
         view.addSubview(rtmpStream.view)
         view.bringSubviewToFront(recordButton)
-        view.bringSubviewToFront(changeCameraButton)
         
     }
     override func viewDidAppear(animated: Bool) {

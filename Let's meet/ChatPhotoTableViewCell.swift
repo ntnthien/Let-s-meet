@@ -17,6 +17,8 @@ class ChatPhotoTableViewCell: ChatTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .None
+
         // Initialization code
     }
     
