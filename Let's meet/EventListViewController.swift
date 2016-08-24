@@ -26,7 +26,7 @@ class EventListViewController: BaseViewController {
             let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             
             let vc = storyboard.instantiateViewControllerWithIdentifier("LoginVC") as! LoginViewController
-            self.showViewController(vc, sender: self)
+            self.presentViewController(vc, animated: true, completion: nil)
         }
         loadData()
 
