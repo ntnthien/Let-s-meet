@@ -23,44 +23,34 @@ class EventsMapViewController: BaseViewController {
     
     let locationManager = CLLocationManager()
     var didFindMyLocation = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setUpTableView()
-//        loadData()
+        //        setUpTableView()
+        //        loadData()
+        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 17.0)
+        mapView.camera = camera
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 17.0)
-//        let marker = GMSMarker()
-////        marker.position = camera.target
-//        marker.snippet = "Hello World"
-//        marker.appearAnimation = kGMSMarkerAnimationPop
-//        marker.map = mapView
-////        marker.position = location.coordinate
-//        marker.title = "Docker Meetup "
-//        marker.snippet = "Work Sai Gon"
-        
-        // adding marker
-        mapView.camera = camera
-
         mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
-
+        
         let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7695186, longitude: 106.6835976)
-//        let mapView1 = GMSMapView.mapWithFrame(self.mapView.bounds, camera: camera)
-
+        createMaker(location)
+    }
+    
+    func createMaker(location: CLLocation?) -> GMSMarker?{
+        //        let location = (mapView.myLocation != nil) ? mapView.myLocation! : CLLocation(latitude: 10.7695186, longitude: 106.6835976) else { return nil }
+        guard let location = location else { return nil }
         let marker = GMSMarker()
         marker.position = location.coordinate
+        marker.appearAnimation = kGMSMarkerAnimationPop
         marker.title = "Docker Meetup "
         marker.snippet = "Work Sai Gon"
         marker.map = mapView
-        
-//        self.mapView.addSubview(mapView1)
-        
-        
-
+        return marker
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -79,8 +69,6 @@ class EventsMapViewController: BaseViewController {
                 print(key, location)
                 marker.map = self.mapView
             }
-
-            
         }
     }
     override func viewWillAppear(animated: Bool) {
@@ -93,30 +81,25 @@ class EventsMapViewController: BaseViewController {
     }
     deinit{
         removeObserver(self, forKeyPath: "myLocation", context: nil)
-        
     }
+    
     override func loadView() {
         super.loadView()
         
-        let camera = GMSCameraPosition.cameraWithLatitude(10.7803616, longitude: 106.6860085, zoom: 15.0)
-        mapView.camera = camera
-        mapView.myLocationEnabled = true
         mapView.mapType = kGMSTypeNormal
         mapView.indoorEnabled = false
         mapView.myLocationEnabled = true
         print("my location is load view \(mapView.myLocation)")
         
-       
-        
-        
-        
         // Creates a marker in the center of the map.
-       
+        
     }
- 
+    
+    
     func getLatitude() {
         let address = "1 Infinite Loop, CA, USA"
         let geocoder = CLGeocoder()
+        let event: [String: AnyObject]?
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             if error != nil {
                 print(error?.localizedDescription)
@@ -125,6 +108,7 @@ class EventsMapViewController: BaseViewController {
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
                 coordinates.latitude
                 coordinates.longitude
+                //                event.
                 print("lat", coordinates.latitude)
                 print("long", coordinates.longitude)
             }
@@ -135,7 +119,7 @@ class EventsMapViewController: BaseViewController {
     func loadData() {
         serviceInstance.getJoinedEvents { (events: [Event?]) in
             self.items.removeAll()
-
+            
             for event in events {
                 self.items.append(event!)
             }
@@ -171,7 +155,7 @@ class EventsMapViewController: BaseViewController {
         refreshControl.endRefreshing()
     }
     
-
+    
     
     /*
      // MARK: - Navigation
