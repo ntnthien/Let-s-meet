@@ -72,6 +72,7 @@ class CreateEventTableViewCell: UITableViewCell, UITextFieldDelegate {
         descriptionTextView.layer.borderWidth = 0.5
         descriptionTextView.layer.borderColor = UIColor(red: 200/255, green: 200/255, blue: 205/255, alpha: 1.0).CGColor
         descriptionTextView.layer.cornerRadius = 5.0
+        self.selectionStyle = .None
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

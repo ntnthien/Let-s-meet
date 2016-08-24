@@ -270,6 +270,16 @@
 			name = FilterTableViewCell;
 			sourceTree = "<group>";
 		};
+		C21FDB1B1D6D6DED00BC6892 /* EventTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C283C3FC1D618FE4009A8CBE /* EventDetailTableViewCell.swift */,
+				C21820AF1D6187090035DBB5 /* EventActionTableViewCell.swift */,
+				C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */,
+			);
+			name = EventTableViewCell;
+			sourceTree = "<group>";
+		};
 		C2F529351D51067000AB6337 = {
 			isa = PBXGroup;
 			children = (
@@ -364,15 +374,13 @@
 		C2F529751D51070700AB6337 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C21FDB1B1D6D6DED00BC6892 /* EventTableViewCell */,
 				6BE957861D6C91590024BE60 /* DiscussionTableViewCell */,
 				A28EF1311D683F7300E7B250 /* FilterTableViewCell */,
 				6B671CCD1D5242A700357BE5 /* ProfileInfoTableViewCell.swift */,
 				846F6A161D549CF500F34EAF /* EventListTableViewCell.swift */,
 				6B82EF301D5C610F00C76357 /* CreateEventTableViewCell.swift */,
 				6B82EF381D5C8CCB00C76357 /* DatePickerPopupViewController.xib */,
-				C264464A1D5DCAA900610C4B /* EventHeaderTableViewCell.swift */,
-				C21820AF1D6187090035DBB5 /* EventActionTableViewCell.swift */,
-				C283C3FC1D618FE4009A8CBE /* EventDetailTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

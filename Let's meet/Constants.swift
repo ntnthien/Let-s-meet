@@ -23,7 +23,7 @@ let BORDER_COLOR = UIColor.darkGrayColor()
 let RED_COLOR = UIColor(red: 201/255.0, green: 63/255.0, blue: 69/255.0, alpha: 1.0)
 
 let NAV_COLOR = UIColor(red: 55/255.0, green: 163/255.0, blue: 226/255.0, alpha: 1.0)
-let SENDER_BORDER_COLOR = UIColor(red: 204/255, green: 204/255, blue: 204/255 , alpha: 1)
+let SENDER_BORDER_COLOR = UIColor(red: 229/255, green: 229/255, blue: 234/255 , alpha: 1)
 
 // MARK: - API
 let GOOGLE_API_KEY = "AIzaSyCqbPtzws6qpHd7V_JE7lNNZuLh3j6cejk"
