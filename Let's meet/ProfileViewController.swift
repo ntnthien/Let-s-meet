@@ -21,7 +21,10 @@ class ProfileViewController: BaseViewController {
     
     var userID: String?
     var isFirstLoad = true
-
+    
+    var wishedList = CollectionProperty<[Event]>([])
+    var joinedList = CollectionProperty<[Event]>([])
+    
     var user: User? {
         didSet {
             if let name = user?.displayName {
@@ -64,9 +67,14 @@ class ProfileViewController: BaseViewController {
                 setUpTableView()
                 loadData()
         }
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(joinValueDidChange(_:)), name: JOIN_VALUE_CHANGED_KEY, object: nil)
     }
     
+    func joinValueDidChange(notification: NSNotification) {
+//        wishedList.removeAll()
+//        joinedList.removeAll()
+        loadData()
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -95,21 +103,33 @@ class ProfileViewController: BaseViewController {
         }
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
     
     func loadData() {
         let actionString = (switchSegmentedControl.selectedSegmentIndex == 0) ? "wished" : "joined"
+        self.items.removeAll()
         serviceInstance.getSubcribedEvents(actionString) { (events: [Event?]) in
-            if self.isFirstLoad {
-                self.isFirstLoad = false
-                
-                self.loadData()
-            } else  {
-                self.items.removeAll()
-                for event in events {
-                    self.items.append(event!)
+            self.items.removeAll()
+
+            //            if self.isFirstLoad {
+            //                self.isFirstLoad = false
+            //
+            //                self.loadData()
+            //            } else  {
+            for event in events {
+                self.items.append(event!)
+                /*
+                if actionString == "wished" {
+                    self.wishedList.append(event!)
+                } else {
+                    self.joinedList.append(event!)
                 }
+ */
             }
         }
+        
     }
     
     
@@ -144,6 +164,17 @@ class ProfileViewController: BaseViewController {
     
     @IBAction func switchChanged(sender: AnyObject) {
         loadData()
+        /*
+        if (wishedList.count == 0 && switchSegmentedControl.selectedSegmentIndex == 0) || (joinedList.count == 0 && switchSegmentedControl.selectedSegmentIndex == 1) {
+            loadData()
+        } else {
+            if switchSegmentedControl.selectedSegmentIndex == 0 {
+                items = wishedList
+            } else {
+                items = joinedList
+            }
+        }
+ */
     }
     
     override func didReceiveMemoryWarning() {
