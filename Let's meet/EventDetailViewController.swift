@@ -44,8 +44,13 @@ class EventDetailViewController: BaseViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(wishValueDidChange(_:)), name: WISH_VALUE_CHANGED_KEY, object: nil)
         
         isStreamer = (FirebaseAPI.sharedInstance.getUserID() == event?.hostID) ? true : false
-        loadJoinValue()
-        loadWishValue()
+        if isStreamer {
+            
+        } else {
+            loadJoinValue()
+            loadWishValue()
+        }
+      
         // Do any additional setup after loading the view.
     }
     
@@ -180,6 +185,10 @@ extension EventDetailViewController: UITableViewDataSource {
             cell.streamButton.backgroundColor = RED_COLOR
             cell.streamButton.setTitle(steamTitle, forState: .Normal)
             cell.wishButton.setImage(UIImage(named: wishImage), forState: .Normal)
+            if isStreamer {
+                cell.joinButton.enabled = false
+                cell.wishButton.enabled = false
+            }
             return cell
             
         case 2:

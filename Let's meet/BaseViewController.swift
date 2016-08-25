@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class BaseViewController: UIViewController {
     
     var keyboardHidden = true
     var hideKeyboardTap:UITapGestureRecognizer!
+    var indicator: NVActivityIndicatorView!
     var serviceInstance = FirebaseAPI.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // Add Indicator
+        indicator = NVActivityIndicatorView(frame: CGRectMake((SCREEN_WIDTH - 80) / 2, SCREEN_HEIGHT / 2 - 40, 80, 60), type: .Orbit, color: MAIN_COLOR)
+        self.view.addSubview(indicator)
         // Do any additional setup after loading the view.
     }
     

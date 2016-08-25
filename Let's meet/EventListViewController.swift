@@ -10,11 +10,13 @@ import UIKit
 import ReactiveKit
 import ReactiveUIKit
 
+
 class EventListViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var items = CollectionProperty<[Event]>([])
     @IBOutlet weak var orderSegment: UISegmentedControl!
+    
     var isFirstLoad = true
     
     override func viewDidLoad() {
@@ -57,8 +59,10 @@ class EventListViewController: BaseViewController {
 
     
     func loadData() {
+        
         let orderString =  (orderSegment.selectedSegmentIndex == 0) ? "join_amount" : "time_since_1970"
-            
+        
+        indicator.startAnimation()
         serviceInstance.getEvents(orderString) { (events: [Event?]) in
             if self.isFirstLoad {
                 self.isFirstLoad = false
@@ -70,6 +74,7 @@ class EventListViewController: BaseViewController {
                 for event in events.reverse() {
                     self.items.append(event!)
                 }
+                self.indicator.stopAnimation()
             }
           
 //            for index in (events.count - 1).stride(to: 0, by: -1) {
