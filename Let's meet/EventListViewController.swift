@@ -76,6 +76,7 @@ class EventListViewController: BaseViewController {
                     }
                 }
                 self.tableView.reloadData()
+                self.indicator.stopAnimation()
             }
         } else {
             serviceInstance.getEvents(orderString) { (events: [Event?]) in

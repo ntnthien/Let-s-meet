@@ -110,6 +110,8 @@ class ProfileViewController: BaseViewController {
     func loadData() {
         let actionString = (switchSegmentedControl.selectedSegmentIndex == 0) ? "wished" : "joined"
         self.items.removeAll()
+        indicator.startAnimation()
+
         serviceInstance.getSubcribedEvents(actionString) { (events: [Event?]) in
             self.items.removeAll()
 
@@ -128,6 +130,8 @@ class ProfileViewController: BaseViewController {
                 }
  */
             }
+            self.indicator.stopAnimation()
+
         }
         
     }

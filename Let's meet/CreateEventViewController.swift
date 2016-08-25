@@ -39,6 +39,7 @@ class CreateEventViewController: BaseViewController {
     @IBAction func onSaveButton(sender: UIBarButtonItem) {
         print("On save event")
         var event = cell?.getEventInfo()
+        indicator.startAnimation()
         print(event?.name)
         if let eventTime = popViewController?.eventTime {
             event?.time = eventTime
@@ -55,6 +56,8 @@ class CreateEventViewController: BaseViewController {
                                 LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "View it", message: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", date: notidyTime, userInfo: nil)
                             }
                         }
+                        self.indicator.stopAnimation()
+
                         self.navigationController?.popViewControllerAnimated(true)
                         }, failureHandler: { (error) in
                             print("Event was not saved yet!")
@@ -70,7 +73,11 @@ class CreateEventViewController: BaseViewController {
                         if let notidyTime: NSDate = NSDate(timeIntervalSince1970: eventTimeInterval) {
                             LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", message: "Open Meetup", date: notidyTime, userInfo: nil)
                         }
-                    }                    }, failureHandler: { (error) in
+                        
+                    }
+                    self.indicator.stopAnimation()
+
+                    }, failureHandler: { (error) in
                         print("Event was not saved yet!")
                 })
             }

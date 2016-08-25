@@ -48,6 +48,8 @@ class LoginViewController: BaseViewController {
     @IBAction func fbButtonTapped(sender: UIButton) {
         let facebookReadPermissions = ["email", "public_profile", "user_photos",  "user_videos"]
         let facebookPublishPermissions = ["publish_actions"]
+        self.indicator.startAnimation()
+
         FBSDKLoginManager().logInWithReadPermissions(facebookReadPermissions, fromViewController: self, handler: { (result:FBSDKLoginManagerLoginResult?, error:NSError?) -> Void in
             if error != nil {
                 // Process error
@@ -110,6 +112,8 @@ class LoginViewController: BaseViewController {
                                         
                                         
                                         self.createFirebaseUser(userID, user: userInfo)
+                                        self.indicator.stopAnimation()
+
                                         self.dismissViewControllerAnimated(true, completion: nil)
                                     }
                                 }

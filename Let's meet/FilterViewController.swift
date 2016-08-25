@@ -242,12 +242,13 @@ extension FilterViewController: UITableViewDataSource {
                 cell.titleSwitchCell.text = dummyDataForCellInTagsSection[indexPath.row + milestoneUpdated] as? String
                 
                 let userDefault = NSUserDefaults()
-                isTagEnable = userDefault.getIsEnableForKey(kIsEnable)!
-                if isTagEnable {
-                    cell.switchButton.enabled = true
-                    
-                } else {
-                    cell.switchButton.enabled = false
+                if let isTagEnable = userDefault.getIsEnableForKey(kIsEnable) {
+                    if isTagEnable {
+                        cell.switchButton.enabled = true
+                        
+                    } else {
+                        cell.switchButton.enabled = false
+                    }
                 }
             }
             
