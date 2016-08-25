@@ -36,16 +36,6 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V48-MZ-Zv3">
-                            <rect key="frame" x="299" y="0.0" width="60" height="60"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="V48-MZ-Zv3" secondAttribute="height" multiplier="1:1" id="DsK-rG-bu2"/>
-                            </constraints>
-                            <state key="normal" image="previous"/>
-                            <connections>
-                                <action selector="previousAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="K35-pj-o1d"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfU-lx-gS3">
                             <rect key="frame" x="359" y="0.0" width="60" height="60"/>
                             <constraints>
@@ -54,6 +44,16 @@
                             <state key="normal" image="next"/>
                             <connections>
                                 <action selector="nextAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="XBF-5t-58b"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V48-MZ-Zv3">
+                            <rect key="frame" x="297" y="0.0" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="V48-MZ-Zv3" secondAttribute="height" multiplier="1:1" id="DsK-rG-bu2"/>
+                            </constraints>
+                            <state key="normal" image="previous"/>
+                            <connections>
+                                <action selector="previousAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="K35-pj-o1d"/>
                             </connections>
                         </button>
                     </subviews>

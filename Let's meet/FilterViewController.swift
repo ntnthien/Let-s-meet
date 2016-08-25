@@ -17,7 +17,7 @@ class FilterViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var dummyDataForCellInTagsSection = []//["DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1", "DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3"]
+    var dummyDataForCellInTagsSection = [] //["DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1","DataScreen1", "DataScreen1", "DataScreen1", "DataScreen1", "DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen2", "DataScreen2", "DataScreen2", "DataScreen2","DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3", "DataScreen3","DataScreen3", "DataScreen3"]
     
     var tags = [String]()
     let dummyDataAnother = ["Something"]
@@ -45,12 +45,37 @@ class FilterViewController: BaseViewController {
                     let tag = snapshot.key
                     self.tags.append(tag)
                     self.dummyDataForCellInTagsSection = self.tags
+                    
+                    //get page number
+                    self.pageNumber = self.getPageNumber()
+                    //data for cell tag
                     self.tableView.reloadData()
+                    
+                }
+            }
+        }
+        
+        serviceInstance.tagsRef.observeEventType(.Value) { (snap: FIRDataSnapshot) in
+            for child in snap.children {
+                if let snap = child as? FIRDataSnapshot {
+                    let child = snap.children
+                    let tag = snap.key
+                    let a = snap.childrenCount
+                    print(child)
+                    print(tag)
+                    print(a)
                 }
             }
         }
         
         initTableView()
+    }
+    
+    func getPageNumber() -> Int{
+        var pageNum: Double = 0
+        pageNum = ceil(Double(dummyDataForCellInTagsSection.count) / Double(numRowPerPage))
+        let pageNumber = Int(pageNum)
+        return pageNumber
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,10 +88,8 @@ class FilterViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerNib(UINib(nibName: "FilterSectionView", bundle: nil) , forHeaderFooterViewReuseIdentifier: "FilterSectionView")
-        
-        //data for cell tag
-        pageNumber = dummyDataForCellInTagsSection.count / numRowPerPage
-        
+        //get page number
+        //self.pageNumber = self.getPageNumber()
     }
 
     @IBAction func searchAcion(sender: AnyObject) {
@@ -155,10 +178,22 @@ extension FilterViewController: UITableViewDataSource {
             return dummyDataLocation.count
         default:
             if dummyDataForCellInTagsSection.count > 0 {
+                
                 if dummyDataForCellInTagsSection.count < numRowPerPage {
                     return dummyDataForCellInTagsSection.count
+                    
                 } else {
-                    return numRowPerPage
+                    let countRowAll = dummyDataForCellInTagsSection.count
+                    let offset = (countRowAll % pageNumber)
+                    if offset != 0 {
+                        if (pageNumber - pageIndex) == 0 {
+                            return offset
+                        } else {
+                            return numRowPerPage
+                        }
+                    } else {
+                        return numRowPerPage
+                    }
                 }
             } else {
                 return 0

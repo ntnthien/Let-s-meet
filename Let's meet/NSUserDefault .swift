@@ -8,7 +8,14 @@
 
 import Foundation
 
-let kTags = "k_tag"
+
+let kBeer = "k_beer"
+let kBelgian = "k_begian"
+let kClub = "kclub"
+let kFestival = "k_festival"
+let kMusic = "k_music"
+let kFunc = "k_func"
+
 extension NSUserDefaults {
     
     func setTag(tag: String, forKey key: String) {
@@ -18,7 +25,7 @@ extension NSUserDefaults {
     }
     
     func getTagForKey(key: String) -> String {
-        let tag = NSUserDefaults.valueForKey(kTags) as! String
+        let tag = NSUserDefaults.valueForKey(key) as! String
         return tag
     }
     
