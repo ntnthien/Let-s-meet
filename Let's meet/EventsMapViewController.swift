@@ -122,7 +122,7 @@ class EventsMapViewController: BaseViewController {
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
                 coordinates.latitude
                 coordinates.longitude
-                //                event.
+                // event.
                 print("lat", coordinates.latitude)
                 print("long", coordinates.longitude)
             }

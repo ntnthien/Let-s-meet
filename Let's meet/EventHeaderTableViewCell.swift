@@ -25,6 +25,11 @@ class EventHeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        titleLabel.text = ""
+        tagLabel.text = ""
+        goingLabel.text = ""
+        hostNameButton.setTitle("", forState: .Normal)
+        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

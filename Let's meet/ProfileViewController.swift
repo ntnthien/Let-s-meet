@@ -48,7 +48,7 @@ class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fullNameLabel.text = ""
         if let id = userID {
             if id != serviceInstance.getUserID()! {
                 self.navigationItem.rightBarButtonItem = nil

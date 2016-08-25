@@ -163,7 +163,7 @@ extension EventDetailViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("actionCell", forIndexPath: indexPath) as! EventActionTableViewCell
             cell.selectionStyle = .None
             cell.delegate = self
-            cell.joinButton.setTitle(joinString, forState: .Normal)
+            cell.joinButton.setImage(UIImage(named: joinString), forState: .Normal)
 //             joinString == "Join"
             let wishImage = wished ? "wish-fill" : "wish"
 //            print(wishImage)

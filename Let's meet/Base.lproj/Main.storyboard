@@ -1007,11 +1007,10 @@
                                                                 </button>
                                                                 <button opaque="NO" tag="10" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9iF-XQ-j0m">
                                                                     <rect key="frame" x="498" y="0.0" width="70" height="70"/>
-                                                                    <color key="backgroundColor" red="0.2156862745" green="0.63921568630000003" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="9iF-XQ-j0m" secondAttribute="height" multiplier="1:1" id="L2r-jc-CjT"/>
                                                                     </constraints>
-                                                                    <state key="normal" title="join"/>
+                                                                    <state key="normal" image="Join"/>
                                                                     <connections>
                                                                         <action selector="buttonDidTouched:" destination="D05-nO-Kan" eventType="touchUpInside" id="HG4-Ha-GA3"/>
                                                                     </connections>
@@ -1890,6 +1889,7 @@
         <image name="985BA7E2-77FB-4F9A-B329-3AB33EA22C6D" width="1170" height="500"/>
         <image name="Attach" width="33" height="33"/>
         <image name="Exit" width="25" height="25"/>
+        <image name="Join" width="70" height="70"/>
         <image name="Sent" width="33" height="33"/>
         <image name="badge" width="21" height="21"/>
         <image name="calendar" width="21" height="21"/>

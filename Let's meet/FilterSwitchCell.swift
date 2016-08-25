@@ -23,6 +23,8 @@ class FilterSwitchCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         switchButton.onTintColor = MAIN_COLOR
+        switchButton.enabled = false
+//        switchButton.
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
