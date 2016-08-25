@@ -16,7 +16,7 @@ class EventListViewController: BaseViewController {
     var items = CollectionProperty<[Event]>([])
     @IBOutlet weak var orderSegment: UISegmentedControl!
     var isFirstLoad = true
-    
+    var tags: [String]?
     override func viewDidLoad() {
         orderSegment.selectedSegmentIndex = 0
         super.viewDidLoad()
@@ -58,30 +58,42 @@ class EventListViewController: BaseViewController {
     
     func loadData() {
         let orderString =  (orderSegment.selectedSegmentIndex == 0) ? "join_amount" : "time_since_1970"
-            
-        serviceInstance.getEvents(orderString) { (events: [Event?]) in
-            if self.isFirstLoad {
-                self.isFirstLoad = false
-                
-                self.loadData()
-            } else {
+        if let tags = tags {
+            serviceInstance.getEventsByTags(tags) { (events) in
+                print(events)
                 self.items.removeAll()
-//                print(events)
+
                 for event in events.reverse() {
                     self.items.append(event!)
                 }
+                self.tableView.reloadData()
             }
-          
-//            for index in (events.count - 1).stride(to: 0, by: -1) {
-//                self.items.append(events[index]!)
-//                print(events[index])
-////                print(event!.joinAmount)
-////                self.eventArray.append(event!)
-//            }
-            //           let indexPath = NSIndexPath.init(forRow:  self.eventArray.count, inSection: 1)
-            //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-//            print(self.items.collection)
+        } else {
+            serviceInstance.getEvents(orderString) { (events: [Event?]) in
+                if self.isFirstLoad {
+                    self.isFirstLoad = false
+                    
+                    self.loadData()
+                } else {
+                    self.items.removeAll()
+                    //                print(events)
+                    for event in events.reverse() {
+                        self.items.append(event!)
+                    }
+                }
+                
+                //            for index in (events.count - 1).stride(to: 0, by: -1) {
+                //                self.items.append(events[index]!)
+                //                print(events[index])
+                ////                print(event!.joinAmount)
+                ////                self.eventArray.append(event!)
+                //            }
+                //           let indexPath = NSIndexPath.init(forRow:  self.eventArray.count, inSection: 1)
+                //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                //            print(self.items.collection)
+            }
         }
+       
         
         
     }
@@ -164,14 +176,15 @@ extension EventListViewController: FilterViewControllerDelegate {
     
     func filterViewController(filterViewController: FilterViewController, didUpdateFilter filter: Filter) {
         
-        serviceInstance.getEventsByTags(filter.tags!) { (events) in
-            
-                for event in events.reverse() {
-                    self.items.append(event!)
-                }
-                self.tableView.reloadData()
-        }
-        
+//        serviceInstance.getEventsByTags(filter.tags!) { (events) in
+//                print(events)
+//                for event in events.reverse() {
+//                    self.items.append(event!)
+//                }
+//                self.tableView.reloadData()
+//        }
+        tags = filter.tags
+        loadData()
     }
     
 }

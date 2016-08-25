@@ -125,27 +125,6 @@ class FirebaseAPI {
     }
     
     func getEventsByTags(tags: [String], completion: (events: [Event?]) -> Void) -> Void {
-//        var _events: [Event?] = []
-//        eventsRef.queryOrderedByChild("time_since_1970").observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
-//            print(dataSnapshot.childrenCount)
-//            for child in dataSnapshot.children {
-//                if let data = child as? FIRDataSnapshot {
-//                    
-//                    if var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! ) {
-//                        if let hostId = event.hostID {
-//                            self.getUser(hostId,completion: { (user) in
-//                                event.user = user
-//                                _events.append(event)
-//                                //            completion(events: _events)
-//                                if _events.count == Int(dataSnapshot.childrenCount) {
-//                                    completion(events: _events)
-//                                }
-//                            })
-//                        }
-//                    }
-//                }
-//            }
-//        }
         
         var _events: [Event?] = []
         var totalEvents: UInt = 0

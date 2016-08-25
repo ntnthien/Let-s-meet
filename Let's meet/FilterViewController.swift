@@ -97,7 +97,7 @@ class FilterViewController: BaseViewController {
             }
         }
         
-        let filter = Filter(tags: tags, location: nil)
+        let filter = Filter(tags: tagsToFilter, location: nil)
         delegate?.filterViewController!(self, didUpdateFilter: filter)
         
         dismissViewControllerAnimated(true, completion: nil)
@@ -228,6 +228,7 @@ extension FilterViewController: UITableViewDataSource {
             
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier("switchCell") as! FilterSwitchCell
+            cell.delegate = self
             cell.selectionStyle = .None
             if dummyDataForCellInTagsSection.count > 0 {
                 cell.switchButton.on = tagsFilter[indexPath.row] ?? false
