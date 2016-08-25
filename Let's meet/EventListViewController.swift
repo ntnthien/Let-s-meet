@@ -60,7 +60,6 @@ class EventListViewController: BaseViewController {
     
     func loadData() {
         indicator.startAnimation()
-
         
         let orderString =  (orderSegment.selectedSegmentIndex == 0) ? "join_amount" : "time_since_1970"
         if let tags = tags {
@@ -68,9 +67,13 @@ class EventListViewController: BaseViewController {
                 print(events)
 
                 self.items.removeAll()
-
+                
                 for event in events.reverse() {
-                    self.items.append(event!)
+                    if !self.items.contains({ (eventD) -> Bool in
+                        return event!.id == eventD.id
+                    }) {
+                        self.items.append(event!)
+                    }
                 }
                 self.tableView.reloadData()
             }
@@ -190,7 +193,9 @@ extension EventListViewController: FilterViewControllerDelegate {
 //                }
 //                self.tableView.reloadData()
 //        }
+        items.removeAll()
         tags = filter.tags
+        print(tags)
         loadData()
     }
     

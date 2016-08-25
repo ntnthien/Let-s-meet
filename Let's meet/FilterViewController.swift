@@ -97,8 +97,15 @@ class FilterViewController: BaseViewController {
             }
         }
         
-        let filter = Filter(tags: tagsToFilter, location: nil)
-        delegate?.filterViewController!(self, didUpdateFilter: filter)
+        let userdefault = NSUserDefaults()
+        if userdefault.getIsEnableForKey(kIsEnable) == true {
+            let filter = Filter(tags: tagsToFilter, location: nil)
+            delegate?.filterViewController!(self, didUpdateFilter: filter)
+        }
+        else {
+            let filter = Filter(tags: tags, location: nil)
+            delegate?.filterViewController!(self, didUpdateFilter: filter)
+        }
         
         dismissViewControllerAnimated(true, completion: nil)
     }
