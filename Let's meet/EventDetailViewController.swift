@@ -40,13 +40,13 @@ class EventDetailViewController: BaseViewController {
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(joinValueDidChange(_:)), name: JOIN_VALUE_CHANGED_KEY, object: nil)
-
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(wishValueDidChange(_:)), name: WISH_VALUE_CHANGED_KEY, object: nil)
         
         isStreamer = (FirebaseAPI.sharedInstance.getUserID() == event?.hostID) ? true : false
         loadJoinValue()
         loadWishValue()
-               // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
     }
     
     func loadJoinValue() {
@@ -78,8 +78,8 @@ class EventDetailViewController: BaseViewController {
             
             if self.valueChanged {
                 self.wished = !self.wished
-//                print(self.wished)
-            
+                //                print(self.wished)
+                
             }
             self.tableView.reloadData()
             
@@ -89,9 +89,9 @@ class EventDetailViewController: BaseViewController {
     @objc func joinValueDidChange(notification: NSNotification) {
         valueChanged = true
         loadJoinValue()
-//        self.joinString = (joinString == "Join") ? "Leave" : "Join"
-//        self.tableView.reloadData()
-//
+        //        self.joinString = (joinString == "Join") ? "Leave" : "Join"
+        //        self.tableView.reloadData()
+        //
     }
     
     @objc func wishValueDidChange(notification: NSNotification) {
@@ -101,12 +101,12 @@ class EventDetailViewController: BaseViewController {
         //        self.tableView.reloadData()
         //
     }
-
+    
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -114,18 +114,27 @@ class EventDetailViewController: BaseViewController {
     
     
     /*
-      MARK: - Navigation
+     MARK: - Navigation
      
-      In a storyboard-based application, you will often want to do a little preparation before navigation
+     In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-      Get the new view controller using segue.destinationViewController.
-      Pass the selected object to the new view controller.
+     Get the new view controller using segue.destinationViewController.
+     Pass the selected object to the new view controller.
      }
      */
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showLiveVC" {
-            
+        print("In prepare Event detail")
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case "discussionSegue":
+                var discussionVC = segue.destinationViewController as? DiscussionViewController
+                discussionVC?.eventID = (event?.id)!
+            case "showLiveVC":
+                print("showLiveVC")
+            default:
+                break
+            }
         }
     }
     
@@ -150,12 +159,12 @@ extension EventDetailViewController: UITableViewDataSource {
             if let event = event, image = eventImage {
                 cell.configureCell(event, image: image)
             }
-//            if joinValueChanged {
-//                joinValueChanged = false
-//                var value = Int(cell.goingLabel.text!)!
-//                value = (joinString == "Join") ? (value) : (value + 1)
-//                cell.goingLabel.text = "\(value)"
-//            }
+            //            if joinValueChanged {
+            //                joinValueChanged = false
+            //                var value = Int(cell.goingLabel.text!)!
+            //                value = (joinString == "Join") ? (value) : (value + 1)
+            //                cell.goingLabel.text = "\(value)"
+            //            }
             cell.delegate = self
             return cell
             
@@ -166,7 +175,7 @@ extension EventDetailViewController: UITableViewDataSource {
             cell.joinButton.setImage(UIImage(named: joinString), forState: .Normal)
 //             joinString == "Join"
             let wishImage = wished ? "wish-fill" : "wish"
-//            print(wishImage)
+            //            print(wishImage)
             let steamTitle = isStreamer ? "Start Live Stream" : "Watch Live Stream"
             cell.streamButton.backgroundColor = RED_COLOR
             cell.streamButton.setTitle(steamTitle, forState: .Normal)
@@ -220,7 +229,7 @@ extension EventDetailViewController: ActionTableViewCellDelegate {
         default:
             print("Wish button touched")
             serviceInstance.changeWishValue(event: (event?.id)!)
-
+            
         }
     }
     
