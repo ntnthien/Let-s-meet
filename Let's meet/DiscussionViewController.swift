@@ -24,8 +24,6 @@ class DiscussionViewController: BaseViewController {
     var currentUser: User?
     
     var eventID = "-KPVjTT3za3KXapXni6P"
-    //    var eventID = "-KPMddCnTDeaeDPFEXu2"
-    var discussionID = "-KPVjTT3za3KXapXni6P"
     var discussionArray:Array<Discussion> = []
     var fileURL: String?
     // Dictionary lưu các url avatar users
@@ -91,7 +89,7 @@ class DiscussionViewController: BaseViewController {
         messageTextInputView.layer.borderWidth = 1
         messageTextInputView.layer.cornerRadius = 5
         
-//        self.chatTableView.addSubview(refeshControl)
+        self.chatTableView.addSubview(refeshControl)
     }
     
     
@@ -220,15 +218,14 @@ class DiscussionViewController: BaseViewController {
         let lastIndexPath = NSIndexPath(forRow: rowIndex, inSection: 0)
         self.chatTableView.scrollToRowAtIndexPath(lastIndexPath, atScrollPosition: .Bottom, animated: false)
     }
-    /*
+   
      // MARK: - Navigation
-     
+/*
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+     
      }
-     */
+  */
     
 }
 
