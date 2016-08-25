@@ -35,5 +35,18 @@ class FilterSwitchCell: UITableViewCell {
 
     @IBAction func switchAction(sender: AnyObject) {
         delegate?.filterSwitchCell(self, isSwitch: switchButton.on)
+        
+    }
+}
+
+
+extension FilterSwitchCell: FilterSectionViewDelegate {
+    func filterSectionView(filterSectionView: FilterSectionView, isSwitch: Bool) {
+        if isSwitch {
+            switchButton.enabled = true
+        }
+        else {
+            switchButton.enabled = false
+        }
     }
 }

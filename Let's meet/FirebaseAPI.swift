@@ -86,7 +86,7 @@ class FirebaseAPI {
             var tagsDict = [String: String]()
             tags.forEach({ (tag) in
                 if !tag.isEmpty {
-                    self.tagsRef.child(tag).setValue(["event_id": newEvent.key])
+                    self.tagsRef.child(tag).setValue([newEvent.key: newEvent.key])
                     tagsDict[tag] = tag
                 }
             })
@@ -125,21 +125,52 @@ class FirebaseAPI {
     }
     
     func getEventsByTags(tags: [String], completion: (events: [Event?]) -> Void) -> Void {
+//        var _events: [Event?] = []
+//        eventsRef.queryOrderedByChild("time_since_1970").observeEventType(.Value) { (dataSnapshot:FIRDataSnapshot) in
+//            print(dataSnapshot.childrenCount)
+//            for child in dataSnapshot.children {
+//                if let data = child as? FIRDataSnapshot {
+//                    
+//                    if var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! ) {
+//                        if let hostId = event.hostID {
+//                            self.getUser(hostId,completion: { (user) in
+//                                event.user = user
+//                                _events.append(event)
+//                                //            completion(events: _events)
+//                                if _events.count == Int(dataSnapshot.childrenCount) {
+//                                    completion(events: _events)
+//                                }
+//                            })
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        
         var _events: [Event?] = []
-        eventsRef.queryOrderedByChild("time_since_1970").observeSingleEventOfType(.Value) { (dataSnapshot:FIRDataSnapshot) in
-            for child in dataSnapshot.children {
-                if let data = child as? FIRDataSnapshot {
-                    
-                    if var event = Event(eventID: data.key, eventInfo: (data.value as? [String:AnyObject])! ) {
-                        if let hostId = event.hostID {
-                            self.getUser(hostId,completion: { (user) in
-                                event.user = user
-                                _events.append(event)
-                                //            completion(events: _events)
-                                if _events.count == Int(dataSnapshot.childrenCount) {
-                                    completion(events: _events)
+        var totalEvents: UInt = 0
+        for tag in tags {
+            tagsRef.child(tag).observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
+                print(snapshot.value)
+                totalEvents += snapshot.childrenCount
+                for child in snapshot.children {
+                    if let snap = child as? FIRDataSnapshot {
+                        self.eventsRef.child(snap.key).observeSingleEventOfType(.Value) { (dataSnapshot: FIRDataSnapshot) in
+                            if let _dataSnapshot = dataSnapshot.value {
+                                if var event: Event = Event(eventID: snap.key, eventInfo: ((_dataSnapshot as? [String:AnyObject]))!)! {
+                                    if let hostId = event.hostID {
+                                        self.getUser(hostId,completion: { (user) in
+                                            event.user = user
+                                            _events.append(event)
+                                            //            completion(events: _events)
+                                            if _events.count == Int(totalEvents) {
+//                                                print("Filtered events: \(_events)")
+                                                completion(events: _events)
+                                            }
+                                        })
+                                    }
                                 }
-                            })
+                            }
                         }
                     }
                 }

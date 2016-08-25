@@ -34,6 +34,8 @@ class EventListViewController: BaseViewController {
         // Tap screen
         hideKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(tapScreen))
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(joinValueDidChange(_:)), name: JOIN_VALUE_CHANGED_KEY, object: nil)
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -80,6 +82,8 @@ class EventListViewController: BaseViewController {
             //            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
 //            print(self.items.collection)
         }
+        
+        
     }
     
     func setUpTableView() {
@@ -131,6 +135,11 @@ extension EventListViewController: UITableViewDelegate {
                 detailVC.eventImage = (tableView.cellForRowAtIndexPath(indexPath) as! EventHeaderTableViewCell).thumbnailImageView.image
             }
         }
+        else if segue.identifier == "filterSegue" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let nextVC = nav.topViewController as! FilterViewController
+            nextVC.delegate = self
+        }
     }
 }
 
@@ -148,4 +157,35 @@ extension EventListViewController: ActionTableViewCellDelegate {
         }
     }
 }
+
+
+extension EventListViewController: FilterViewControllerDelegate {
+    
+    
+    func filterViewController(filterViewController: FilterViewController, didUpdateFilter filter: Filter) {
+        
+        serviceInstance.getEventsByTags(filter.tags!) { (events) in
+            
+                for event in events.reverse() {
+                    self.items.append(event!)
+                }
+                self.tableView.reloadData()
+        }
+        
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

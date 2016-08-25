@@ -14,6 +14,8 @@ protocol FilterViewControllerDelegate {
 }
 
 class FilterViewController: BaseViewController {
+    
+    var delegate: FilterViewControllerDelegate?
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -30,18 +32,24 @@ class FilterViewController: BaseViewController {
     var pageIndex = 1
     var pageNumber = 0
     var milestoneUpdated = 0
-    let numRowPerPage = 20
+    let numRowPerPage = 10
     
     //handle expand section, get cell selected in tags section
     var isSeletedButtonInCellTags = false
     var isVisitedAtRowInTagSection: [Bool] = [Bool](count: 3, repeatedValue: true)
     
+    var isTagEnable = true
+    
+    var tagsFilter: [Int: Bool] = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         serviceInstance.tagsRef.observeEventType(.Value) { (snap: FIRDataSnapshot) in
+//            print(snap.childrenCount)
             for child in snap.children {
                 if let snapshot = child as? FIRDataSnapshot {
+                    
                     let tag = snapshot.key
                     self.tags.append(tag)
                     self.dummyDataForCellInTagsSection = self.tags
@@ -51,19 +59,6 @@ class FilterViewController: BaseViewController {
                     //data for cell tag
                     self.tableView.reloadData()
                     
-                }
-            }
-        }
-        
-        serviceInstance.tagsRef.observeEventType(.Value) { (snap: FIRDataSnapshot) in
-            for child in snap.children {
-                if let snap = child as? FIRDataSnapshot {
-                    let child = snap.children
-                    let tag = snap.key
-                    let a = snap.childrenCount
-                    print(child)
-                    print(tag)
-                    print(a)
                 }
             }
         }
@@ -93,6 +88,18 @@ class FilterViewController: BaseViewController {
     }
 
     @IBAction func searchAcion(sender: AnyObject) {
+        
+        var tagsToFilter = [String]()
+        
+        for (row, isSelected) in tagsFilter {
+            if isSelected {
+                tagsToFilter.append(tags[row])
+            }
+        }
+        
+        let filter = Filter(tags: tags, location: nil)
+        delegate?.filterViewController!(self, didUpdateFilter: filter)
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func cancelAction(sender: AnyObject) {
@@ -184,7 +191,7 @@ extension FilterViewController: UITableViewDataSource {
                     
                 } else {
                     let countRowAll = dummyDataForCellInTagsSection.count
-                    let offset = (countRowAll % pageNumber)
+                    let offset = (countRowAll % numRowPerPage)
                     if offset != 0 {
                         if (pageNumber - pageIndex) == 0 {
                             return offset
@@ -223,7 +230,17 @@ extension FilterViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier("switchCell") as! FilterSwitchCell
             cell.selectionStyle = .None
             if dummyDataForCellInTagsSection.count > 0 {
+                cell.switchButton.on = tagsFilter[indexPath.row] ?? false
                 cell.titleSwitchCell.text = dummyDataForCellInTagsSection[indexPath.row + milestoneUpdated] as? String
+                
+                let userDefault = NSUserDefaults()
+                isTagEnable = userDefault.getIsEnableForKey(kIsEnable)!
+                if isTagEnable {
+                    cell.switchButton.enabled = true
+                    
+                } else {
+                    cell.switchButton.enabled = false
+                }
             }
             
             return cell
@@ -237,6 +254,11 @@ extension FilterViewController: UITableViewDataSource {
             headerSectionView.delegate = self
             headerSectionView.customLabel.text = "Tags"
             headerSectionView.indexLabel.text = String(pageIndex)
+            let userDefault = NSUserDefaults()
+            let isOn = userDefault.getIsEnableForKey(kIsEnable)
+            if (isOn != nil) {
+                headerSectionView.switchButton.on = isOn!
+            }
             return headerSectionView
             
         } else {
@@ -246,8 +268,20 @@ extension FilterViewController: UITableViewDataSource {
 }
 
 extension FilterViewController: FilterSectionViewDelegate {
-    func filterSectionView(isNextAction: Bool, index: Int) {
-        
+    
+    func filterSectionView(filterSectionView: FilterSectionView, isSwitch: Bool) {
+        filterSectionView.switchButton.onTintColor = MAIN_COLOR
+        let userDefault = NSUserDefaults()
+        if isSwitch {
+            userDefault.setIsEnableTags(true, forKey: kIsEnable)
+        } else {
+            userDefault.setIsEnableTags(false, forKey: kIsEnable)
+        }
+//        tableView.reloadSections(NSIndexSet(index: 2), withRowAnimation: .Fade)
+        tableView.reloadData()
+    }
+    
+    func filterSectionView(filterSectionView: FilterSectionView, isNextAction: Bool, index: Int) {
         //get current index page
         var indexPage = index
         
@@ -289,6 +323,12 @@ extension FilterViewController: FilterSectionViewDelegate {
 extension FilterViewController: FilterSwitchCellDelegate {
     
     func filterSwitchCell(filterSwitchCell: FilterSwitchCell, isSwitch: Bool) {
+        
+        let indexPath = tableView.indexPathForCell(filterSwitchCell)
+        
+        if indexPath?.section == 2 {
+            tagsFilter[(indexPath?.row)!] = isSwitch
+        }
         
     }
 }

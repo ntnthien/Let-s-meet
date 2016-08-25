@@ -37,3 +37,5 @@ class FilterCheckCell: UITableViewCell {
         delegate?.filterCheckCell(self, isChecked: checkButton.selected)
     }
 }
+
+

@@ -9,24 +9,40 @@
 import Foundation
 
 
-let kBeer = "k_beer"
-let kBelgian = "k_begian"
-let kClub = "kclub"
-let kFestival = "k_festival"
-let kMusic = "k_music"
-let kFunc = "k_func"
+let kTags = "k_tags"
+let kIsEnable = "k_isEnable"
 
 extension NSUserDefaults {
     
-    func setTag(tag: String, forKey key: String) {
+    func setTags(tags: [String], forKey key: String) {
         let userDefault = NSUserDefaults.standardUserDefaults()
-        userDefault.setValue(tag, forKey: key)
+        userDefault.setObject(tags, forKey: key)
         userDefault.synchronize()
     }
     
-    func getTagForKey(key: String) -> String {
-        let tag = NSUserDefaults.valueForKey(key) as! String
-        return tag
+    func getTagsForKey(key: String) -> [String]? {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        
+        if let tags = userDefault.objectForKey(key) {
+            return tags as? [String]
+        } else {
+            return nil
+        }
+    }
+    
+    func setIsEnableTags(isEnable: Bool, forKey key: String) {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        userDefault.setValue(isEnable, forKey: key)
+        userDefault.synchronize()
+    }
+    
+    func getIsEnableForKey(key: String) -> Bool? {
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        if let value = userDefault.valueForKey(key) {
+            return value as? Bool
+        } else {
+            return nil
+        }
     }
     
 }

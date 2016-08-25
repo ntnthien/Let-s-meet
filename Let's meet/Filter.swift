@@ -16,8 +16,11 @@ class Filter: NSObject {
     
     var location: CLLocation?
     
-    init(location: CLLocation) {
+    var tags: [String]?
+    
+    init(tags: [String]?, location: CLLocation?) {
         self.location = location
+        self.tags = tags
     }
 }
 
