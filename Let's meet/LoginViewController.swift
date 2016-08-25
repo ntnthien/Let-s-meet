@@ -125,7 +125,11 @@ class LoginViewController: BaseViewController {
     }
     
     func createFirebaseUser(uid: String, user: [String : AnyObject]) {
-        FirebaseAPI.sharedInstance.userRef.child(uid).setValue(user)
+        FirebaseAPI.sharedInstance.userRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+            if !snapshot.hasChild(uid) {
+                FirebaseAPI.sharedInstance.userRef.child(uid).setValue(user)
+            }
+        }
     }
     /*
      // MARK: - Navigation

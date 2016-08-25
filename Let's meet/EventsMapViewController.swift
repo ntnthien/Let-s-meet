@@ -75,6 +75,7 @@ class EventsMapViewController: BaseViewController {
                     if let location = event!.getLocation() {
                         marker.snippet = "\(date)\n\(location)"
                     }
+//                    marker.
 //                    marker.icon = UIImage(data: NSData(contentsOfURL: NSURL(string: (event?.thumbnailURL)!)!)!)?.scaleImage(CGSize(width: 50, height: 50))
 //                    print(key, location)
                     marker.map = self.mapView
