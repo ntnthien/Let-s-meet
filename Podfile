@@ -20,6 +20,7 @@ target 'Lets meet' do
   pod 'Firebase/DynamicLinks'
   pod 'lf', '~> 0.3.0'
   pod 'ReactiveKit', '~> 2.1'
+  pod 'NVActivityIndicatorView'
   pod 'ReactiveUIKit', '~> 2.0'
   pod 'RSKImageCropper'
   pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
