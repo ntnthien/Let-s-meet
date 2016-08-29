@@ -51,6 +51,9 @@ class ProfileViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let newItems = items.map { Event(id: $0.id, name: $0.name, description: $0.description!, address: $0.address!, district: $0.district!, city: $0.city!, country: $0.country, time: $0.time!, duration: $0.duration, hostID: $0.hostID!, onlineStream: $0.onlineStream!, joinAmount: $0.joinAmount!, tags: $0.tags!, discussionID: $0.discussionID!, thumbnailURL: $0.thumbnailURL!)
+//        }
+        
         fullNameLabel.text = ""
         if let id = userID {
             if id != serviceInstance.getUserID()! {
@@ -74,6 +77,7 @@ class ProfileViewController: BaseViewController {
 //        wishedList.removeAll()
 //        joinedList.removeAll()
         loadData()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -129,11 +133,13 @@ class ProfileViewController: BaseViewController {
                     self.joinedList.append(event!)
                 }
  */
+
             }
             self.indicator.stopAnimation()
 
         }
-        
+        self.indicator.stopAnimation()
+
     }
     
     

@@ -591,7 +591,7 @@ class FirebaseAPI {
     // MARK: - Discussions
     
     func getDiscussions(event_id: String, completionHandler: ([Discussion?] -> Void)) {
-        discussionsRef.child(event_id).observeSingleEventOfType(.Value) { (dataSnapshot:
+        discussionsRef.child(event_id).observeEventType(.Value) { (dataSnapshot:
             FIRDataSnapshot) in
             var discussions: [Discussion?] = []
             for child in dataSnapshot.children {

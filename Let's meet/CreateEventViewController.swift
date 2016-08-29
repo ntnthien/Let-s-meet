@@ -53,7 +53,10 @@ class CreateEventViewController: BaseViewController {
                         print(eventKey)
                         if let eventTimeInterval = event.time {
                             if let notidyTime: NSDate = NSDate(timeIntervalSince1970: eventTimeInterval) {
-                                LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "View it", message: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", date: notidyTime, userInfo: nil)
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    LocalNotificationHelper.sharedInstance?.scheduleNotificationWithKey(event.id, title: "View it", message: "Hey, the event - \(event.name) about to start. Are you get ready to go now?", date: notidyTime, userInfo: nil)
+                                })
+                                
                             }
                         }
                         self.indicator.stopAnimation()
